@@ -1,82 +1,169 @@
-import {  ObjectType, Field, ID, Int } from "type-graphql";
-
+import { ObjectType, Field, ID, InputType, Float, Int } from "type-graphql";
+import { Decimal } from "@prisma/client/runtime/library";
+import { GraphQLDecimal } from "./scalers/Decimal";
+import { User } from "./User";
+import { Shuttle } from "./Shuttle";
 import { ShuttleStatus } from "@prisma/client";
-import { GraphQLDateTimeISO, GraphQLJSONObject } from "graphql-scalars";
+import { GraphQLJSONObject } from "graphql-scalars";
 
 @ObjectType()
-export class DriverStats {
-  @Field(() => Int)
-  totalRides: number;
+export class Driver {
+  @Field(() => ID)
+  id!: string;
+
+  @Field(() => User)
+  user!: User;
+
+  @Field(() => String, { nullable: true })
+  licenseNumber?: string | null;
+
+  @Field(() => GraphQLDecimal)
+  rating!: Decimal;
 
   @Field(() => Int)
-  rating: number;
+  totalRides!: number;
 
-  @Field(() => Int)
-  totalEarnings: number;
+  @Field(() => Boolean)
+  isOnline!: boolean;
 
-  @Field(() => Int)
-  todayEarnings: number;
+  @Field(() => Boolean)
+  isVerified!: boolean;
 
-  @Field(() => Int)
-  weekEarnings: number;
+  @Field(() => Float, { nullable: true })
+  currentLat?: number | null;
+
+  @Field(() => Float, { nullable: true })
+  currentLng?: number | null;
+
+  @Field(() => GraphQLDecimal)
+  earnings!: Decimal;
+}
+
+@ObjectType()
+class Passenger {
+  @Field(() => ID)
+  id!: string;
+
+  @Field(() => String)
+  name!: string;
+
+  @Field(() => String)
+  email!: string;
+
+  @Field(() => String)
+  phone!: string;
+}
+
+@ObjectType()
+class RouteInfo {
+  @Field(() => ID)
+  id!: string;
+
+  @Field(() => String)
+  name!: string;
+
+  @Field(() => GraphQLJSONObject)
+  startLocation!: any;
+
+  @Field(() => GraphQLJSONObject)
+  endLocation!: any;
+
+  @Field(() => [GraphQLJSONObject])
+  waypoints!: any[];
 }
 
 @ObjectType()
 export class RideAssignment {
   @Field(() => ID)
-  id: string;
+  shuttleId!: string;
 
   @Field(() => ID)
-  shuttleId: string;
+  eventId!: string;
 
-  @Field(() => String)
-  vehicleNumber: string;
+  @Field()
+  licensePlate!: string;
 
-  @Field(() => GraphQLDateTimeISO)
-  departureTime: Date;
+  @Field()
+  vehicleType!: string;
+
+  @Field(() => ShuttleStatus)
+  status!: ShuttleStatus;
+
+  @Field()
+  departureTime!: Date;
+
+  @Field()
+  arrivalTime!: Date;
 
   @Field(() => GraphQLJSONObject)
-  pickupLocation: any;
+  pickupLocation!: any;
 
   @Field(() => GraphQLJSONObject)
-  dropoffLocation: any;
+  dropoffLocation!: any;
 
-  @Field(() => String)
-  status: ShuttleStatus;
+  @Field(() => Float, { nullable: true })
+  currentLat?: number | null;
+
+  @Field(() => Float, { nullable: true })
+  currentLng?: number | null;
 
   @Field(() => Int)
-  bookedSeats: number;
+  capacity!: number;
 
   @Field(() => Int)
-  capacity: number;
+  bookedSeats!: number;
+
+  @Field(() => [Passenger])
+  passengers!: Passenger[];
+
+  @Field(() => RouteInfo)
+  route!: RouteInfo;
 }
 
 @ObjectType()
-export class DriverDetails {
-  @Field(() => ID)
-  id: string;
-
+export class DriverStats {
   @Field()
-  email: string;
+  totalRides!: number;
 
-  @Field()
-  phoneNumber: string;
+  @Field(() => Float)
+  rating!: number;
 
-  @Field()
-  licenseNumber: string;
+  @Field(() => Float)
+  totalEarnings!: number;
 
-  @Field()
-  rating: number;
+  @Field(() => Float)
+  todayEarnings!: number;
 
-  @Field()
-  totalRides: number;
+  @Field(() => Float)
+  weekEarnings!: number;
 
-  @Field()
-  isOnline: boolean;
+  @Field(() => RideAssignment, { nullable: true })
+  currentAssignment?: RideAssignment | null;
+}
 
+@InputType()
+export class CreateDriverInput {
   @Field()
-  isVerified: boolean;
+  userId!: string;
 
-  @Field()
-  earnings: number;
+  @Field({ nullable: true })
+  licenseNumber?: string;
+}
+
+@InputType()
+export class UpdateDriverInput {
+  @Field({ nullable: true })
+  licenseNumber?: string;
+
+  @Field({ nullable: true })
+  isOnline?: boolean;
+
+  @Field({ nullable: true })
+  isVerified?: boolean;
+
+  @Field(() => Float, { nullable: true })
+  currentLat?: number | null;
+
+  @Field(() => Float, { nullable: true })
+  currentLng?: number | null;
 }

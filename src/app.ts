@@ -11,7 +11,7 @@ import { PrismaClient } from '@prisma/client';
 import { Redis } from 'ioredis';
 import { buildSchema } from 'type-graphql';
 import { errorHandler } from './middleware/errorHandler';
-import { setupSocketIO } from './socket/LocationSocket';
+import { setupLocationSocket } from './socket/LocationSocket';
 import { logger } from './utils/logger';
 import { authMiddleware } from './middleware/auth';
 import { generalRateLimiter } from './middleware/graphqlRateLimits';
@@ -24,6 +24,9 @@ import { RewardResolver } from './resolvers/RewardResolver';
 import { FleetAuthResolver } from './resolvers/FleetAuthResolver';
 import { DriverResolver } from './resolvers/DriverResolver';
 import { OwnerResolver } from './resolvers/OwnerResolver';
+import { NotificationResolver } from './resolvers/NotificationResolver';
+import { AdminResolver } from './resolvers/AdminResolver';
+import { pubSub } from './config/pubsub';
 
 export async function createApp(prisma: PrismaClient, redisClient: Redis) {
   const app: Express = express();
@@ -60,6 +63,8 @@ export async function createApp(prisma: PrismaClient, redisClient: Redis) {
         FleetAuthResolver,
         DriverResolver,
         OwnerResolver,
+        NotificationResolver,
+        AdminResolver,
       ],
       globalMiddlewares: [generalRateLimiter],
       authChecker: ({ context }, roles) => {
@@ -100,12 +105,13 @@ export async function createApp(prisma: PrismaClient, redisClient: Redis) {
           userId: (req as any).user?.id,
           prisma,
           redisClient,
+          pubSub,
         }),
       })
     );
 
     // Setup Socket.IO for real-time tracking
-    setupSocketIO(io);
+    setupLocationSocket(io);
 
     // Error handling
     app.use(errorHandler);

@@ -1,8 +1,9 @@
+// src/socket/LocationSocket.ts
 import { Server as SocketIOServer } from "socket.io";
 import { logger } from "../utils/logger";
 import { redisClient } from "../config/redis";
-import jwt from "jsonwebtoken";
 import { prisma } from "../config/database";
+import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 
@@ -13,106 +14,146 @@ interface LocationUpdate {
   timestamp: number;
 }
 
-interface SocketAuth {
-  userId?: string;
-  user?: any;
-}
-
-export function setupSocketIO(io: SocketIOServer) {
-  // Authentication middleware for Socket.IO
+export function setupLocationSocket(io: SocketIOServer) {
+  // Socket authentication middleware
   io.use(async (socket, next) => {
     try {
-      const token = socket.handshake.auth.token || socket.handshake.headers.authorization?.replace("Bearer ", "");
+      const token = socket.handshake.auth?.token || 
+                   socket.handshake.headers?.authorization?.replace("Bearer ", "");
       
-      if (!token) {
-        // Allow anonymous connections for tracking
-        (socket.data as SocketAuth) = {};
-        return next();
+      if (token) {
+        const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
+        const user = await prisma.user.findUnique({
+          where: { id: decoded.userId },
+          select: { id: true, role: true },
+        });
+        (socket as any).user = user;
       }
-
-      const decoded = jwt.verify(token, JWT_SECRET) as { userId: string; walletAddress: string };
-      
-      const user = await prisma.user.findUnique({
-        where: { id: decoded.userId },
-        select: {
-          id: true,
-          walletAddress: true,
-          role: true,
-          isNFTHolder: true,
-        },
-      });
-
-      if (user) {
-        (socket.data as SocketAuth) = { userId: user.id, user };
-        // Join user-specific room
-        socket.join(`user:${user.id}`);
-      }
-
       next();
     } catch (error) {
-      // Allow connection even if auth fails (for anonymous users)
-      (socket.data as SocketAuth) = {};
+      logger.warn(`Socket auth failed for ${socket.id}:`, error);
+      // Allow connection but mark as unauthenticated
+      (socket as any).user = null;
       next();
     }
   });
 
   io.on("connection", (socket) => {
-    const auth = socket.data as SocketAuth;
-    const userId = auth.userId || "anonymous";
-    
-    logger.info(`Client connected: ${socket.id} (User: ${userId})`);
+    logger.info(`New client connected: ${socket.id}`);
 
-    // Join shuttle tracking room
-    socket.on("track-shuttle", (shuttleId: string) => {
-      socket.join(`shuttle:${shuttleId}`);
-      logger.info(`Client ${socket.id} (User: ${userId}) tracking shuttle ${shuttleId}`);
-      
-      // Also join user-specific tracking room
-      if (auth.userId) {
-        socket.join(`user:${auth.userId}:tracking:${shuttleId}`);
+    // Track shuttle (for passengers/seekers)
+    socket.on("track-shuttle", async (shuttleId: string) => {
+      try {
+        await socket.join(`shuttle:${shuttleId}`);
+        logger.info(`Client ${socket.id} tracking shuttle ${shuttleId}`);
+
+        // Send last known location
+        const cached = await redisClient.get(`shuttle:location:${shuttleId}`);
+        if (cached) {
+          const location = JSON.parse(cached);
+          socket.emit("shuttle-location", {
+            shuttleId,
+            coordinates: {
+              latitude: location.latitude,
+              longitude: location.longitude
+            },
+            timestamp: location.timestamp,
+          });
+        } else {
+          // Fallback to database
+          const shuttle = await prisma.shuttle.findUnique({
+            where: { id: shuttleId },
+            select: { 
+              id: true,
+              currentLat: true,
+              currentLng: true,
+              lastLocationUpdate: true
+            },
+          });
+          if (shuttle?.currentLat && shuttle?.currentLng) {
+            socket.emit("shuttle-location", {
+              shuttleId: shuttle.id,
+              coordinates: {
+                latitude: shuttle.currentLat,
+                longitude: shuttle.currentLng
+              },
+              timestamp: shuttle.lastLocationUpdate?.getTime() || Date.now(),
+            });
+          }
+        }
+      } catch (error) {
+        logger.error("Track shuttle error:", error);
       }
     });
 
-    // Driver sends location update (requires authentication)
+    // Handle driver location updates
     socket.on("location-update", async (data: LocationUpdate) => {
-      if (!auth.userId || !auth.user) {
-        socket.emit("error", { message: "Authentication required for location updates" });
-        return;
+      try {
+        const { shuttleId, latitude, longitude, timestamp } = data;
+        
+        // Verify driver owns this shuttle
+        const shuttle = await prisma.shuttle.findUnique({
+          where: { id: shuttleId },
+          include: {
+            driver: {
+              select: {
+                id: true,
+                userId: true
+              }
+            }
+          },
+        });
+
+        const userId = (socket as any).user?.id;
+        if (!userId || (shuttle?.driver?.userId !== userId && shuttle?.driver?.id !== userId)) {
+          socket.emit("error", { message: "Unauthorized to update location" });
+          return;
+        }
+
+        // Store in Redis
+        await redisClient.setex(
+          `shuttle:location:${shuttleId}`,
+          300, // 5 minutes TTL
+          JSON.stringify({ latitude, longitude, timestamp })
+        );
+
+        // Update in database
+        await prisma.shuttle.update({
+          where: { id: shuttleId },
+          data: {
+            currentLat: latitude,
+            currentLng: longitude,
+            lastLocationUpdate: new Date(),
+            status: 'IN_TRANSIT'
+          }
+        });
+
+        // Broadcast to all clients tracking this shuttle
+        io.to(`shuttle:${shuttleId}`).emit("shuttle-location", {
+          shuttleId,
+          coordinates: {
+            latitude,
+            longitude
+          },
+          longitude,
+          timestamp,
+        });
+
+        logger.debug(`Location updated for shuttle ${shuttleId}`);
+      } catch (error) {
+        logger.error("WebSocket location update error:", error);
+        socket.emit("error", { message: "Failed to update location" });
       }
-
-      const { shuttleId, latitude, longitude, timestamp } = data;
-
-      // Store in Redis for quick retrieval
-      await redisClient.setex(
-        `shuttle:location:${shuttleId}`,
-        300, // 5 minutes TTL
-        JSON.stringify({ latitude, longitude, timestamp })
-      );
-
-      // Broadcast to all clients tracking this shuttle
-      io.to(`shuttle:${shuttleId}`).emit("shuttle-location", {
-        shuttleId,
-        latitude,
-        longitude,
-        timestamp,
-      });
-
-      logger.info(`Location update for shuttle ${shuttleId}: ${latitude}, ${longitude}`);
     });
 
-    // Stop tracking
+    // Stop tracking shuttle
     socket.on("untrack-shuttle", (shuttleId: string) => {
       socket.leave(`shuttle:${shuttleId}`);
-      if (auth.userId) {
-        socket.leave(`user:${auth.userId}:tracking:${shuttleId}`);
-      }
       logger.info(`Client ${socket.id} stopped tracking shuttle ${shuttleId}`);
     });
 
     socket.on("disconnect", () => {
-      logger.info(`Client disconnected: ${socket.id} (User: ${userId})`);
+      logger.info(`Client disconnected: ${socket.id}`);
     });
   });
-
-  logger.info("✅ Socket.IO configured with authentication");
 }

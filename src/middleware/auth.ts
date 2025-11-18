@@ -2,6 +2,7 @@ import { type Request, type Response, type NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { prisma } from "../config/database";
 import { logger } from "../utils/logger";
+import { NFTVerificationService } from "../services/blockchain/NFTVerificationService";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 
@@ -12,7 +13,7 @@ interface JWTPayload {
 
 export const authMiddleware = async (
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ) => {
   try {
@@ -32,8 +33,6 @@ export const authMiddleware = async (
         id: true,
         walletAddress: true,
         role: true,
-        isNFTHolder: true,
-        nftTokens: true,
       },
     });
 
@@ -42,7 +41,22 @@ export const authMiddleware = async (
       return next();
     }
 
-    (req as any).user = user;
+    let isNFTHolder = false;
+    if (user.walletAddress) {
+      try {
+        const access = await NFTVerificationService.hasNFTAccess(
+          user.walletAddress
+        );
+        isNFTHolder = access.hasAccess;
+      } catch (verificationError) {
+        logger.warn("NFT verification failed:", verificationError);
+      }
+    }
+
+    (req as any).user = {
+      ...user,
+      isNFTHolder,
+    };
     next();
   } catch (error) {
     logger.error("Auth middleware error:", error);

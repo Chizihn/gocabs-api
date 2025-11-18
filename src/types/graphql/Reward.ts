@@ -1,63 +1,68 @@
-import { ObjectType, Field, ID } from "type-graphql";
+import { ObjectType, Field, ID, Int, Float } from "type-graphql";
+import { Decimal } from "@prisma/client/runtime/library";
+import { Booking } from "./Booking";
+import { User } from "./User";
 import { GraphQLDecimal } from "./scalers/Decimal";
-import type { Decimal } from "@prisma/client/runtime/library";
 
 @ObjectType()
 export class Reward {
   @Field(() => ID)
-  id: string;
+  id!: string;
 
   @Field()
-  userId: string;
+  userId!: string;
+
+  @Field(() => User, { nullable: true })
+  user?: User;
 
   @Field()
-  bookingId: string;
+  bookingId!: string;
 
-  @Field()
-  xpPoints: number;
+  @Field(() => Booking, { nullable: true })
+  booking?: Booking;
 
-  @Field()
-  co2XpPoints: number;
+  @Field(() => Int)
+  xpEarned!: number;
 
-  @Field()
-  isRedeemed: boolean;
+  @Field(() => Int)
+  co2SavedKg!: number;
 
   @Field(() => GraphQLDecimal, { nullable: true })
-  redeemedAmount?: Decimal | string;
-
-  @Field(() => Date, { nullable: true })
-  redeemedAt?: Date;
+  usdcValue?: Decimal | null;
 
   @Field()
-  createdAt: Date;
+  claimed!: boolean;
+
+  @Field()
+  createdAt!: Date;
 }
 
 @ObjectType()
 export class UserRewardsSummary {
-  @Field()
-  totalXP: number;
+  @Field(() => Int)
+  totalXP!: number;
 
-  @Field()
-  totalCO2XP: number;
+  @Field(() => Int)
+  totalCO2XP!: number;
 
-  @Field()
-  redeemedXP: number;
+  @Field(() => Int)
+  redeemedXP!: number;
 
-  @Field()
-  redeemedAmount: number;
+  @Field(() => Float)
+  redeemedAmount!: number;
 
-  @Field()
-  availableXP: number;
+  @Field(() => Int)
+  availableXP!: number;
 }
 
 @ObjectType()
 export class RedemptionResponse {
-  @Field()
-  xpRedeemed: number;
+  @Field(() => Int)
+  xpRedeemed!: number;
+
+  @Field(() => Float)
+  usdcAmount!: number;
 
   @Field()
-  usdcAmount: number;
-
-  @Field()
-  timestamp: Date;
+  timestamp!: Date;
 }

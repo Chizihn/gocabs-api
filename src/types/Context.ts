@@ -1,19 +1,22 @@
 import { PrismaClient } from "@prisma/client";
 import { Redis } from "ioredis";
-import { Request } from "express";
+import { Request, Response } from "express";
+import { PubSubEngine } from "graphql-subscriptions";
 
 export interface User {
   id: string;
-  walletAddress: string;
+  walletAddress?: string | null;
   role: string;
-  isNFTHolder: boolean;
-  nftTokens: string[];
+  isNFTHolder?: boolean;
+  nftTokens?: string[];
 }
 
 export interface Context {
   req: Request;
+  res: Response;
   user: User | null;
   userId: string | null;
   prisma: PrismaClient;
   redisClient: Redis;
+  pubSub: PubSubEngine;
 }

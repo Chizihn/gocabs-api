@@ -59,28 +59,35 @@ export class LocationTrackingService {
       await redisClient.setex(
         `shuttle:location:${shuttleId}`,
         300, // 5 minutes TTL
-        JSON.stringify({ latitude, longitude, timestamp })
+        JSON.stringify({ 
+          shuttleId,
+          coordinates: { latitude, longitude },
+          timestamp 
+        })
       );
 
-      // Update database
+      // Update database using the correct fields
       await prisma.shuttle.update({
         where: { id: shuttleId },
         data: {
-          currentLocation: { latitude, longitude },
+          currentLat: latitude,
+          currentLng: longitude,
+          lastLocationUpdate: new Date(),
+          status: 'IN_TRANSIT'
         },
       });
 
       // Broadcast to all clients tracking this shuttle
       this.io.to(`shuttle:${shuttleId}`).emit("shuttle-location", {
         shuttleId,
-        latitude,
-        longitude,
+        coordinates: { latitude, longitude },
         timestamp,
       });
 
       logger.debug(`Location updated for shuttle ${shuttleId}`);
     } catch (error) {
       logger.error("Failed to handle location update:", error);
+      throw error; // Re-throw to handle it in the caller
     }
   }
 
@@ -93,7 +100,11 @@ export class LocationTrackingService {
         const location = JSON.parse(cached);
         socket.emit("shuttle-location", {
           shuttleId,
-          ...location,
+          coordinates: {
+            latitude: location.latitude,
+            longitude: location.longitude
+          },
+          timestamp: location.timestamp
         });
         return;
       }
@@ -101,14 +112,22 @@ export class LocationTrackingService {
       // Fallback to database
       const shuttle = await prisma.shuttle.findUnique({
         where: { id: shuttleId },
-        select: { currentLocation: true },
+        select: { 
+          id: true,
+          currentLat: true,
+          currentLng: true,
+          lastLocationUpdate: true 
+        },
       });
 
-      if (shuttle?.currentLocation) {
+      if (shuttle?.currentLat && shuttle?.currentLng) {
         socket.emit("shuttle-location", {
-          shuttleId,
-          ...(shuttle.currentLocation as any),
-          timestamp: Date.now(),
+          shuttleId: shuttle.id,
+          coordinates: {
+            latitude: shuttle.currentLat,
+            longitude: shuttle.currentLng
+          },
+          timestamp: shuttle.lastLocationUpdate?.getTime() || Date.now(),
         });
       }
     } catch (error) {
@@ -116,20 +135,39 @@ export class LocationTrackingService {
     }
   }
 
-  async getShuttleLocation(shuttleId: string): Promise<any> {
+  async getShuttleLocation(shuttleId: string): Promise<{ coordinates: { latitude: number; longitude: number }; timestamp: number } | null> {
     try {
       const cached = await redisClient.get(`shuttle:location:${shuttleId}`);
 
       if (cached) {
-        return JSON.parse(cached);
+        const location = JSON.parse(cached);
+        return {
+          coordinates: {
+            latitude: location.latitude,
+            longitude: location.longitude
+          },
+          timestamp: location.timestamp
+        };
       }
 
       const shuttle = await prisma.shuttle.findUnique({
         where: { id: shuttleId },
-        select: { currentLocation: true },
+        select: { 
+          currentLat: true,
+          currentLng: true,
+          lastLocationUpdate: true 
+        },
       });
 
-      return shuttle?.currentLocation;
+      if (!shuttle?.currentLat || !shuttle?.currentLng) return null;
+
+      return {
+        coordinates: {
+          latitude: shuttle.currentLat,
+          longitude: shuttle.currentLng
+        },
+        timestamp: shuttle.lastLocationUpdate?.getTime() || Date.now()
+      };
     } catch (error) {
       logger.error("Failed to get shuttle location:", error);
       return null;
@@ -141,35 +179,58 @@ export class LocationTrackingService {
     longitude: number,
     radiusKm: number = 5
   ) {
-    // Get all active shuttles
-    const shuttles = await prisma.shuttle.findMany({
-      where: {
-        status: { in: ["SCHEDULED", "BOARDING", "IN_TRANSIT"] },
-        currentLocation: { not: {} }, // Empty object to check for non-null JSON
-      },
-      select: {
-        id: true,
-        vehicleNumber: true,
-        currentLocation: true,
-      },
-    });
+    try {
+      // Get all active shuttles with location data
+      const shuttles = await prisma.shuttle.findMany({
+        where: {
+          status: { in: ["SCHEDULED", "BOARDING", "IN_TRANSIT"] },
+          currentLat: { not: null },
+          currentLng: { not: null },
+        },
+        select: {
+          id: true,
+          licensePlate: true,
+          currentLat: true,
+          currentLng: true,
+          vehicleType: true,
+          capacity: true,
+          availableSeats: true,
+        },
+      });
 
-    // Filter by distance
-    const nearbyShuttles = shuttles.filter((shuttle: { id: string; vehicleNumber: string; currentLocation: any }) => {
-      if (!shuttle.currentLocation) return false;
+      // Filter by distance and map to response format
+      return shuttles
+        .filter((shuttle) => {
+          if (shuttle.currentLat === null || shuttle.currentLng === null) return false;
 
-      const location = shuttle.currentLocation as any;
-      const distance = this.calculateDistance(
-        latitude,
-        longitude,
-        location.latitude,
-        location.longitude
-      );
+          const distance = this.calculateDistance(
+            latitude,
+            longitude,
+            shuttle.currentLat,
+            shuttle.currentLng
+          );
 
-      return distance <= radiusKm;
-    });
-
-    return nearbyShuttles;
+          return distance <= radiusKm;
+        })
+        .map(shuttle => ({
+          id: shuttle.id,
+          licensePlate: shuttle.licensePlate,
+          currentLat: shuttle.currentLat,
+          currentLng: shuttle.currentLng,
+          vehicleType: shuttle.vehicleType,
+          capacity: shuttle.capacity,
+          availableSeats: shuttle.availableSeats,
+          distance: this.calculateDistance(
+            latitude,
+            longitude,
+            shuttle.currentLat!,
+            shuttle.currentLng!
+          )
+        }));
+    } catch (error) {
+      logger.error("Error finding nearby shuttles:", error);
+      throw new Error("Failed to find nearby shuttles");
+    }
   }
 
   private calculateDistance(

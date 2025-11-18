@@ -6,6 +6,9 @@ import { logger } from './utils/logger';
 
 dotenv.config();
 
+// Set timezone
+process.env.TZ = process.env.TIMEZONE || 'UTC';
+
 const PORT = process.env.PORT || 4000;
 
 async function startServer() {

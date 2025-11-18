@@ -22,7 +22,7 @@ import { solanaConnection, PROGRAM_IDS } from "../../config/solana";
 import { logger } from "../../utils/logger";
 import BigNumber from "bignumber.js";
 
-interface PaymentRequest {
+export interface PaymentRequest {
   url: string;
   qrCode: string;
   reference: string;

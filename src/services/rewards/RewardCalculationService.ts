@@ -1,150 +1,130 @@
 import { prisma } from "../../config/database";
 import { logger } from "../../utils/logger";
 import { Decimal } from "@prisma/client/runtime/library";
+import { NotificationService } from "../notification/NotificationService";
+
+const XP_TO_USDC_RATE = 0.01;
 
 export class RewardCalculationService {
-  // Base XP per ride
-  private static BASE_XP = 100;
-  // CO2 saved per ride (in kg)
-  private static CO2_PER_RIDE = 5;
-  // CO2 XP multiplier
-  private static CO2_XP_MULTIPLIER = 10;
+  private static readonly BASE_XP = 100;
+  private static readonly CO2_PER_SEAT = 5;
 
   static async generateReward(bookingId: string) {
-    try {
-      const booking = await prisma.booking.findUnique({
-        where: { id: bookingId },
-        include: { user: true, shuttle: true },
-      });
+    const booking = await prisma.booking.findUnique({
+      where: { id: bookingId },
+      include: { user: true },
+    });
 
-      if (!booking) {
-        throw new Error("Booking not found");
-      }
-
-      // Check if reward already exists
-      const existingReward = await prisma.reward.findUnique({
-        where: { bookingId },
-      });
-
-      if (existingReward) {
-        logger.warn(`Reward already exists for booking ${bookingId}`);
-        return existingReward;
-      }
-
-      // Calculate XP (base + number of seats)
-      const xpPoints = this.BASE_XP * booking.numberOfSeats;
-
-      // Calculate CO2 XP
-      const co2XpPoints = Math.floor(
-        this.CO2_PER_RIDE * booking.numberOfSeats * this.CO2_XP_MULTIPLIER
-      );
-
-      // Create reward
-      const reward = await prisma.reward.create({
-        data: {
-          userId: booking.userId,
-          bookingId,
-          xpPoints,
-          co2XpPoints,
-          isRedeemed: false,
-        },
-      });
-
-      logger.info(
-        `Reward created for booking ${bookingId}: ${xpPoints} XP, ${co2XpPoints} CO2 XP`
-      );
-      return reward;
-    } catch (error) {
-      logger.error("Reward generation failed:", error);
-      throw error;
+    if (!booking) {
+      throw new Error("Booking not found");
     }
+
+    const existing = await prisma.reward.findUnique({
+      where: { bookingId },
+    });
+
+    if (existing) {
+      return existing;
+    }
+
+    const xpEarned = this.BASE_XP * booking.seats;
+    const co2SavedKg = Math.floor(this.CO2_PER_SEAT * booking.seats);
+
+    const reward = await prisma.reward.create({
+      data: {
+        userId: booking.userId,
+        bookingId,
+        xpEarned,
+        co2SavedKg,
+        claimed: false,
+      },
+    });
+
+    await NotificationService.sendRewardNotification(
+      booking.userId,
+      xpEarned,
+      co2SavedKg
+    );
+
+    logger.info(
+      `Reward created for booking ${bookingId}: ${xpEarned} XP, ${co2SavedKg}kg CO2`
+    );
+
+    return reward;
   }
 
   static async getUserTotalRewards(userId: string) {
-    const rewards = await prisma.reward.aggregate({
+    const totals = await prisma.reward.aggregate({
       where: { userId },
       _sum: {
-        xpPoints: true,
-        co2XpPoints: true,
+        xpEarned: true,
+        co2SavedKg: true,
+        usdcValue: true,
       },
     });
 
-    const redeemedRewards = await prisma.reward.aggregate({
-      where: { userId, isRedeemed: true },
+    const redeemed = await prisma.reward.aggregate({
+      where: { userId, claimed: true },
       _sum: {
-        xpPoints: true,
-        redeemedAmount: true,
+        xpEarned: true,
+        usdcValue: true,
       },
     });
+
+    const totalXP = totals._sum.xpEarned || 0;
+    const redeemedXP = redeemed._sum.xpEarned || 0;
 
     return {
-      totalXP: rewards._sum.xpPoints || 0,
-      totalCO2XP: rewards._sum.co2XpPoints || 0,
-      redeemedXP: redeemedRewards._sum.xpPoints || 0,
-      redeemedAmount: Number(redeemedRewards._sum.redeemedAmount || 0),
-      availableXP:
-        (rewards._sum.xpPoints || 0) - (redeemedRewards._sum.xpPoints || 0),
+      totalXP,
+      totalCO2XP: totals._sum.co2SavedKg || 0,
+      redeemedXP,
+      redeemedAmount: Number(redeemed._sum.usdcValue || 0),
+      availableXP: totalXP - redeemedXP,
     };
   }
 
   static async redeemRewards(userId: string, xpAmount: number) {
-    try {
-      // Get user's unredeemed rewards
-      const unredeemedRewards = await prisma.reward.findMany({
-        where: { userId, isRedeemed: false },
-        orderBy: { createdAt: "asc" },
-      });
-
-      const totalAvailableXP = unredeemedRewards.reduce(
-        (sum: number, r: { xpPoints: number }) => sum + r.xpPoints,
-        0
-      );
-
-      if (totalAvailableXP < xpAmount) {
-        throw new Error("Insufficient XP balance");
-      }
-
-      // XP to USDC conversion rate (e.g., 100 XP = 1 USDC)
-      const XP_TO_USDC_RATE = 0.01;
-      const usdcAmount = xpAmount * XP_TO_USDC_RATE;
-
-      // Mark rewards as redeemed
-      let remainingXP = xpAmount;
-      const redeemPromises = [];
-
-      for (const reward of unredeemedRewards) {
-        if (remainingXP <= 0) break;
-
-        const xpToRedeem = Math.min(remainingXP, reward.xpPoints);
-        remainingXP -= xpToRedeem;
-
-        const redeemedAmount = new Decimal(xpToRedeem * XP_TO_USDC_RATE);
-        redeemPromises.push(
-          prisma.reward.update({
-            where: { id: reward.id },
-            data: {
-              isRedeemed: true,
-              redeemedAmount,
-              redeemedAt: new Date(),
-            },
-          })
-        );
-      }
-
-      await Promise.all(redeemPromises);
-
-      logger.info(
-        `User ${userId} redeemed ${xpAmount} XP for ${usdcAmount} USDC`
-      );
-
-      return {
-        xpRedeemed: xpAmount,
-        usdcAmount,
-        timestamp: new Date(),
-      };
-    } catch (error) {
-      logger.error("Reward redemption failed:", error);
-      throw error;
+    if (xpAmount <= 0) {
+      throw new Error("XP amount must be greater than zero");
     }
+
+    const summary = await this.getUserTotalRewards(userId);
+    if (summary.availableXP < xpAmount) {
+      throw new Error("Insufficient XP balance");
+    }
+
+    const rewards = await prisma.reward.findMany({
+      where: { userId, claimed: false },
+      orderBy: { createdAt: "asc" },
+    });
+
+    let remaining = xpAmount;
+    const updates: Promise<any>[] = [];
+
+    for (const reward of rewards) {
+      if (remaining <= 0) break;
+      const redeeming = Math.min(remaining, reward.xpEarned);
+      remaining -= redeeming;
+
+      updates.push(
+        prisma.reward.update({
+          where: { id: reward.id },
+          data: {
+            claimed: true,
+            usdcValue: new Decimal(redeeming * XP_TO_USDC_RATE),
+          },
+        })
+      );
+    }
+
+    await Promise.all(updates);
+
+    logger.info(`User ${userId} redeemed ${xpAmount} XP`);
+
+    return {
+      xpRedeemed: xpAmount,
+      usdcAmount: xpAmount * XP_TO_USDC_RATE,
+      timestamp: new Date(),
+    };
   }
 }

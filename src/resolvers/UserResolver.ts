@@ -1,265 +1,242 @@
-import { Resolver, Query, Mutation, Arg, Ctx, Authorized, UseMiddleware, registerEnumType } from "type-graphql";
-import { User, AuthResponse } from "../types/graphql/User";
+import { Resolver, Query, Mutation, Arg, Ctx, Authorized } from "type-graphql";
+import {
+  User,
+  AuthResponse,
+  UpdateUserProfileInput,
+} from "../types/graphql/User";
 import {
   NotificationSettings,
   LocationSettings,
   UpdateNotificationSettingsInput,
   UpdateLocationSettingsInput,
 } from "../types/graphql/UserSettings";
-import { prisma } from "../config/database";
+import { type Context } from "../types/Context";
+import { NFTVerificationResponse } from "../types/graphql/NFT";
 import { NFTVerificationService } from "../services/blockchain/NFTVerificationService";
-import { generateToken } from "../middleware/auth";
+import { UserService } from "../services/user/UserService";
+import { prisma } from "../config/database";
 import { logger } from "../utils/logger";
-import { Context } from "../types/Context";
-import { authRateLimiter } from "../middleware/graphqlRateLimits";
-import { PaymentStatus, PayoutStatus, PayoutType, UserRole } from "@prisma/client";
+import { User as PrismaUser, Prisma } from "@prisma/client";
 
-  registerEnumType(UserRole, {
-    name: "UserRole",
-    description: "User role types in the system",
-    valuesConfig: {
-      SEEKER: { description: "Regular user looking for rides" },
-      DRIVER: { description: "Driver who operates shuttles" },
-      OWNER: { description: "Fleet owner who manages vehicles and drivers" },
-      ADMIN: { description: "System administrator" },
-    },
-  });
+// Helper to transform Prisma User to GraphQL User
+const toGqlUser = (user: PrismaUser & { [key: string]: any }): User => {
+  return {
+    ...user,
+    notificationSettings: (typeof user.notificationSettings === "string"
+      ? JSON.parse(user.notificationSettings)
+      : user.notificationSettings) as NotificationSettings,
+    locationSettings: (typeof user.locationSettings === "string"
+      ? JSON.parse(user.locationSettings)
+      : user.locationSettings) as LocationSettings,
+  };
+};
 
-  
-  // PaymentStatus enum
-  registerEnumType(PaymentStatus, {
-    name: "PaymentStatus",
-    description: "Status of a payment transaction",
-    valuesConfig: {
-      PENDING: { description: "Payment is pending processing" },
-      PROCESSING: { description: "Payment is being processed" },
-      COMPLETED: { description: "Payment has been successfully completed" },
-      FAILED: { description: "Payment processing failed" },
-      REFUNDED: { description: "Payment has been refunded" },
-    },
-  });
-
-
-  // PayoutType enum
-  registerEnumType(PayoutType, {
-    name: "PayoutType",
-    description: "Type of payout",
-    valuesConfig: {
-      REVENUE_SHARE: { description: "Revenue share from shuttle operations" },
-      FRACTIONAL_OWNERSHIP: { description: "Earnings from fractional ownership" },
-    },
-  });
-
-  // PayoutStatus enum
-  registerEnumType(PayoutStatus, {
-    name: "PayoutStatus",
-    description: "Status of a payout",
-    valuesConfig: {
-      PENDING: { description: "Payout is pending processing" },
-      PROCESSING: { description: "Payout is being processed" },
-      COMPLETED: { description: "Payout has been completed" },
-    },
-  });
-
-
-@Resolver()
+@Resolver(() => User)
 export class UserResolver {
-  @UseMiddleware(authRateLimiter)
   @Mutation(() => AuthResponse)
   async connectWallet(
     @Arg("walletAddress") walletAddress: string
   ): Promise<AuthResponse> {
-    try {
-      // Verify NFT ownership
-      const { isHolder, nftTokens } =
-        await NFTVerificationService.verifyNFTOwnership(walletAddress);
+    const { user, token, nftAccess } = await UserService.connectWallet(
+      walletAddress
+    );
 
-      // Find or create user
-      let user = await prisma.user.findUnique({
-        where: { walletAddress },
-      });
-
-      if (!user) {
-        user = await prisma.user.create({
-          data: {
-            walletAddress,
-            isNFTHolder: isHolder,
-            nftTokens,
-          },
-        });
-        logger.info(`New user created: ${walletAddress}`);
-      } else {
-        // Update NFT holder status
-        user = await prisma.user.update({
-          where: { walletAddress },
-          data: {
-            isNFTHolder: isHolder,
-            nftTokens,
-          },
-        });
-      }
-
-      const token = generateToken(user.id, user?.walletAddress as string);
-
-      return {
-        token,
-        user,
-        isNFTHolder: isHolder,
-      };
-    } catch (error) {
-      logger.error("Wallet connection failed:", error);
-      throw new Error("Failed to connect wallet");
-    }
+    return {
+      token,
+      user: toGqlUser(user),
+      hasNFTAccess: nftAccess.hasAccess,
+    };
   }
 
   @Authorized()
   @Query(() => User)
   async me(@Ctx() ctx: Context): Promise<User> {
-    const user = await prisma.user.findUnique({
-      where: { id: ctx.userId! },
-    });
-
-    if (!user) throw new Error("User not found");
-    return user;
+    const user = await UserService.getMe(ctx.userId!);
+    return toGqlUser(user);
   }
 
   @Authorized()
-  @Mutation(() => Boolean)
-  async refreshNFTStatus(@Ctx() ctx: Context): Promise<boolean> {
-    const user = await prisma.user.findUnique({
-      where: { id: ctx.userId! },
-    });
+  @Mutation(() => User)
+  async updateProfile(
+    @Ctx() ctx: Context,
+    @Arg("input") input: UpdateUserProfileInput
+  ): Promise<User> {
+    // Check if email is being updated and validate uniqueness
+    if (input.email) {
+      const existingUser = await prisma.user.findFirst({
+        where: {
+          email: input.email,
+          id: { not: ctx.userId! },
+        },
+      });
 
-    if (!user) throw new Error("User not found");
-    if (!user.walletAddress) throw new Error("No wallet address found for user");
+      if (existingUser) {
+        throw new Error("Email is already in use");
+      }
+    }
 
-    // Invalidate cache and re-verify
-    await NFTVerificationService.invalidateCache(user.walletAddress);
-    const { isHolder, nftTokens } =
-      await NFTVerificationService.verifyNFTOwnership(user.walletAddress);
+    // Check if username is being updated and validate uniqueness
+    if (input.username) {
+      const existingUser = await prisma.user.findFirst({
+        where: {
+          username: input.username,
+          id: { not: ctx.userId! },
+        },
+      });
 
-    await prisma.user.update({
-      where: { id: user.id },
-      data: { 
-        isNFTHolder: isHolder, 
-        nftTokens: nftTokens || [] 
-      },
-    });
+      if (existingUser) {
+        throw new Error("Username is already taken");
+      }
+    }
 
-    return isHolder;
+    const dataToUpdate: Prisma.UserUpdateInput = {};
+    if (input.email) dataToUpdate.email = input.email;
+    if (input.username) dataToUpdate.username = input.username;
+    if (input.phoneNumber) dataToUpdate.phoneNumber = input.phoneNumber;
+
+    const updated = await UserService.updateProfile(ctx.userId!, dataToUpdate);
+
+    return toGqlUser(updated);
   }
 
   @Authorized()
   @Mutation(() => Boolean)
   async updateFCMToken(
-    @Arg("fcmToken") fcmToken: string,
-    @Ctx() ctx: Context
+    @Ctx() ctx: Context,
+    @Arg("fcmToken") fcmToken: string
   ): Promise<boolean> {
-    await prisma.user.update({
-      where: { id: ctx.userId! },
-      data: { fcmToken },
-    });
-    logger.info(`FCM token updated for user ${ctx.userId}`);
-    return true;
+    try {
+      await prisma.user.update({
+        where: { id: ctx.userId! },
+        data: { fcmToken },
+      });
+      logger.info(`FCM token updated for user ${ctx.userId}`);
+      return true;
+    } catch (error) {
+      logger.error(`Failed to update FCM token for user ${ctx.userId}:`, error);
+      throw new Error("Failed to update FCM token");
+    }
   }
 
   @Authorized()
   @Query(() => NotificationSettings)
-  async getNotificationSettings(@Ctx() ctx: Context): Promise<NotificationSettings> {
-    const user = await prisma.user.findUnique({
-      where: { id: ctx.userId! },
-      select: { notificationSettings: true },
-    });
-
-    if (!user) throw new Error("User not found");
-
-    const settings = (user.notificationSettings as any) || {
-      rideUpdates: true,
-      promotions: true,
-      rewards: true,
-    };
-
-    return settings;
+  async getNotificationSettings(
+    @Ctx() ctx: Context
+  ): Promise<NotificationSettings> {
+    try {
+      return await UserService.getNotificationSettings(ctx.userId!);
+    } catch (error) {
+      logger.error(
+        `Failed to get notification settings for user ${ctx.userId}:`,
+        error
+      );
+      throw new Error("Failed to retrieve notification settings");
+    }
   }
 
   @Authorized()
   @Mutation(() => NotificationSettings)
   async updateNotificationSettings(
-    @Arg("input") input: UpdateNotificationSettingsInput,
-    @Ctx() ctx: Context
+    @Ctx() ctx: Context,
+    @Arg("input") input: UpdateNotificationSettingsInput
   ): Promise<NotificationSettings> {
-    const user = await prisma.user.findUnique({
-      where: { id: ctx.userId! },
-      select: { notificationSettings: true },
-    });
-
-    if (!user) throw new Error("User not found");
-
-    const currentSettings = (user.notificationSettings as any) || {
-      rideUpdates: true,
-      promotions: true,
-      rewards: true,
-    };
-
-    const updatedSettings = {
-      ...currentSettings,
-      ...input,
-    };
-
-    await prisma.user.update({
-      where: { id: ctx.userId! },
-      data: { notificationSettings: updatedSettings as any },
-    });
-
-    return updatedSettings;
+    try {
+      return await UserService.updateNotificationSettings(ctx.userId!, input);
+    } catch (error) {
+      logger.error(
+        `Failed to update notification settings for user ${ctx.userId}:`,
+        error
+      );
+      throw new Error("Failed to update notification settings");
+    }
   }
 
   @Authorized()
   @Query(() => LocationSettings)
   async getLocationSettings(@Ctx() ctx: Context): Promise<LocationSettings> {
-    const user = await prisma.user.findUnique({
-      where: { id: ctx.userId! },
-      select: { locationSettings: true },
-    });
-
-    if (!user) throw new Error("User not found");
-
-    const settings = (user.locationSettings as any) || {
-      shareLocation: true,
-      locationAccuracy: "high",
-    };
-
-    return settings;
+    try {
+      return await UserService.getLocationSettings(ctx.userId!);
+    } catch (error) {
+      logger.error(
+        `Failed to get location settings for user ${ctx.userId}:`,
+        error
+      );
+      throw new Error("Failed to retrieve location settings");
+    }
   }
 
   @Authorized()
   @Mutation(() => LocationSettings)
   async updateLocationSettings(
-    @Arg("input") input: UpdateLocationSettingsInput,
-    @Ctx() ctx: Context
+    @Ctx() ctx: Context,
+    @Arg("input") input: UpdateLocationSettingsInput
   ): Promise<LocationSettings> {
-    const user = await prisma.user.findUnique({
-      where: { id: ctx.userId! },
-      select: { locationSettings: true },
-    });
+    try {
+      return await UserService.updateLocationSettings(ctx.userId!, input);
+    } catch (error) {
+      logger.error(
+        `Failed to update location settings for user ${ctx.userId}:`,
+        error
+      );
+      throw new Error("Failed to update location settings");
+    }
+  }
 
-    if (!user) throw new Error("User not found");
+  @Authorized()
+  @Query(() => NFTVerificationResponse)
+  async checkNFTAccess(@Ctx() ctx: Context): Promise<NFTVerificationResponse> {
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: ctx.userId! },
+        select: { walletAddress: true },
+      });
 
-    const currentSettings = (user.locationSettings as any) || {
-      shareLocation: true,
-      locationAccuracy: "high",
-    };
+      if (!user?.walletAddress) {
+        throw new Error("Wallet not connected");
+      }
 
-    const updatedSettings = {
-      ...currentSettings,
-      ...input,
-    };
+      const access = await NFTVerificationService.hasNFTAccess(user.walletAddress);
+      return {
+        hasAccess: access.hasAccess,
+        tokens: [], // checkNFTAccess does not return full token list
+      };
+    } catch (error) {
+      logger.error(`Failed to check NFT access for user ${ctx.userId}:`, error);
+      throw new Error("Failed to verify NFT access");
+    }
+  }
 
-    await prisma.user.update({
-      where: { id: ctx.userId! },
-      data: { locationSettings: updatedSettings as any },
-    });
+  @Authorized()
+  @Mutation(() => NFTVerificationResponse)
+  async refreshNFTStatus(
+    @Ctx() ctx: Context
+  ): Promise<NFTVerificationResponse> {
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: ctx.userId! },
+        select: { walletAddress: true },
+      });
 
-    return updatedSettings;
+      if (!user?.walletAddress) {
+        throw new Error("Wallet not connected");
+      }
+
+      // Invalidate cache to force a fresh check
+      await NFTVerificationService.invalidateCache(user.walletAddress);
+      
+      // Verify ownership and get the list of tokens
+      const { isHolder, nftTokens } = await NFTVerificationService.verifyNFTOwnership(user.walletAddress);
+
+      return {
+        hasAccess: isHolder,
+        tokens: nftTokens.map(tokenMint => ({ tokenMint })),
+      };
+    } catch (error) {
+      logger.error(
+        `Failed to refresh NFT status for user ${ctx.userId}:`,
+        error
+      );
+      throw new Error("Failed to refresh NFT status");
+    }
   }
 }

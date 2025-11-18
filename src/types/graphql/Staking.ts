@@ -3,88 +3,141 @@ import {
   Field,
   ID,
   InputType,
-  GraphQLISODateTime,
-  Float,
+  registerEnumType,
   Int,
 } from "type-graphql";
-import { StakingTier } from "@prisma/client";
+import { StakeType, StakingTier } from "@prisma/client";
+import { Decimal } from "@prisma/client/runtime/library";
 import { GraphQLDecimal } from "./scalers/Decimal";
-import type { Decimal } from "@prisma/client/runtime/library";
+import { Payout } from "./Payout";
+
+registerEnumType(StakeType, {
+  name: "StakeType",
+});
+
+registerEnumType(StakingTier, {
+  name: "StakingTier",
+});
 
 @ObjectType()
 export class StakedNFT {
   @Field(() => ID)
-  id: string;
+  id!: string;
 
-  @Field(() => ID)
-  userId: string;
+  @Field()
+  walletAddress!: string;
 
-  @Field(() => String)
-  nftMintAddress: string;
+  @Field()
+  tokenMint!: string;
+
+  @Field(() => StakeType)
+  stakeType!: StakeType;
+
+  @Field({ nullable: true })
+  shuttleId?: string;
 
   @Field(() => StakingTier)
-  stakingTier: StakingTier;
+  tier!: StakingTier;
 
-  @Field(() => String, { nullable: true })
-  shuttleId?: string;
+  @Field()
+  isActive!: boolean;
 
-  @Field(() => GraphQLISODateTime)
-  createdAt: Date;
+  @Field()
+  stakedAt!: Date;
 
-  @Field(() => GraphQLISODateTime)
-  stakedAt: Date;
-
-  @Field(() => Date, { nullable: true })
+  @Field({ nullable: true })
   unstakedAt?: Date;
 
-  @Field(() => Boolean)
-  isActive: boolean;
-
   @Field(() => GraphQLDecimal)
-  totalEarnings: Decimal | string;
+  totalEarnings!: Decimal;
 
-  @Field(() => Date, { nullable: true })
+  @Field({ nullable: true })
   lastPayoutAt?: Date;
+
+  @Field(() => [Payout], { nullable: true })
+  payouts?: Payout[];
 }
 
-@InputType()
-export class StakeNFTInput {
-  @Field(() => String)
-  nftMintAddress: string;
+@ObjectType()
+export class StakingStats {
+  @Field(() => GraphQLDecimal)
+  totalEarned!: Decimal;
 
-  @Field(() => String, { nullable: true })
-  shuttleId?: string;
+  @Field(() => Int)
+  totalStaked!: number;
+
+  @Field(() => [StakedNFT])
+  stakedNFTs!: StakedNFT[];
 }
 
 @ObjectType()
 export class RevenueShareInfo {
-  @Field(() => GraphQLDecimal)
-  totalRevenue: Decimal | string;
+  @Field()
+  period!: string;
+
+  @Field({ nullable: true })
+  startDate?: Date;
+
+  @Field({ nullable: true })
+  endDate?: Date;
 
   @Field(() => GraphQLDecimal)
-  platformFee: Decimal | string;
+  totalRevenue!: Decimal;
 
   @Field(() => GraphQLDecimal)
-  distributableRevenue: Decimal | string;
+  distributableRevenue!: Decimal;
+
+  @Field(() => GraphQLDecimal)
+  tier1PerNFT!: Decimal;
+
+  @Field(() => GraphQLDecimal)
+  tier2PerNFT!: Decimal;
 
   @Field(() => Int)
-  tier1PerNFT: number;
+  tier1Stakes!: number;
 
   @Field(() => Int)
-  tier2PerNFT: number;
+  tier2Stakes!: number;
+}
+
+@ObjectType()
+export class FractionalRevenueInfo {
+  @Field()
+  period!: string;
+
+  @Field({ nullable: true })
+  startDate?: Date;
+
+  @Field({ nullable: true })
+  endDate?: Date;
+
+  @Field(() => GraphQLDecimal)
+  totalRevenue!: Decimal;
+
+  @Field(() => GraphQLDecimal)
+  perNFT!: Decimal;
 
   @Field(() => Int)
-  tier1Stakes: number;
+  stakes!: number;
+}
 
-  @Field(() => Int)
-  tier2Stakes: number;
+@InputType()
+export class StakeNFTInput {
+  @Field()
+  tokenMint!: string;
 
-  @Field(() => String)
-  period: string;
+  @Field(() => StakeType)
+  stakeType!: StakeType;
 
-  @Field(() => GraphQLISODateTime)
-  startDate: Date;
+  @Field(() => StakingTier)
+  tier!: StakingTier;
 
-  @Field(() => GraphQLISODateTime)
-  endDate: Date;
+  @Field({ nullable: true })
+  shuttleId?: string;
+}
+
+@InputType()
+export class UnstakeNFTInput {
+  @Field()
+  tokenMint!: string;
 }

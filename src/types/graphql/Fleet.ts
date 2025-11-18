@@ -1,59 +1,81 @@
 import {
   ObjectType,
   Field,
-  GraphQLISODateTime,
   ID,
+  registerEnumType,
+  Int,
+  Float,
+  GraphQLISODateTime,
 } from "type-graphql";
+import { ShuttleStatus } from "@prisma/client";
+import { Location } from "./Location";
 
+registerEnumType(ShuttleStatus, {
+  name: "FleetShuttleStatus",
+});
 
 @ObjectType()
 export class FleetOverview {
-  @Field(() => Number)
-  totalVehicles: number;
+  @Field(() => Int)
+  totalVehicles!: number;
 
-  @Field()
-  activeVehicles: number;
+  @Field(() => Int)
+  activeVehicles!: number;
 
-  @Field()
-  totalDrivers: number;
+  @Field(() => Float)
+  totalRevenue!: number;
 
-  @Field()
-  activeDrivers: number;
-
-  @Field()
-  totalRevenue: number;
-
-  @Field()
-  monthRevenue: number;
+  @Field(() => Float)
+  monthRevenue!: number;
 }
 
 @ObjectType()
 export class VehicleDetails {
   @Field(() => ID)
-  id: string;
+  id!: string;
 
   @Field()
-  vehicleNumber: string;
+  licensePlate!: string;
 
   @Field()
-  vehicleType: string;
+  vehicleType!: string;
+
+  @Field(() => Int)
+  capacity!: number;
+
+  @Field(() => Int)
+  availableSeats!: number;
+
+  @Field(() => ID, { nullable: true })
+  driverId?: string | null;
 
   @Field()
-  capacity: number;
+  departureTime!: Date;
 
   @Field()
-  licensePlate: string;
+  arrivalTime!: Date;
+
+  @Field(() => Location)
+  pickupLocation!: Location;
+
+  @Field(() => Location)
+  dropoffLocation!: Location;
+
+  @Field(() => Float)
+  basePriceUsdc!: number;
+
+  @Field(() => ShuttleStatus)
+  status!: ShuttleStatus;
 
   @Field()
-  isActive: boolean;
+  isFractionalized!: boolean;
+
+  @Field(() => String, { nullable: true })
+  currentLat?: number | null;
+
+  @Field(() => Int, { nullable: true })
+  currentLng?: number | null;
 
   @Field(() => GraphQLISODateTime, { nullable: true })
-  lastMaintenance: Date | null;
-
-  @Field(() => GraphQLISODateTime, { nullable: true })
-  nextMaintenance: Date | null;
-
-  @Field()
-  mileage: number;
+  lastLocationUpdate?: Date | null;
 }
-

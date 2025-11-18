@@ -1,0 +1,168 @@
+11/5/25, 8:55 AM
+ Google Gemini
+ GoCabs: A Web3-Powered Event Shuttle Platform
+ GoCabs is a next-generation, event-focused shuttle booking application built with React Native and
+ Expo. It addresses the friction of event transportation by building a community-owned ecosystem. It
+ leverages the Solana blockchain to offer a seamless booking experience, using USDC for payments
+ and NFTs for access control, rewards, and fractional ownership.
+ This project provides a complete transportation ecosystem, splitting functionality into two core
+ applications:
+ 1. Seeker App (Rider): The customer-facing app for finding events, booking shuttles, and managing
+ Web3 assets.
+ 2. Fleet Management App (Driver/Owner): The operational backend for drivers to manage rides
+ and for owners to manage their fleet.
+ 1. Core Concept: NFT-Based Partial Gating
+ The app operates on a "partial gating" model, creating a clear conversion funnel for users to become
+ platform stakeholders. This model is designed to drive NFT adoption by demonstrating value upfront.
+ Non-NFT Holders (Teaser Mode): Can download the app, browse events, and see shuttle
+ availability. All booking, reward, and staking features are disabled. Key information like pricing is
+ blurred, and calls-to-action prompt the user to acquire an NFT to unlock the full experience.
+ NFT Holders (Full Access): Unlock the app's full utility. They can book rides, track shuttles in
+ real-time, earn rewards, and participate in the staking and governance ecosystem.
+ 2. Seeker App (Rider)
+ The primary application for event-goers to book and track their rides.
+ 2.1. Seeker User Flow
+ 1. Onboarding & Gating:
+ User downloads the app and is prompted to connect a wallet (e.g., Phantom, Solflare) using
+ the Solana Mobile Wallet Adapter.
+ The app instantly verifies NFT ownership.
+ If Holder: The app unlocks all features.
+ If Non-Holder: The app enters "Teaser Mode."
+ 2. Event Discovery:
+ User browses a map or list of upcoming events.
+ Filters events by date, location, or type (e.g., concert, conference).
+ Views event details and available shuttle schedules.
+ 3. Booking (NFT-Only):
+ User selects an event and a shuttle service.
+ Views details like departure/arrival times and price (in USDC).
+ 1/4
+ https://gemini.google.com/u/0/app/a6adaaf0cd727829?hl=en-IN
+11/5/25, 8:55 AM
+ Google Gemini
+ Books the ride and pays with USDC via Solana Pay, which triggers a transaction approval in
+ their mobile wallet.
+ 4. Ride Tracking (NFT-Only):
+ After booking, the user can track the shuttle's location in real-time on the map.
+ Receives push notifications for schedule updates and estimated arrival times.
+ 5. Post-Ride (NFT-Only):
+ User is prompted to rate and review the shuttle service.
+ User automatically earns Points (XP) and CO2 XP rewards for taking the shuttle, which
+ appear in their rewards dashboard.
+ 2.2. Seeker App Features
+ Solana Wallet Integration: Connect instantly with Phantom, Solflare, and other wallets using the
+ Solana Mobile Wallet Adapter.
+ Event Discovery: Browse a map (Mapbox) or filterable list of upcoming events.
+ NFT-Gated Booking: Seamlessly book event shuttles and pay with USDC via Solana Pay.
+ Live Ride Tracking: Track your shuttle's location in real-time on its way to your event.
+ Rewards & Staking: A dedicated dashboard to view earned points (XP), redeem them for USDC,
+ and stake GoCabs NFTs.
+ 2.3. NFT Holder Benefits
+ Exclusive Access: Only NFT holders can book rides, ensuring a premium, less-crowded service.
+ Priority Service: Get priority access to shuttle services, reduced wait times, and guaranteed
+ seats.
+ Points & Rewards: Earn XP for every ride taken, which can be redeemed for USDC.
+ Revenue Share (Staking): Stake NFTs to earn a share of platform revenue, distributed monthly in
+ USDC.
+ Tier 1: Stake 1 NFT to earn a 25% share of the revenue pool.
+ Tier 2: Stake 3+ NFTs to earn a 40% share of the revenue pool.
+ Fractional Ownership: Link staked NFTs to specific shuttles to earn a pro-rata share of that
+ individual shuttle's monthly revenue (paid in USDC).
+ Governance: Participate in on-chain voting to influence platform development, new routes, and
+ expansion.
+ 3. Fleet Management App (Driver/Owner)
+ The all-in-one operational tool for drivers and fleet owners.
+ 3.1. Driver User Flow
+ 1. Login/Signup: Driver launches the app and logs in with their credentials.
+ 2. Dashboard: Views a simple list of upcoming and assigned rides for the day.
+ 2/4
+ https://gemini.google.com/u/0/app/a6adaaf0cd727829?hl=en-IN
+11/5/25, 8:55 AM
+ Google Gemini
+ 3. Ride Management: Accepts a ride request, sees pickup/drop-off details, and uses in-app
+ navigation to the destination.
+ 4. Earnings: Taps to view daily and weekly earnings summaries.
+ 5. Support: Accesses a support center to contact dispatch or the support team.
+ 3.2. Owner User Flow
+ 1. Login/Signup: Owner logs in with their credentials.
+ 2. Dashboard: Views a fleet-wide overview: real-time location of all vehicles, driver status
+ (online/offline/on-ride), and key revenue metrics.
+ 3. Vehicle Management: Adds, edits, or removes vehicles. Tracks and receives alerts for upcoming
+ maintenance and inspection schedules.
+ 4. Driver Management: Manages the driver roster, views driver profiles and ratings, and assigns
+ drivers to specific vehicles or schedules.
+ 5. Earnings & Analytics: Accesses detailed reports on driver performance, vehicle utilization, and
+ f
+ leet-wide profitability.
+ 6. Support: Uses a dedicated support channel for fleet-level issues.
+ 3.3. Fleet App Features
+ Role-Based Access: Separate, secure logins and distinct UIs for "Driver" and "Owner" roles.
+ Driver Dashboard: A simple, clear interface for drivers to view upcoming rides, manage their
+ schedule, and use in-app navigation.
+ Owner Dashboard: A complete fleet overview, including:
+ Real-time GPS tracking of all vehicles.
+ Driver management (profiles, ratings, assignments).
+ Vehicle management (maintenance schedules, inspection tracking).
+ Earnings & Analytics:
+ (Driver) View daily/weekly earnings summaries.
+ (Owner) Access detailed reports on driver performance, vehicle utilization, and fleet-wide
+ profitability.
+ 4. Technology & Architecture
+ This project is built on a modern, Web3-native stack. The React Native app communicates via a
+ GraphQL API to a Node.js backend. The backend handles business logic and integrates with Helius
+ for NFT verification and Solana Pay for payments. PostgreSQL stores core data, while Redis caches
+ on-chain data like NFT ownership to ensure a fast user experience.
+ Component
+ Mobile App
+ Backend
+ Technology
+ React Native (with Expo)
+ Node.js / Express
+ Purpose
+ Cross-platform (iOS & Android) build for both apps.
+ Core business logic and API server.
+ 3/4
+ https://gemini.google.com/u/0/app/a6adaaf0cd727829?hl=en-IN
+11/5/25, 8:55 AM
+ GraphQL
+ Flexible data querying between app and server.
+ Google Gemini
+ API
+ Database
+ Cache
+ Blockchain
+ Wallet
+ Payments
+ Blockchain API
+ PostgreSQL
+ Redis
+ Solana
+ Solana Mobile Wallet Adapter
+ Solana Pay (USDC)
+ Helius
+ Maps & Real-time Mapbox & Socket.io
+ Notifications
+ Firebase
+ 5. MVP v1 Scope & Goals
+ Primary data store for users, rides, events, etc.
+ Caching NFT ownership status to reduce on-chain calls.
+ The underlying blockchain for all transactions and assets.
+ The standard for connecting to wallets on mobile.
+ The protocol for initiating USDC payments.
+ Used for fast and reliable NFT verification.
+ For maps, navigation, and live location tracking.
+ For push notifications (ride updates, etc.).
+ The initial v1 launch is focused on validating the core user loop: Gating -> Booking -> Ride -> Reward.
+ 5.1. MVP Scope
+ Events: 1-2 beta events.
+ Fleet: 5 active shuttles.
+ Users: ~100 simulated NFTs for testing.
+ Gating: ~80% of app features will be gated.
+ Core Test: End-to-end testing of the staking and payout flow for 2 fractionalized shuttles.
+ 5.2. Key Success Metrics
+ Acquisition: Total app downloads and wallet connections.
+ Conversion: % of non-holders (in Teaser Mode) who acquire an NFT within 7 days.
+ Activation: # of rides booked by NFT holders.
+ Engagement: % of NFTs staked in the revenue pool or on fractionalized shuttles.
+ Revenue:Total USDC volume from booking commissions
+ 4/4
+ https://gemini.google.com/u/0/app/a6adaaf0cd727829?hl=en-IN

@@ -2,43 +2,55 @@ import { ObjectType, Field, InputType } from "type-graphql";
 
 @ObjectType()
 export class NotificationSettings {
-  @Field(() => Boolean, { defaultValue: true })
-  rideUpdates: boolean;
+  @Field({ defaultValue: true })
+  rideUpdates!: boolean;
 
-  @Field(() => Boolean, { defaultValue: true })
-  promotions: boolean;
+  @Field({ defaultValue: true })
+  promotions!: boolean;
 
-  @Field(() => Boolean, { defaultValue: true })
-  rewards: boolean;
-}
+  @Field({ defaultValue: true })
+  rewards!: boolean;
 
-@ObjectType()
-export class LocationSettings {
-  @Field(() => Boolean, { defaultValue: true })
-  shareLocation: boolean;
-
-  @Field(() => String, { defaultValue: "high" })
-  locationAccuracy: string;
+  @Field({ nullable: true, defaultValue: true })
+  staking?: boolean;
 }
 
 @InputType()
 export class UpdateNotificationSettingsInput {
-  @Field(() => Boolean, { nullable: true })
+  @Field({ nullable: true })
   rideUpdates?: boolean;
 
-  @Field(() => Boolean, { nullable: true })
+  @Field({ nullable: true })
   promotions?: boolean;
 
-  @Field(() => Boolean, { nullable: true })
+  @Field({ nullable: true })
   rewards?: boolean;
+
+  @Field({ nullable: true })
+  staking?: boolean;
+}
+
+@ObjectType()
+export class LocationSettings {
+  @Field({ defaultValue: true })
+  shareLocation!: boolean;
+
+  @Field({ defaultValue: "high" })
+  accuracy!: string;
+
+  @Field({ nullable: true })
+  backgroundUpdates?: boolean;
 }
 
 @InputType()
 export class UpdateLocationSettingsInput {
-  @Field(() => Boolean, { nullable: true })
+  @Field({ nullable: true })
   shareLocation?: boolean;
 
-  @Field(() => String, { nullable: true })
-  locationAccuracy?: string;
+  @Field({ nullable: true })
+  accuracy?: string;
+
+  @Field({ nullable: true })
+  backgroundUpdates?: boolean;
 }
 

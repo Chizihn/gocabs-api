@@ -1,97 +1,80 @@
-2025-11-15 12:17:02 [error]: TypeError: fetch failed
+2025-11-18 11:41:08 [error]: TypeError: fetch failed
     at node:internal/deps/undici/undici:13510:13
     at processTicksAndRejections (node:internal/process/task_queues:105:5)
     at ClientBrowser.callServer (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@solana\web3.js\src\connection.ts:1679:17)
-2025-11-15 12:17:02 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:02 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:02 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:02 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:02 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:02 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:03 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:03 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:04 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:04 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:05 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:05 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:06 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:06 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:07 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:08 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:09 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:10 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:10 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:11 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:12 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:14 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:15 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:16 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:17 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:18 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:20 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:21 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:22 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:24 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-2025-11-15 12:17:25 [error]: AggregateError: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
+2025-11-18 11:59:23 [error]: TypeError: heliusClient.rpc.getAssetsByOwner is not a function
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:29:47)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at Function.connectWallet (C:\Users\Chizi\Desktop\gocab\backend\src\services\user\UserService.ts:18:23)
+    at UserResolver.connectWallet (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:40:40)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-18 11:59:23 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:59:13)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at Function.connectWallet (C:\Users\Chizi\Desktop\gocab\backend\src\services\user\UserService.ts:18:23)
+    at UserResolver.connectWallet (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:40:40)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-18 11:59:25 [error]: TypeError: heliusClient.rpc.getAssetsByOwner is not a function
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:29:47)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:47:24)
+2025-11-18 11:59:25 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:59:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:47:24)
+2025-11-18 12:04:36 [error]: TypeError: heliusClient.rpc.getAssetsByOwner is not a function
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:29:47)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:47:24)
+2025-11-18 12:04:36 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:59:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:47:24)
+2025-11-18 12:04:59 [error]: TypeError: heliusClient.rpc.getAssetsByOwner is not a function
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:29:47)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:47:24)
+2025-11-18 12:04:59 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:59:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:47:24)
+2025-11-18 12:06:28 [error]: TypeError: heliusClient.rpc.getAssetsByOwner is not a function
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:29:47)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:47:24)
+2025-11-18 12:06:28 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:59:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:47:24)
+2025-11-18 12:06:28 [error]: TypeError: heliusClient.rpc.getAssetsByOwner is not a function
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:29:47)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:47:24)
+2025-11-18 12:06:28 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:59:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:47:24)
+2025-11-18 12:06:52 [error]: TypeError: heliusClient.rpc.getAssetsByOwner is not a function
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:29:47)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:47:24)
+2025-11-18 12:06:52 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:59:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:142:39)
+    at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:47:24)

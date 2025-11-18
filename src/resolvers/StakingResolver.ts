@@ -1,22 +1,19 @@
-import { Resolver, Query, Mutation, Arg, Ctx, Authorized, registerEnumType } from "type-graphql";
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Arg,
+  Ctx,
+  Authorized,
+} from "type-graphql";
 import { StakingService } from "../services/blockchain/StakingService";
 import {
   StakedNFT,
   StakeNFTInput,
   RevenueShareInfo,
+  FractionalRevenueInfo,
 } from "../types/graphql/Staking";
 import { Context } from "../types/Context";
-import { StakingTier } from "@prisma/client";
-
-// StakingTier enum
-  registerEnumType(StakingTier, {
-    name: "StakingTier",
-    description: "Tier levels for staking rewards",
-    valuesConfig: {
-      TIER_1: { description: "1 NFT - 25% share of rewards" },
-      TIER_2: { description: "3+ NFTs - 40% share of rewards" },
-    },
-  });
 
 @Resolver()
 export class StakingResolver {
@@ -28,24 +25,26 @@ export class StakingResolver {
   ): Promise<StakedNFT> {
     return StakingService.stakeNFT(
       ctx.userId!,
-      input.nftMintAddress,
+      input.tokenMint,
+      input.stakeType,
+      input.tier,
       input.shuttleId
-    ) as any;
+    ) as unknown as StakedNFT;
   }
 
   @Authorized("NFT_HOLDER")
   @Mutation(() => Boolean)
   async unstakeNFT(
-    @Arg("stakedNFTId") stakedNFTId: string,
+    @Arg("tokenMint") tokenMint: string,
     @Ctx() ctx: Context
   ): Promise<boolean> {
-    return StakingService.unstakeNFT(ctx.userId!, stakedNFTId);
+    return StakingService.unstakeNFT(ctx.userId!, tokenMint);
   }
 
   @Authorized("NFT_HOLDER")
   @Query(() => [StakedNFT])
   async myStakedNFTs(@Ctx() ctx: Context): Promise<StakedNFT[]> {
-    return StakingService.getUserStakedNFTs(ctx.userId!) as any;
+    return StakingService.getUserStakedNFTs(ctx.userId!) as unknown as StakedNFT[];
   }
 
   @Authorized("ADMIN")
@@ -53,6 +52,20 @@ export class StakingResolver {
   async revenueShareInfo(
     @Arg("period", { defaultValue: "monthly" }) period: "monthly" | "weekly"
   ): Promise<RevenueShareInfo> {
-    return StakingService.calculateRevenueShare(period) as any;
+    return StakingService.calculateRevenueShare(
+      period
+    ) as unknown as RevenueShareInfo;
+  }
+
+  @Authorized("ADMIN")
+  @Query(() => FractionalRevenueInfo)
+  async fractionalRevenueInfo(
+    @Arg("shuttleId") shuttleId: string,
+    @Arg("period", { defaultValue: "monthly" }) period: "monthly" | "weekly"
+  ): Promise<FractionalRevenueInfo> {
+    return StakingService.calculateFractionalOwnershipRevenue(
+      shuttleId,
+      period
+    ) as unknown as FractionalRevenueInfo;
   }
 }

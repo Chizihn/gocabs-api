@@ -1,5 +1,5 @@
 import { prisma } from "../../config/database";
-import { PaymentStatus, PayoutStatus, PayoutType } from "@prisma/client";
+import { PaymentStatus } from "@prisma/client";
 import { logger } from "../../utils/logger";
 import { SolanaPayService } from "../blockchain/SolanaPayService";
 import { PublicKey } from "@solana/web3.js";
@@ -30,14 +30,10 @@ export class PayoutService {
       startDate.setMonth(startDate.getMonth() - 1);
 
       const totalRevenue = await prisma.booking.aggregate({
-        where: {
-          paymentStatus: PaymentStatus.COMPLETED,
-          createdAt: { gte: startDate, lte: endDate },
-        },
-        _sum: { totalPrice: true },
+_sum: { totalPriceUsdc: true },
       });
 
-      const revenueAmount = Number(totalRevenue._sum.totalPrice || 0);
+      const revenueAmount = Number(totalRevenue._sum.totalPriceUsdc || 0);
       const platformFee = revenueAmount * 0.1;
       const distributableRevenue = revenueAmount - platformFee;
 
@@ -81,7 +77,7 @@ export class PayoutService {
         this.createPayout(
           stake.id,
           tier1PerNFT,
-          PayoutType.REVENUE_SHARE,
+          "REVENUE_SHARE",
           stake.user.walletAddress
         )
       );
@@ -92,7 +88,7 @@ export class PayoutService {
         this.createPayout(
           stake.id,
           tier2PerNFT,
-          PayoutType.REVENUE_SHARE,
+          "REVENUE_SHARE",
           stake.user.walletAddress
         )
       );
@@ -123,10 +119,10 @@ export class PayoutService {
           paymentStatus: PaymentStatus.COMPLETED,
           createdAt: { gte: startDate, lte: endDate },
         },
-        _sum: { totalPrice: true },
+        _sum: { totalPriceUsdc: true },
       });
 
-      const revenue = Number(shuttleRevenue._sum.totalPrice || 0);
+      const revenue = Number(shuttleRevenue._sum.totalPriceUsdc || 0);
       const perNFT = revenue / (shuttleStakes as any[]).length;
 
       // Create payouts
@@ -152,9 +148,9 @@ export class PayoutService {
     const payout = await prisma.payout.create({
       data: {
         stakedNFTId,
-        amount,
-        payoutType: type,
-        status: PayoutStatus.PENDING,
+        amountUsdc: amount,
+        type: type,
+        status: "PENDING",
       },
     });
 
@@ -178,7 +174,7 @@ export class PayoutService {
         );
         await prisma.payout.update({
           where: { id: payout.id },
-          data: { status: PayoutStatus.FAILED },
+          data: { status: "FAILED" },
         });
       }
     }
@@ -195,7 +191,7 @@ private async processUSDCTransfer(
     // Mark as processing
     await prisma.payout.update({
       where: { id: payoutId },
-      data: { status: PayoutStatus.PROCESSING },
+      data: { status: "PROCESSING" },
     });
 
     const toWallet = new PublicKey(walletAddress);
@@ -227,7 +223,7 @@ private async processUSDCTransfer(
       where: { id: payoutId },
       data: {
         status: 'COMPLETED',
-        transactionHash: signature,
+        txSignature: signature,
         payoutDate: new Date(),
       },
     });

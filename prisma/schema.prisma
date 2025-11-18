@@ -7,93 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id              String    @id @default(uuid())
-  walletAddress   String?   @unique  // Optional for drivers/owners
-  email           String?   @unique  // Required for drivers/owners
-  password        String?             // For email/password auth
-  phoneNumber     String?
-  role            UserRole  @default(SEEKER)
-  isNFTHolder     Boolean   @default(false)
-  nftTokens       String[]
-  fcmToken        String?   // Firebase Cloud Messaging token
-  notificationSettings Json? @default("{\"rideUpdates\":true,\"promotions\":true,\"rewards\":true}") // User notification preferences
-  locationSettings Json? @default("{\"shareLocation\":true,\"locationAccuracy\":\"high\"}") // Location sharing preferences
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  
-  bookings        Booking[]
-  rewards         Reward[]
-  stakedNFTs      StakedNFT[]
-  driverProfile   Driver?
-  ownerProfile    Owner?
-  
-  @@index([walletAddress])
-  @@index([email])
-  @@index([isNFTHolder])
-}
-
-model Driver {
-  id                String    @id @default(uuid())
-  userId            String    @unique
-  licenseNumber     String    @unique
-  vehicleType       String
-  rating            Decimal   @default(5.0) @db.Decimal(3, 2)
-  totalRides        Int       @default(0)
-  isOnline          Boolean   @default(false)
-  isVerified        Boolean   @default(false)
-  currentShuttleId  String?
-  earnings          Decimal   @default(0) @db.Decimal(10, 2)
-  ownerId           String?
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  
-  user              User      @relation(fields: [userId], references: [id])
-  owner             Owner?    @relation(fields: [ownerId], references: [id])
-  shuttles          Shuttle[]
-  
-  @@index([isOnline])
-  @@index([isVerified])
-  @@index([ownerId])
-}
-
-model Owner {
-  id                String    @id @default(uuid())
-  userId            String    @unique
-  companyName       String
-  licenseNumber     String    @unique
-  isVerified        Boolean   @default(false)
-  totalRevenue      Decimal   @default(0) @db.Decimal(10, 2)
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  
-  user              User      @relation(fields: [userId], references: [id])
-  drivers           Driver[]
-  vehicles          Vehicle[]
-  
-  @@index([isVerified])
-}
-
-model Vehicle {
-  id                String    @id @default(uuid())
-  ownerId           String
-  vehicleNumber     String    @unique
-  vehicleType       String
-  capacity          Int
-  licensePlate      String    @unique
-  isActive          Boolean   @default(true)
-  lastMaintenance   DateTime?
-  nextMaintenance   DateTime?
-  mileage           Int       @default(0)
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  
-  owner             Owner     @relation(fields: [ownerId], references: [id])
-  
-  @@index([ownerId])
-  @@index([isActive])
-}
-
+// ====================== ENUMS ======================
 enum UserRole {
   SEEKER
   DRIVER
@@ -101,50 +15,14 @@ enum UserRole {
   ADMIN
 }
 
-model Event {
-  id              String    @id @default(uuid())
-  name            String
-  description     String?
-  location        Json      // {lat, lng, address}
-  eventDate       DateTime
-  eventType       String
-  imageUrl        String?
-  isActive        Boolean   @default(true)
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  
-  shuttles        Shuttle[]
-  
-  @@index([eventDate])
-  @@index([isActive])
+enum StakeType {
+  POOL
+  FRACTIONAL
 }
 
-model Shuttle {
-  id                    String          @id @default(uuid())
-  eventId               String
-  vehicleNumber         String
-  capacity              Int
-  departureTime         DateTime
-  arrivalTime           DateTime
-  pickupLocation        Json
-  dropoffLocation       Json
-  basePrice             Decimal         @db.Decimal(10, 2)
-  currency              String          @default("USDC")
-  status                ShuttleStatus   @default(SCHEDULED)
-  isFractionalized      Boolean         @default(false)
-  currentLocation       Json?
-  driverId              String?
-  createdAt             DateTime        @default(now())
-  updatedAt             DateTime        @updatedAt
-  
-  event                 Event           @relation(fields: [eventId], references: [id])
-  driver                Driver?         @relation(fields: [driverId], references: [id])
-  bookings              Booking[]
-  stakedNFTs            StakedNFT[]
-  
-  @@index([eventId])
-  @@index([status])
-  @@index([departureTime])
+enum StakingTier {
+  TIER_1   // 1 NFT  → 25% revenue share
+  TIER_2   // 3+ NFTs → 40% revenue share
 }
 
 enum ShuttleStatus {
@@ -153,30 +31,6 @@ enum ShuttleStatus {
   IN_TRANSIT
   COMPLETED
   CANCELLED
-}
-
-model Booking {
-  id                String          @id @default(uuid())
-  userId            String
-  shuttleId         String
-  bookingDate       DateTime        @default(now())
-  numberOfSeats     Int             @default(1)
-  totalPrice        Decimal         @db.Decimal(10, 2)
-  paymentStatus     PaymentStatus   @default(PENDING)
-  transactionHash   String?         @unique
-  status            BookingStatus   @default(CONFIRMED)
-  rating            Int?
-  review            String?
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
-  
-  user              User            @relation(fields: [userId], references: [id])
-  shuttle           Shuttle         @relation(fields: [shuttleId], references: [id])
-  reward            Reward?
-  
-  @@index([userId])
-  @@index([shuttleId])
-  @@index([paymentStatus])
 }
 
 enum PaymentStatus {
@@ -189,79 +43,250 @@ enum PaymentStatus {
 
 enum BookingStatus {
   CONFIRMED
-  CHECKED_IN
+  PICKED_UP
   COMPLETED
   CANCELLED
   NO_SHOW
 }
 
-model Reward {
-  id                String    @id @default(uuid())
-  userId            String
-  bookingId         String    @unique
-  xpPoints          Int
-  co2XpPoints       Int
-  isRedeemed        Boolean   @default(false)
-  redeemedAmount    Decimal?  @db.Decimal(10, 2)
-  redeemedAt        DateTime?
-  createdAt         DateTime  @default(now())
-  
-  user              User      @relation(fields: [userId], references: [id])
-  booking           Booking   @relation(fields: [bookingId], references: [id])
-  
-  @@index([userId])
-  @@index([isRedeemed])
+enum NotificationType {
+  RIDE_UPDATE
+  BOOKING_CONFIRMED
+  BOOKING_CANCELLED
+  PAYMENT_RECEIVED
+  REWARD_EARNED
+  PROMOTION
+  SYSTEM
 }
 
-model StakedNFT {
-  id                String        @id @default(uuid())
-  userId            String
-  nftMintAddress    String
-  stakingTier       StakingTier
-  shuttleId         String?       // For fractionalized ownership
-  stakedAt          DateTime      @default(now())
-  unstakedAt        DateTime?
-  isActive          Boolean       @default(true)
-  totalEarnings     Decimal       @default(0) @db.Decimal(10, 2)
-  lastPayoutAt      DateTime?
-  
-  user              User          @relation(fields: [userId], references: [id])
-  shuttle           Shuttle?      @relation(fields: [shuttleId], references: [id])
-  payouts           Payout[]
-  
-  @@unique([nftMintAddress, isActive])
-  @@index([userId])
+// ====================== MODELS ======================
+
+model User {
+  id                   String   @id @default(uuid())
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  walletAddress        String?  @unique @db.VarChar(44) // Solana base58 pubkey
+  email                String?  @unique
+  username             String?  @db.VarChar(50)
+  password            String?     
+  phoneNumber          String?
+  fcmToken             String?
+  role                 UserRole @default(SEEKER)
+
+  notificationSettings Json     @default("{\"rideUpdates\":true,\"promotions\":true,\"rewards\":true}")
+  locationSettings     Json     @default("{\"shareLocation\":true,\"accuracy\":\"high\"}")
+
+  // Relations
+  bookings             Booking[]
+  rewards              Reward[]
+  stakedNFTs           StakedNFT[]
+  driver               Driver?
+  owner                Owner?
+  notifications        Notification[]
+
+  @@index([walletAddress])
+  @@index([email])
+  @@index([role])
+}
+
+model Driver {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  licenseNumber String?   @unique
+  rating        Decimal   @default(5.0) @db.Decimal(3, 2)
+  totalRides    Int       @default(0)
+  isOnline      Boolean   @default(false)
+  isVerified    Boolean   @default(false)
+  currentLat    Float?
+  currentLng    Float?
+  earnings      Decimal   @default(0) @db.Decimal(12, 2)
+
+  // Driver is currently assigned to one shuttle
+  currentShuttle Shuttle? @relation("DriverCurrentShuttle")
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([isOnline])
+  @@index([isVerified])
+}
+
+model Owner {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  companyName   String?
+  licenseNumber String?   @unique
+  isVerified    Boolean  @default(false)
+  totalRevenue  Decimal  @default(0) @db.Decimal(12, 2)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  location    Json     // { lat: Float, lng: Float, address: String }
+  eventDate   DateTime
+  eventType   String
+  imageUrl    String?
+  isActive    Boolean  @default(true)
+
+  shuttles    Shuttle[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([eventDate])
   @@index([isActive])
 }
 
-enum StakingTier {
-  TIER_1  // 1 NFT - 25% share
-  TIER_2  // 3+ NFTs - 40% share
-}
+model Shuttle {
+  id                  String        @id @default(uuid())
+  eventId             String
+  event               Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
-model Payout {
-  id              String      @id @default(uuid())
-  stakedNFTId     String
-  amount          Decimal     @db.Decimal(10, 2)
-  payoutType      PayoutType
-  transactionHash String?
-  status          PayoutStatus @default(PENDING)
-  payoutDate      DateTime    @default(now())
-  
-  stakedNFT       StakedNFT   @relation(fields: [stakedNFTId], references: [id])
-  
-  @@index([stakedNFTId])
+  // Vehicle info directly on Shuttle (MVP-simplified — no separate Vehicle table)
+  licensePlate String @default("") 
+  vehicleType         String        @default("minibus")
+  capacity            Int
+  availableSeats      Int          @default(0) // updated by app logic or trigger
+
+  // Driver assignment 
+  driverId String? @unique
+  driver   Driver? @relation("DriverCurrentShuttle", fields: [driverId], references: [id])
+
+  departureTime       DateTime
+  arrivalTime         DateTime
+  pickupLocation      Json      // { lat, lng, name }
+  dropoffLocation     Json      // venue location
+
+  basePriceUsdc       Decimal   @default(0) @db.Decimal(12, 6)
+  status              ShuttleStatus @default(SCHEDULED)
+  isFractionalized    Boolean   @default(false)
+
+  // Real-time tracking
+  currentLat          Float?
+  currentLng          Float?
+  lastLocationUpdate  DateTime?
+
+  bookings            Booking[]
+  stakedNFTs          StakedNFT[]
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([eventId])
+  @@index([departureTime])
   @@index([status])
 }
 
-enum PayoutType {
-  REVENUE_SHARE
-  FRACTIONAL_OWNERSHIP
+model Booking {
+  id               String        @id @default(uuid())
+  userId           String
+  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shuttleId        String
+  shuttle          Shuttle       @relation(fields: [shuttleId], references: [id], onDelete: Cascade)
+
+  seats            Int           @default(1)
+  totalPriceUsdc   Decimal       @db.Decimal(12, 6)
+  paymentStatus    PaymentStatus @default(PENDING)
+  transactionHash  String?       @unique // Solana Pay signature
+  status           BookingStatus @default(CONFIRMED)
+
+  rating           Int?
+  review           String?
+
+  reward           Reward?
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([userId])
+  @@index([shuttleId])
+  @@index([paymentStatus])
 }
 
-enum PayoutStatus {
-  PENDING
-  PROCESSING
-  COMPLETED
-  FAILED
+model Reward {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookingId  String   @unique
+  booking    Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  xpEarned   Int      @default(100)
+  co2SavedKg Int      @default(8)
+  usdcValue  Decimal? @db.Decimal(12, 6)
+  claimed    Boolean  @default(false)
+
+  createdAt  DateTime @default(now())
+}
+
+model StakedNFT {
+  id            String      @id @default(uuid())
+  walletAddress String
+  tokenMint     String      @unique // One row = one staked NFT
+  stakeType     StakeType
+  shuttleId     String?
+  shuttle       Shuttle?    @relation(fields: [shuttleId], references: [id])
+  tier          StakingTier
+  isActive      Boolean     @default(true)
+
+  stakedAt      DateTime    @default(now())
+  unstakedAt    DateTime?
+
+  totalEarnings Decimal     @default(0) @db.Decimal(12, 6)
+  lastPayoutAt  DateTime?
+
+  user          User?       @relation(fields: [walletAddress], references: [walletAddress])
+  payouts       Payout[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([walletAddress])
+  @@index([tokenMint])
+  @@index([shuttleId])
+  @@index([isActive])
+  @@index([stakeType])
+}
+
+model Payout {
+  id           String    @id @default(uuid())
+  stakedNFTId  String
+  stakedNFT    StakedNFT @relation(fields: [stakedNFTId], references: [id], onDelete: Cascade)
+
+  amountUsdc   Decimal   @db.Decimal(12, 6)
+  type         String    // "REVENUE_SHARE" | "FRACTIONAL_OWNERSHIP"
+  txSignature  String?   @unique
+  status       String    @default("PENDING")
+
+  payoutDate   DateTime  @default(now())
+
+  @@index([stakedNFTId])
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title     String
+  body      String
+  type      NotificationType
+  data      Json?
+  isRead    Boolean          @default(false)
+  readAt    DateTime?
+
+  createdAt DateTime         @default(now())
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([createdAt])
 }

@@ -1,17 +1,25 @@
 import * as admin from "firebase-admin";
 import { logger } from "../../utils/logger";
 import { prisma } from "../../config/database";
+import { NotificationType } from "@prisma/client";
 
 // Initialize Firebase Admin if not already initialized
 if (!admin.apps.length) {
   try {
-    const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT;
-    if (serviceAccount) {
+    const firebasePrivateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+
+    if (process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL && firebasePrivateKey) {
+      const serviceAccount: admin.ServiceAccount = {
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: firebasePrivateKey,
+      };
+
       admin.initializeApp({
-        credential: admin.credential.cert(JSON.parse(serviceAccount)),
+        credential: admin.credential.cert(serviceAccount),
       });
     } else {
-      logger.warn("Firebase service account not configured");
+      logger.warn("Firebase service account credentials are not fully configured in environment variables.");
     }
   } catch (error) {
     logger.error("Failed to initialize Firebase:", error);
@@ -74,8 +82,28 @@ export class NotificationService {
         },
       };
 
-      const response = await admin.messaging().send(message);
-      logger.info(`Notification sent to user ${userId}: ${response}`);
+      // Create database notification
+      await prisma.notification.create({
+        data: {
+          userId,
+          title: payload.title,
+          body: payload.body,
+          type: (payload.data?.type?.toUpperCase() || "SYSTEM") as NotificationType,
+          data: payload.data as any,
+        },
+      });
+
+      // Send push notification if FCM token exists
+      if (user.fcmToken) {
+        try {
+          const response = await admin.messaging().send(message);
+          logger.info(`Push notification sent to user ${userId}: ${response}`);
+        } catch (pushError) {
+          logger.error(`Failed to send push notification:`, pushError);
+          // Continue even if push fails - we've saved to DB
+        }
+      }
+      
       return true;
     } catch (error: any) {
       logger.error(`Failed to send notification to user ${userId}:`, error);

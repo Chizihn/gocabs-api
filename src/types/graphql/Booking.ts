@@ -1,9 +1,23 @@
-import { ObjectType, Field, ID, InputType } from "type-graphql";
-
-import { GraphQLDecimal } from "./scalers/Decimal";
-import type { Decimal } from "@prisma/client/runtime/library";
+import {
+  ObjectType,
+  Field,
+  ID,
+  InputType,
+  Int,
+  registerEnumType,
+  Float,
+} from "type-graphql";
 import { BookingStatus, PaymentStatus } from "@prisma/client";
-import { Shuttle } from "./Shuttle";
+import { Decimal } from "@prisma/client/runtime/library";
+import { Reward } from "./Reward";
+
+registerEnumType(BookingStatus, {
+  name: "BookingStatus",
+});
+
+registerEnumType(PaymentStatus, {
+  name: "PaymentStatus",
+});
 
 @ObjectType()
 export class Booking {
@@ -16,35 +30,35 @@ export class Booking {
   @Field()
   shuttleId: string;
 
-  @Field()
-  bookingDate: Date;
+  @Field(() => Int)
+  seats: number;
 
-  @Field()
-  numberOfSeats: number;
-
-  @Field(() => GraphQLDecimal)
-  totalPrice: Decimal | string;
+  @Field(() => Float)
+  totalPriceUsdc: Decimal;
 
   @Field(() => PaymentStatus)
   paymentStatus: PaymentStatus;
 
-  @Field(() => String, { nullable: true })
+  @Field({ nullable: true })
   transactionHash?: string;
 
   @Field(() => BookingStatus)
   status: BookingStatus;
 
-  @Field(() => Number, { nullable: true })
+  @Field(() => Int, { nullable: true })
   rating?: number;
 
-  @Field(() => String, { nullable: true })
+  @Field({ nullable: true })
   review?: string;
 
-  @Field(() => Shuttle, { nullable: true })
-  shuttle?: Shuttle;
+  @Field(() => Reward, { nullable: true })
+  reward?: Reward;
 
   @Field()
   createdAt: Date;
+
+  @Field()
+  updatedAt: Date;
 }
 
 @InputType()
@@ -52,8 +66,23 @@ export class CreateBookingInput {
   @Field()
   shuttleId: string;
 
-  @Field(() => Number, { defaultValue: 1 })
-  numberOfSeats: number;
+  @Field(() => Int, { defaultValue: 1 })
+  seats: number;
+}
+
+@InputType()
+export class UpdateBookingInput {
+  @Field(() => BookingStatus)
+  status: BookingStatus;
+}
+
+@ObjectType()
+export class BookingConfirmation {
+  @Field(() => Booking)
+  booking: Booking;
+
+  @Field()
+  paymentUrl: string; // Solana Pay URL
 }
 
 @ObjectType()

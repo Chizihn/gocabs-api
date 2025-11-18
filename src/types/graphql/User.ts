@@ -1,47 +1,108 @@
-import { ObjectType, Field, ID, GraphQLISODateTime } from "type-graphql";
+import {
+  ObjectType,
+  Field,
+  ID,
+  InputType,
+  registerEnumType,
+} from "type-graphql";
 import { UserRole } from "@prisma/client";
+import { Booking } from "./Booking";
+import { Reward } from "./Reward";
+import { StakedNFT } from "./Staking";
+import { Driver } from "./Driver";
+import { Owner } from "./Owner";
+import { Notification } from "./Notification";
+import { LocationSettings, NotificationSettings } from "./UserSettings";
+
+registerEnumType(UserRole, {
+  name: "UserRole",
+});
 
 @ObjectType()
 export class User {
   @Field(() => ID)
-  id: string;
+  id!: string;
+
+  @Field()
+  createdAt!: Date;
+
+  @Field()
+  updatedAt!: Date;
 
   @Field(() => String, { nullable: true })
-  walletAddress: string | null;
+  walletAddress?: string | null;
 
   @Field(() => String, { nullable: true })
-  email: string | null;
+  email?: string | null;
 
   @Field(() => String, { nullable: true })
-  phoneNumber: string | null;
+  username?: string | null;
 
   @Field(() => String, { nullable: true })
-  password: string | null;
+  phoneNumber?: string | null;
+
+  @Field(() => String, { nullable: true })
+  fcmToken?: string | null;
 
   @Field(() => UserRole)
-  role: UserRole;
+  role!: UserRole;
 
-  @Field(() => Boolean)
-  isNFTHolder: boolean;
+  @Field(() => NotificationSettings)
+  notificationSettings!: NotificationSettings;
 
-  @Field(() => [String])
-  nftTokens: string[];
+  @Field(() => LocationSettings)
+  locationSettings!: LocationSettings;
 
-  @Field(() => GraphQLISODateTime)
-  createdAt: Date;
+  @Field(() => [Booking], { nullable: true })
+  bookings?: Booking[];
 
-  @Field(() => GraphQLISODateTime)
-  updatedAt: Date;
+  @Field(() => [Reward], { nullable: true })
+  rewards?: Reward[];
+
+  @Field(() => [StakedNFT], { nullable: true })
+  stakedNFTs?: StakedNFT[];
+
+  @Field(() => Driver, { nullable: true })
+  driver?: Driver | null;
+
+  @Field(() => Owner, { nullable: true })
+  owner?: Owner | null;
+
+  @Field(() => [Notification], { nullable: true })
+  notifications?: Notification[];
+}
+
+@InputType()
+export class ConnectWalletInput {
+  @Field()
+  walletAddress!: string;
+
+  @Field(() => UserRole, { nullable: true })
+  role?: UserRole;
+}
+
+@InputType()
+export class UpdateUserProfileInput {
+  @Field({ nullable: true })
+  email?: string;
+
+  @Field({ nullable: true })
+  username?: string;
+
+  @Field({ nullable: true })
+  phoneNumber?: string;
 }
 
 @ObjectType()
 export class AuthResponse {
-  @Field(() => String)
-  token: string;
+  @Field()
+  token!: string;
 
   @Field(() => User)
-  user: User;
+  user!: User;
 
-  @Field(() => Boolean)
-  isNFTHolder: boolean;
+  @Field()
+  hasNFTAccess!: boolean;
 }
+
+export { NFTVerificationResponse } from "./NFT";
