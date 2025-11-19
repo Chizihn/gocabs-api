@@ -3,6 +3,8 @@ import {
   User,
   AuthResponse,
   UpdateUserProfileInput,
+  RegisterInput,
+  AdminUpdateUserInput,
 } from "../types/graphql/User";
 import {
   NotificationSettings,
@@ -34,6 +36,27 @@ const toGqlUser = (user: PrismaUser & { [key: string]: any }): User => {
 @Resolver(() => User)
 export class UserResolver {
   @Mutation(() => AuthResponse)
+  async register(
+    @Arg("input") input: RegisterInput
+  ): Promise<AuthResponse> {
+    const { user, token, nftAccess } = await UserService.register(
+      "", // walletAddress is not available in this flow
+      input.email,
+      input.username,
+      input.password,
+      input.role,
+      input.companyName,
+      input.licenseNumber
+    );
+
+    return {
+      token,
+      user: toGqlUser(user),
+      hasNFTAccess: nftAccess.hasAccess,
+    };
+  }
+
+  @Mutation(() => AuthResponse)
   async connectWallet(
     @Arg("walletAddress") walletAddress: string
   ): Promise<AuthResponse> {
@@ -46,6 +69,149 @@ export class UserResolver {
       user: toGqlUser(user),
       hasNFTAccess: nftAccess.hasAccess,
     };
+  }
+
+  @Authorized("ADMIN")
+  @Query(() => [User])
+  async adminUsers(): Promise<User[]> {
+    try {
+      const users = await prisma.user.findMany({
+        include: {
+          driver: true,
+          owner: true,
+        },
+      });
+      return users.map(toGqlUser);
+    } catch (error) {
+      logger.error('Error fetching all users:', error);
+      throw new Error('Failed to fetch users');
+    }
+  }
+
+  @Authorized("ADMIN")
+  @Query(() => User, { nullable: true })
+  async adminUser(@Arg("id") id: string): Promise<User | null> {
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id },
+        include: {
+          driver: true,
+          owner: true,
+        },
+      });
+      return user ? toGqlUser(user) : null;
+    } catch (error) {
+      logger.error(`Error fetching user ${id}:`, error);
+      throw new Error('Failed to fetch user');
+    }
+  }
+
+  @Authorized("ADMIN")
+  @Mutation(() => User)
+  async adminCreateUser(
+    @Arg("input") input: RegisterInput
+  ): Promise<User> {
+    try {
+      const { user } = await UserService.register(
+        "", // walletAddress is not part of RegisterInput for adminCreateUser
+        input.email,
+        input.username,
+        input.password,
+        input.role,
+        input.companyName,
+        input.licenseNumber
+      );
+      return toGqlUser(user);
+    } catch (error) {
+      logger.error('Error creating user:', error);
+      throw new Error('Failed to create user');
+    }
+  }
+
+  @Authorized("ADMIN")
+  @Mutation(() => User)
+  async adminUpdateUser(
+    @Arg("id") id: string,
+    @Arg("input") input: AdminUpdateUserInput
+  ): Promise<User> {
+    try {
+      const updatedUser = await prisma.$transaction(async (tx) => {
+        const existingUser = await tx.user.findUnique({
+          where: { id },
+          include: {
+            driver: true,
+            owner: true,
+          },
+        });
+        if (!existingUser) {
+          throw new Error("User not found");
+        }
+
+        const dataToUpdate: Prisma.UserUpdateInput = {};
+        if (input.email !== undefined) dataToUpdate.email = input.email;
+        if (input.username !== undefined) dataToUpdate.username = input.username;
+        if (input.phoneNumber !== undefined) dataToUpdate.phoneNumber = input.phoneNumber;
+        if (input.avatar !== undefined) dataToUpdate.avatar = input.avatar;
+        if (input.fcmToken !== undefined) dataToUpdate.fcmToken = input.fcmToken;
+        if (input.role !== undefined) dataToUpdate.role = input.role;
+        if (input.walletAddress !== undefined) dataToUpdate.walletAddress = input.walletAddress;
+
+        const user = await tx.user.update({
+          where: { id },
+          data: dataToUpdate,
+          include: {
+            driver: true,
+            owner: true,
+          },
+        });
+
+        // Handle role changes: if user becomes a DRIVER or OWNER, create respective profile
+        if (input.role === "DRIVER" && !existingUser.driver) {
+          await tx.driver.create({ data: { userId: user.id } });
+        } else if (input.role === "OWNER" && !existingUser.owner) {
+          await tx.owner.create({ data: { userId: user.id } });
+        }
+        return user;
+      });
+
+      return toGqlUser(updatedUser);
+    } catch (error) {
+      logger.error(`Error updating user ${id}:`, error);
+      throw new Error('Failed to update user');
+    }
+  }
+
+  @Authorized("ADMIN")
+  @Mutation(() => Boolean)
+  async adminDeleteUser(@Arg("id") id: string): Promise<boolean> {
+    try {
+      await prisma.user.delete({ where: { id } });
+      logger.info(`User deleted: ${id}`);
+      return true;
+    } catch (error) {
+      logger.error(`Error deleting user ${id}:`, error);
+      throw new Error('Failed to delete user');
+    }
+  }
+
+  @Authorized()
+  @Mutation(() => Boolean)
+  async logout(@Ctx() ctx: Context): Promise<boolean> {
+    const token = ctx.req.headers.authorization?.split(" ")[1];
+    if (token) {
+      return UserService.logout(token);
+    }
+    return false;
+  }
+
+  @Authorized()
+  @Mutation(() => User)
+  async uploadAvatar(
+    @Ctx() ctx: Context,
+    @Arg("avatarUrl") avatarUrl: string
+  ): Promise<User> {
+    const updatedUser = await UserService.uploadAvatar(ctx.userId!, avatarUrl);
+    return toGqlUser(updatedUser);
   }
 
   @Authorized()
@@ -90,9 +256,9 @@ export class UserResolver {
     }
 
     const dataToUpdate: Prisma.UserUpdateInput = {};
-    if (input.email) dataToUpdate.email = input.email;
-    if (input.username) dataToUpdate.username = input.username;
-    if (input.phoneNumber) dataToUpdate.phoneNumber = input.phoneNumber;
+    if (input.email !== undefined) dataToUpdate.email = input.email;
+    if (input.username !== undefined) dataToUpdate.username = input.username;
+    if (input.phoneNumber !== undefined) dataToUpdate.phoneNumber = input.phoneNumber;
 
     const updated = await UserService.updateProfile(ctx.userId!, dataToUpdate);
 

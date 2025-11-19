@@ -4,7 +4,7 @@ import { GraphQLRedisRateLimiter } from "../utils/graphqlRedisRateLimiter";
 export const generalRateLimiter = new GraphQLRedisRateLimiter(
   "general",
   15 * 60 * 1000, // 15 minutes
-  100 // 100 requests per 15 minutes
+  1000 // 100 requests per 15 minutes
 ).getMiddleware();
 
 // Limiter for queries

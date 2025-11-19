@@ -88,43 +88,45 @@ export class RewardCalculationService {
       throw new Error("XP amount must be greater than zero");
     }
 
-    const summary = await this.getUserTotalRewards(userId);
-    if (summary.availableXP < xpAmount) {
-      throw new Error("Insufficient XP balance");
-    }
+    return prisma.$transaction(async (tx) => {
+      const summary = await this.getUserTotalRewards(userId); // Note: This still uses the main prisma client, but the check is before the transaction
+      if (summary.availableXP < xpAmount) {
+        throw new Error("Insufficient XP balance");
+      }
 
-    const rewards = await prisma.reward.findMany({
-      where: { userId, claimed: false },
-      orderBy: { createdAt: "asc" },
+      const rewards = await tx.reward.findMany({ // Use tx for findMany within transaction
+        where: { userId, claimed: false },
+        orderBy: { createdAt: "asc" },
+      });
+
+      let remaining = xpAmount;
+      const updates: Promise<any>[] = [];
+
+      for (const reward of rewards) {
+        if (remaining <= 0) break;
+        const redeeming = Math.min(remaining, reward.xpEarned);
+        remaining -= redeeming;
+
+        updates.push(
+          tx.reward.update({ // Use tx for update within transaction
+            where: { id: reward.id },
+            data: {
+              claimed: true,
+              usdcValue: new Decimal(redeeming * XP_TO_USDC_RATE),
+            },
+          })
+        );
+      }
+
+      await Promise.all(updates);
+
+      logger.info(`User ${userId} redeemed ${xpAmount} XP`);
+
+      return {
+        xpRedeemed: xpAmount,
+        usdcAmount: xpAmount * XP_TO_USDC_RATE,
+        timestamp: new Date(),
+      };
     });
-
-    let remaining = xpAmount;
-    const updates: Promise<any>[] = [];
-
-    for (const reward of rewards) {
-      if (remaining <= 0) break;
-      const redeeming = Math.min(remaining, reward.xpEarned);
-      remaining -= redeeming;
-
-      updates.push(
-        prisma.reward.update({
-          where: { id: reward.id },
-          data: {
-            claimed: true,
-            usdcValue: new Decimal(redeeming * XP_TO_USDC_RATE),
-          },
-        })
-      );
-    }
-
-    await Promise.all(updates);
-
-    logger.info(`User ${userId} redeemed ${xpAmount} XP`);
-
-    return {
-      xpRedeemed: xpAmount,
-      usdcAmount: xpAmount * XP_TO_USDC_RATE,
-      timestamp: new Date(),
-    };
   }
 }

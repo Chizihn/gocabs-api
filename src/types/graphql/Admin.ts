@@ -1,8 +1,34 @@
 import { ObjectType, Field, ID, InputType, Int, Float } from "type-graphql";
 import { BookingStatus, ShuttleStatus, UserRole } from "@prisma/client";
 import { GraphQLJSONObject } from "graphql-scalars";
+import { GraphQLDecimal } from "./scalers/Decimal";
+import { Decimal } from "@prisma/client/runtime/library";
 import { Driver } from "./Driver";
 import { Owner } from "./Owner";
+import { Location, LocationInput } from "./Location";
+
+// NEW INPUT TYPES
+@InputType()
+export class EventFilterInput {
+  @Field(() => Boolean, { nullable: true })
+  isActive?: boolean;
+
+  @Field(() => String, { nullable: true })
+  eventType?: string;
+
+  // Add more filters as needed
+}
+
+@InputType()
+export class ShuttleFilterInput {
+  @Field(() => ShuttleStatus, { nullable: true })
+  status?: ShuttleStatus;
+
+  @Field(() => ID, { nullable: true })
+  eventId?: string;
+
+  // Add more filters as needed
+}
 
 @ObjectType()
 export class UserStats {
@@ -115,6 +141,9 @@ export class AdminCreateShuttleInput {
   licensePlate!: string;
 
   @Field()
+  vehicleNumber!: string;
+
+  @Field()
   vehicleType!: string;
 
   @Field(() => Int)
@@ -126,14 +155,14 @@ export class AdminCreateShuttleInput {
   @Field()
   arrivalTime!: Date;
 
-  @Field(() => GraphQLJSONObject)
-  pickupLocation!: Record<string, unknown>;
+  @Field(() => LocationInput)
+  pickupLocation!: LocationInput;
 
-  @Field(() => GraphQLJSONObject)
-  dropoffLocation!: Record<string, unknown>;
+  @Field(() => LocationInput)
+  dropoffLocation!: LocationInput;
 
-  @Field()
-  basePriceUsdc!: number;
+  @Field(() => GraphQLDecimal)
+  basePriceUsdc!: Decimal;
 
   @Field({ nullable: true })
   isFractionalized?: boolean;
@@ -198,11 +227,11 @@ export class ShuttleResponse {
   @Field()
   arrivalTime!: Date;
 
-  @Field(() => GraphQLJSONObject)
-  pickupLocation!: Record<string, unknown>;
+  @Field(() => Location)
+  pickupLocation!: Location;
 
-  @Field(() => GraphQLJSONObject)
-  dropoffLocation!: Record<string, unknown>;
+  @Field(() => Location)
+  dropoffLocation!: Location;
 
   @Field(() => Float)
   basePriceUsdc!: number;

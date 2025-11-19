@@ -44,12 +44,12 @@ export class Location {
 
 @InputType()
 export class LocationInput {
-  @Field()
-  lat!: number;
+  @Field({ nullable: true })
+  lat?: number;
 
-  @Field()
-  lng!: number;
+  @Field({ nullable: true })
+  lng?: number;
 
-  @Field()
-  name!: string;
+  @Field({ nullable: true })
+  name?: string;
 }

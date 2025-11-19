@@ -98,17 +98,34 @@ export async function createApp(prisma: PrismaClient, redisClient: Redis) {
     app.use(
       '/graphql',
       json(),
-      expressMiddleware(server, {
-        context: async ({ req }) => ({
-          req,
-          user: (req as any).user,
-          userId: (req as any).user?.id,
-          prisma,
-          redisClient,
-          pubSub,
-        }),
-      })
-    );
+              expressMiddleware(server, {
+                context: async ({ req, res }) => {
+                  const user = (req as any).user;
+                  const userId = user?.id || null;
+                  const userRole = user?.role || null;
+                  let ownerId: string | null = null;
+      
+                  if (userRole === "OWNER" && userId) {
+                    const owner = await prisma.owner.findUnique({
+                      where: { userId: userId },
+                      select: { id: true },
+                    });
+                    ownerId = owner?.id || null;
+                  }
+      
+                  return {
+                    req,
+                    res,
+                    user,
+                    userId,
+                    userRole,
+                    ownerId,
+                    prisma,
+                    redisClient,
+                    pubSub,
+                  };
+                },
+              })    );
 
     // Setup Socket.IO for real-time tracking
     setupLocationSocket(io);

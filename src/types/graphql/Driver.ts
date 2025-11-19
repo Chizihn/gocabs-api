@@ -11,23 +11,20 @@ export class Driver {
   @Field(() => ID)
   id!: string;
 
-  @Field(() => User)
-  user!: User;
-
   @Field(() => String, { nullable: true })
   licenseNumber?: string | null;
 
-  @Field(() => GraphQLDecimal)
-  rating!: Decimal;
+  @Field(() => GraphQLDecimal, {nullable: true})
+  rating?: Decimal;
 
-  @Field(() => Int)
-  totalRides!: number;
+  @Field(() => Int, {nullable: true})
+  totalRides?: number;
 
-  @Field(() => Boolean)
-  isOnline!: boolean;
+  @Field(() => Boolean, { nullable: true })
+  isOnline?: boolean;
 
-  @Field(() => Boolean)
-  isVerified!: boolean;
+  @Field(() => Boolean, { nullable: true })
+  isVerified?: boolean;
 
   @Field(() => Float, { nullable: true })
   currentLat?: number | null;
@@ -35,8 +32,11 @@ export class Driver {
   @Field(() => Float, { nullable: true })
   currentLng?: number | null;
 
-  @Field(() => GraphQLDecimal)
-  earnings!: Decimal;
+  @Field(() => GraphQLDecimal, {nullable: true})
+  earnings?: Decimal;
+
+  @Field(() => User)
+  user?: Partial<User>
 }
 
 @ObjectType()

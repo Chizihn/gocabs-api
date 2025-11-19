@@ -1,40 +1,124 @@
-import { Resolver, Query, Mutation, Arg, Ctx, Authorized } from "type-graphql";
+// src/resolvers/DriverResolver.ts
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Arg,
+  Ctx,
+  Authorized,
+  ObjectType,
+  Field,
+  Int,
+  Float,
+} from "type-graphql";
 import { prisma } from "../config/database";
-import { Prisma, ShuttleStatus } from "@prisma/client";
-import { DriverStats, RideAssignment } from "../types/graphql/Driver";
-import { Decimal } from "@prisma/client/runtime/library";
-import { type Context } from "../types/Context";
+import { ShuttleStatus, } from "@prisma/client";
+import { Context } from "../types/Context";
+import { Location } from "../types/graphql/Location";
+
+// ====================== DRIVER STATS RESPONSE ======================
+@ObjectType()
+class PassengerInfo {
+  @Field(() => String)
+  id!: string;
+
+  @Field(() => String)
+  name!: string;
+
+  @Field(() => String, { nullable: true })
+  email?: string | null;
+
+  @Field(() => String, { nullable: true })
+  phone?: string | null;
+}
+
+@ObjectType()
+class RouteInfo {
+  @Field(() => String)
+  id!: string;
+
+  @Field(() => String)
+  name!: string;
+
+  @Field(() => Location)
+  startLocation!: Location;
+
+  @Field(() => Location)
+  endLocation!: Location;
+
+  @Field(() => [Location])
+  waypoints!: Location[];
+}
+
+@ObjectType()
+class RideAssignment {
+  @Field(() => String)
+  shuttleId!: string;
+
+  @Field(() => String)
+  eventId!: string;
+
+  @Field(() => ShuttleStatus)
+  status!: ShuttleStatus;
+
+  @Field()
+  departureTime!: Date;
+
+  @Field()
+  arrivalTime!: Date;
+
+  @Field(() => Location)
+  pickupLocation!: Location;
+
+  @Field(() => Location)
+  dropoffLocation!: Location;
+
+  @Field(() => Float, { nullable: true })
+  currentLat?: number | null;
+
+  @Field(() => Float, { nullable: true })
+  currentLng?: number | null;
+
+  @Field(() => Int)
+  bookedSeats!: number;
+
+  @Field(() => [PassengerInfo])
+  passengers!: PassengerInfo[];
+
+  @Field(() => RouteInfo)
+  route!: RouteInfo;
+}
+
+@ObjectType()
+class DriverStats {
+  @Field(() => Int)
+  totalRides!: number;
+
+  @Field(() => Float)
+  rating!: number;
+
+  @Field(() => Float)
+  totalEarnings!: number;
+
+  @Field(() => Float)
+  todayEarnings!: number;
+
+  @Field(() => Float)
+  weekEarnings!: number;
+
+  @Field(() => RideAssignment, { nullable: true })
+  currentAssignment?: RideAssignment | null;
+}
 
 @Resolver()
 export class DriverResolver {
+  // Helper: Get authenticated driver
   private async getDriver(ctx: Context) {
+    if (!ctx.userId) throw new Error("Unauthorized");
+
     const user = await prisma.user.findUnique({
-      where: { id: ctx.userId! },
-      include: {
-        driver: {
-          include: {
-            currentShuttle: {
-              include: {
-                event: true,
-                bookings: {
-                  where: { status: "CONFIRMED" },
-                  include: {
-                    user: {
-                      select: {
-                        id: true,
-                        username: true,
-                        email: true,
-                        phoneNumber: true,
-                        fcmToken: true,
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
+      where: { id: ctx.userId },
+      include: { driver: true },
     });
 
     if (!user?.driver) {
@@ -44,6 +128,7 @@ export class DriverResolver {
     return user.driver;
   }
 
+  // ====================== MY STATS ======================
   @Authorized("DRIVER")
   @Query(() => DriverStats)
   async myDriverStats(@Ctx() ctx: Context): Promise<DriverStats> {
@@ -54,7 +139,7 @@ export class DriverResolver {
     const weekAgo = new Date();
     weekAgo.setDate(weekAgo.getDate() - 7);
 
-    const [todayRides, weekRides, currentShuttle] = await Promise.all([
+    const [todayBookings, weekBookings, activeShuttle] = await Promise.all([
       prisma.booking.findMany({
         where: {
           shuttle: { driverId: driver.id },
@@ -77,93 +162,85 @@ export class DriverResolver {
           status: { in: [ShuttleStatus.BOARDING, ShuttleStatus.IN_TRANSIT] },
         },
         include: {
+          event: true,
+          vehicle: true,
           bookings: {
-            where: { status: "CONFIRMED" },
+            where: { status: { in: ["CONFIRMED", "PICKED_UP"] } },
             include: {
               user: {
                 select: {
                   id: true,
                   username: true,
-                  email: true,
                   phoneNumber: true,
-                  fcmToken: true,
+                  email: true,
                 },
               },
             },
           },
-          event: true,
         },
       }),
     ]);
 
-    // Calculate earnings using Decimal for precision
-    const todayEarnings = todayRides.reduce(
-      (sum, booking) => sum.plus(booking.totalPriceUsdc.times(0.1)), // 10% commission
-      new Decimal(0)
+    const driverCommission = 0.10; // 10%
+
+    const todayEarnings = todayBookings.reduce(
+      (sum, b) => sum + Number(b.totalPriceUsdc) * driverCommission,
+      0
     );
 
-    const weekEarnings = weekRides.reduce(
-      (sum, booking) => sum.plus(booking.totalPriceUsdc.times(0.1)),
-      new Decimal(0)
+    const weekEarnings = weekBookings.reduce(
+      (sum, b) => sum + Number(b.totalPriceUsdc) * driverCommission,
+      0
     );
+
+    const currentAssignment: RideAssignment | null = activeShuttle
+      ? {
+          shuttleId: activeShuttle.id,
+          eventId: activeShuttle.eventId,
+          status: activeShuttle.status,
+          departureTime: activeShuttle.departureTime,
+          arrivalTime: activeShuttle.arrivalTime,
+          pickupLocation: activeShuttle.pickupLocation as any,
+          dropoffLocation: activeShuttle.dropoffLocation as any,
+          currentLat: activeShuttle.currentLat,
+          currentLng: activeShuttle.currentLng,
+          bookedSeats: activeShuttle.bookings.reduce((s, b) => s + b.seats, 0),
+          passengers: activeShuttle.bookings.map((b) => ({
+            id: b.user.id,
+            name: b.user.username || "Passenger",
+            email: b.user.email,
+            phone: b.user.phoneNumber,
+          })),
+          route: {
+            id: activeShuttle.event.id,
+            name: activeShuttle.event.name,
+            startLocation: activeShuttle.pickupLocation as any,
+            endLocation: activeShuttle.dropoffLocation as any,
+            waypoints: [],
+          },
+        }
+      : null;
 
     return {
       totalRides: driver.totalRides,
-      rating: driver.rating.toNumber(),
-      totalEarnings: driver.earnings.toNumber(),
-      todayEarnings: todayEarnings.toNumber(),
-      weekEarnings: weekEarnings.toNumber(),
-      currentAssignment: currentShuttle
-        ? {
-            shuttleId: currentShuttle.id,
-            eventId: currentShuttle.eventId,
-            licensePlate: currentShuttle.licensePlate,
-            vehicleType: currentShuttle.vehicleType,
-            status: currentShuttle.status,
-            departureTime: currentShuttle.departureTime,
-            arrivalTime: currentShuttle.arrivalTime,
-            pickupLocation: currentShuttle.pickupLocation as any,
-            dropoffLocation: currentShuttle.dropoffLocation as any,
-            currentLat: currentShuttle.currentLat,
-            currentLng: currentShuttle.currentLng,
-            passengers: currentShuttle.bookings.map((booking) => ({
-              id: booking.user.id,
-              name: booking.user.username ?? "Passenger",
-              email: booking.user.email ?? "",
-              phone: booking.user.phoneNumber ?? "",
-            })),
-            route: {
-              id: currentShuttle.event?.id || "unknown-route",
-              name: currentShuttle.event?.name || "Unnamed Route",
-              startLocation: currentShuttle.pickupLocation as any,
-              endLocation: currentShuttle.dropoffLocation as any,
-              waypoints: [],
-            },
-            capacity: currentShuttle.capacity,
-            bookedSeats: currentShuttle.bookings.reduce(
-              (sum, b) => sum + b.seats,
-              0
-            ),
-          }
-        : null,
+      rating: Number(driver.rating),
+      totalEarnings: Number(driver.earnings),
+      todayEarnings: Number(todayEarnings.toFixed(2)),
+      weekEarnings: Number(weekEarnings.toFixed(2)),
+      currentAssignment,
     };
   }
 
+  // ====================== MY ASSIGNED RIDES ======================
   @Authorized("DRIVER")
   @Query(() => [RideAssignment])
   async myAssignedRides(@Ctx() ctx: Context): Promise<RideAssignment[]> {
     const driver = await this.getDriver(ctx);
 
-    const shuttles = await prisma.shuttle.findMany({
+    const shuttles =  await prisma.shuttle.findMany({
       where: {
         driverId: driver.id,
-        status: {
-          in: [
-            ShuttleStatus.SCHEDULED,
-            ShuttleStatus.BOARDING,
-            ShuttleStatus.IN_TRANSIT,
-          ],
-        },
+        status: { in: [ShuttleStatus.SCHEDULED, ShuttleStatus.BOARDING, ShuttleStatus.IN_TRANSIT] },
         departureTime: { gte: new Date() },
       },
       include: {
@@ -172,13 +249,7 @@ export class DriverResolver {
           where: { status: "CONFIRMED" },
           include: {
             user: {
-              select: {
-                id: true,
-                username: true,
-                email: true,
-                phoneNumber: true,
-                fcmToken: true,
-              },
+              select: { id: true, username: true, phoneNumber: true, email: true },
             },
           },
         },
@@ -186,44 +257,39 @@ export class DriverResolver {
       orderBy: { departureTime: "asc" },
     });
 
-    return shuttles.map((shuttle) => ({
-      shuttleId: shuttle.id,
-      eventId: shuttle.eventId,
-      licensePlate: shuttle.licensePlate,
-      vehicleType: shuttle.vehicleType,
-      status: shuttle.status,
-      departureTime: shuttle.departureTime,
-      arrivalTime: shuttle.arrivalTime,
-      pickupLocation: shuttle.pickupLocation as any,
-      dropoffLocation: shuttle.dropoffLocation as any,
-      currentLat: shuttle.currentLat,
-      currentLng: shuttle.currentLng,
-      capacity: shuttle.capacity,
-      bookedSeats: shuttle.bookings.reduce(
-        (sum, booking) => sum + booking.seats,
-        0
-      ),
-      passengers: shuttle.bookings.map((booking) => ({
-        id: booking.user.id,
-        name: booking.user.username || "Passenger",
-        email: booking.user.email || "",
-        phone: booking.user.phoneNumber || "",
+    return shuttles.map((s) => ({
+      shuttleId: s.id,
+      eventId: s.eventId,
+      status: s.status,
+      departureTime: s.departureTime,
+      arrivalTime: s.arrivalTime,
+      pickupLocation: s.pickupLocation as any,
+      dropoffLocation: s.dropoffLocation as any,
+      currentLat: s.currentLat,
+      currentLng: s.currentLng,
+      bookedSeats: s.bookings.reduce((sum, b) => sum + b.seats, 0),
+      passengers: s.bookings.map((b) => ({
+        id: b.user.id,
+        name: b.user.username || "Passenger",
+        email: b.user.email,
+        phone: b.user.phoneNumber,
       })),
       route: {
-        id: shuttle.event?.id || "unknown-route",
-        name: shuttle.event?.name || "Unnamed Route",
-        startLocation: shuttle.pickupLocation as any,
-        endLocation: shuttle.dropoffLocation as any,
+        id: s.event.id,
+        name: s.event.name,
+        startLocation: s.pickupLocation as any,
+        endLocation: s.dropoffLocation as any,
         waypoints: [],
       },
     }));
   }
 
+  // ====================== GO ONLINE / OFFLINE ======================
   @Authorized("DRIVER")
   @Mutation(() => Boolean)
   async setDriverOnline(
     @Ctx() ctx: Context,
-    @Arg("isOnline") isOnline: boolean
+    @Arg("isOnline", () => Boolean) isOnline: boolean
   ): Promise<boolean> {
     const driver = await this.getDriver(ctx);
     await prisma.driver.update({
@@ -233,6 +299,7 @@ export class DriverResolver {
     return true;
   }
 
+  // ====================== UPDATE SHUTTLE STATUS ======================
   @Authorized("DRIVER")
   @Mutation(() => Boolean)
   async updateAssignedShuttleStatus(
@@ -242,62 +309,61 @@ export class DriverResolver {
   ): Promise<boolean> {
     const driver = await this.getDriver(ctx);
 
-    await prisma.shuttle.updateMany({
-      where: { id: shuttleId, driverId: driver.id },
+    const updated = await prisma.shuttle.updateMany({
+      where: {
+        id: shuttleId,
+        driverId: driver.id,
+      },
       data: { status },
     });
+
+    if (updated.count === 0) {
+      throw new Error("Shuttle not found or not assigned to you");
+    }
 
     return true;
   }
 
+  // ====================== UPDATE LIVE LOCATION ======================
   @Authorized("DRIVER")
   @Mutation(() => Boolean)
   async updateAssignedShuttleLocation(
     @Ctx() ctx: Context,
     @Arg("shuttleId") shuttleId: string,
-    @Arg("latitude", () => Number) latitude: number,
-    @Arg("longitude", () => Number) longitude: number
+    @Arg("latitude", () => Float) latitude: number,
+    @Arg("longitude", () => Float) longitude: number
   ): Promise<boolean> {
     const driver = await this.getDriver(ctx);
+
+    const shuttle = await prisma.shuttle.findFirst({
+      where: { id: shuttleId, driverId: driver.id },
+      select: { id: true },
+    });
+
+    if (!shuttle) {
+      throw new Error("You are not assigned to this shuttle");
+    }
+
     const now = new Date();
 
-    try {
-      // Verify the driver is assigned to this shuttle
-      const shuttle = await prisma.shuttle.findFirst({
-        where: {
-          id: shuttleId,
-          driverId: driver.id,
-        },
-        select: { id: true },
-      });
-
-      if (!shuttle) {
-        throw new Error("Shuttle not found or not assigned to this driver");
-      }
-
-      // Update shuttle location
-      await prisma.shuttle.update({
+    await prisma.$transaction([
+      prisma.shuttle.update({
         where: { id: shuttleId },
         data: {
           currentLat: latitude,
           currentLng: longitude,
           lastLocationUpdate: now,
         },
-      });
-
-      // Update driver's current location
-      await prisma.driver.update({
+      }),
+      prisma.driver.update({
         where: { id: driver.id },
         data: {
           currentLat: latitude,
           currentLng: longitude,
         },
-      });
+      }),
+    ]);
 
-      return true;
-    } catch (error) {
-      console.error("Error updating shuttle location:", error);
-      throw new Error("Failed to update shuttle location");
-    }
+    return true;
   }
 }

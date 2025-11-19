@@ -20,18 +20,24 @@ export const GraphQLDecimal = new GraphQLScalarType({
   },
 
   parseValue(value: unknown): Decimal {
-    if (typeof value !== "string") {
-      throw new Error(`Value is not a string: ${value}`);
+    if (typeof value === "string") {
+      return new Decimal(value);
     }
-    return new Decimal(value);
+    if (typeof value === "number") {
+      return new Decimal(value.toString());
+    }
+    throw new Error(`Value is not a string or number: ${value}`);
   },
 
   parseLiteral(ast: ValueNode): Decimal {
-    if (ast.kind !== Kind.STRING) {
-      throw new Error(
-        `Can only parse strings to Decimal but got a: ${ast.kind}`
-      );
+    if (ast.kind === Kind.STRING) {
+      return new Decimal(ast.value);
     }
-    return new Decimal(ast.value);
+    if (ast.kind === Kind.INT || ast.kind === Kind.FLOAT) {
+      return new Decimal(ast.value);
+    }
+    throw new Error(
+      `Can only parse strings, ints, or floats to Decimal but got a: ${ast.kind}`
+    );
   },
 });

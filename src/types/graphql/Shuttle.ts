@@ -6,63 +6,63 @@ import {
   Float,
   registerEnumType,
   Int,
-  GraphQLISODateTime,
 } from "type-graphql";
 import { ShuttleStatus } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime/library";
-import { GraphQLJSONObject } from "graphql-scalars";
+
 import { Event } from "./Event";
 import { Driver } from "./Driver";
+import { Vehicle } from "./Vehicle";
 import { Booking } from "./Booking";
 import { StakedNFT } from "./Staking";
 import { Location, LocationInput } from "./Location";
-import { GraphQLDecimal } from "./scalers/Decimal";
+import { GraphQLDecimal } from "./scalers/Decimal"; // your custom Decimal scalar
 
 registerEnumType(ShuttleStatus, {
   name: "ShuttleStatus",
+  description: "Current status of the shuttle ride",
 });
 
+// ====================== SHUTTLE OBJECT TYPE ======================
 @ObjectType()
 export class Shuttle {
   @Field(() => ID)
   id!: string;
 
-  @Field()
+  // Relations
+  @Field(() => ID)
   eventId!: string;
 
-  @Field(() => Event, { nullable: true })
-  event?: Event;
+  @Field(() => Event)
+  event!: Event;
 
-  @Field()
-  licensePlate!: string;
+  @Field(() => ID)
+  vehicleId!: string;
 
-  @Field()
-  vehicleType!: string;
+  @Field(() => Vehicle)
+  vehicle!: Vehicle;
 
-  @Field()
-  capacity!: number;
-
-  @Field()
-  availableSeats!: number;
-
-  @Field({ nullable: true })
-  driverId?: string;
+  @Field(() => ID, { nullable: true })
+  driverId?: string | null;
 
   @Field(() => Driver, { nullable: true })
   driver?: Driver | null;
 
-  @Field()
+  // Timestamps
+  @Field(() => Date)
   departureTime!: Date;
 
-  @Field()
+  @Field(() => Date)
   arrivalTime!: Date;
 
-  @Field(() => GraphQLJSONObject)
-  pickupLocation!: Record<string, unknown>;
+  // Locations (stored as JSON in DB)
+  @Field(() => Location)
+  pickupLocation!: Location;
 
-  @Field(() => GraphQLJSONObject)
-  dropoffLocation!: Record<string, unknown>;
+  @Field(() => Location)
+  dropoffLocation!: Location;
 
+  // Pricing & Status
   @Field(() => GraphQLDecimal)
   basePriceUsdc!: Decimal;
 
@@ -72,46 +72,47 @@ export class Shuttle {
   @Field()
   isFractionalized!: boolean;
 
+  // Live tracking
   @Field(() => Float, { nullable: true })
   currentLat?: number | null;
 
   @Field(() => Float, { nullable: true })
   currentLng?: number | null;
 
-  @Field({ nullable: true })
-  lastLocationUpdate?: Date;
+  @Field(() => Date, { nullable: true })
+  lastLocationUpdate?: Date | null;
 
+  // Relations (optional in queries)
   @Field(() => [Booking], { nullable: true })
   bookings?: Booking[];
 
   @Field(() => [StakedNFT], { nullable: true })
   stakedNFTs?: StakedNFT[];
 
-  @Field()
+  // Timestamps
+  @Field(() => Date)
   createdAt!: Date;
 
-  @Field()
+  @Field(() => Date)
   updatedAt!: Date;
 }
 
+// ====================== CREATE SHUTTLE INPUT ======================
 @InputType()
 export class CreateShuttleInput {
-  @Field()
+  @Field(() => ID)
   eventId!: string;
 
-  @Field()
-  licensePlate!: string;
+  @Field(() => ID)
+  vehicleId!: string;
 
-  @Field({ defaultValue: "minibus" })
-  vehicleType!: string;
+  @Field(() => ID, { nullable: true })
+  driverId?: string | null;
 
-  @Field()
-  capacity!: number;
-
-  @Field()
+  @Field(() => Date)
   departureTime!: Date;
 
-  @Field()
+  @Field(() => Date)
   arrivalTime!: Date;
 
   @Field(() => LocationInput)
@@ -124,30 +125,19 @@ export class CreateShuttleInput {
   basePriceUsdc!: Decimal;
 
   @Field({ defaultValue: false })
-  isFractionalized!: boolean;
-
-  @Field({ nullable: true })
-  driverId?: string;
+  isFractionalized?: boolean;
 }
 
+// ====================== UPDATE SHUTTLE INPUT ======================
 @InputType()
 export class UpdateShuttleInput {
-  @Field(() => String, { nullable: true })
-  licensePlate?: string;
+  @Field(() => ID, { nullable: true })
+  driverId?: string | null;
 
-  @Field(() => String, { nullable: true })
-  vehicleType?: string;
-
-  @Field(() => Int, { nullable: true })
-  capacity?: number;
-
-  @Field(() => Int, { nullable: true })
-  availableSeats?: number;
-
-  @Field(() => GraphQLISODateTime, { nullable: true })
+  @Field(() => Date, { nullable: true })
   departureTime?: Date;
 
-  @Field(() => GraphQLISODateTime, { nullable: true })
+  @Field(() => Date, { nullable: true })
   arrivalTime?: Date;
 
   @Field(() => LocationInput, { nullable: true })
@@ -165,12 +155,14 @@ export class UpdateShuttleInput {
   @Field(() => Boolean, { nullable: true })
   isFractionalized?: boolean;
 
-  @Field(() => ID, { nullable: true })
-  driverId?: string | null;
-
-  @Field(() => Int, { nullable: true })
+  // Live location updates (driver app)
+  @Field(() => Float, { nullable: true })
   currentLat?: number | null;
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Float, { nullable: true })
   currentLng?: number | null;
+
+  // Optional: manually set last update time (usually auto-managed)
+  @Field(() => Date, { nullable: true })
+  lastLocationUpdate?: Date | null;
 }

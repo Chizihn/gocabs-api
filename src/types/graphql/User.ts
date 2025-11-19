@@ -42,6 +42,9 @@ export class User {
   phoneNumber?: string | null;
 
   @Field(() => String, { nullable: true })
+  avatar?: string | null;
+
+  @Field(() => String, { nullable: true })
   fcmToken?: string | null;
 
   @Field(() => UserRole)
@@ -91,6 +94,54 @@ export class UpdateUserProfileInput {
 
   @Field({ nullable: true })
   phoneNumber?: string;
+}
+
+@InputType()
+export class RegisterInput {
+  @Field()
+  email!: string;
+
+  @Field(() => String, { nullable: true })
+  username?: string;
+
+  @Field()
+  password!: string;
+
+  @Field(() => UserRole)
+  role!: UserRole;
+
+  @Field(() => String, { nullable: true })
+  companyName?: string;
+
+  @Field({ nullable: true })
+  licenseNumber?: string;
+
+    @Field({ nullable: true })
+  phoneNumber?: string;
+}
+
+@InputType()
+export class AdminUpdateUserInput {
+  @Field({ nullable: true })
+  email?: string;
+
+  @Field({ nullable: true })
+  username?: string;
+
+  @Field({ nullable: true })
+  phoneNumber?: string;
+
+  @Field({ nullable: true })
+  avatar?: string;
+
+  @Field({ nullable: true })
+  fcmToken?: string;
+
+  @Field(() => UserRole, { nullable: true })
+  role?: UserRole;
+
+  @Field({ nullable: true })
+  walletAddress?: string;
 }
 
 @ObjectType()

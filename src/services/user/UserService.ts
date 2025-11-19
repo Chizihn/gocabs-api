@@ -7,8 +7,67 @@ import {
   LocationSettings,
   NotificationSettings,
 } from "../../types/graphql/UserSettings";
+import bcrypt from "bcrypt";
+
+const tokenBlacklist = new Set<string>();
 
 export class UserService {
+  static async register(
+    walletAddress: string,
+    email?: string,
+    username?: string,
+    password?: string,
+    role: UserRole = UserRole.SEEKER,
+    companyName?: string,
+    licenseNumber?: string
+  ) {
+    if (role === UserRole.OWNER && !companyName) {
+      throw new Error("Company name is required for owners.");
+    }
+    if (role === UserRole.DRIVER && !licenseNumber) {
+      throw new Error("License number is required for drivers.");
+    }
+
+    const normalized = walletAddress?.trim();
+    const nftAccess = normalized ? await NFTVerificationService.hasNFTAccess(normalized) : { hasAccess: false };
+
+    const hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
+
+    const user = await prisma.$transaction(async (tx) => {
+      const newUser = await tx.user.create({
+        data: {
+          walletAddress: normalized || null,
+          email: email || null,
+          username: username || null,
+          password: hashedPassword || null,
+          role,
+        },
+      });
+
+      if (role === UserRole.OWNER) {
+        await tx.owner.create({
+          data: {
+            userId: newUser.id,
+            companyName: companyName || null,
+          },
+        });
+      } else if (role === UserRole.DRIVER) {
+        await tx.driver.create({
+          data: {
+            userId: newUser.id,
+            licenseNumber: licenseNumber || null,
+          },
+        });
+      }
+
+      return newUser;
+    });
+
+    const token = generateToken(user.id, user.role, user.walletAddress || "");
+
+    return { user, token, nftAccess };
+  }
+
   static async connectWallet(walletAddress: string) {
     const normalized = walletAddress.trim();
     if (!normalized) {
@@ -28,9 +87,21 @@ export class UserService {
       },
     });
 
-    const token = generateToken(user.id, normalized);
+    const token = generateToken(user.id, user.role, normalized);
 
     return { user, token, nftAccess };
+  }
+
+  static async logout(token: string) {
+    tokenBlacklist.add(token);
+    return true;
+  }
+
+  static async uploadAvatar(userId: string, avatarUrl: string) {
+    return prisma.user.update({
+      where: { id: userId },
+      data: { avatar: avatarUrl },
+    });
   }
 
   static async getMe(userId: string) {

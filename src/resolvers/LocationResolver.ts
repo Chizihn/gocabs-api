@@ -12,7 +12,8 @@ import {
 import { PubSubEngine } from 'graphql-subscriptions';
 import { Context } from "../types/Context";
 import { prisma } from "../config/database";
-import { CoordinatesInput, LocationUpdate } from "../types/graphql/Location";
+import { LocationUpdate } from "../types/graphql/Location";
+import type { CoordinatesInput } from "../types/graphql/Location";
 import { logger } from "../utils/logger";
 import { redisClient } from "../config/redis";
 import { ShuttleStatus } from "@prisma/client";

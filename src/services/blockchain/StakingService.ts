@@ -69,6 +69,7 @@ export class StakingService {
 
     const stake = await prisma.stakedNFT.create({
       data: {
+        userId,
         walletAddress: user.walletAddress,
         tokenMint,
         stakeType,

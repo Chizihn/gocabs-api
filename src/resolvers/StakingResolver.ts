@@ -1,11 +1,4 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Arg,
-  Ctx,
-  Authorized,
-} from "type-graphql";
+import { Resolver, Query, Mutation, Arg, Ctx, Authorized } from "type-graphql";
 import { StakingService } from "../services/blockchain/StakingService";
 import {
   StakedNFT,
@@ -13,7 +6,7 @@ import {
   RevenueShareInfo,
   FractionalRevenueInfo,
 } from "../types/graphql/Staking";
-import { Context } from "../types/Context";
+import { type Context } from "../types/Context";
 
 @Resolver()
 export class StakingResolver {
@@ -44,7 +37,9 @@ export class StakingResolver {
   @Authorized("NFT_HOLDER")
   @Query(() => [StakedNFT])
   async myStakedNFTs(@Ctx() ctx: Context): Promise<StakedNFT[]> {
-    return StakingService.getUserStakedNFTs(ctx.userId!) as unknown as StakedNFT[];
+    return StakingService.getUserStakedNFTs(
+      ctx.userId!
+    ) as unknown as StakedNFT[];
   }
 
   @Authorized("ADMIN")

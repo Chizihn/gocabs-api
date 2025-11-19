@@ -14,6 +14,7 @@ registerEnumType(ShuttleStatus, {
   name: "FleetShuttleStatus",
 });
 
+// ====================== FLEET OVERVIEW TYPE ======================
 @ObjectType()
 export class FleetOverview {
   @Field(() => Int)
@@ -22,11 +23,17 @@ export class FleetOverview {
   @Field(() => Int)
   activeVehicles!: number;
 
-  @Field(() => Float)
+  @Field(() => Number)
   totalRevenue!: number;
 
-  @Field(() => Float)
+  @Field(() => Number)
   monthRevenue!: number;
+
+  @Field(() => Int)
+  totalDrivers!: number;
+
+  @Field(() => Int)
+  activeDrivers!: number;
 }
 
 @ObjectType()
@@ -34,6 +41,9 @@ export class VehicleDetails {
   @Field(() => ID)
   id!: string;
 
+  @Field()
+  vehicleNumber!: string;
+  
   @Field()
   licensePlate!: string;
 
@@ -78,4 +88,19 @@ export class VehicleDetails {
 
   @Field(() => GraphQLISODateTime, { nullable: true })
   lastLocationUpdate?: Date | null;
+
+  @Field(() => Int)
+  mileage!: number;
+
+  @Field(() => GraphQLISODateTime, { nullable: true })
+  lastMaintenance?: Date | null;
+
+  @Field(() => GraphQLISODateTime, { nullable: true })
+  nextMaintenance?: Date | null;
+
+  @Field()
+  isActive!: boolean;
+
+  @Field()
+  createdAt!: Date;
 }

@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { prisma } from "../config/database";
 import { generateToken } from "../middleware/auth";
 import { logger } from "../utils/logger";
-import { User } from "../types/graphql/User";
+import { RegisterInput, User } from "../types/graphql/User";
 import { UserRole } from "@prisma/client";
 
 @ObjectType()
@@ -21,26 +21,6 @@ class FleetAuthResponse {
   ownerId?: string | null;
 }
 
-@InputType()
-class RegisterInput {
-  @Field()
-  email: string;
-
-  @Field()
-  password: string;
-
-  @Field()
-  phoneNumber: string;
-
-  @Field(() => UserRole)
-  role: UserRole;
-
-  @Field({ nullable: true })
-  licenseNumber?: string;
-
-  @Field({ nullable: true })
-  companyName?: string;
-}
 
 @InputType()
 class LoginInput {
@@ -79,7 +59,7 @@ export class FleetAuthResolver {
           email: input.email,
           // @ts-ignore - Password field exists in the database but not in the Prisma type
           password: hashedPassword,
-          phoneNumber: input.phoneNumber,
+          phoneNumber: input.phoneNumber || "",
           role: input.role,
           // Initialize with default values
           notificationSettings: {},
@@ -121,7 +101,7 @@ export class FleetAuthResolver {
         ownerId = owner.id;
       }
 
-      const token = generateToken(user.id, user.email!);
+      const token = generateToken(user.id, user.role, user.email!);
 
       logger.info(`Fleet user registered: ${user.email} (${input.role})`);
 
@@ -160,98 +140,82 @@ export class FleetAuthResolver {
     }
   }
 
-  @Mutation(() => FleetAuthResponse)
-  async loginFleetUser(@Arg("input") input: LoginInput): Promise<FleetAuthResponse> {
-    try {
-      logger.info(`Fleet user login attempt: ${input.email}`);
-      
-      // Find user with their role-specific profile using Prisma's type-safe query
-      const users = await prisma.$queryRaw<Array<{
-        id: string;
-        email: string | null;
-        password: string;
-        walletAddress: string | null;
-        username: string | null;
-        phoneNumber: string | null;
-        fcmToken: string | null;
-        role: UserRole;
-        notificationSettings: any;
-        locationSettings: any;
-        driverId: string | null;
-        ownerId: string | null;
-        createdAt: Date;
-        updatedAt: Date;
-      }>>`
-        SELECT 
-          u.*,
-          d.id as "driverId",
-          o.id as "ownerId"
-        FROM "User" u
-        LEFT JOIN "Driver" d ON d."userId" = u.id
-        LEFT JOIN "Owner" o ON o."userId" = u.id
-        WHERE u.email = ${input.email} 
-        AND u.role IN ('DRIVER', 'OWNER')
-        LIMIT 1
-      `;
+@Mutation(() => FleetAuthResponse)
+async loginFleetUser(@Arg("input") input: LoginInput): Promise<FleetAuthResponse> {
+  try {
+    logger.info(`Fleet login attempt: ${input.email}`);
 
-      const user = users[0];
+    // CRITICAL FIX: Explicitly SELECT password + role-specific IDs
+    const user = await prisma.user.findUnique({
+      where: { email: input.email },
+      select: {
+        id: true,
+        email: true,
+        password: true,           // This is the key — must be explicitly selected
+        walletAddress: true,
+        username: true,
+        phoneNumber: true,
+        fcmToken: true,
+        role: true,
+        notificationSettings: true,
+        locationSettings: true,
+        createdAt: true,
+        updatedAt: true,
+        driver: { select: { id: true } },
+        owner: { select: { id: true } },
+      },
+    });
 
-      // Verify user exists and has a password
-      if (!user || !user.password) {
-        logger.warn(`Login failed: User not found or invalid credentials for ${input.email}`);
-        throw new Error("Invalid email or password");
-      }
-
-      // Verify password
-      const validPassword = await bcrypt.compare(input.password, user.password);
-      if (!validPassword) {
-        logger.warn(`Login failed: Invalid password for ${input.email}`);
-        throw new Error("Invalid email or password");
-      }
-
-      // Generate JWT token
-      const token = generateToken(user.id, user.email || '');
-
-      logger.info(`Fleet user logged in successfully: ${user.email}`);
-
-      // Map the user to match the GraphQL User type
-      const userResponse: User = {
-        id: user.id,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
-        walletAddress: user.walletAddress,
-        email: user.email,
-        username: user.username,
-        phoneNumber: user.phoneNumber,
-        fcmToken: user.fcmToken,
-        role: user.role as UserRole,
-        notificationSettings: user.notificationSettings as any,
-        locationSettings: user.locationSettings as any
-      };
-
-      // Prepare response
-      const response: FleetAuthResponse = {
-        token,
-        user: userResponse,
-        driverId: user.driverId || null,
-        ownerId: user.ownerId || null,
-      };
-
-      return response;
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-      logger.error(`Login failed: ${errorMessage}`, { error });
-      
-      // Return a more specific error message for known cases
-      if (errorMessage.includes('ECONNREFUSED') || errorMessage.includes('timeout')) {
-        throw new Error('Unable to connect to the authentication service. Please try again later.');
-      }
-      
-      // For security reasons, don't expose internal error details
-      throw new Error('Authentication failed. Please check your credentials and try again.');
+    if (!user || !user.password) {
+      logger.warn(`Login failed: User not found or no password set for ${input.email}`);
+      throw new Error("Invalid email or password");
     }
-  }
 
+    if (user.role !== UserRole.DRIVER && user.role !== UserRole.OWNER) {
+      throw new Error("This login is only for Drivers and Owners");
+    }
+
+    const validPassword = await bcrypt.compare(input.password, user.password);
+    if (!validPassword) {
+      logger.warn(`Login failed: Wrong password for ${input.email}`);
+      throw new Error("Invalid email or password");
+    }
+
+    const token = generateToken(user.id, user.role, user?.email || "");
+
+    logger.info(`Fleet user logged in: ${user.email} (${user.role})`);
+
+    const userResponse: User = {
+      id: user.id,
+      walletAddress: user.walletAddress,
+      email: user.email,
+      username: user.username,
+      phoneNumber: user.phoneNumber,
+      fcmToken: user.fcmToken,
+      role: user.role,
+      notificationSettings: user.notificationSettings as any,
+      locationSettings: user.locationSettings as any,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+      bookings: [],
+      rewards: [],
+      stakedNFTs: [],
+      notifications: [],
+      driver: user.driver || null,
+      owner: user.owner || null,
+    };
+
+    return {
+      token,
+      user: userResponse,
+      driverId: user.driver?.id || null,
+      ownerId: user.owner?.id || null,
+    };
+  } catch (error) {
+    logger.error("Fleet login failed:", error);
+    throw new Error("Invalid email or password");
+  }
+}
   @Mutation(() => Boolean)
   async requestPasswordReset(@Arg("email") email: string): Promise<boolean> {
     try {

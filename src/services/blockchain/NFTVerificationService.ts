@@ -5,8 +5,8 @@ import { prisma } from "../../config/database";
 
 export class NFTVerificationService {
   private static CACHE_TTL = 300; // 5 minutes
-  private static OWNERSHIP_CACHE_PREFIX = 'nft:ownership:';
-  private static STAKING_CACHE_PREFIX = 'nft:staking:';
+  private static OWNERSHIP_CACHE_PREFIX = "nft:ownership:";
+  private static STAKING_CACHE_PREFIX = "nft:staking:";
 
   /**
    * Check if a wallet owns any NFTs from the GoCabs collection
@@ -15,7 +15,6 @@ export class NFTVerificationService {
     walletAddress: string
   ): Promise<{ isHolder: boolean; nftTokens: string[] }> {
     const cacheKey = `${this.OWNERSHIP_CACHE_PREFIX}${walletAddress}`;
-
     try {
       // Check cache first
       const cached = await redisClient.get(cacheKey);
@@ -24,15 +23,19 @@ export class NFTVerificationService {
         return JSON.parse(cached);
       }
 
-      // Fetch from Helius
+      // Fetch from Helius (updated to direct method call)
       const heliusClient = await getHeliusClient();
-      const response = await heliusClient.rpc.getAssetsByOwner({
+      const response = await heliusClient.getAssetsByOwner({
         ownerAddress: walletAddress,
         page: 1,
         limit: 1000,
+        displayOptions: {
+          showNativeBalance: false,
+          showCollectionMetadata: true, // Ensures grouping is populated for collections
+        },
       });
 
-      // Filter for GoCabs collection NFTs
+      // Filter for collection NFTs
       const collectionAddress = PROGRAM_IDS.GOCABS_NFT_COLLECTION.toString();
       const goCabsNFTs = response.items.filter((nft: any) => {
         const grouping = nft.grouping || [];
@@ -49,7 +52,6 @@ export class NFTVerificationService {
 
       // Cache the result
       await redisClient.setex(cacheKey, this.CACHE_TTL, JSON.stringify(result));
-
       logger.info(
         `NFT verification for ${walletAddress}: ${result.isHolder} (${result.nftTokens.length} NFTs)`
       );
@@ -66,15 +68,14 @@ export class NFTVerificationService {
   ): Promise<boolean> {
     try {
       const heliusClient = await getHeliusClient();
-      const asset = await heliusClient.rpc.getAsset({
+      // Updated to direct method call
+      const asset = await heliusClient.getAsset({
         id: nftMintAddress,
       });
-
       const isOwned = asset.ownership.owner === walletAddress;
       logger.info(
         `Specific NFT verification: ${nftMintAddress} owned by ${walletAddress}: ${isOwned}`
       );
-
       return isOwned;
     } catch (error) {
       logger.error("Specific NFT verification failed:", error);
@@ -85,9 +86,10 @@ export class NFTVerificationService {
   /**
    * Check if a wallet has any staked NFTs
    */
-  static async checkStakedNFTs(walletAddress: string): Promise<{ hasStaked: boolean; stakedTokens: string[] }> {
+  static async checkStakedNFTs(
+    walletAddress: string
+  ): Promise<{ hasStaked: boolean; stakedTokens: string[] }> {
     const cacheKey = `${this.STAKING_CACHE_PREFIX}${walletAddress}`;
-
     try {
       // Check cache first
       const cached = await redisClient.get(cacheKey);
@@ -99,17 +101,16 @@ export class NFTVerificationService {
       // Check database for staked NFTs
       const stakedNFTs = await prisma.stakedNFT.findMany({
         where: { walletAddress },
-        select: { tokenMint: true }
+        select: { tokenMint: true },
       });
 
       const result = {
         hasStaked: stakedNFTs.length > 0,
-        stakedTokens: stakedNFTs.map(nft => nft.tokenMint)
+        stakedTokens: stakedNFTs.map((nft) => nft.tokenMint),
       };
 
       // Cache the result
       await redisClient.setex(cacheKey, this.CACHE_TTL, JSON.stringify(result));
-      
       logger.info(
         `Staked NFTs check for ${walletAddress}: ${result.hasStaked} (${result.stakedTokens.length} staked)`
       );
@@ -124,53 +125,62 @@ export class NFTVerificationService {
    * Check if a wallet has access to GoCabs features by either:
    * 1. Owning NFTs from the GoCabs collection, or
    * 2. Having staked NFTs from the GoCabs collection
-   * 
+   *
    * @param walletAddress - The wallet address to check
    * @returns Object with access status and reason
    */
-  static async hasNFTAccess(walletAddress: string): Promise<{ 
-    hasAccess: boolean; 
-    reason: 'owns_nft' | 'has_staked' | 'none';
+  static async hasNFTAccess(walletAddress: string): Promise<{
+    hasAccess: boolean;
+    reason: "owns_nft" | "has_staked" | "none";
     collectionAddress?: string;
   }> {
     const collectionAddress = PROGRAM_IDS.GOCABS_NFT_COLLECTION.toString();
-    
     try {
-      logger.info(`Checking NFT access for wallet: ${walletAddress}, collection: ${collectionAddress}`);
-      
+      logger.info(
+        `Checking NFT access for wallet: ${walletAddress}, collection: ${collectionAddress}`
+      );
+
       // Check direct ownership first
-      const { isHolder, nftTokens } = await this.verifyNFTOwnership(walletAddress);
+      const { isHolder, nftTokens } = await this.verifyNFTOwnership(
+        walletAddress
+      );
       if (isHolder) {
-        logger.info(`Wallet ${walletAddress} has direct NFT ownership: ${nftTokens.length} NFTs found`);
-        return { 
-          hasAccess: true, 
-          reason: 'owns_nft',
-          collectionAddress
+        logger.info(
+          `Wallet ${walletAddress} has direct NFT ownership: ${nftTokens.length} NFTs found`
+        );
+        return {
+          hasAccess: true,
+          reason: "owns_nft",
+          collectionAddress,
         };
       }
 
       // If no direct ownership, check staked NFTs
-      const { hasStaked, stakedTokens } = await this.checkStakedNFTs(walletAddress);
+      const { hasStaked, stakedTokens } = await this.checkStakedNFTs(
+        walletAddress
+      );
       if (hasStaked) {
-        logger.info(`Wallet ${walletAddress} has staked NFTs: ${stakedTokens.length} staked`);
-        return { 
-          hasAccess: true, 
-          reason: 'has_staked',
-          collectionAddress
+        logger.info(
+          `Wallet ${walletAddress} has staked NFTs: ${stakedTokens.length} staked`
+        );
+        return {
+          hasAccess: true,
+          reason: "has_staked",
+          collectionAddress,
         };
       }
 
       logger.info(`No GoCabs NFT access for wallet: ${walletAddress}`);
-      return { 
-        hasAccess: false, 
-        reason: 'none',
-        collectionAddress
+      return {
+        hasAccess: false,
+        reason: "none",
+        collectionAddress,
       };
     } catch (error) {
       logger.error(`Error checking NFT access for ${walletAddress}:`, error);
-      return { 
-        hasAccess: false, 
-        reason: 'none',
+      return {
+        hasAccess: false,
+        reason: "none",
         collectionAddress,
       };
     }
@@ -182,22 +192,20 @@ export class NFTVerificationService {
   static async invalidateCache(walletAddress: string): Promise<void> {
     const ownershipKey = `${this.OWNERSHIP_CACHE_PREFIX}${walletAddress}`;
     const stakingKey = `${this.STAKING_CACHE_PREFIX}${walletAddress}`;
-    
     await Promise.all([
       redisClient.del(ownershipKey),
-      redisClient.del(stakingKey)
+      redisClient.del(stakingKey),
     ]);
-    
     logger.info(`Invalidated NFT caches for wallet: ${walletAddress}`);
   }
 
   static async getNFTMetadata(nftMintAddress: string): Promise<any> {
     try {
       const heliusClient = await getHeliusClient();
-      const asset = await heliusClient.rpc.getAsset({
+      // Updated to direct method call
+      const asset = await heliusClient.getAsset({
         id: nftMintAddress,
       });
-
       return {
         name: asset.content?.metadata?.name,
         symbol: asset.content?.metadata?.symbol,

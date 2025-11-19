@@ -15,7 +15,9 @@ export interface Context {
   req: Request;
   res: Response;
   user: User | null;
-  userId: string | null;
+  userId: string | null; 
+  userRole: string | null; // Added userRole
+  ownerId: string | null; // Added ownerId
   prisma: PrismaClient;
   redisClient: Redis;
   pubSub: PubSubEngine;

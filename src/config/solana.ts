@@ -44,7 +44,6 @@ export const solanaConnection = new Connection(
   SOLANA_CONFIG.commitment
 );
 
-
 // Test connection
 solanaConnection
   .getVersion()

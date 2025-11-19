@@ -35,6 +35,15 @@ class GetEventsArgs {
   @Field({ nullable: true })
   eventType?: string;
 
+  @Field({ nullable: true })
+  startDate?: Date;
+
+  @Field({ nullable: true })
+  endDate?: Date;
+
+  @Field({ nullable: true })
+  location?: string;
+
   @Field(() => Int, { defaultValue: 10 })
   take: number = 10;
 
@@ -46,7 +55,7 @@ class GetEventsArgs {
 export class EventResolver {
   @Query(() => [Event])
   async events(
-    @Args() { isActive, upcoming, eventType, take, skip }: GetEventsArgs
+    @Args() { isActive, upcoming, eventType, startDate, endDate, location, take, skip }: GetEventsArgs
   ): Promise<Event[]> {
     const where: Prisma.EventWhereInput = { isActive: isActive ?? true };
 
@@ -54,8 +63,24 @@ export class EventResolver {
       where.eventDate = { gte: new Date() };
     }
 
+    if (startDate && endDate) {
+      where.eventDate = { gte: startDate, lte: endDate };
+    } else if (startDate) {
+      where.eventDate = { gte: startDate };
+    } else if (endDate) {
+      where.eventDate = { lte: endDate };
+    }
+
     if (eventType) {
       where.eventType = { equals: eventType, mode: 'insensitive' };
+    }
+
+    if (location) {
+      where.location = {
+        path: ['name'], // Assuming location has a 'name' field
+        string_contains: location,
+        mode: 'insensitive',
+      };
     }
 
     try {

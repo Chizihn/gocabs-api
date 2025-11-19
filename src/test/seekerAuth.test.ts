@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { ApolloServer } from '@apollo/server';
 import { buildSchema } from 'type-graphql';
 import { prisma } from '../config/database';
@@ -17,6 +18,26 @@ import { AdminResolver } from '../resolvers/AdminResolver';
 jest.mock('../services/blockchain/NFTVerificationService');
 const mockedNFTVerificationService =
   NFTVerificationService as jest.Mocked<any>;
+
+interface ConnectWalletResponse {
+  connectWallet: {
+    token: string;
+    user: {
+      id: string;
+      walletAddress: string;
+    };
+    hasNFTAccess: boolean;
+  };
+}
+
+interface RefreshNFTStatusResponse {
+  refreshNFTStatus: {
+    hasAccess: boolean;
+    tokens: {
+      tokenMint: string;
+    }[];
+  };
+}
 
 describe('UserResolver - Seeker Authentication', () => {
   let server: ApolloServer;
@@ -70,11 +91,14 @@ describe('UserResolver - Seeker Authentication', () => {
       query: CONNECT_WALLET,
     });
 
-    expect(response.data?.connectWallet.token).toBeDefined();
-    expect(response.data?.connectWallet.user.walletAddress).toBe(
-      walletAddress
-    );
-    expect(response.data?.connectWallet.hasNFTAccess).toBe(true);
+    if (response.body.kind === 'single') {
+      const data = response.body.singleResult.data as ConnectWalletResponse;
+      expect(data.connectWallet.token).toBeDefined();
+      expect(data.connectWallet.user.walletAddress).toBe(
+        walletAddress
+      );
+      expect(data.connectWallet.hasNFTAccess).toBe(true);
+    }
 
     const userInDb = await prisma.user.findUnique({
       where: { walletAddress },
@@ -106,11 +130,14 @@ describe('UserResolver - Seeker Authentication', () => {
       query: CONNECT_WALLET,
     });
 
-    expect(response.data?.connectWallet.token).toBeDefined();
-    expect(response.data?.connectWallet.user.walletAddress).toBe(
-      walletAddress
-    );
-    expect(response.data?.connectWallet.hasNFTAccess).toBe(false);
+    if (response.body.kind === 'single') {
+      const data = response.body.singleResult.data as ConnectWalletResponse;
+      expect(data.connectWallet.token).toBeDefined();
+      expect(data.connectWallet.user.walletAddress).toBe(
+        walletAddress
+      );
+      expect(data.connectWallet.hasNFTAccess).toBe(false);
+    }
 
     const userInDb = await prisma.user.findUnique({
       where: { walletAddress },
@@ -145,8 +172,11 @@ describe('UserResolver - Seeker Authentication', () => {
       query: CONNECT_WALLET,
     });
 
-    expect(response.data?.connectWallet.token).toBeDefined();
-    expect(response.data?.connectWallet.hasNFTAccess).toBe(true);
+    if (response.body.kind === 'single') {
+      const data = response.body.singleResult.data as ConnectWalletResponse;
+      expect(data.connectWallet.token).toBeDefined();
+      expect(data.connectWallet.hasNFTAccess).toBe(true);
+    }
   });
 
   it('should refresh NFT status and return the correct token list', async () => {
@@ -187,12 +217,15 @@ describe('UserResolver - Seeker Authentication', () => {
       }
     );
 
-    expect(mockedNFTVerificationService.invalidateCache).toHaveBeenCalledWith(walletAddress);
-    expect(response.data?.refreshNFTStatus.hasAccess).toBe(true);
-    expect(response.data?.refreshNFTStatus.tokens).toHaveLength(2);
-    expect(response.data?.refreshNFTStatus.tokens).toEqual([
-      { tokenMint: 'nft-mint-1' },
-      { tokenMint: 'nft-mint-2' },
-    ]);
+    if (response.body.kind === 'single') {
+      const data = response.body.singleResult.data as RefreshNFTStatusResponse;
+      expect(mockedNFTVerificationService.invalidateCache).toHaveBeenCalledWith(walletAddress);
+      expect(data.refreshNFTStatus.hasAccess).toBe(true);
+      expect(data.refreshNFTStatus.tokens).toHaveLength(2);
+      expect(data.refreshNFTStatus.tokens).toEqual([
+        { tokenMint: 'nft-mint-1' },
+        { tokenMint: 'nft-mint-2' },
+      ]);
+    }
   });
 });

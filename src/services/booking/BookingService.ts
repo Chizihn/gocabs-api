@@ -20,33 +20,54 @@ interface CreateBookingParams {
   seats: number;
 }
 
+// Helper: Compute available seats dynamically
+const getAvailableSeats = async (shuttleId: string): Promise<number> => {
+  const shuttle = await prisma.shuttle.findUnique({
+    where: { id: shuttleId },
+    include: { vehicle: true },
+  });
+
+  if (!shuttle) throw new Error("Shuttle not found");
+
+  const booked = await prisma.booking.count({
+    where: {
+      shuttleId,
+      status: { in: ["CONFIRMED", "PICKED_UP"] },
+    },
+  });
+
+  return shuttle.vehicle.capacity - booked;
+};
+
 export class BookingService {
   static async ensureAvailability(shuttleId: string, seats: number) {
     const shuttle = await prisma.shuttle.findUnique({
       where: { id: shuttleId },
-      select: { id: true, availableSeats: true, status: true },
+      include: { vehicle: true },
     });
 
     if (!shuttle) throw new Error("Shuttle not found");
     if (shuttle.status === ShuttleStatus.CANCELLED) {
       throw new Error("Shuttle has been cancelled");
     }
-    if ((shuttle.availableSeats ?? 0) < seats) {
-      throw new Error("Not enough seats available");
+
+    const available = shuttle.vehicle.capacity - await prisma.booking.count({
+      where: { shuttleId, status: { in: ["CONFIRMED", "PICKED_UP"] } },
+    });
+
+    if (available < seats) {
+      throw new Error(`Only ${available} seats available`);
     }
   }
 
-  static async createBooking({
-    userId,
-    shuttleId,
-    seats,
-  }: CreateBookingParams) {
+  static async createBooking({ userId, shuttleId, seats }: CreateBookingParams) {
     await this.ensureAvailability(shuttleId, seats);
 
     return prisma.$transaction(async (tx) => {
       const shuttle = await tx.shuttle.findUniqueOrThrow({
         where: { id: shuttleId },
         include: {
+          vehicle: true,
           event: true,
         },
       });
@@ -66,25 +87,25 @@ export class BookingService {
           shuttle: {
             include: {
               event: true,
+              vehicle: true,
             },
           },
+          user: true,
         },
       });
 
-      await tx.shuttle.update({
-        where: { id: shuttleId },
-        data: {
-          availableSeats: shuttle.availableSeats - seats,
-        },
-      });
-
+      // Generate Solana Pay link
       const reference = Keypair.generate().publicKey;
+      const memo = `${shuttle.vehicle.licensePlate} → ${shuttle.event.name} (${seats} seat${seats > 1 ? "s" : ""})`;
+
       const paymentRequest = await solanaPay.createPaymentRequest(
         price.toNumber(),
         reference,
-        "GoCabs Shuttle Booking",
-        `${shuttle.licensePlate} - ${shuttle.event.name}`
+        "GoCab Shuttle Booking",
+        memo
       );
+
+      logger.info(`Booking created: ${booking.id} | ${seats} seats | ${price.toFixed(2)} USDC`);
 
       return {
         booking,
@@ -93,17 +114,16 @@ export class BookingService {
     });
   }
 
-  static async confirmPayment(
-    bookingId: string,
-    signature: string,
-    reference: string
-  ) {
+  static async confirmPayment(bookingId: string, signature: string, reference: string) {
     return prisma.$transaction(async (tx) => {
       const booking = await tx.booking.findUnique({
         where: { id: bookingId },
         include: {
           shuttle: {
-            include: { event: true },
+            include: {
+              event: true,
+              vehicle: true,
+            },
           },
           user: true,
         },
@@ -120,26 +140,30 @@ export class BookingService {
         booking.totalPriceUsdc.toNumber()
       );
 
-      if (!isValid) throw new Error("Payment verification failed");
+      if (!isValid) {
+        throw new Error("Invalid payment signature");
+      }
 
       const updated = await tx.booking.update({
         where: { id: bookingId },
         data: {
           paymentStatus: PaymentStatus.COMPLETED,
-          status: BookingStatus.CONFIRMED,
           transactionHash: signature,
         },
       });
 
+      // Generate reward
       await RewardCalculationService.generateReward(bookingId);
 
+      // Notify user
       await NotificationService.sendBookingConfirmation(
         booking.userId,
         bookingId,
-        booking.shuttle.event?.name || "Your event"
+        booking.shuttle.event.name
       );
 
-      logger.info(`Payment confirmed for booking ${bookingId}`);
+      logger.info(`Payment confirmed: ${bookingId} | Tx: ${signature}`);
+
       return updated;
     });
   }
@@ -151,32 +175,30 @@ export class BookingService {
         include: { shuttle: true },
       });
 
-      if (!booking) {
-        throw new Error("Booking not found");
+      if (!booking) throw new Error("Booking not found");
+
+      if (booking.status === BookingStatus.COMPLETED) {
+        throw new Error("Completed rides cannot be cancelled");
       }
 
-      if (
-        booking.paymentStatus === PaymentStatus.COMPLETED &&
-        booking.status === BookingStatus.COMPLETED
-      ) {
-        throw new Error("Completed bookings cannot be cancelled");
+      if (booking.paymentStatus === PaymentStatus.COMPLETED) {
+        // TODO: Trigger refund via Solana
+        logger.warn(`Refund needed for booking ${bookingId}`);
       }
 
       await tx.booking.update({
         where: { id: bookingId },
         data: {
           status: BookingStatus.CANCELLED,
-          paymentStatus: PaymentStatus.REFUNDED,
+          paymentStatus: booking.paymentStatus === PaymentStatus.COMPLETED
+            ? PaymentStatus.REFUNDED
+            : PaymentStatus.FAILED,
         },
       });
 
-      await tx.shuttle.update({
-        where: { id: booking.shuttleId },
-        data: {
-          availableSeats: (booking.shuttle.availableSeats ?? 0) + booking.seats,
-        },
-      });
+      await NotificationService.sendBookingCancelled(userId, bookingId);
 
+      logger.info(`Booking cancelled: ${bookingId}`);
       return true;
     });
   }
@@ -187,6 +209,8 @@ export class BookingService {
     rating: number,
     review?: string
   ) {
+    if (rating < 1 || rating > 5) throw new Error("Rating must be 1–5");
+
     return prisma.$transaction(async (tx) => {
       const booking = await tx.booking.findFirst({
         where: {
@@ -201,19 +225,14 @@ export class BookingService {
         },
       });
 
-      if (!booking) {
-        throw new Error("Booking not found or not completed");
-      }
+      if (!booking) throw new Error("Booking not eligible for rating");
 
       await tx.booking.update({
         where: { id: bookingId },
-        data: {
-          rating,
-          review: review ?? null,
-        },
+        data: { rating, review: review || null },
       });
 
-      if (booking.shuttle?.driver) {
+      if (booking.shuttle.driver) {
         const ratings = await tx.booking.findMany({
           where: {
             shuttle: { driverId: booking.shuttle.driver.id },
@@ -222,10 +241,8 @@ export class BookingService {
           select: { rating: true },
         });
 
-        if (ratings.length) {
-          const avg =
-            ratings.reduce((sum, b) => sum + (b.rating || 0), 0) /
-            ratings.length;
+        if (ratings.length > 0) {
+          const avg = ratings.reduce((sum, b) => sum + b.rating!, 0) / ratings.length;
           await tx.driver.update({
             where: { id: booking.shuttle.driver.id },
             data: { rating: new Decimal(avg.toFixed(2)) },
@@ -233,6 +250,7 @@ export class BookingService {
         }
       }
 
+      logger.info(`Rating submitted: ${bookingId} → ${rating} stars`);
       return true;
     });
   }

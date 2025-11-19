@@ -6,10 +6,12 @@ import {
   Ctx,
   Authorized,
   Int,
+  ID,
 } from "type-graphql";
 import { prisma } from "../config/database";
 import { Context } from "../types/Context";
-import { Notification, MarkNotificationReadInput } from "../types/graphql/Notification";
+import { Notification } from "../types/graphql/Notification";
+import type { MarkNotificationReadInput } from "../types/graphql/Notification";
 import { logger } from "../utils/logger";
 
 @Resolver(() => Notification)
@@ -17,9 +19,12 @@ export class NotificationResolver {
   @Authorized()
   @Query(() => [Notification])
   async myNotifications(
-    @Arg("limit", () => Int, { nullable: true, defaultValue: 50 }) limit: number,
-    @Arg("offset", () => Int, { nullable: true, defaultValue: 0 }) offset: number,
-    @Arg("unreadOnly", () => Boolean, { nullable: true, defaultValue: false }) unreadOnly: boolean,
+    @Arg("limit", () => Int, { nullable: true, defaultValue: 50 })
+    limit: number,
+    @Arg("offset", () => Int, { nullable: true, defaultValue: 0 })
+    offset: number,
+    @Arg("unreadOnly", () => Boolean, { nullable: true, defaultValue: false })
+    unreadOnly: boolean,
     @Ctx() ctx: Context
   ): Promise<Notification[]> {
     const where: any = {
@@ -70,12 +75,12 @@ export class NotificationResolver {
   @Authorized()
   @Mutation(() => Boolean)
   async markNotificationRead(
-    @Arg("input") input: MarkNotificationReadInput,
+    @Arg("notificationId", () => ID) notificationId: string,
     @Ctx() ctx: Context
   ): Promise<boolean> {
     await prisma.notification.updateMany({
       where: {
-        id: input.notificationId,
+        id: notificationId,
         userId: ctx.userId!,
       },
       data: {
@@ -121,4 +126,3 @@ export class NotificationResolver {
     return true;
   }
 }
-

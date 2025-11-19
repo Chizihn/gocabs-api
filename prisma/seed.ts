@@ -1,334 +1,184 @@
-import { PrismaClient } from '@prisma/client';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+// prisma/seed.ts
+
+import { PrismaClient, UserRole, Prisma } from '@prisma/client';
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-const OWNER_EMAILS = [
-  'owner1@gocab.com',
-  'owner2@gocab.com',
-  'owner3@gocab.com',
-  'owner4@gocab.com',
-  'owner5@gocab.com'
-];
-
-const DRIVER_EMAILS = [
-  'driver1@gocab.com',
-  'driver2@gocab.com',
-  'driver3@gocab.com',
-  'driver4@gocab.com',
-  'driver5@gocab.com'
-];
-
-const VEHICLE_TYPES = ['Sedan', 'SUV', 'Minivan', 'Bus', 'Luxury Van'];
-const EVENT_TYPES = ['Concert', 'Sports', 'Conference', 'Gala', 'Expo'];
-
+// City coordinates & EVENTS stay exactly the same (omitted for brevity)
 const CITIES = [
-  { name: 'New York', lat: 40.7128, lng: -74.0060 },
-  { name: 'Los Angeles', lat: 34.0522, lng: -118.2437 },
-  { name: 'Chicago', lat: 41.8781, lng: -87.6298 },
-  { name: 'Miami', lat: 25.7617, lng: -80.1918 },
-  { name: 'Las Vegas', lat: 36.1699, lng: -115.1398 }
+  { name: 'Tbilisi', lat: 41.7151, lng: 44.8271 },
+  { name: 'Singapore', lat: 1.3521, lng: 103.8198 },
+  { name: 'Barcelona', lat: 41.3851, lng: 2.1734 },
+  { name: 'Dubai', lat: 25.2048, lng: 55.2708 },
+  { name: 'London', lat: 51.5074, lng: -0.1278 },
 ];
 
 const EVENTS = [
-  {
-    name: 'Tech Summit 2023',
-    description: 'Annual technology conference with industry leaders',
-    eventType: 'Conference',
-    city: 'San Francisco',
-    date: '2023-12-15T09:00:00.000Z',
-    imageUrl: 'https://eventslabpro.com/wp-content/uploads/2023/11/special-dinner.png'
-  },
-  {
-    name: 'Music Festival',
-    description: 'Weekend music festival featuring top artists',
-    eventType: 'Concert',
-    city: 'Austin',
-    date: '2024-01-20T12:00:00.000Z',
-    imageUrl: 'https://eventslabpro.com/wp-content/uploads/2023/11/special-dinner.png'
-  },
-  {
-    name: 'Startup Expo',
-    description: 'Showcasing innovative startups and technologies',
-    eventType: 'Expo',
-    city: 'Boston',
-    date: '2024-02-10T10:00:00.000Z',
-    imageUrl: 'https://eventslabpro.com/wp-content/uploads/2023/11/special-dinner.png'
-  },
-  {
-    name: 'Sports Championship',
-    description: 'Annual sports championship event',
-    eventType: 'Sports',
-    city: 'Chicago',
-    date: '2024-03-05T15:00:00.000Z',
-    imageUrl: 'https://eventslabpro.com/wp-content/uploads/2023/11/special-dinner.png'
-  },
-  {
-    name: 'Charity Gala',
-    description: 'Black-tie fundraising event for charity',
-    eventType: 'Gala',
-    city: 'New York',
-    date: '2024-04-18T19:00:00.000Z',
-    imageUrl: 'https://eventslabpro.com/wp-content/uploads/2023/11/special-dinner.png'
-  }
+  { name: "Degamefi 2025", city: "Tbilisi", date: "2025-09-19T09:00:00.000Z", eventType: "Conference", description: "...", imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=400&fit=crop" },
+  { name: "TOKEN2049 Singapore", city: "Singapore", date: "2025-10-01T09:00:00.000Z", eventType: "Conference", description: "...", imageUrl: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=400&fit=crop" },
+  { name: "European Blockchain Convention", city: "Barcelona", date: "2025-10-15T09:00:00.000Z", eventType: "Conference", description: "...", imageUrl: "https://images.unsplash.com/photo-1550528913-5a1be7b6cfad?w=800&h=400&fit=crop" },
+  { name: "Blockchain Life 2025", city: "Dubai", date: "2025-10-28T10:00:00.000Z", eventType: "Forum", description: "...", imageUrl: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=400&fit=crop" },
+  { name: "London Blockchain Conference", city: "London", date: "2025-10-22T09:30:00.000Z", eventType: "Conference", description: "...", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop" },
 ];
 
-const VEHICLES = [
-  { type: 'SUV', capacity: 6, license: 'ABC123' },
-  { type: 'Luxury Van', capacity: 8, license: 'XYZ789' },
-  { type: 'Minivan', capacity: 7, license: 'DEF456' },
-  { type: 'Bus', capacity: 30, license: 'GHI789' },
-  { type: 'Sedan', capacity: 4, license: 'JKL012' }
-];
-
-const DRIVERS = [
-  { name: 'John Doe', license: 'DRV-12345', rating: 4.8 },
-  { name: 'Jane Smith', license: 'DRV-23456', rating: 4.9 },
-  { name: 'Mike Johnson', license: 'DRV-34567', rating: 4.7 },
-  { name: 'Sarah Williams', license: 'DRV-45678', rating: 4.9 },
-  { name: 'David Brown', license: 'DRV-56789', rating: 4.8 }
-];
-
-// Get coordinates for a city
 function getCityCoordinates(cityName: string) {
-  const city = CITIES.find(c => c.name === cityName) || CITIES[0];
-  return { lat: city.lat, lng: city.lng };
+  return CITIES.find(c => c.name === cityName) || CITIES[0];
 }
 
-// Add hours to a date
-function addHours(date: Date, hours: number) {
-  const newDate = new Date(date);
-  newDate.setHours(newDate.getHours() + hours);
-  return newDate;
+function getLocationData(location: Prisma.JsonValue): { lat: number; lng: number; address: string } {
+  if (typeof location !== 'object' || location === null) return { lat: 0, lng: 0, address: 'Unknown' };
+  const loc = location as any;
+  return { lat: loc.lat ?? 0, lng: loc.lng ?? 0, address: loc.address ?? 'Unknown' };
 }
 
 async function main() {
-  console.log('🌱 Starting database seeding...');
+  console.log('Starting full database seeding...\n');
 
-  // Create owners
-  console.log('👔 Creating owners...');
-  const owners = [];
-  const companyNames = [
-    'Elite Transport',
-    'City Rides',
-    'Premier Fleet',
-    'Metro Trans',
-    'Luxury Rides'
+  await prisma.$transaction([
+    prisma.booking.deleteMany(),
+    prisma.shuttle.deleteMany(),
+    prisma.vehicle.deleteMany(),
+    prisma.driver.deleteMany(),
+    prisma.owner.deleteMany(),
+    prisma.user.deleteMany(),
+    prisma.event.deleteMany(),
+  ]);
+
+  // 1. Events
+  for (const ev of EVENTS) {
+    const coords = getCityCoordinates(ev.city);
+    await prisma.event.create({
+      data: {
+        name: ev.name,
+        description: ev.description,
+        location: { lat: coords.lat, lng: coords.lng, address: `Convention Center, ${ev.city}` } as Prisma.JsonObject,
+        eventDate: new Date(ev.date),
+        eventType: ev.eventType,
+        imageUrl: ev.imageUrl,
+        isActive: true,
+      },
+    });
+  }
+
+  // 2. Seeker — WALLET ONLY
+  await prisma.user.create({
+    data: {
+      walletAddress: "5GdRtZ3YJ3QWjrdwMCGGpzqjUgkAm6fywYa19T45DbBX",
+      email: "seeker@demo.com",
+      username: "CryptoSeeker",
+      phoneNumber: "+995555123456",
+      role: UserRole.SEEKER,
+    },
+  });
+
+  // 3. Owners — EMAIL + PASSWORD
+  const ownerAccounts = [
+    { email: "owner.tbilisi@fleet.ge", password: "owner123", company: "Tbilisi Shuttle Co" },
+    { email: "owner.dubai@fleet.ae",   password: "owner123", company: "Dubai Crypto Rides" },
   ];
 
-  for (let i = 0; i < 5; i++) {
-    try {
-      const owner = await prisma.user.create({
+  for (const acc of ownerAccounts) {
+    const user = await prisma.user.create({
+      data: {
+        email: acc.email,
+        username: acc.company,
+        password: await bcrypt.hash(acc.password, 10),
+        role: UserRole.OWNER,
+      },
+    });
+    const owner = await prisma.owner.create({
+      data: {
+        userId: user.id,
+        companyName: acc.company,
+        licenseNumber: acc.company.includes("Dubai") ? "DXB-777" : "GEO-001",
+        isVerified: true,
+      },
+    });
+    for (let i = 1; i <= 2; i++) {
+      await prisma.vehicle.create({
         data: {
-          email: OWNER_EMAILS[i],
-          password: '$2a$10$8X5zFJQ3Jk9vXQH5X8X5XeX5XeX5XeX5XeX5XeX5XeX5XeX5XeX5Xe', // 'password123' hashed
-          role: "OWNER",
-          isNFTHolder: i % 2 === 0, // Every other owner has NFT
-          nftTokens: i % 2 === 0 ? ['0x' + Math.random().toString(16).substr(2, 40)] : [],
-          ownerProfile: {
-            create: {
-              companyName: companyNames[i],
-              licenseNumber: `OWN-${1000 + i}`,
-              isVerified: true,
-            },
-          },
+          ownerId: owner.id,
+          vehicleNumber: `${acc.company.split(' ')[0].slice(0,3).toUpperCase()}${i}`,
+          licensePlate: `${acc.company.includes("Dubai") ? "DXB" : "TB"}-${i}`,
+          vehicleType: acc.company.includes("Dubai") ? "luxury_bus" : "minibus",
+          capacity: acc.company.includes("Dubai") ? 30 : 18,
         },
-        include: { ownerProfile: true },
       });
-      owners.push(owner);
-      console.log(`   Created owner: ${owner.ownerProfile?.companyName}`);
-    } catch (error) {
-      if (error instanceof PrismaClientKnownRequestError && error.code === 'P2002') {
-        console.log(`   Owner ${OWNER_EMAILS[i]} already exists, skipping...`);
-      } else {
-        console.error('Error creating owner:', error);
-      }
     }
   }
 
-  // Create drivers
-  console.log('🚗 Creating drivers...');
-  const drivers = [];
-  
-  for (let i = 0; i < 5; i++) {
-    try {
-      const owner = owners[i % owners.length]; // Distribute drivers among owners
-      const driverData = DRIVERS[i];
-      
-      const driver = await prisma.user.create({
-        data: {
-          email: DRIVER_EMAILS[i],
-          password: '$2a$10$8X5zFJQ3Jk9vXQH5X8X5XeX5XeX5XeX5XeX5XeX5XeX5XeX5XeX5Xe',
-          role: "DRIVER",
-          isNFTHolder: i % 3 === 0, // Every 3rd driver has NFT
-          nftTokens: i % 3 === 0 ? ['0x' + Math.random().toString(16).substr(2, 40)] : [],
-          driverProfile: {
-            create: {
-              licenseNumber: driverData.license,
-              vehicleType: VEHICLES[i % VEHICLES.length].type,
-              rating: driverData.rating,
-              totalRides: 50 + (i * 10),
-              isOnline: true,
-              isVerified: true,
-              ownerId: owner.ownerProfile?.id,
-            },
-          },
-        },
-        include: { driverProfile: true },
-      });
-      drivers.push(driver);
-      console.log(`   Created driver: ${driverData.name} (${driverData.license})`);
-    } catch (error) {
-      if (error instanceof PrismaClientKnownRequestError && error.code === 'P2002') {
-        console.log(`   Driver ${DRIVER_EMAILS[i]} already exists, skipping...`);
-      } else {
-        console.error('Error creating driver:', error);
-      }
-    }
-  }
-
-  // Create vehicles for each owner
-  console.log('🚘 Creating vehicles...');
-  const vehicles = [];
-  
-  for (let i = 0; i < VEHICLES.length; i++) {
-    const vehicleData = VEHICLES[i];
-    const owner = owners[i % owners.length]; // Distribute vehicles among owners
-    
-    try {
-      const vehicle = await prisma.vehicle.create({
-        data: {
-          ownerId: owner.ownerProfile!.id,
-          vehicleNumber: `VH-${1000 + i}`,
-          vehicleType: vehicleData.type,
-          capacity: vehicleData.capacity,
-          licensePlate: vehicleData.license,
-          isActive: true,
-          mileage: 10000 + (i * 5000),
-          lastMaintenance: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // 30 days ago
-          nextMaintenance: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), // 90 days from now
-        },
-      });
-      vehicles.push(vehicle);
-      console.log(`   Created vehicle: ${vehicle.licensePlate} (${vehicle.vehicleType})`);
-    } catch (error) {
-      console.error('Error creating vehicle:', error);
-    }
-  }
-
-  // Create events
-  console.log('🎉 Creating events...');
-  const events = [];
-  
-  for (const eventData of EVENTS) {
-    const city = CITIES.find(c => c.name === eventData.city) || CITIES[0];
-    const location = getCityCoordinates(eventData.city);
-    
-    try {
-      const event = await prisma.event.create({
-        data: {
-          name: eventData.name,
-          description: eventData.description,
-          location: {
-            lat: location.lat,
-            lng: location.lng,
-            address: `123 ${eventData.eventType} St, ${eventData.city}`,
-            city: eventData.city,
-          },
-          eventDate: new Date(eventData.date),
-          eventType: eventData.eventType,
-          imageUrl: eventData.imageUrl,
-          isActive: true,
-        },
-      });
-      events.push(event);
-      console.log(`   Created event: ${event.name} (${event.eventType})`);
-    } catch (error) {
-      console.error('Error creating event:', error);
-    }
-  }
-
-  // Create shuttles for each event
-  console.log('🚌 Creating shuttles...');
-  const shuttles = [];
-  const pickupLocations = [
-    'Downtown Transit Center',
-    'Central Station',
-    'City Hall',
-    'Main Square',
-    'Convention Center'
+  // 4. Drivers — EMAIL + PASSWORD
+  const driverAccounts = [
+    { name: "Giorgi", email: "giorgi@fleet.ge", password: "driver123", license: "DRV-GEO-101" },
+    { name: "Ahmed",  email: "ahmed@fleet.ae",  password: "driver123", license: "DRV-DXB-999" },
   ];
-  
+
+  const createdDrivers: any[] = [];
+  for (const d of driverAccounts) {
+    const user = await prisma.user.create({
+      data: {
+        email: d.email,
+        username: d.name,
+        password: await bcrypt.hash(d.password, 10),
+        phoneNumber: d.name === "Giorgi" ? "+995599887766" : "+971551234567",
+        role: UserRole.DRIVER,
+      },
+    });
+    const driver = await prisma.driver.create({
+      data: {
+        userId: user.id,
+        licenseNumber: d.license,
+        isVerified: true,
+        rating: 4.9,
+        totalRides: 142,
+        earnings: 3120,
+      },
+    });
+    createdDrivers.push(driver);
+  }
+
+  // 5. Shuttles — only one per driver
+  const vehicles = await prisma.vehicle.findMany();
+  const events = await prisma.event.findMany({ select: { id: true, eventDate: true, location: true } });
+
+  let vIndex = 0;
   for (let i = 0; i < events.length; i++) {
     const event = events[i];
-    const shuttleCount = 2; // 2 shuttles per event
-    
-    for (let j = 0; j < shuttleCount; j++) {
-      try {
-        const departureTime = new Date(event.eventDate);
-        departureTime.setHours(departureTime.getHours() - 1 - j); // Stagger departure times
-        
-        const arrivalTime = new Date(departureTime);
-        arrivalTime.setHours(arrivalTime.getHours() + 2); // 2 hours after departure
-        
-        const driver = drivers[(i + j) % drivers.length];
-        const vehicle = vehicles[(i + j) % vehicles.length];
-        
-        // Create pickup and dropoff locations
-        const pickupLocation = {
-          lat: event.location.lat + (Math.random() * 0.1 - 0.05),
-          lng: event.location.lng + (Math.random() * 0.1 - 0.05),
-          address: `${pickupLocations[j % pickupLocations.length]}, ${event.location.city}`
-        };
-        
-        const dropoffLocation = {
-          lat: event.location.lat + (Math.random() * 0.02 - 0.01),
-          lng: event.location.lng + (Math.random() * 0.02 - 0.01),
-          address: event.name
-        };
-        
-        const shuttle = await prisma.shuttle.create({
-          data: {
-            eventId: event.id,
-            vehicleNumber: vehicle.vehicleNumber,
-            capacity: vehicle.capacity,
-            departureTime: departureTime,
-            arrivalTime: arrivalTime,
-            pickupLocation: {
-              lat: pickupLocation.lat,
-              lng: pickupLocation.lng,
-              address: pickupLocation.address,
-            },
-            dropoffLocation: {
-              lat: dropoffLocation.lat,
-              lng: dropoffLocation.lng,
-              address: dropoffLocation.address,
-            },
-            basePrice: 25.0 + (j * 5), // $25 for first shuttle, $30 for second, etc.
-            currency: 'USDC',
-            status: "SCHEDULED",
-            isFractionalized: j % 2 === 0, // Every other shuttle is fractionalized
-            driverId: driver.driverProfile?.id,
-          },
-        });
-        
-        shuttles.push(shuttle);
-        console.log(`   Created shuttle from ${pickupLocation.address} to ${event.name}`);
-      } catch (error) {
-        console.error('Error creating shuttle:', error);
-      }
-    }
+    const vehicle = vehicles[vIndex++ % vehicles.length];
+    const loc = getLocationData(event.location);
+
+    await prisma.shuttle.create({
+      data: {
+        eventId: event.id,
+        vehicleId: vehicle.id,
+        driverId: i < createdDrivers.length ? createdDrivers[i].id : null,
+        departureTime: event.eventDate,
+        arrivalTime: new Date(event.eventDate.getTime() + 2.5 * 3600000),
+        pickupLocation: { lat: loc.lat, lng: loc.lng, address: loc.address } as Prisma.JsonObject,
+        dropoffLocation: { lat: loc.lat + 0.08, lng: loc.lng + 0.08, address: "Airport Drop-off" } as Prisma.JsonObject,
+        basePriceUsdc: i < 3 ? 25 : 45,
+        status: "SCHEDULED",
+        isFractionalized: i % 2 === 0,
+      },
+    });
   }
 
-  console.log('✅ Database seeded successfully!');
+  // FINAL LOGIN INFO
+  console.log('\nSEEDING COMPLETED!');
+  console.log('LOGIN CREDENTIALS:');
+  console.log('─────────────────────────────');
+  console.log('Seeker (Wallet):');
+  console.log('   Wallet: 5GdRtZ3YJ3QWjrdwMCGGpzqjUgkAm6fywYa19T45DbBX');
+  console.log('\nOwners (Email/Password):');
+  console.log('   owner.tbilisi@fleet.ge  →  owner123');
+  console.log('   owner.dubai@fleet.ae    →  owner123');
+  console.log('\nDrivers (Email/Password):');
+  console.log('   giorgi@fleet.ge   →  driver123');
+  console.log('   ahmed@fleet.ae    →  driver123');
+  console.log('─────────────────────────────\n');
 }
 
 main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error('Error seeding database:', e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+  .catch(e => { console.error(e); process.exit(1); })
+  .finally(async () => await prisma.$disconnect());

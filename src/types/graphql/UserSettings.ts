@@ -2,13 +2,13 @@ import { ObjectType, Field, InputType } from "type-graphql";
 
 @ObjectType()
 export class NotificationSettings {
-  @Field({ defaultValue: true })
+  @Field({ nullable: true, defaultValue: true })
   rideUpdates!: boolean;
 
-  @Field({ defaultValue: true })
+  @Field({ nullable: true, defaultValue: true })
   promotions!: boolean;
 
-  @Field({ defaultValue: true })
+  @Field({ nullable: true, defaultValue: true })
   rewards!: boolean;
 
   @Field({ nullable: true, defaultValue: true })
@@ -32,10 +32,10 @@ export class UpdateNotificationSettingsInput {
 
 @ObjectType()
 export class LocationSettings {
-  @Field({ defaultValue: true })
+  @Field({ nullable: true, defaultValue: true })
   shareLocation!: boolean;
 
-  @Field({ defaultValue: "high" })
+  @Field({ nullable: true, defaultValue: "high" })
   accuracy!: string;
 
   @Field({ nullable: true })
@@ -53,4 +53,3 @@ export class UpdateLocationSettingsInput {
   @Field({ nullable: true })
   backgroundUpdates?: boolean;
 }
-

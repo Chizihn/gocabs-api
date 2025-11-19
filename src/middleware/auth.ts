@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { prisma } from "../config/database";
 import { logger } from "../utils/logger";
 import { NFTVerificationService } from "../services/blockchain/NFTVerificationService";
+import { UserRole } from "@prisma/client";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 
@@ -25,6 +26,7 @@ export const authMiddleware = async (
     }
 
     const token = authHeader.replace("Bearer ", "");
+    logger.info("Token: ", token);
     const decoded = jwt.verify(token, JWT_SECRET) as JWTPayload;
 
     const user = await prisma.user.findUnique({
@@ -44,13 +46,17 @@ export const authMiddleware = async (
     let isNFTHolder = false;
     if (user.walletAddress) {
       try {
+        logger.info("Checking NFT access for wallet:", user.walletAddress);
         const access = await NFTVerificationService.hasNFTAccess(
           user.walletAddress
         );
         isNFTHolder = access.hasAccess;
+        logger.info("NFT verification result:", isNFTHolder);
       } catch (verificationError) {
         logger.warn("NFT verification failed:", verificationError);
       }
+    } else {
+      logger.info("No wallet address found for user, skipping NFT verification");
     }
 
     (req as any).user = {
@@ -67,9 +73,10 @@ export const authMiddleware = async (
 
 export const generateToken = (
   userId: string,
-  walletAddress: string
+  role: UserRole,
+  identifier?: string,
 ): string => {
-  return jwt.sign({ userId, walletAddress }, JWT_SECRET, {
+  return jwt.sign({ userId, role, identifier }, JWT_SECRET, {
     expiresIn: "7d",
   });
 };

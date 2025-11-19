@@ -10,17 +10,17 @@ export class Owner {
   @Field(() => String, { nullable: true })
   licenseNumber?: string | null;
 
-  @Field()
-  isVerified!: boolean;
+  @Field(() => Boolean, { nullable: true })
+  isVerified?: boolean;
 
-  @Field(() => GraphQLDecimal)
-  totalRevenue!: Decimal;
+  @Field(() => GraphQLDecimal, { nullable: true })
+  totalRevenue?: Decimal;
 
-  @Field()
-  createdAt!: Date;
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date;
 
-  @Field()
-  updatedAt!: Date;
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date;
 }
 
 @InputType()

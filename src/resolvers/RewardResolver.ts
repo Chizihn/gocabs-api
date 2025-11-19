@@ -5,7 +5,7 @@ import {
   UserRewardsSummary,
   RedemptionResponse,
 } from "../types/graphql/Reward";
-import { Context } from "../types/Context";
+import { type Context } from "../types/Context";
 import { prisma } from "../config/database";
 
 @Resolver()
@@ -34,4 +34,3 @@ export class RewardResolver {
     return RewardCalculationService.redeemRewards(ctx.userId!, xpAmount) as any;
   }
 }
-

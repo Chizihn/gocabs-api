@@ -8,6 +8,7 @@ import {
   FieldResolver,
   Root,
   Int,
+  UseMiddleware,
 } from "type-graphql";
 import {
   Booking,
@@ -19,10 +20,12 @@ import type { Context } from "../types/Context";
 import { prisma } from "../config/database";
 import { BookingService } from "../services/booking/BookingService";
 import { BookingStatus } from "@prisma/client";
+import { NFTGate } from "../middleware/nftGate";
 
 @Resolver(() => Booking)
 export class BookingResolver {
   @Authorized("NFT_HOLDER")
+  @UseMiddleware(NFTGate)
   @Mutation(() => BookingResponse)
   async createBooking(
     @Arg("input") input: CreateBookingInput,
@@ -53,6 +56,7 @@ export class BookingResolver {
   }
 
   @Authorized()
+  @UseMiddleware(NFTGate)
   @Query(() => [Booking])
   async myBookings(@Ctx() ctx: Context): Promise<Booking[]> {
     const bookings = await prisma.booking.findMany({
@@ -93,7 +97,7 @@ export class BookingResolver {
     @Arg("bookingId") bookingId: string,
     @Arg("rating", () => Int) rating: number,
     @Ctx() ctx: Context,
-    @Arg("review", { nullable: true }) review?: string,
+    @Arg("review", { nullable: true }) review?: string
   ): Promise<boolean> {
     if (rating < 1 || rating > 5) {
       throw new Error("Rating must be between 1 and 5");
@@ -159,18 +163,18 @@ export class BookingResolver {
 
   @Authorized()
   @Query(() => [Booking])
-  async getShuttleBookings(@Arg("shuttleId") shuttleId: string) {
+  async getShuttleBookings(@Arg("shuttleId" ) shuttleId: string) {
     return prisma.booking.findMany({
       where: { shuttleId },
-      include: { 
+      include: {
         user: {
           select: {
             id: true,
             username: true,
             email: true,
-            phoneNumber: true
-          }
-        }
+            phoneNumber: true,
+          },
+        },
       },
     });
   }
@@ -179,7 +183,7 @@ export class BookingResolver {
   async shuttle(@Root() booking: Booking) {
     return prisma.shuttle.findUnique({
       where: { id: booking.shuttleId },
-      include: { 
+      include: {
         event: true,
         driver: {
           include: {
@@ -187,11 +191,11 @@ export class BookingResolver {
               select: {
                 id: true,
                 username: true,
-                phoneNumber: true
-              }
-            }
-          }
-        }
+                phoneNumber: true,
+              },
+            },
+          },
+        },
       },
     });
   }
@@ -209,6 +213,6 @@ export class BookingResolver {
     const reward = await prisma.reward.findUnique({
       where: { bookingId: booking.id },
     });
-    return reward?.claimed ? 'CLAIMED' : reward ? 'AVAILABLE' : 'NONE';
+    return reward?.claimed ? "CLAIMED" : reward ? "AVAILABLE" : "NONE";
   }
 }
