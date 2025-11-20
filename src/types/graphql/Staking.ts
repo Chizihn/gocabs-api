@@ -10,6 +10,7 @@ import { StakeType, StakingTier } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime/library";
 import { GraphQLDecimal } from "./scalers/Decimal";
 import { Payout } from "./Payout";
+import { PaginatedResponse } from "./responses";
 
 registerEnumType(StakeType, {
   name: "StakeType",
@@ -141,3 +142,6 @@ export class UnstakeNFTInput {
   @Field()
   tokenMint!: string;
 }
+
+@ObjectType()
+export class PaginatedStakedNFTsResponse extends PaginatedResponse(StakedNFT) {}

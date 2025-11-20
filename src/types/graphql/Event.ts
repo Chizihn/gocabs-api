@@ -7,6 +7,7 @@ import {
   GraphQLISODateTime,
 } from "type-graphql";
 import { Shuttle } from "./Shuttle";
+import { PaginatedResponse } from "./responses";
 
 @ObjectType()
 export class Event {
@@ -88,3 +89,6 @@ export class UpdateEventInput {
   @Field(() => Boolean, { nullable: true })
   isActive?: boolean;
 }
+
+@ObjectType()
+export class PaginatedEventsResponse extends PaginatedResponse(Event) {}

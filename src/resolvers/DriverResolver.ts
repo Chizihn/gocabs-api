@@ -12,9 +12,11 @@ import {
   Float,
 } from "type-graphql";
 import { prisma } from "../config/database";
-import { ShuttleStatus, } from "@prisma/client";
+import { BaseResponse } from "../types/graphql/responses";
+import { ShuttleStatus } from "@prisma/client";
 import { Context } from "../types/Context";
 import { Location } from "../types/graphql/Location";
+import { GraphQLError } from "graphql";
 
 // ====================== DRIVER STATS RESPONSE ======================
 @ObjectType()
@@ -181,7 +183,7 @@ export class DriverResolver {
       }),
     ]);
 
-    const driverCommission = 0.10; // 10%
+    const driverCommission = 0.1; // 10%
 
     const todayEarnings = todayBookings.reduce(
       (sum, b) => sum + Number(b.totalPriceUsdc) * driverCommission,
@@ -237,10 +239,16 @@ export class DriverResolver {
   async myAssignedRides(@Ctx() ctx: Context): Promise<RideAssignment[]> {
     const driver = await this.getDriver(ctx);
 
-    const shuttles =  await prisma.shuttle.findMany({
+    const shuttles = await prisma.shuttle.findMany({
       where: {
         driverId: driver.id,
-        status: { in: [ShuttleStatus.SCHEDULED, ShuttleStatus.BOARDING, ShuttleStatus.IN_TRANSIT] },
+        status: {
+          in: [
+            ShuttleStatus.SCHEDULED,
+            ShuttleStatus.BOARDING,
+            ShuttleStatus.IN_TRANSIT,
+          ],
+        },
         departureTime: { gte: new Date() },
       },
       include: {
@@ -249,7 +257,12 @@ export class DriverResolver {
           where: { status: "CONFIRMED" },
           include: {
             user: {
-              select: { id: true, username: true, phoneNumber: true, email: true },
+              select: {
+                id: true,
+                username: true,
+                phoneNumber: true,
+                email: true,
+              },
             },
           },
         },
@@ -286,84 +299,103 @@ export class DriverResolver {
 
   // ====================== GO ONLINE / OFFLINE ======================
   @Authorized("DRIVER")
-  @Mutation(() => Boolean)
+  @Mutation(() => BaseResponse)
   async setDriverOnline(
     @Ctx() ctx: Context,
     @Arg("isOnline", () => Boolean) isOnline: boolean
-  ): Promise<boolean> {
-    const driver = await this.getDriver(ctx);
-    await prisma.driver.update({
-      where: { id: driver.id },
-      data: { isOnline },
-    });
-    return true;
+  ): Promise<BaseResponse> {
+    try {
+      const driver = await this.getDriver(ctx);
+      await prisma.driver.update({
+        where: { id: driver.id },
+        data: { isOnline },
+      });
+      return {
+        success: true,
+        message: `You are now ${isOnline ? "online" : "offline"}.`,
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        message: error.message || "Failed to update status.",
+      };
+    }
   }
 
   // ====================== UPDATE SHUTTLE STATUS ======================
   @Authorized("DRIVER")
-  @Mutation(() => Boolean)
+  @Mutation(() => BaseResponse)
   async updateAssignedShuttleStatus(
     @Ctx() ctx: Context,
     @Arg("shuttleId") shuttleId: string,
     @Arg("status", () => ShuttleStatus) status: ShuttleStatus
-  ): Promise<boolean> {
-    const driver = await this.getDriver(ctx);
+  ): Promise<BaseResponse> {
+    try {
+      const driver = await this.getDriver(ctx);
+      const { count } = await prisma.shuttle.updateMany({
+        where: { id: shuttleId, driverId: driver.id },
+        data: { status },
+      });
 
-    const updated = await prisma.shuttle.updateMany({
-      where: {
-        id: shuttleId,
-        driverId: driver.id,
-      },
-      data: { status },
-    });
-
-    if (updated.count === 0) {
-      throw new Error("Shuttle not found or not assigned to you");
+      if (count === 0) {
+        return {
+          success: false,
+          message: "Shuttle not found or not assigned to you.",
+        };
+      }
+      return { success: true, message: `Shuttle status updated to ${status}.` };
+    } catch (error: any) {
+      return {
+        success: false,
+        message: error.message || "Failed to update shuttle status.",
+      };
     }
-
-    return true;
   }
 
   // ====================== UPDATE LIVE LOCATION ======================
   @Authorized("DRIVER")
-  @Mutation(() => Boolean)
+  @Mutation(() => BaseResponse)
   async updateAssignedShuttleLocation(
     @Ctx() ctx: Context,
     @Arg("shuttleId") shuttleId: string,
     @Arg("latitude", () => Float) latitude: number,
     @Arg("longitude", () => Float) longitude: number
-  ): Promise<boolean> {
-    const driver = await this.getDriver(ctx);
+  ): Promise<BaseResponse> {
+    try {
+      const driver = await this.getDriver(ctx);
+      const shuttle = await prisma.shuttle.findFirst({
+        where: { id: shuttleId, driverId: driver.id },
+        select: { id: true },
+      });
 
-    const shuttle = await prisma.shuttle.findFirst({
-      where: { id: shuttleId, driverId: driver.id },
-      select: { id: true },
-    });
+      if (!shuttle) {
+        return {
+          success: false,
+          message: "You are not assigned to this shuttle.",
+        };
+      }
 
-    if (!shuttle) {
-      throw new Error("You are not assigned to this shuttle");
+      const now = new Date();
+      await prisma.$transaction([
+        prisma.shuttle.update({
+          where: { id: shuttleId },
+          data: {
+            currentLat: latitude,
+            currentLng: longitude,
+            lastLocationUpdate: now,
+          },
+        }),
+        prisma.driver.update({
+          where: { id: driver.id },
+          data: { currentLat: latitude, currentLng: longitude },
+        }),
+      ]);
+      return { success: true, message: "Location updated." };
+    } catch (error: any) {
+      return {
+        success: false,
+        message: error.message || "Failed to update location.",
+      };
     }
-
-    const now = new Date();
-
-    await prisma.$transaction([
-      prisma.shuttle.update({
-        where: { id: shuttleId },
-        data: {
-          currentLat: latitude,
-          currentLng: longitude,
-          lastLocationUpdate: now,
-        },
-      }),
-      prisma.driver.update({
-        where: { id: driver.id },
-        data: {
-          currentLat: latitude,
-          currentLng: longitude,
-        },
-      }),
-    ]);
-
-    return true;
   }
 }

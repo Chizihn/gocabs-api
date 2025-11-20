@@ -5,6 +5,10 @@ import { GraphQLDecimal } from "./scalers/Decimal";
 import { Decimal } from "@prisma/client/runtime/library";
 import { Driver } from "./Driver";
 import { Owner } from "./Owner";
+import { PaginatedResponse } from "./responses";
+import { Event } from "./Event";
+import { Shuttle } from "./Shuttle";
+import { Booking } from "./Booking";
 import { Location, LocationInput } from "./Location";
 
 // NEW INPUT TYPES
@@ -317,3 +321,21 @@ export class AdminAnalytics {
   @Field(() => AnalyticsRevenue)
   revenue!: AnalyticsRevenue;
 }
+
+@ObjectType()
+export class PaginatedAdminUsersResponse extends PaginatedResponse(
+  UserWithProfiles
+) {}
+
+@ObjectType()
+export class PaginatedAdminEventsResponse extends PaginatedResponse(Event) {}
+
+@ObjectType()
+export class PaginatedAdminShuttlesResponse extends PaginatedResponse(
+  Shuttle
+) {}
+
+@ObjectType()
+export class PaginatedAdminBookingsResponse extends PaginatedResponse(
+  Booking
+) {}

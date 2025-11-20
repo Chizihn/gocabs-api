@@ -17,6 +17,7 @@ import { Booking } from "./Booking";
 import { StakedNFT } from "./Staking";
 import { Location, LocationInput } from "./Location";
 import { GraphQLDecimal } from "./scalers/Decimal"; // your custom Decimal scalar
+import { PaginatedResponse } from "./responses";
 
 registerEnumType(ShuttleStatus, {
   name: "ShuttleStatus",
@@ -166,3 +167,6 @@ export class UpdateShuttleInput {
   @Field(() => Date, { nullable: true })
   lastLocationUpdate?: Date | null;
 }
+
+@ObjectType()
+export class PaginatedShuttlesResponse extends PaginatedResponse(Shuttle) {}

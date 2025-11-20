@@ -5,6 +5,7 @@ import {
   UpdateUserProfileInput,
   RegisterInput,
   AdminUpdateUserInput,
+  PaginatedUsersResponse,
 } from "../types/graphql/User";
 import {
   NotificationSettings,
@@ -18,7 +19,12 @@ import { NFTVerificationService } from "../services/blockchain/NFTVerificationSe
 import { UserService } from "../services/user/UserService";
 import { prisma } from "../config/database";
 import { logger } from "../utils/logger";
-import { User as PrismaUser, Prisma } from "@prisma/client";
+import {
+  BaseResponse,
+  PaginationInput,
+  SortInput,
+} from "../types/graphql/responses";
+import { User as PrismaUser, Prisma, UserRole } from "@prisma/client";
 
 // Helper to transform Prisma User to GraphQL User
 const toGqlUser = (user: PrismaUser & { [key: string]: any }): User => {
@@ -36,9 +42,7 @@ const toGqlUser = (user: PrismaUser & { [key: string]: any }): User => {
 @Resolver(() => User)
 export class UserResolver {
   @Mutation(() => AuthResponse)
-  async register(
-    @Arg("input") input: RegisterInput
-  ): Promise<AuthResponse> {
+  async register(@Arg("input") input: RegisterInput): Promise<AuthResponse> {
     const { user, token, nftAccess } = await UserService.register(
       "", // walletAddress is not available in this flow
       input.email,
@@ -72,19 +76,47 @@ export class UserResolver {
   }
 
   @Authorized("ADMIN")
-  @Query(() => [User])
-  async adminUsers(): Promise<User[]> {
+  @Query(() => PaginatedUsersResponse)
+  async adminUsers(
+    @Arg("pagination") pagination: PaginationInput,
+    @Arg("sort", { nullable: true }) sort?: SortInput,
+    @Arg("role", () => UserRole, { nullable: true }) role?: UserRole
+  ): Promise<PaginatedUsersResponse> {
+    const where: Prisma.UserWhereInput = role ? { role } : {};
+    const { page, limit } = pagination;
+    const orderBy = sort
+      ? { [sort.field]: sort.order }
+      : { createdAt: "desc" as const };
+
     try {
-      const users = await prisma.user.findMany({
-        include: {
-          driver: true,
-          owner: true,
+      const [items, totalItems] = await prisma.$transaction([
+        prisma.user.findMany({
+          where,
+          take: limit,
+          skip: (page - 1) * limit,
+          orderBy,
+          include: {
+            driver: true,
+            owner: true,
+          },
+        }),
+        prisma.user.count({ where }),
+      ]);
+
+      return {
+        items: items.map(toGqlUser),
+        pagination: {
+          totalItems,
+          page,
+          limit,
+          totalPages: Math.ceil(totalItems / limit),
+          hasNextPage: page * limit < totalItems,
+          hasPreviousPage: page > 1,
         },
-      });
-      return users.map(toGqlUser);
+      };
     } catch (error) {
-      logger.error('Error fetching all users:', error);
-      throw new Error('Failed to fetch users');
+      logger.error("Error fetching all users:", error);
+      throw new Error("Failed to fetch users");
     }
   }
 
@@ -102,15 +134,13 @@ export class UserResolver {
       return user ? toGqlUser(user) : null;
     } catch (error) {
       logger.error(`Error fetching user ${id}:`, error);
-      throw new Error('Failed to fetch user');
+      throw new Error("Failed to fetch user");
     }
   }
 
   @Authorized("ADMIN")
   @Mutation(() => User)
-  async adminCreateUser(
-    @Arg("input") input: RegisterInput
-  ): Promise<User> {
+  async adminCreateUser(@Arg("input") input: RegisterInput): Promise<User> {
     try {
       const { user } = await UserService.register(
         "", // walletAddress is not part of RegisterInput for adminCreateUser
@@ -123,8 +153,8 @@ export class UserResolver {
       );
       return toGqlUser(user);
     } catch (error) {
-      logger.error('Error creating user:', error);
-      throw new Error('Failed to create user');
+      logger.error("Error creating user:", error);
+      throw new Error("Failed to create user");
     }
   }
 
@@ -149,12 +179,16 @@ export class UserResolver {
 
         const dataToUpdate: Prisma.UserUpdateInput = {};
         if (input.email !== undefined) dataToUpdate.email = input.email;
-        if (input.username !== undefined) dataToUpdate.username = input.username;
-        if (input.phoneNumber !== undefined) dataToUpdate.phoneNumber = input.phoneNumber;
+        if (input.username !== undefined)
+          dataToUpdate.username = input.username;
+        if (input.phoneNumber !== undefined)
+          dataToUpdate.phoneNumber = input.phoneNumber;
         if (input.avatar !== undefined) dataToUpdate.avatar = input.avatar;
-        if (input.fcmToken !== undefined) dataToUpdate.fcmToken = input.fcmToken;
+        if (input.fcmToken !== undefined)
+          dataToUpdate.fcmToken = input.fcmToken;
         if (input.role !== undefined) dataToUpdate.role = input.role;
-        if (input.walletAddress !== undefined) dataToUpdate.walletAddress = input.walletAddress;
+        if (input.walletAddress !== undefined)
+          dataToUpdate.walletAddress = input.walletAddress;
 
         const user = await tx.user.update({
           where: { id },
@@ -177,31 +211,36 @@ export class UserResolver {
       return toGqlUser(updatedUser);
     } catch (error) {
       logger.error(`Error updating user ${id}:`, error);
-      throw new Error('Failed to update user');
+      throw new Error("Failed to update user");
     }
   }
 
   @Authorized("ADMIN")
-  @Mutation(() => Boolean)
-  async adminDeleteUser(@Arg("id") id: string): Promise<boolean> {
+  @Mutation(() => BaseResponse)
+  async adminDeleteUser(@Arg("id") id: string): Promise<BaseResponse> {
     try {
+      // You might want to add more logic here, e.g., not allowing to delete oneself
       await prisma.user.delete({ where: { id } });
       logger.info(`User deleted: ${id}`);
-      return true;
+      return { success: true, message: "User deleted successfully." };
     } catch (error) {
       logger.error(`Error deleting user ${id}:`, error);
-      throw new Error('Failed to delete user');
+      return { success: false, message: "Failed to delete user." };
     }
   }
 
   @Authorized()
-  @Mutation(() => Boolean)
-  async logout(@Ctx() ctx: Context): Promise<boolean> {
+  @Mutation(() => BaseResponse)
+  async logout(@Ctx() ctx: Context): Promise<BaseResponse> {
     const token = ctx.req.headers.authorization?.split(" ")[1];
     if (token) {
-      return UserService.logout(token);
+      const success = await UserService.logout(token);
+      return {
+        success,
+        message: success ? "Logged out successfully." : "Logout failed.",
+      };
     }
-    return false;
+    return { success: false, message: "No token provided." };
   }
 
   @Authorized()
@@ -258,7 +297,8 @@ export class UserResolver {
     const dataToUpdate: Prisma.UserUpdateInput = {};
     if (input.email !== undefined) dataToUpdate.email = input.email;
     if (input.username !== undefined) dataToUpdate.username = input.username;
-    if (input.phoneNumber !== undefined) dataToUpdate.phoneNumber = input.phoneNumber;
+    if (input.phoneNumber !== undefined)
+      dataToUpdate.phoneNumber = input.phoneNumber;
 
     const updated = await UserService.updateProfile(ctx.userId!, dataToUpdate);
 
@@ -266,21 +306,21 @@ export class UserResolver {
   }
 
   @Authorized()
-  @Mutation(() => Boolean)
+  @Mutation(() => BaseResponse)
   async updateFCMToken(
     @Ctx() ctx: Context,
     @Arg("fcmToken") fcmToken: string
-  ): Promise<boolean> {
+  ): Promise<BaseResponse> {
     try {
       await prisma.user.update({
         where: { id: ctx.userId! },
         data: { fcmToken },
       });
       logger.info(`FCM token updated for user ${ctx.userId}`);
-      return true;
+      return { success: true, message: "FCM token updated." };
     } catch (error) {
       logger.error(`Failed to update FCM token for user ${ctx.userId}:`, error);
-      throw new Error("Failed to update FCM token");
+      return { success: false, message: "Failed to update FCM token." };
     }
   }
 
@@ -361,7 +401,9 @@ export class UserResolver {
         throw new Error("Wallet not connected");
       }
 
-      const access = await NFTVerificationService.hasNFTAccess(user.walletAddress);
+      const access = await NFTVerificationService.hasNFTAccess(
+        user.walletAddress
+      );
       return {
         hasAccess: access.hasAccess,
         tokens: [], // checkNFTAccess does not return full token list
@@ -389,13 +431,14 @@ export class UserResolver {
 
       // Invalidate cache to force a fresh check
       await NFTVerificationService.invalidateCache(user.walletAddress);
-      
+
       // Verify ownership and get the list of tokens
-      const { isHolder, nftTokens } = await NFTVerificationService.verifyNFTOwnership(user.walletAddress);
+      const { isHolder, nftTokens } =
+        await NFTVerificationService.verifyNFTOwnership(user.walletAddress);
 
       return {
         hasAccess: isHolder,
-        tokens: nftTokens.map(tokenMint => ({ tokenMint })),
+        tokens: nftTokens.map((tokenMint) => ({ tokenMint })),
       };
     } catch (error) {
       logger.error(

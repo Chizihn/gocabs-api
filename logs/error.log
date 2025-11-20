@@ -1,0 +1,37 @@
+2025-11-20 13:47:21 [error]: ❌ Redis error:
+2025-11-20 13:47:21 [error]: ❌ Redis error:
+2025-11-20 13:47:21 [error]: ❌ Redis error:
+2025-11-20 13:47:21 [error]: Max Redis reconnection attempts reached
+2025-11-20 13:47:21 [error]: Max Redis reconnection attempts reached
+2025-11-20 14:03:32 [error]: GraphQL Error: Field "updateFCMToken" of type "BaseResponse!" must have a selection of subfields. Did you mean "updateFCMToken { ... }"?
+2025-11-20 14:10:04 [error]: GraphQL Error: Unknown argument "limit" on field "Query.myNotifications".
+2025-11-20 14:10:04 [error]: GraphQL Error: Unknown argument "offset" on field "Query.myNotifications".
+2025-11-20 14:10:04 [error]: GraphQL Error: Cannot query field "id" on type "PaginatedNotificationsResponse".
+2025-11-20 14:10:04 [error]: GraphQL Error: Cannot query field "title" on type "PaginatedNotificationsResponse".
+2025-11-20 14:10:04 [error]: GraphQL Error: Cannot query field "body" on type "PaginatedNotificationsResponse".
+2025-11-20 14:10:04 [error]: GraphQL Error: Cannot query field "type" on type "PaginatedNotificationsResponse".
+2025-11-20 14:10:04 [error]: GraphQL Error: Cannot query field "data" on type "PaginatedNotificationsResponse".
+2025-11-20 14:10:04 [error]: GraphQL Error: Cannot query field "isRead" on type "PaginatedNotificationsResponse".
+2025-11-20 14:10:04 [error]: GraphQL Error: Cannot query field "readAt" on type "PaginatedNotificationsResponse".
+2025-11-20 14:10:04 [error]: GraphQL Error: Cannot query field "createdAt" on type "PaginatedNotificationsResponse".
+2025-11-20 14:10:04 [error]: GraphQL Error: Field "myNotifications" argument "pagination" of type "PaginationInput!" is required, but it was not provided.
+2025-11-20 14:13:01 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-20 14:43:31 [error]: GraphQL Error: Variable "$input" got invalid value { __typename: "NotificationSettings", rideUpdates: false, promotions: true, rewards: true, staking: null }; Field "__typename" is not defined by type "UpdateNotificationSettingsInput".
+2025-11-20 14:45:34 [error]: GraphQL Error: Variable "$input" got invalid value { __typename: "NotificationSettings", rideUpdates: false, promotions: true, rewards: true, staking: true }; Field "__typename" is not defined by type "UpdateNotificationSettingsInput".
+2025-11-20 14:59:55 [error]: GraphQL Error: Variable "$input" got invalid value { __typename: "LocationSettings", shareLocation: true, accuracy: "LOW", backgroundUpdates: null }; Field "__typename" is not defined by type "UpdateLocationSettingsInput".
+2025-11-20 14:59:56 [error]: GraphQL Error: Variable "$input" got invalid value { __typename: "LocationSettings", shareLocation: true, accuracy: "HIGH", backgroundUpdates: null }; Field "__typename" is not defined by type "UpdateLocationSettingsInput".
+2025-11-20 15:00:00 [error]: GraphQL Error: Variable "$input" got invalid value { __typename: "NotificationSettings", rideUpdates: true, promotions: false, rewards: true, staking: null }; Field "__typename" is not defined by type "UpdateNotificationSettingsInput".
+2025-11-20 15:07:41 [error]: Error: Invalid email or password
+    at FleetAuthResolver.loginFleetUser (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\FleetAuthResolver.ts:181:13)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-20 15:07:41 [error]: GraphQL Error: Invalid email or password
+2025-11-20 15:08:33 [error]: GraphQL Error: Field "getShuttleBookings" argument "pagination" of type "PaginationInput!" is required, but it was not provided.
+2025-11-20 15:08:45 [error]: GraphQL Error: Field "getShuttleBookings" argument "pagination" of type "PaginationInput!" is required, but it was not provided.
+2025-11-20 15:49:52 [error]: GraphQL Error: Cannot query field "items" on type "Booking".
+2025-11-20 15:49:52 [error]: GraphQL Error: Cannot query field "pagination" on type "Booking".
+2025-11-20 15:50:04 [error]: GraphQL Error: Cannot query field "items" on type "Booking".
+2025-11-20 15:50:04 [error]: GraphQL Error: Cannot query field "pagination" on type "Booking".
+2025-11-20 15:50:13 [error]: GraphQL Error: Cannot query field "items" on type "Booking".
+2025-11-20 15:50:13 [error]: GraphQL Error: Cannot query field "pagination" on type "Booking".

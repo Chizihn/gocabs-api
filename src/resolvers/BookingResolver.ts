@@ -14,13 +14,19 @@ import {
   Booking,
   BookingResponse,
   CreateBookingInput,
+  PaginatedBookingsResponse,
 } from "../types/graphql/Booking";
 import { Shuttle } from "../types/graphql/Shuttle";
 import type { Context } from "../types/Context";
 import { prisma } from "../config/database";
 import { BookingService } from "../services/booking/BookingService";
-import { BookingStatus } from "@prisma/client";
+import { BookingStatus, Prisma } from "@prisma/client";
 import { NFTGate } from "../middleware/nftGate";
+import {
+  BaseResponse,
+  PaginationInput,
+  SortInput,
+} from "../types/graphql/responses";
 
 @Resolver(() => Booking)
 export class BookingResolver {
@@ -45,27 +51,59 @@ export class BookingResolver {
     };
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => BaseResponse)
   async confirmPayment(
     @Arg("bookingId") bookingId: string,
     @Arg("signature") signature: string,
     @Arg("reference") reference: string
-  ): Promise<boolean> {
-    await BookingService.confirmPayment(bookingId, signature, reference);
-    return true;
+  ): Promise<BaseResponse> {
+    try {
+      await BookingService.confirmPayment(bookingId, signature, reference);
+      return { success: true, message: "Payment confirmed successfully." };
+    } catch (error: any) {
+      return {
+        success: false,
+        message: error.message || "Payment confirmation failed.",
+      };
+    }
   }
 
   @Authorized()
   @UseMiddleware(NFTGate)
-  @Query(() => [Booking])
-  async myBookings(@Ctx() ctx: Context): Promise<Booking[]> {
-    const bookings = await prisma.booking.findMany({
-      where: { userId: ctx.userId! },
-      include: { shuttle: { include: { event: true } } },
-      orderBy: { createdAt: "desc" },
-    });
+  @Query(() => PaginatedBookingsResponse)
+  async myBookings(
+    @Ctx() ctx: Context,
+    @Arg("pagination") pagination: PaginationInput,
+    @Arg("sort", { nullable: true }) sort?: SortInput
+  ): Promise<PaginatedBookingsResponse> {
+    const where = { userId: ctx.userId! };
+    const { page, limit } = pagination;
+    const orderBy = sort
+      ? { [sort.field]: sort.order }
+      : { createdAt: "desc" as const };
 
-    return bookings as any;
+    const [items, totalItems] = await prisma.$transaction([
+      prisma.booking.findMany({
+        where,
+        take: limit,
+        skip: (page - 1) * limit,
+        orderBy,
+        include: { shuttle: { include: { event: true } } },
+      }),
+      prisma.booking.count({ where }),
+    ]);
+
+    return {
+      items: items as any,
+      pagination: {
+        totalItems,
+        page,
+        limit,
+        totalPages: Math.ceil(totalItems / limit),
+        hasNextPage: page * limit < totalItems,
+        hasPreviousPage: page > 1,
+      },
+    };
   }
 
   @Authorized()
@@ -83,56 +121,81 @@ export class BookingResolver {
   }
 
   @Authorized()
-  @Mutation(() => Boolean)
+  @Mutation(() => BaseResponse)
   async cancelBooking(
     @Arg("bookingId") bookingId: string,
     @Ctx() ctx: Context
-  ): Promise<boolean> {
-    return BookingService.cancelBooking(bookingId, ctx.userId!);
+  ): Promise<BaseResponse> {
+    try {
+      const success = await BookingService.cancelBooking(
+        bookingId,
+        ctx.userId!
+      );
+      if (success) {
+        return { success: true, message: "Booking cancelled successfully." };
+      }
+      return {
+        success: false,
+        message:
+          "Failed to cancel booking. It may not exist or is not eligible for cancellation.",
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        message:
+          error.message || "An unexpected error occurred during cancellation.",
+      };
+    }
   }
 
   @Authorized()
-  @Mutation(() => Boolean)
+  @Mutation(() => BaseResponse)
   async rateBooking(
     @Arg("bookingId") bookingId: string,
     @Arg("rating", () => Int) rating: number,
     @Ctx() ctx: Context,
     @Arg("review", { nullable: true }) review?: string
-  ): Promise<boolean> {
-    if (rating < 1 || rating > 5) {
-      throw new Error("Rating must be between 1 and 5");
+  ): Promise<BaseResponse> {
+    try {
+      if (rating < 1 || rating > 5) {
+        return { success: false, message: "Rating must be between 1 and 5." };
+      }
+
+      const booking = await prisma.booking.findFirst({
+        where: {
+          id: bookingId,
+          userId: ctx.userId!,
+          status: BookingStatus.COMPLETED,
+        },
+      });
+
+      if (!booking) {
+        return {
+          success: false,
+          message: "Completed booking not found or access denied.",
+        };
+      }
+
+      const updateData: any = { rating };
+      if (review !== undefined) {
+        updateData.review = review;
+      }
+
+      await prisma.booking.update({
+        where: { id: bookingId },
+        data: updateData,
+      });
+
+      if (booking.shuttleId) {
+        await BookingResolver.updateDriverRating(booking.shuttleId);
+      }
+      return { success: true, message: "Thank you for your feedback!" };
+    } catch (error: any) {
+      return {
+        success: false,
+        message: error.message || "Failed to submit rating.",
+      };
     }
-
-    const booking = await prisma.booking.findFirst({
-      where: {
-        id: bookingId,
-        userId: ctx.userId!,
-        status: BookingStatus.COMPLETED,
-      },
-    });
-
-    if (!booking) {
-      throw new Error("Completed booking not found or access denied");
-    }
-
-    // Create the update data object with proper typing
-    const updateData: any = { rating };
-    // Only include review in the update if it's provided
-    if (review !== undefined) {
-      updateData.review = review;
-    }
-
-    await prisma.booking.update({
-      where: { id: bookingId },
-      data: updateData,
-    });
-
-    // If there's an associated shuttle with a driver, update their rating
-    if (booking.shuttleId) {
-      await BookingResolver.updateDriverRating(booking.shuttleId);
-    }
-
-    return true;
   }
 
   private static async updateDriverRating(shuttleId: string) {
@@ -163,20 +226,48 @@ export class BookingResolver {
 
   @Authorized()
   @Query(() => [Booking])
-  async getShuttleBookings(@Arg("shuttleId" ) shuttleId: string) {
-    return prisma.booking.findMany({
-      where: { shuttleId },
-      include: {
-        user: {
-          select: {
-            id: true,
-            username: true,
-            email: true,
-            phoneNumber: true,
+  async getShuttleBookings(
+    @Arg("shuttleId") shuttleId: string,
+    @Arg("pagination") pagination: PaginationInput,
+    @Arg("sort", { nullable: true }) sort?: SortInput
+  ): Promise<PaginatedBookingsResponse> {
+    const where = { shuttleId };
+    const { page, limit } = pagination;
+    const orderBy = sort
+      ? { [sort.field]: sort.order }
+      : { createdAt: "desc" as const };
+
+    const [items, totalItems] = await prisma.$transaction([
+      prisma.booking.findMany({
+        where,
+        take: limit,
+        skip: (page - 1) * limit,
+        orderBy,
+        include: {
+          user: {
+            select: {
+              id: true,
+              username: true,
+              email: true,
+              phoneNumber: true,
+            },
           },
         },
+      }),
+      prisma.booking.count({ where }),
+    ]);
+
+    return {
+      items: items as any,
+      pagination: {
+        totalItems,
+        page,
+        limit,
+        totalPages: Math.ceil(totalItems / limit),
+        hasNextPage: page * limit < totalItems,
+        hasPreviousPage: page > 1,
       },
-    });
+    };
   }
 
   @FieldResolver(() => Shuttle)

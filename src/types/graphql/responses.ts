@@ -1,4 +1,4 @@
-import { Field, ObjectType } from "type-graphql";
+import { Field, ObjectType, Int, InputType, ClassType } from "type-graphql";
 
 @ObjectType()
 export class BaseResponse {
@@ -10,25 +10,60 @@ export class BaseResponse {
 }
 
 @ObjectType()
-export class PaginationInfo {
-  @Field()
-  total: number;
+export class PaginationMeta {
+  @Field(() => Int)
+  totalItems!: number;
+
+  @Field(() => Int)
+  page!: number;
+
+  @Field(() => Int)
+  limit!: number;
+
+  @Field(() => Int)
+  totalPages!: number;
 
   @Field()
-  page: number;
+  hasNextPage: boolean;
 
   @Field()
-  pageSize: number;
-
-  @Field()
-  totalPages: number;
+  hasPreviousPage: boolean;
 }
 
-@ObjectType()
-export class PaginatedResponse<T> extends BaseResponse {
-  @Field(() => PaginationInfo)
-  pagination: PaginationInfo;
+export function PaginatedResponse<TItem extends object>(
+  TItemClass: ClassType<TItem>
+) {
+  @ObjectType()
+  abstract class PaginatedResponseClass {
+    @Field(() => [TItemClass])
+    items: TItem[];
 
-  @Field(() => [Object])
-  items: T[];
+    @Field(() => PaginationMeta)
+    pagination: PaginationMeta;
+  }
+  return PaginatedResponseClass;
+}
+
+@InputType()
+export class SortInput {
+  @Field({ defaultValue: "createdAt" })
+  field: string;
+
+  @Field(() => String, { defaultValue: "desc" })
+  order: "asc" | "desc";
+}
+
+@InputType()
+export class PaginationInput {
+  @Field(() => Int, {
+    defaultValue: 1,
+    description: "Page number, starting from 1",
+  })
+  page: number;
+
+  @Field(() => Int, {
+    defaultValue: 10,
+    description: "Number of items per page",
+  })
+  limit: number;
 }

@@ -6,8 +6,11 @@ import {
   Ctx,
   Authorized,
   Int,
+  ObjectType,
+  Field,
 } from "type-graphql";
 import { Context } from "../types/Context";
+import { BaseResponse } from "../types/graphql/responses";
 import { prisma } from "../config/database";
 import {
   Vehicle,
@@ -23,9 +26,17 @@ import {
 } from "../types/graphql/Shuttle";
 import { Driver } from "../types/graphql/Driver";
 import { Owner } from "../types/graphql/Owner";
+import { GraphQLError } from "graphql";
 import { FleetOverview } from "../types/graphql/Fleet";
 
+@ObjectType()
+class RevenueDataPoint {
+  @Field()
+  day: string;
 
+  @Field()
+  revenue: number;
+}
 
 @Resolver(() => Owner)
 export class OwnerResolver {
@@ -160,23 +171,23 @@ export class OwnerResolver {
     }
 
     return {
-        success: true,
-        vehicle: {
-          id: vehicle.id,
-          ownerId: vehicle.ownerId,
-          vehicleNumber: vehicle.vehicleNumber,
-          licensePlate: vehicle.licensePlate,
-          vehicleType: vehicle.vehicleType || 'minibus',
-          capacity: vehicle.capacity,
-          mileage: vehicle.mileage,          
-          lastMaintenance: vehicle.lastMaintenance,
-          nextMaintenance: vehicle.nextMaintenance,
-          owner: vehicle.owner,
-          shuttles: (vehicle.shuttles || []) as any,
-          createdAt: vehicle.createdAt,
-          updatedAt: vehicle.updatedAt,
-        },
-      };
+      success: true,
+      vehicle: {
+        id: vehicle.id,
+        ownerId: vehicle.ownerId,
+        vehicleNumber: vehicle.vehicleNumber,
+        licensePlate: vehicle.licensePlate,
+        vehicleType: vehicle.vehicleType || "minibus",
+        capacity: vehicle.capacity,
+        mileage: vehicle.mileage,
+        lastMaintenance: vehicle.lastMaintenance,
+        nextMaintenance: vehicle.nextMaintenance,
+        owner: vehicle.owner,
+        shuttles: (vehicle.shuttles || []) as any,
+        createdAt: vehicle.createdAt,
+        updatedAt: vehicle.updatedAt,
+      },
+    };
   }
 
   // ====================== 3. CREATE VEHICLE ======================
@@ -233,7 +244,10 @@ export class OwnerResolver {
     });
 
     if (!vehicle) {
-      return { success: false, message: "Vehicle not found or not owned by you" };
+      return {
+        success: false,
+        message: "Vehicle not found or not owned by you",
+      };
     }
 
     try {
@@ -247,6 +261,47 @@ export class OwnerResolver {
     } catch (error: any) {
       return { success: false, message: error.message };
     }
+  }
+
+  // ====================== 4b. DELETE VEHICLE ======================
+  @Authorized("OWNER")
+  @Mutation(() => BaseResponse)
+  async deleteVehicle(
+    @Arg("vehicleId") vehicleId: string,
+    @Ctx() { userId }: Context
+  ): Promise<BaseResponse> {
+    const owner = await prisma.owner.findUnique({
+      where: { userId: userId! },
+    });
+
+    if (!owner) {
+      throw new GraphQLError("Owner profile not found");
+    }
+
+    const vehicle = await prisma.vehicle.findFirst({
+      where: { id: vehicleId, ownerId: owner.id },
+      include: { shuttles: { where: { status: { not: "COMPLETED" } } } },
+    });
+
+    if (!vehicle) {
+      return {
+        success: false,
+        message: "Vehicle not found or not owned by you.",
+      };
+    }
+
+    if (vehicle.shuttles.length > 0) {
+      return {
+        success: false,
+        message: "Cannot delete a vehicle with active or scheduled shuttles.",
+      };
+    }
+
+    await prisma.vehicle.delete({
+      where: { id: vehicleId },
+    });
+
+    return { success: true, message: "Vehicle deleted successfully." };
   }
 
   // ====================== 5. CREATE SHUTTLE ======================
@@ -293,33 +348,46 @@ export class OwnerResolver {
 
   // ====================== 6. ASSIGN DRIVER TO SHUTTLE ======================
   @Authorized("OWNER")
-  @Mutation(() => Boolean)
+  @Mutation(() => BaseResponse)
   async assignDriverToShuttle(
     @Arg("shuttleId") shuttleId: string,
     @Arg("driverId") driverId: string,
     @Ctx() { userId }: Context
-  ): Promise<boolean> {
-    const owner = await prisma.owner.findUnique({
-      where: { userId: userId! },
-    });
+  ): Promise<BaseResponse> {
+    try {
+      const owner = await prisma.owner.findUnique({
+        where: { userId: userId! },
+      });
 
-    if (!owner) throw new Error("Owner not found");
+      if (!owner) throw new GraphQLError("Owner profile not found");
 
-    const shuttle = await prisma.shuttle.findUnique({
-      where: { id: shuttleId },
-      include: { vehicle: { select: { ownerId: true } } },
-    });
+      const shuttle = await prisma.shuttle.findUnique({
+        where: { id: shuttleId },
+        include: { vehicle: { select: { ownerId: true } } },
+      });
 
-    if (!shuttle || shuttle.vehicle.ownerId !== owner.id) {
-      throw new Error("Shuttle not found or not owned by you");
+      if (!shuttle || shuttle.vehicle.ownerId !== owner.id) {
+        return {
+          success: false,
+          message: "Shuttle not found or not owned by you.",
+        };
+      }
+
+      await prisma.shuttle.update({
+        where: { id: shuttleId },
+        data: { driverId },
+      });
+
+      return {
+        success: true,
+        message: "Driver assigned to shuttle successfully.",
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        message: error.message || "Failed to assign driver.",
+      };
     }
-
-    await prisma.shuttle.update({
-      where: { id: shuttleId },
-      data: { driverId },
-    });
-
-    return true;
   }
 
   // ====================== 7. MY DRIVERS (EVER DRIVEN FOR ME) ======================
@@ -358,7 +426,6 @@ export class OwnerResolver {
     return drivers as unknown as Driver[];
   }
 
-  
   // ====================== 8. AVAILABLE DRIVERS ======================
   @Authorized("OWNER")
   @Query(() => [Driver])
@@ -378,5 +445,58 @@ export class OwnerResolver {
     });
 
     return drivers as unknown as Driver[];
+  }
+
+  // ====================== 9. GET WEEKLY REVENUE ======================
+  @Authorized("OWNER")
+  @Query(() => [RevenueDataPoint])
+  async getWeeklyRevenue(
+    @Ctx() { userId }: Context
+  ): Promise<RevenueDataPoint[]> {
+    const owner = await prisma.owner.findUnique({
+      where: { userId: userId! },
+    });
+
+    if (!owner) {
+      throw new GraphQLError("Owner profile not found");
+    }
+
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    sevenDaysAgo.setHours(0, 0, 0, 0);
+
+    const bookings = await prisma.booking.findMany({
+      where: {
+        paymentStatus: "COMPLETED",
+        createdAt: { gte: sevenDaysAgo },
+        shuttle: {
+          vehicle: {
+            ownerId: owner.id,
+          },
+        },
+      },
+      select: {
+        createdAt: true,
+        totalPriceUsdc: true,
+      },
+    });
+
+    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const dailyRevenue = new Map<string, number>();
+
+    // Initialize the map for the last 7 days to ensure all days are present
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      dailyRevenue.set(daysOfWeek[d.getDay()]!, 0);
+    }
+
+    bookings.forEach((booking) => {
+      const day = daysOfWeek[booking.createdAt.getDay()]!;
+      const currentRevenue = dailyRevenue.get(day)!;
+      dailyRevenue.set(day, currentRevenue + Number(booking.totalPriceUsdc));
+    });
+
+    return Array.from(dailyRevenue, ([day, revenue]) => ({ day, revenue }));
   }
 }

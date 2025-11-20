@@ -5,8 +5,15 @@ import {
   StakeNFTInput,
   RevenueShareInfo,
   FractionalRevenueInfo,
+  PaginatedStakedNFTsResponse,
 } from "../types/graphql/Staking";
 import { type Context } from "../types/Context";
+import {
+  BaseResponse,
+  PaginationInput,
+  SortInput,
+} from "../types/graphql/responses";
+import { GraphQLError } from "graphql";
 
 @Resolver()
 export class StakingResolver {
@@ -16,30 +23,43 @@ export class StakingResolver {
     @Arg("input") input: StakeNFTInput,
     @Ctx() ctx: Context
   ): Promise<StakedNFT> {
-    return StakingService.stakeNFT(
-      ctx.userId!,
-      input.tokenMint,
-      input.stakeType,
-      input.tier,
-      input.shuttleId
-    ) as unknown as StakedNFT;
+    try {
+      const stake = await StakingService.stakeNFT(
+        ctx.userId!,
+        input.tokenMint,
+        input.stakeType,
+        input.tier,
+        input.shuttleId
+      );
+      return stake as any;
+    } catch (error: any) {
+      throw new GraphQLError(error.message || "Failed to stake NFT.");
+    }
   }
 
   @Authorized("NFT_HOLDER")
-  @Mutation(() => Boolean)
+  @Mutation(() => BaseResponse)
   async unstakeNFT(
     @Arg("tokenMint") tokenMint: string,
     @Ctx() ctx: Context
-  ): Promise<boolean> {
+  ): Promise<BaseResponse> {
     return StakingService.unstakeNFT(ctx.userId!, tokenMint);
   }
 
   @Authorized("NFT_HOLDER")
-  @Query(() => [StakedNFT])
-  async myStakedNFTs(@Ctx() ctx: Context): Promise<StakedNFT[]> {
-    return StakingService.getUserStakedNFTs(
-      ctx.userId!
-    ) as unknown as StakedNFT[];
+  @Query(() => PaginatedStakedNFTsResponse)
+  async myStakedNFTs(
+    @Ctx() ctx: Context,
+    @Arg("pagination") pagination: PaginationInput,
+    @Arg("sort", { nullable: true }) sort?: SortInput
+  ): Promise<PaginatedStakedNFTsResponse> {
+    const result = await StakingService.getUserStakedNFTs(
+      ctx.userId!,
+      pagination,
+      sort
+    );
+    // The 'as any' is a temporary workaround for a known TypeGraphQL/Prisma typing complexity.
+    return result as any;
   }
 
   @Authorized("ADMIN")

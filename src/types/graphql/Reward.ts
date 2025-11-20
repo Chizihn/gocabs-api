@@ -3,6 +3,7 @@ import { Decimal } from "@prisma/client/runtime/library";
 import { Booking } from "./Booking";
 import { User } from "./User";
 import { GraphQLDecimal } from "./scalers/Decimal";
+import { PaginatedResponse } from "./responses";
 
 @ObjectType()
 export class Reward {
@@ -66,3 +67,6 @@ export class RedemptionResponse {
   @Field()
   timestamp!: Date;
 }
+
+@ObjectType()
+export class PaginatedRewardsResponse extends PaginatedResponse(Reward) {}

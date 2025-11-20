@@ -7,6 +7,7 @@ import {
 } from "type-graphql";
 import { NotificationType } from "@prisma/client";
 import { GraphQLJSONObject } from "graphql-scalars";
+import { PaginatedResponse } from "./responses";
 
 registerEnumType(NotificationType, {
   name: "NotificationType",
@@ -47,3 +48,8 @@ export class MarkNotificationReadInput {
   @Field()
   notificationId!: string;
 }
+
+@ObjectType()
+export class PaginatedNotificationsResponse extends PaginatedResponse(
+  Notification
+) {}

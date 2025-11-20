@@ -13,23 +13,33 @@ import {
   Shuttle,
   CreateShuttleInput,
   UpdateShuttleInput,
+  PaginatedShuttlesResponse,
 } from "../types/graphql/Shuttle";
 import { Location } from "../types/graphql/Location";
 import { prisma } from "../config/database";
 import { ShuttleStatus, Prisma } from "@prisma/client";
 import { logger } from "../utils/logger";
 import { Context } from "../types/Context";
+import {
+  BaseResponse,
+  PaginationInput,
+  SortInput,
+} from "../types/graphql/responses";
+import { GraphQLError } from "graphql";
 
 @Resolver(() => Shuttle)
 export class ShuttleResolver {
   // ====================== PUBLIC: LIST SHUTTLES ======================
-  @Query(() => [Shuttle])
+  @Query(() => PaginatedShuttlesResponse)
   async shuttles(
+    @Arg("pagination") pagination: PaginationInput,
+    @Arg("sort", { nullable: true }) sort?: SortInput,
     @Arg("eventId", { nullable: true }) eventId?: string,
-    @Arg("status", () => ShuttleStatus, { nullable: true }) status?: ShuttleStatus,
+    @Arg("status", () => ShuttleStatus, { nullable: true })
+    status?: ShuttleStatus,
     @Arg("isFractionalized", { nullable: true }) isFractionalized?: boolean,
     @Arg("departureAfter", { nullable: true }) departureAfter?: Date
-  ): Promise<Shuttle[]> {
+  ): Promise<PaginatedShuttlesResponse> {
     const where: Prisma.ShuttleWhereInput = {
       ...(eventId && { eventId }),
       ...(status && { status }),
@@ -37,20 +47,38 @@ export class ShuttleResolver {
       ...(departureAfter && { departureTime: { gte: departureAfter } }),
     };
 
-    const shuttles = await prisma.shuttle.findMany({
-      where,
-      include: {
-        event: true,
-        vehicle: true,
-        driver: { include: { user: true } },
-        bookings: true,
-        stakedNFTs: true,
-        _count: { select: { bookings: true } },
-      },
-      orderBy: { departureTime: "asc" },
-    });
+    const { page, limit } = pagination;
+    const orderBy = sort
+      ? { [sort.field]: sort.order }
+      : { departureTime: "asc" as const };
 
-    return shuttles as unknown as Shuttle[];
+    const [items, totalItems] = await prisma.$transaction([
+      prisma.shuttle.findMany({
+        where,
+        take: limit,
+        skip: (page - 1) * limit,
+        orderBy,
+        include: {
+          event: true,
+          vehicle: true,
+          driver: { include: { user: true } },
+          _count: { select: { bookings: true } },
+        },
+      }),
+      prisma.shuttle.count({ where }),
+    ]);
+
+    return {
+      items: items as any,
+      pagination: {
+        totalItems,
+        page,
+        limit,
+        totalPages: Math.ceil(totalItems / limit),
+        hasNextPage: page * limit < totalItems,
+        hasPreviousPage: page > 1,
+      },
+    };
   }
 
   // ====================== PUBLIC: GET SINGLE SHUTTLE ======================
@@ -68,7 +96,8 @@ export class ShuttleResolver {
       },
     });
 
-    return shuttle as unknown as Shuttle | null;
+    if (!shuttle) throw new GraphQLError("Shuttle not found");
+    return shuttle as any;
   }
 
   // ====================== OWNER/ADMIN: CREATE SHUTTLE ======================
@@ -79,26 +108,34 @@ export class ShuttleResolver {
     @Ctx() { userId, userRole }: Context
   ): Promise<Shuttle> {
     // Validate event exists
-    const event = await prisma.event.findUnique({ where: { id: input.eventId } });
-    if (!event) throw new Error(`Event with ID ${input.eventId} not found`);
+    const event = await prisma.event.findUnique({
+      where: { id: input.eventId },
+    });
+    if (!event)
+      throw new GraphQLError(`Event with ID ${input.eventId} not found`);
 
     // For OWNER: verify vehicle belongs to them
     if (userRole === "OWNER") {
-      const owner = await prisma.owner.findUnique({ where: { userId: userId! } });
-      if (!owner) throw new Error("Owner profile not found");
+      const owner = await prisma.owner.findUnique({
+        where: { userId: userId! },
+      });
+      if (!owner) throw new GraphQLError("Owner profile not found");
 
       const vehicle = await prisma.vehicle.findUnique({
         where: { id: input.vehicleId },
       });
       if (!vehicle || vehicle.ownerId !== owner.id) {
-        throw new Error("You can only use vehicles you own");
+        throw new GraphQLError("You can only use vehicles you own");
       }
     }
 
     // Validate driver if provided
     if (input.driverId) {
-      const driver = await prisma.driver.findUnique({ where: { id: input.driverId } });
-      if (!driver) throw new Error(`Driver with ID ${input.driverId} not found`);
+      const driver = await prisma.driver.findUnique({
+        where: { id: input.driverId },
+      });
+      if (!driver)
+        throw new GraphQLError(`Driver with ID ${input.driverId} not found`);
     }
 
     const shuttle = await prisma.shuttle.create({
@@ -122,7 +159,7 @@ export class ShuttleResolver {
       },
     });
 
-    return shuttle as unknown as Shuttle;
+    return shuttle as any;
   }
 
   // ====================== OWNER/ADMIN/DRIVER: UPDATE SHUTTLE ======================
@@ -135,32 +172,41 @@ export class ShuttleResolver {
   ): Promise<Shuttle> {
     const shuttle = await prisma.shuttle.findUnique({
       where: { id },
-      include: { vehicle: { include: { owner: { select: { userId: true } } } } },
+      include: {
+        vehicle: { include: { owner: { select: { userId: true } } } },
+      },
     });
 
-    if (!shuttle) throw new Error("Shuttle not found");
+    if (!shuttle) throw new GraphQLError("Shuttle not found");
 
     // Authorization: ADMIN can do anything
     // OWNER can update their own shuttles
     // DRIVER can only update their assigned shuttle's live location
     if (userRole !== "ADMIN") {
       if (userRole === "OWNER") {
-        const owner = await prisma.owner.findUnique({ where: { userId: userId! } });
+        const owner = await prisma.owner.findUnique({
+          where: { userId: userId! },
+        });
         if (!owner || shuttle.vehicle.owner.userId !== owner.userId) {
-          throw new Error("Not authorized to update this shuttle");
+          throw new GraphQLError("Not authorized to update this shuttle");
         }
       }
 
       if (userRole === "DRIVER") {
-        const driver = await prisma.driver.findUnique({ where: { userId: userId! } });
+        const driver = await prisma.driver.findUnique({
+          where: { userId: userId! },
+        });
         if (!driver || shuttle.driverId !== driver.id) {
-          throw new Error("You can only update location of your assigned shuttle");
+          throw new GraphQLError(
+            "You can only update location of your assigned shuttle"
+          );
         }
         // Drivers can only update live location fields
         const allowed = Object.keys(input).every((k) =>
           ["currentLat", "currentLng"].includes(k)
         );
-        if (!allowed) throw new Error("Drivers can only update live location");
+        if (!allowed)
+          throw new GraphQLError("Drivers can only update live location");
       }
     }
 
@@ -172,9 +218,11 @@ export class ShuttleResolver {
         ? { connect: { id: input.driverId } }
         : { disconnect: true };
     }
-    if (input.departureTime !== undefined) data.departureTime = input.departureTime;
+    if (input.departureTime !== undefined)
+      data.departureTime = input.departureTime;
     if (input.arrivalTime !== undefined) data.arrivalTime = input.arrivalTime;
-    if (input.basePriceUsdc !== undefined) data.basePriceUsdc = input.basePriceUsdc as any;
+    if (input.basePriceUsdc !== undefined)
+      data.basePriceUsdc = input.basePriceUsdc as any;
     if (input.status !== undefined) data.status = input.status;
     if (input.isFractionalized !== undefined)
       data.isFractionalized = input.isFractionalized;
@@ -207,90 +255,126 @@ export class ShuttleResolver {
       },
     });
 
-    return updated as unknown as Shuttle;
+    return updated as any;
   }
 
   // ====================== OWNER/ADMIN: UPDATE STATUS ======================
   @Authorized("ADMIN", "OWNER")
-  @Mutation(() => Boolean)
+  @Mutation(() => BaseResponse)
   async updateShuttleStatus(
     @Arg("id") id: string,
     @Arg("status", () => ShuttleStatus) status: ShuttleStatus,
     @Ctx() { userId, userRole }: Context
-  ): Promise<boolean> {
-    const shuttle = await prisma.shuttle.findUnique({
-      where: { id },
-      include: { vehicle: { include: { owner: true } } },
-    });
+  ): Promise<BaseResponse> {
+    try {
+      const shuttle = await prisma.shuttle.findUnique({
+        where: { id },
+        include: { vehicle: { include: { owner: true } } },
+      });
 
-    if (!shuttle) throw new Error("Shuttle not found");
-
-    if (userRole === "OWNER") {
-      const owner = await prisma.owner.findUnique({ where: { userId: userId! } });
-      if (!owner || shuttle.vehicle.ownerId !== owner.id) {
-        throw new Error("Not authorized");
+      if (!shuttle) {
+        return { success: false, message: "Shuttle not found." };
       }
+
+      if (userRole === "OWNER") {
+        const owner = await prisma.owner.findUnique({
+          where: { userId: userId! },
+        });
+        if (!owner || shuttle.vehicle.ownerId !== owner.id) {
+          return {
+            success: false,
+            message: "Not authorized to update this shuttle.",
+          };
+        }
+      }
+
+      await prisma.shuttle.update({
+        where: { id },
+        data: { status },
+      });
+
+      logger.info(`Shuttle ${id} status → ${status} by ${userRole}`);
+      return { success: true, message: `Shuttle status updated to ${status}.` };
+    } catch (error: any) {
+      logger.error(`Failed to update shuttle ${id} status:`, error);
+      return {
+        success: false,
+        message: error.message || "Failed to update shuttle status.",
+      };
     }
-
-    await prisma.shuttle.update({
-      where: { id },
-      data: { status },
-    });
-
-    logger.info(`Shuttle ${id} status → ${status} by ${userRole}`);
-    return true;
   }
 
   // ====================== DRIVER: UPDATE LIVE LOCATION ======================
   @Authorized("DRIVER")
-  @Mutation(() => Boolean)
+  @Mutation(() => BaseResponse)
   async updateShuttleLocation(
     @Arg("shuttleId") shuttleId: string,
     @Arg("latitude", () => Number) latitude: number,
     @Arg("longitude", () => Number) longitude: number,
     @Ctx() { userId }: Context
-  ): Promise<boolean> {
-    const driver = await prisma.driver.findUnique({
-      where: { userId: userId! },
-    });
+  ): Promise<BaseResponse> {
+    try {
+      const driver = await prisma.driver.findUnique({
+        where: { userId: userId! },
+      });
 
-    if (!driver) throw new Error("Driver not found");
+      if (!driver)
+        return { success: false, message: "Driver profile not found." };
 
-    const shuttle = await prisma.shuttle.findFirst({
-      where: { id: shuttleId, driverId: driver.id },
-    });
+      const shuttle = await prisma.shuttle.findFirst({
+        where: { id: shuttleId, driverId: driver.id },
+      });
 
-    if (!shuttle) throw new Error("You are not assigned to this shuttle");
+      if (!shuttle)
+        return {
+          success: false,
+          message: "You are not assigned to this shuttle.",
+        };
 
-    const now = new Date();
+      const now = new Date();
 
-    await prisma.$transaction([
-      prisma.shuttle.update({
-        where: { id: shuttleId },
-        data: {
-          currentLat: latitude,
-          currentLng: longitude,
-          lastLocationUpdate: now,
-        },
-      }),
-      prisma.driver.update({
-        where: { id: driver.id },
-        data: {
-          currentLat: latitude,
-          currentLng: longitude,
-        },
-      }),
-    ]);
+      await prisma.$transaction([
+        prisma.shuttle.update({
+          where: { id: shuttleId },
+          data: {
+            currentLat: latitude,
+            currentLng: longitude,
+            lastLocationUpdate: now,
+          },
+        }),
+        prisma.driver.update({
+          where: { id: driver.id },
+          data: { currentLat: latitude, currentLng: longitude },
+        }),
+      ]);
 
-    return true;
+      return { success: true, message: "Location updated successfully." };
+    } catch (error: any) {
+      logger.error(
+        `Failed to update location for shuttle ${shuttleId}:`,
+        error
+      );
+      return {
+        success: false,
+        message: error.message || "Failed to update location.",
+      };
+    }
   }
 
   // ====================== FIELD RESOLVERS ======================
   @FieldResolver(() => Int)
-  availableSeats(@Root() shuttle: Shuttle, @Ctx() { prisma }: Context): Promise<number> {
+  availableSeats(
+    @Root() shuttle: Shuttle,
+    @Ctx() { prisma }: Context
+  ): Promise<number> {
     // vehicle.capacity - booked seats
     return prisma.booking
-      .count({ where: { shuttleId: shuttle.id, status: { in: ["CONFIRMED", "PICKED_UP"] } } })
+      .count({
+        where: {
+          shuttleId: shuttle.id,
+          status: { in: ["CONFIRMED", "PICKED_UP"] },
+        },
+      })
       .then((booked) => shuttle.vehicle.capacity - booked);
   }
 

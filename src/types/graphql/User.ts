@@ -13,6 +13,7 @@ import { Driver } from "./Driver";
 import { Owner } from "./Owner";
 import { Notification } from "./Notification";
 import { LocationSettings, NotificationSettings } from "./UserSettings";
+import { PaginatedResponse } from "./responses";
 
 registerEnumType(UserRole, {
   name: "UserRole",
@@ -116,7 +117,7 @@ export class RegisterInput {
   @Field({ nullable: true })
   licenseNumber?: string;
 
-    @Field({ nullable: true })
+  @Field({ nullable: true })
   phoneNumber?: string;
 }
 
@@ -157,3 +158,6 @@ export class AuthResponse {
 }
 
 export { NFTVerificationResponse } from "./NFT";
+
+@ObjectType()
+export class PaginatedUsersResponse extends PaginatedResponse(User) {}

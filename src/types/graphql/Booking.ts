@@ -10,6 +10,7 @@ import {
 import { BookingStatus, PaymentStatus } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime/library";
 import { Reward } from "./Reward";
+import { PaginatedResponse } from "./responses";
 
 registerEnumType(BookingStatus, {
   name: "BookingStatus",
@@ -96,3 +97,6 @@ export class BookingResponse {
   @Field()
   reference: string;
 }
+
+@ObjectType()
+export class PaginatedBookingsResponse extends PaginatedResponse(Booking) {}
