@@ -70604,3 +70604,1443 @@ Timed out fetching a new connection from the connection pool. More info: http://
 2025-11-23 04:02:46 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
 2025-11-23 04:02:46 [info]: NFT verification result:
 2025-11-23 04:02:46 [error]: GraphQL Error: Access denied! You don't have permission for this action!
+2025-11-23 05:03:09 [info]: Firebase Admin initialized successfully
+2025-11-23 04:03:09 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 04:03:09 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 04:03:09 [info]: ✅ Redis connected
+2025-11-23 04:03:11 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 04:03:13 [info]: Token: 
+2025-11-23 04:03:13 [info]: Checking NFT access for wallet:
+2025-11-23 04:03:13 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 04:03:13 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:13 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:13 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:13 [info]: NFT verification result:
+2025-11-23 04:03:13 [info]: User 5e5ace70-b8ba-4963-998a-ef8c566d4105 redeemed 100 XP
+2025-11-23 04:03:13 [info]: Token: 
+2025-11-23 04:03:13 [info]: Token: 
+2025-11-23 04:03:13 [info]: Checking NFT access for wallet:
+2025-11-23 04:03:13 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 04:03:13 [info]: Checking NFT access for wallet:
+2025-11-23 04:03:13 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 04:03:13 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:13 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:13 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:13 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:13 [info]: NFT verification result:
+2025-11-23 04:03:13 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:13 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:13 [info]: NFT verification result:
+2025-11-23 04:03:21 [info]: Token: 
+2025-11-23 04:03:21 [info]: Checking NFT access for wallet:
+2025-11-23 04:03:21 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 04:03:21 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:21 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:21 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:21 [info]: NFT verification result:
+2025-11-23 04:03:21 [info]: Token: 
+2025-11-23 04:03:21 [info]: Checking NFT access for wallet:
+2025-11-23 04:03:21 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 04:03:21 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:21 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:21 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:03:21 [info]: NFT verification result:
+2025-11-23 04:06:48 [info]: Token: 
+2025-11-23 04:06:48 [info]: Checking NFT access for wallet:
+2025-11-23 04:06:48 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 04:06:48 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 04:06:50 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 04:06:50 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 04:06:50 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 04:06:50 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 04:06:50 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 04:06:50 [info]: NFT verification result:
+2025-11-23 04:06:50 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 04:13:46 [info]: Token: 
+2025-11-23 04:13:46 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 04:13:51 [info]: Token: 
+2025-11-23 04:13:51 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 06:26:16 [info]: Firebase Admin initialized successfully
+2025-11-23 05:26:18 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 05:26:18 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 05:26:19 [info]: ✅ Redis connected
+2025-11-23 05:26:20 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 06:27:28 [info]: Firebase Admin initialized successfully
+2025-11-23 05:27:29 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 05:27:29 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 05:27:29 [info]: ✅ Redis connected
+2025-11-23 05:27:30 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 05:28:29 [info]: Invalidated NFT caches for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:28:29 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:28:29 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 05:28:30 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 05:28:30 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 05:28:30 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 05:28:30 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 05:28:30 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:28:31 [info]: Token: 
+2025-11-23 05:28:31 [info]: Token: 
+2025-11-23 05:28:31 [info]: Checking NFT access for wallet:
+2025-11-23 05:28:31 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:28:31 [info]: Checking NFT access for wallet:
+2025-11-23 05:28:31 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:28:31 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:28:31 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:28:31 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:28:31 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:28:31 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:28:31 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:28:31 [info]: NFT verification result:
+2025-11-23 05:28:31 [info]: NFT verification result:
+2025-11-23 05:33:22 [info]: Token: 
+2025-11-23 05:33:22 [info]: Checking NFT access for wallet:
+2025-11-23 05:33:22 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:33:22 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:22 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:22 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:22 [info]: NFT verification result:
+2025-11-23 05:33:24 [info]: Token: 
+2025-11-23 05:33:24 [info]: Checking NFT access for wallet:
+2025-11-23 05:33:24 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:33:24 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:24 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:24 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:24 [info]: NFT verification result:
+2025-11-23 05:33:42 [info]: Invalidated NFT caches for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:42 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:33:42 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 05:33:43 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 05:33:43 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 05:33:43 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 05:33:43 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 05:33:43 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:44 [info]: Token: 
+2025-11-23 05:33:44 [info]: Token: 
+2025-11-23 05:33:44 [info]: Checking NFT access for wallet:
+2025-11-23 05:33:44 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:33:44 [info]: Checking NFT access for wallet:
+2025-11-23 05:33:44 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:33:44 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:44 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:44 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:44 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:44 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:44 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:44 [info]: NFT verification result:
+2025-11-23 05:33:44 [info]: NFT verification result:
+2025-11-23 05:33:46 [info]: Token: 
+2025-11-23 05:33:46 [info]: Checking NFT access for wallet:
+2025-11-23 05:33:46 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:33:46 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:46 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:46 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:33:46 [info]: NFT verification result:
+2025-11-23 05:34:13 [info]: Token: 
+2025-11-23 05:34:13 [info]: Token: 
+2025-11-23 05:34:13 [info]: Checking NFT access for wallet:
+2025-11-23 05:34:13 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:34:13 [info]: Checking NFT access for wallet:
+2025-11-23 05:34:13 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:34:13 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:34:13 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:34:13 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:34:13 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:34:13 [info]: NFT verification result:
+2025-11-23 05:34:13 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:34:13 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:34:13 [info]: NFT verification result:
+2025-11-23 05:36:07 [info]: Invalidated NFT caches for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:36:07 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:36:07 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 05:36:08 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 05:36:08 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 05:36:08 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 05:36:08 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 05:36:08 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:36:09 [info]: Token: 
+2025-11-23 05:36:09 [info]: Token: 
+2025-11-23 05:36:09 [info]: Checking NFT access for wallet:
+2025-11-23 05:36:09 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:36:09 [info]: Checking NFT access for wallet:
+2025-11-23 05:36:09 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:36:09 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:36:09 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:36:09 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:36:09 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:36:09 [info]: NFT verification result:
+2025-11-23 05:36:09 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:36:09 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:36:09 [info]: NFT verification result:
+2025-11-23 05:36:10 [info]: Token: 
+2025-11-23 05:36:10 [info]: Checking NFT access for wallet:
+2025-11-23 05:36:10 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:36:10 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:36:10 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:36:10 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:36:10 [info]: NFT verification result:
+2025-11-23 05:40:07 [info]: Token: 
+2025-11-23 05:40:07 [info]: Checking NFT access for wallet:
+2025-11-23 05:40:07 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:40:07 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:40:07 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:40:07 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:40:07 [info]: NFT verification result:
+2025-11-23 05:40:08 [info]: Token: 
+2025-11-23 05:40:08 [info]: Checking NFT access for wallet:
+2025-11-23 05:40:08 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:40:08 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:40:08 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:40:08 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:40:08 [info]: NFT verification result:
+2025-11-23 05:40:08 [info]: Token: 
+2025-11-23 05:40:08 [info]: Checking NFT access for wallet:
+2025-11-23 05:40:08 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:40:08 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:40:08 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:40:08 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:40:08 [info]: NFT verification result:
+2025-11-23 05:40:09 [info]: Token: 
+2025-11-23 05:40:09 [info]: Checking NFT access for wallet:
+2025-11-23 05:40:09 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:40:09 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:40:09 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:40:09 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:40:09 [info]: NFT verification result:
+2025-11-23 05:46:33 [info]: Token: 
+2025-11-23 05:46:33 [info]: Checking NFT access for wallet:
+2025-11-23 05:46:33 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:46:33 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 05:46:34 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 05:46:34 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 05:46:34 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 05:46:34 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 05:46:34 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:46:34 [info]: NFT verification result:
+2025-11-23 05:46:34 [info]: Token: 
+2025-11-23 05:46:34 [info]: Token: 
+2025-11-23 05:46:34 [info]: Checking NFT access for wallet:
+2025-11-23 05:46:34 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:46:34 [info]: Checking NFT access for wallet:
+2025-11-23 05:46:34 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:46:34 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:46:34 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:46:34 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:46:34 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:46:34 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:46:34 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:46:34 [info]: NFT verification result:
+2025-11-23 05:46:35 [info]: NFT verification result:
+2025-11-23 05:46:35 [info]: Token: 
+2025-11-23 05:46:35 [info]: Checking NFT access for wallet:
+2025-11-23 05:46:35 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:46:35 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:46:35 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:46:35 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:46:35 [info]: NFT verification result:
+2025-11-23 05:47:07 [info]: Invalidated NFT caches for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:07 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:47:07 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 05:47:08 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 05:47:08 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 05:47:08 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 05:47:08 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 05:47:08 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:09 [info]: Token: 
+2025-11-23 05:47:09 [info]: Checking NFT access for wallet:
+2025-11-23 05:47:09 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:47:09 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:09 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:09 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:09 [info]: NFT verification result:
+2025-11-23 05:47:09 [info]: Token: 
+2025-11-23 05:47:09 [info]: Checking NFT access for wallet:
+2025-11-23 05:47:09 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:47:09 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:09 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:09 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:09 [info]: NFT verification result:
+2025-11-23 05:47:10 [info]: Token: 
+2025-11-23 05:47:10 [info]: Checking NFT access for wallet:
+2025-11-23 05:47:10 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:47:10 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:10 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:10 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:10 [info]: NFT verification result:
+2025-11-23 05:47:41 [info]: Token: 
+2025-11-23 05:47:41 [info]: Token: 
+2025-11-23 05:47:41 [info]: Checking NFT access for wallet:
+2025-11-23 05:47:41 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:47:41 [info]: Checking NFT access for wallet:
+2025-11-23 05:47:41 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:47:41 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:41 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:41 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:41 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:41 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:41 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:41 [info]: NFT verification result:
+2025-11-23 05:47:41 [info]: NFT verification result:
+2025-11-23 05:47:58 [info]: Invalidated NFT caches for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:58 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:47:58 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 05:47:58 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 05:47:58 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 05:47:58 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 05:47:58 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 05:47:58 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:59 [info]: Token: 
+2025-11-23 05:47:59 [info]: Token: 
+2025-11-23 05:47:59 [info]: Checking NFT access for wallet:
+2025-11-23 05:47:59 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:47:59 [info]: Checking NFT access for wallet:
+2025-11-23 05:47:59 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:47:59 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:59 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:59 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:59 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:59 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:59 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:47:59 [info]: NFT verification result:
+2025-11-23 05:47:59 [info]: NFT verification result:
+2025-11-23 05:48:00 [info]: Token: 
+2025-11-23 05:48:00 [info]: Checking NFT access for wallet:
+2025-11-23 05:48:00 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:48:00 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:48:00 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:48:00 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:48:00 [info]: NFT verification result:
+2025-11-23 05:48:07 [info]: Token: 
+2025-11-23 05:48:08 [info]: Checking NFT access for wallet:
+2025-11-23 05:48:08 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:48:08 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:48:08 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:48:08 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:48:08 [info]: NFT verification result:
+2025-11-23 05:48:08 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:48:09 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:48:09 [info]: [NFT Mint API] Payment transaction created. Price: 0.01 SOL
+2025-11-23 05:49:43 [info]: Token: 
+2025-11-23 05:49:43 [info]: Checking NFT access for wallet:
+2025-11-23 05:49:43 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:49:43 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:49:43 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:49:43 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:49:43 [info]: NFT verification result:
+2025-11-23 05:49:44 [info]: Token: 
+2025-11-23 05:49:44 [info]: Checking NFT access for wallet:
+2025-11-23 05:49:44 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:49:44 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:49:44 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:49:44 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:49:44 [info]: NFT verification result:
+2025-11-23 05:49:44 [info]: Token: 
+2025-11-23 05:49:44 [info]: Checking NFT access for wallet:
+2025-11-23 05:49:44 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:49:44 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:49:44 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:49:44 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:49:44 [info]: NFT verification result:
+2025-11-23 05:49:46 [info]: Token: 
+2025-11-23 05:49:46 [info]: Checking NFT access for wallet:
+2025-11-23 05:49:46 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:49:46 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:49:46 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:49:46 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:49:46 [info]: NFT verification result:
+2025-11-23 05:50:01 [info]: Token: 
+2025-11-23 05:50:01 [info]: Checking NFT access for wallet:
+2025-11-23 05:50:01 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:50:01 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:01 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:01 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:01 [info]: NFT verification result:
+2025-11-23 05:50:01 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:02 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:02 [info]: [NFT Mint API] Payment transaction created. Price: 0.01 SOL
+2025-11-23 05:50:56 [info]: Token: 
+2025-11-23 05:50:56 [info]: Checking NFT access for wallet:
+2025-11-23 05:50:56 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:50:56 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:56 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:56 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:56 [info]: NFT verification result:
+2025-11-23 05:50:56 [info]: Token: 
+2025-11-23 05:50:56 [info]: Token: 
+2025-11-23 05:50:57 [info]: Checking NFT access for wallet:
+2025-11-23 05:50:57 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:50:57 [info]: Checking NFT access for wallet:
+2025-11-23 05:50:57 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:50:57 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:57 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:57 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:57 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:57 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:57 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:57 [info]: NFT verification result:
+2025-11-23 05:50:57 [info]: NFT verification result:
+2025-11-23 05:50:58 [info]: Token: 
+2025-11-23 05:50:58 [info]: Checking NFT access for wallet:
+2025-11-23 05:50:58 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:50:58 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:58 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:58 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:50:58 [info]: NFT verification result:
+2025-11-23 05:52:40 [info]: Token: 
+2025-11-23 05:52:41 [info]: Checking NFT access for wallet:
+2025-11-23 05:52:41 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:52:41 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:41 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:41 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:41 [info]: NFT verification result:
+2025-11-23 05:52:41 [info]: Token: 
+2025-11-23 05:52:41 [info]: Checking NFT access for wallet:
+2025-11-23 05:52:42 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:52:42 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:42 [info]: Token: 
+2025-11-23 05:52:42 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:42 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:42 [info]: NFT verification result:
+2025-11-23 05:52:42 [info]: Checking NFT access for wallet:
+2025-11-23 05:52:42 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:52:42 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:42 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:42 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:42 [info]: NFT verification result:
+2025-11-23 05:52:43 [info]: Token: 
+2025-11-23 05:52:43 [info]: Checking NFT access for wallet:
+2025-11-23 05:52:43 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:52:43 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:43 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:43 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:43 [info]: NFT verification result:
+2025-11-23 05:52:56 [info]: Invalidated NFT caches for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:56 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:52:56 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 05:52:57 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 05:52:57 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 05:52:57 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 05:52:57 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 05:52:57 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:58 [info]: Token: 
+2025-11-23 05:52:58 [info]: Token: 
+2025-11-23 05:52:58 [info]: Checking NFT access for wallet:
+2025-11-23 05:52:58 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:52:58 [info]: Checking NFT access for wallet:
+2025-11-23 05:52:58 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:52:58 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:58 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:58 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:58 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:58 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:58 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:58 [info]: NFT verification result:
+2025-11-23 05:52:58 [info]: NFT verification result:
+2025-11-23 05:52:59 [info]: Token: 
+2025-11-23 05:52:59 [info]: Checking NFT access for wallet:
+2025-11-23 05:52:59 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:52:59 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:59 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:59 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:52:59 [info]: NFT verification result:
+2025-11-23 05:53:02 [info]: Token: 
+2025-11-23 05:53:02 [info]: Checking NFT access for wallet:
+2025-11-23 05:53:02 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:53:02 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:53:02 [info]: Token: 
+2025-11-23 05:53:02 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:53:02 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:53:02 [info]: NFT verification result:
+2025-11-23 05:53:02 [info]: Checking NFT access for wallet:
+2025-11-23 05:53:02 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:53:02 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:53:02 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:53:02 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:53:02 [info]: NFT verification result:
+2025-11-23 05:53:11 [info]: Token: 
+2025-11-23 05:53:11 [info]: Checking NFT access for wallet:
+2025-11-23 05:53:11 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:53:11 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:53:11 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:53:11 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:53:11 [info]: NFT verification result:
+2025-11-23 05:53:11 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:53:12 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:53:12 [info]: [NFT Mint API] Payment transaction created. Price: 0.01 SOL
+2025-11-23 05:54:09 [info]: Token: 
+2025-11-23 05:54:09 [info]: Checking NFT access for wallet:
+2025-11-23 05:54:09 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:54:09 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:09 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:09 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:09 [info]: NFT verification result:
+2025-11-23 05:54:09 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 05:54:34 [info]: Token: 
+2025-11-23 05:54:34 [info]: Checking NFT access for wallet:
+2025-11-23 05:54:34 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:54:34 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:34 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:34 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:34 [info]: NFT verification result:
+2025-11-23 05:54:34 [info]: Token: 
+2025-11-23 05:54:34 [info]: Token: 
+2025-11-23 05:54:35 [info]: Checking NFT access for wallet:
+2025-11-23 05:54:35 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:54:35 [info]: Checking NFT access for wallet:
+2025-11-23 05:54:35 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:54:35 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:35 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:35 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:35 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:35 [info]: NFT verification result:
+2025-11-23 05:54:35 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:35 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:35 [info]: NFT verification result:
+2025-11-23 05:54:36 [info]: Token: 
+2025-11-23 05:54:36 [info]: Checking NFT access for wallet:
+2025-11-23 05:54:36 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:54:36 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:36 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:36 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:54:36 [info]: NFT verification result:
+2025-11-23 05:55:37 [info]: Token: 
+2025-11-23 05:55:37 [info]: Token: 
+2025-11-23 05:55:37 [info]: Token: 
+2025-11-23 05:55:37 [info]: Checking NFT access for wallet:
+2025-11-23 05:55:37 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:55:37 [info]: Checking NFT access for wallet:
+2025-11-23 05:55:37 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:55:37 [info]: Checking NFT access for wallet:
+2025-11-23 05:55:37 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:55:37 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:37 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:37 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:37 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:37 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:37 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:37 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:37 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:37 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:37 [info]: NFT verification result:
+2025-11-23 05:55:37 [info]: NFT verification result:
+2025-11-23 05:55:37 [info]: NFT verification result:
+2025-11-23 05:55:44 [info]: Token: 
+2025-11-23 05:55:44 [info]: Checking NFT access for wallet:
+2025-11-23 05:55:44 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:55:44 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:44 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:44 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:44 [info]: NFT verification result:
+2025-11-23 05:55:45 [info]: Token: 
+2025-11-23 05:55:45 [info]: Checking NFT access for wallet:
+2025-11-23 05:55:45 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:55:45 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:45 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:45 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:55:45 [info]: NFT verification result:
+2025-11-23 05:58:21 [info]: Token: 
+2025-11-23 05:58:21 [info]: Checking NFT access for wallet:
+2025-11-23 05:58:21 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:58:21 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 05:58:22 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 05:58:22 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 05:58:22 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 05:58:22 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 05:58:22 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:58:22 [info]: NFT verification result:
+2025-11-23 05:58:22 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 05:58:39 [info]: Invalidated NFT caches for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:58:39 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:58:39 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 05:58:40 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 05:58:40 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 05:58:40 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 05:58:40 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 05:58:40 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:58:40 [info]: Token: 
+2025-11-23 05:58:40 [info]: Token: 
+2025-11-23 05:58:40 [info]: Checking NFT access for wallet:
+2025-11-23 05:58:40 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:58:40 [info]: Checking NFT access for wallet:
+2025-11-23 05:58:40 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:58:40 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:58:40 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:58:40 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:58:40 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:58:40 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:58:40 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:58:40 [info]: NFT verification result:
+2025-11-23 05:58:40 [info]: NFT verification result:
+2025-11-23 05:58:42 [info]: Token: 
+2025-11-23 05:58:42 [info]: Checking NFT access for wallet:
+2025-11-23 05:58:42 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 05:58:42 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:58:42 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:58:42 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 05:58:42 [info]: NFT verification result:
+2025-11-23 06:01:04 [info]: Token: 
+2025-11-23 06:01:04 [info]: Checking NFT access for wallet:
+2025-11-23 06:01:04 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:01:04 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:04 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:04 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:04 [info]: NFT verification result:
+2025-11-23 06:01:05 [info]: Token: 
+2025-11-23 06:01:05 [info]: Checking NFT access for wallet:
+2025-11-23 06:01:05 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:01:05 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:05 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:05 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:05 [info]: NFT verification result:
+2025-11-23 06:01:05 [info]: Token: 
+2025-11-23 06:01:05 [info]: Checking NFT access for wallet:
+2025-11-23 06:01:05 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:01:05 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:05 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:05 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:05 [info]: NFT verification result:
+2025-11-23 06:01:07 [info]: Token: 
+2025-11-23 06:01:07 [info]: Checking NFT access for wallet:
+2025-11-23 06:01:07 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:01:07 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:07 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:07 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:07 [info]: NFT verification result:
+2025-11-23 06:01:35 [info]: Token: 
+2025-11-23 06:01:35 [info]: Checking NFT access for wallet:
+2025-11-23 06:01:35 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:01:35 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:35 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:35 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:35 [info]: NFT verification result:
+2025-11-23 06:01:35 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:36 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:01:36 [info]: [NFT Mint API] Payment transaction created. Price: 0.01 SOL
+2025-11-23 06:03:20 [info]: Token: 
+2025-11-23 06:03:20 [info]: Checking NFT access for wallet:
+2025-11-23 06:03:20 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:03:20 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:03:20 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:03:20 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:03:20 [info]: NFT verification result:
+2025-11-23 06:03:20 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:03:21 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:03:21 [info]: [NFT Mint API] Payment transaction created. Price: 0.01 SOL
+2025-11-23 06:06:52 [info]: Token: 
+2025-11-23 06:06:52 [info]: Checking NFT access for wallet:
+2025-11-23 06:06:52 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:06:52 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 06:06:52 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 06:06:53 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 06:06:53 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 06:06:53 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 06:06:53 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:06:53 [info]: NFT verification result:
+2025-11-23 06:06:53 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:06:54 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:06:54 [info]: [NFT Mint API] Payment transaction created. Price: 0.01 SOL
+2025-11-23 06:10:39 [info]: Token: 
+2025-11-23 06:10:39 [info]: Checking NFT access for wallet:
+2025-11-23 06:10:39 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:10:39 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:10:39 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:10:39 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:10:39 [info]: NFT verification result:
+2025-11-23 06:10:39 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:10:40 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:10:40 [info]: [NFT Mint API] Payment transaction created. Price: 0.01 SOL
+2025-11-23 06:13:21 [info]: Token: 
+2025-11-23 06:13:21 [info]: Checking NFT access for wallet:
+2025-11-23 06:13:21 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:13:21 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 06:13:22 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 06:13:22 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 06:13:22 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 06:13:22 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 06:13:22 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:22 [info]: NFT verification result:
+2025-11-23 06:13:23 [info]: Token: 
+2025-11-23 06:13:23 [info]: Checking NFT access for wallet:
+2025-11-23 06:13:23 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:13:23 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:23 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:23 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:23 [info]: NFT verification result:
+2025-11-23 06:13:23 [info]: Token: 
+2025-11-23 06:13:23 [info]: Checking NFT access for wallet:
+2025-11-23 06:13:23 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:13:23 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:23 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:23 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:23 [info]: NFT verification result:
+2025-11-23 06:13:24 [info]: Token: 
+2025-11-23 06:13:24 [info]: Checking NFT access for wallet:
+2025-11-23 06:13:24 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:13:24 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:24 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:24 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:24 [info]: NFT verification result:
+2025-11-23 06:13:29 [info]: Token: 
+2025-11-23 06:13:29 [info]: Checking NFT access for wallet:
+2025-11-23 06:13:29 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:13:29 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:29 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:29 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:29 [info]: NFT verification result:
+2025-11-23 06:13:29 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:30 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:13:30 [info]: [NFT Mint API] Payment transaction created. Price: 0.01 SOL
+2025-11-23 06:14:34 [info]: Token: 
+2025-11-23 06:14:34 [info]: Checking NFT access for wallet:
+2025-11-23 06:14:34 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:14:34 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:34 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:34 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:34 [info]: NFT verification result:
+2025-11-23 06:14:35 [info]: Token: 
+2025-11-23 06:14:35 [info]: Checking NFT access for wallet:
+2025-11-23 06:14:35 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:14:35 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:35 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:35 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:35 [info]: NFT verification result:
+2025-11-23 06:14:35 [info]: Token: 
+2025-11-23 06:14:35 [info]: Checking NFT access for wallet:
+2025-11-23 06:14:35 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:14:35 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:35 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:35 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:35 [info]: NFT verification result:
+2025-11-23 06:14:37 [info]: Token: 
+2025-11-23 06:14:37 [info]: Checking NFT access for wallet:
+2025-11-23 06:14:37 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:14:37 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:37 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:37 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:37 [info]: NFT verification result:
+2025-11-23 06:14:51 [info]: Token: 
+2025-11-23 06:14:51 [info]: Checking NFT access for wallet:
+2025-11-23 06:14:51 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:14:51 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:51 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:51 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:51 [info]: NFT verification result:
+2025-11-23 06:14:51 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:53 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:14:53 [info]: [NFT Mint API] Payment transaction created. Price: 0.01 SOL
+2025-11-23 06:15:29 [info]: Token: 
+2025-11-23 06:15:29 [info]: Checking NFT access for wallet:
+2025-11-23 06:15:29 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:15:29 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:29 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:29 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:29 [info]: NFT verification result:
+2025-11-23 06:15:30 [info]: Token: 
+2025-11-23 06:15:30 [info]: Token: 
+2025-11-23 06:15:30 [info]: Checking NFT access for wallet:
+2025-11-23 06:15:30 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:15:30 [info]: Checking NFT access for wallet:
+2025-11-23 06:15:30 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:15:30 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:30 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:30 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:30 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:30 [info]: NFT verification result:
+2025-11-23 06:15:30 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:30 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:30 [info]: NFT verification result:
+2025-11-23 06:15:31 [info]: Token: 
+2025-11-23 06:15:31 [info]: Checking NFT access for wallet:
+2025-11-23 06:15:31 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:15:31 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:31 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:31 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:31 [info]: NFT verification result:
+2025-11-23 06:15:42 [info]: Token: 
+2025-11-23 06:15:42 [info]: Checking NFT access for wallet:
+2025-11-23 06:15:42 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:15:42 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:42 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:42 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:42 [info]: NFT verification result:
+2025-11-23 06:15:42 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:44 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:15:44 [info]: [NFT Mint API] Payment transaction created. Price: 0.01 SOL
+2025-11-23 06:17:16 [info]: Token: 
+2025-11-23 06:17:16 [info]: Checking NFT access for wallet:
+2025-11-23 06:17:16 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:17:16 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:17:16 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:17:16 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:17:17 [info]: NFT verification result:
+2025-11-23 06:17:18 [info]: Token: 
+2025-11-23 06:17:18 [info]: Token: 
+2025-11-23 06:17:18 [info]: Checking NFT access for wallet:
+2025-11-23 06:17:18 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:17:18 [info]: Checking NFT access for wallet:
+2025-11-23 06:17:18 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:17:18 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:17:18 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:17:18 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:17:18 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:17:18 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:17:18 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:17:18 [info]: NFT verification result:
+2025-11-23 06:17:18 [info]: NFT verification result:
+2025-11-23 06:17:19 [info]: Token: 
+2025-11-23 06:17:19 [info]: Checking NFT access for wallet:
+2025-11-23 06:17:19 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:17:19 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:17:19 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:17:19 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:17:19 [info]: NFT verification result:
+2025-11-23 06:19:11 [info]: Token: 
+2025-11-23 06:19:11 [info]: Checking NFT access for wallet:
+2025-11-23 06:19:11 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:19:11 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 06:19:12 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 06:19:12 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 06:19:12 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 06:19:12 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 06:19:12 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:19:12 [info]: NFT verification result:
+2025-11-23 06:19:12 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:19:14 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:19:14 [info]: [NFT Mint API] Payment transaction created. Price: 0.01 SOL
+2025-11-23 07:20:45 [info]: Firebase Admin initialized successfully
+2025-11-23 06:20:47 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 06:20:47 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 06:20:47 [info]: ✅ Redis connected
+2025-11-23 06:20:49 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 06:21:20 [info]: Token: 
+2025-11-23 06:21:20 [info]: Checking NFT access for wallet:
+2025-11-23 06:21:20 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:21:20 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:21:20 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:21:20 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:21:21 [info]: NFT verification result:
+2025-11-23 06:21:22 [info]: Token: 
+2025-11-23 06:21:22 [info]: Token: 
+2025-11-23 06:21:22 [info]: Checking NFT access for wallet:
+2025-11-23 06:21:22 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:21:22 [info]: Checking NFT access for wallet:
+2025-11-23 06:21:23 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:21:23 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:21:23 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:21:23 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:21:23 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:21:23 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:21:23 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:21:23 [info]: NFT verification result:
+2025-11-23 06:21:23 [info]: NFT verification result:
+2025-11-23 06:21:25 [info]: Token: 
+2025-11-23 06:21:25 [info]: Checking NFT access for wallet:
+2025-11-23 06:21:25 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:21:25 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:21:25 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:21:25 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:21:25 [info]: NFT verification result:
+2025-11-23 06:22:22 [info]: Token: 
+2025-11-23 06:22:22 [info]: Checking NFT access for wallet:
+2025-11-23 06:22:22 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:22:22 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:22 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:22 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:22 [info]: NFT verification result:
+2025-11-23 06:22:23 [info]: Token: 
+2025-11-23 06:22:23 [info]: Token: 
+2025-11-23 06:22:23 [info]: Checking NFT access for wallet:
+2025-11-23 06:22:23 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:22:23 [info]: Checking NFT access for wallet:
+2025-11-23 06:22:24 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:22:24 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:24 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:24 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:24 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:24 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:25 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:25 [info]: NFT verification result:
+2025-11-23 06:22:25 [info]: NFT verification result:
+2025-11-23 06:22:26 [info]: Token: 
+2025-11-23 06:22:26 [info]: Checking NFT access for wallet:
+2025-11-23 06:22:26 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:22:26 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:26 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:26 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:26 [info]: NFT verification result:
+2025-11-23 06:22:46 [info]: Token: 
+2025-11-23 06:22:46 [info]: Checking NFT access for wallet:
+2025-11-23 06:22:46 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:22:46 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:46 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:46 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:46 [info]: NFT verification result:
+2025-11-23 06:22:47 [info]: Token: 
+2025-11-23 06:22:47 [info]: Token: 
+2025-11-23 06:22:47 [info]: Checking NFT access for wallet:
+2025-11-23 06:22:47 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:22:47 [info]: Checking NFT access for wallet:
+2025-11-23 06:22:47 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:22:47 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:47 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:47 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:47 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:47 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:47 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:47 [info]: NFT verification result:
+2025-11-23 06:22:47 [info]: NFT verification result:
+2025-11-23 06:22:48 [info]: Token: 
+2025-11-23 06:22:48 [info]: Checking NFT access for wallet:
+2025-11-23 06:22:48 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:22:48 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:48 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:48 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:48 [info]: NFT verification result:
+2025-11-23 06:22:56 [info]: Token: 
+2025-11-23 06:22:56 [info]: Checking NFT access for wallet:
+2025-11-23 06:22:56 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:22:56 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:56 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:56 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:56 [info]: NFT verification result:
+2025-11-23 06:22:56 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:58 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:22:58 [info]: [NFT Mint API] Payment transaction created. Price: 0.001 SOL
+2025-11-23 07:26:32 [info]: Firebase Admin initialized successfully
+2025-11-23 06:26:33 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 06:26:33 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 06:26:33 [info]: ✅ Redis connected
+2025-11-23 06:26:34 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 07:27:36 [info]: Firebase Admin initialized successfully
+2025-11-23 06:27:37 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 06:27:37 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 06:27:37 [info]: ✅ Redis connected
+2025-11-23 06:27:38 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 06:27:55 [info]: Token: 
+2025-11-23 06:27:56 [info]: Checking NFT access for wallet:
+2025-11-23 06:27:56 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:27:56 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 06:27:57 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 06:27:57 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 06:27:57 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 06:27:57 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 06:27:57 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:27:57 [info]: NFT verification result:
+2025-11-23 06:27:57 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:27:59 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:27:59 [info]: [NFT Mint API] Payment transaction created. Price: 0.001 SOL
+2025-11-23 06:28:17 [info]: Token: 
+2025-11-23 06:28:17 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:17 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:17 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:17 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:17 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:17 [info]: NFT verification result:
+2025-11-23 06:28:18 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:28:21 [info]: Token: 
+2025-11-23 06:28:21 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:21 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:21 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:21 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:21 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:21 [info]: NFT verification result:
+2025-11-23 06:28:21 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:28:25 [info]: Token: 
+2025-11-23 06:28:25 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:25 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:25 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:25 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:25 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:25 [info]: NFT verification result:
+2025-11-23 06:28:25 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:28:28 [info]: Token: 
+2025-11-23 06:28:28 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:28 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:28 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:28 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:28 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:28 [info]: NFT verification result:
+2025-11-23 06:28:28 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:28:31 [info]: Token: 
+2025-11-23 06:28:31 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:31 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:31 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:31 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:31 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:31 [info]: NFT verification result:
+2025-11-23 06:28:32 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:28:35 [info]: Token: 
+2025-11-23 06:28:35 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:35 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:35 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:35 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:35 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:35 [info]: NFT verification result:
+2025-11-23 06:28:35 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:28:39 [info]: Token: 
+2025-11-23 06:28:39 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:39 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:39 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:39 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:39 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:39 [info]: NFT verification result:
+2025-11-23 06:28:39 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:28:42 [info]: Token: 
+2025-11-23 06:28:42 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:42 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:42 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:42 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:42 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:42 [info]: NFT verification result:
+2025-11-23 06:28:42 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:28:45 [info]: Token: 
+2025-11-23 06:28:45 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:45 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:45 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:45 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:45 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:45 [info]: NFT verification result:
+2025-11-23 06:28:46 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:28:49 [info]: Token: 
+2025-11-23 06:28:49 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:49 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:49 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:49 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:49 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:49 [info]: NFT verification result:
+2025-11-23 06:28:49 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:28:52 [info]: Token: 
+2025-11-23 06:28:52 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:52 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:52 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:52 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:52 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:52 [info]: NFT verification result:
+2025-11-23 06:28:52 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:28:56 [info]: Token: 
+2025-11-23 06:28:56 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:56 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:56 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:56 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:56 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:56 [info]: NFT verification result:
+2025-11-23 06:28:56 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:28:59 [info]: Token: 
+2025-11-23 06:28:59 [info]: Checking NFT access for wallet:
+2025-11-23 06:28:59 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:28:59 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:59 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:59 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:28:59 [info]: NFT verification result:
+2025-11-23 06:28:59 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:02 [info]: Token: 
+2025-11-23 06:29:02 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:02 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:03 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:03 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:03 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:03 [info]: NFT verification result:
+2025-11-23 06:29:03 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:06 [info]: Token: 
+2025-11-23 06:29:06 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:06 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:06 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:06 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:06 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:06 [info]: NFT verification result:
+2025-11-23 06:29:07 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:10 [info]: Token: 
+2025-11-23 06:29:10 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:10 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:10 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:10 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:10 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:10 [info]: NFT verification result:
+2025-11-23 06:29:10 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:13 [info]: Token: 
+2025-11-23 06:29:13 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:13 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:13 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:13 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:13 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:13 [info]: NFT verification result:
+2025-11-23 06:29:14 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:17 [info]: Token: 
+2025-11-23 06:29:17 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:17 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:17 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:17 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:17 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:17 [info]: NFT verification result:
+2025-11-23 06:29:17 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:20 [info]: Token: 
+2025-11-23 06:29:20 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:20 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:20 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:20 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:20 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:20 [info]: NFT verification result:
+2025-11-23 06:29:21 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:24 [info]: Token: 
+2025-11-23 06:29:24 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:24 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:24 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:24 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:24 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:24 [info]: NFT verification result:
+2025-11-23 06:29:24 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:28 [info]: Token: 
+2025-11-23 06:29:28 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:28 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:28 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:28 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:28 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:28 [info]: NFT verification result:
+2025-11-23 06:29:28 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:31 [info]: Token: 
+2025-11-23 06:29:31 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:31 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:31 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:31 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:31 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:31 [info]: NFT verification result:
+2025-11-23 06:29:31 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:34 [info]: Token: 
+2025-11-23 06:29:34 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:34 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:34 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:34 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:34 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:34 [info]: NFT verification result:
+2025-11-23 06:29:35 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:38 [info]: Token: 
+2025-11-23 06:29:38 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:38 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:38 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:38 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:38 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:38 [info]: NFT verification result:
+2025-11-23 06:29:38 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:41 [info]: Token: 
+2025-11-23 06:29:41 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:41 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:41 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:41 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:41 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:41 [info]: NFT verification result:
+2025-11-23 06:29:41 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:44 [info]: Token: 
+2025-11-23 06:29:44 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:44 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:44 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:44 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:44 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:44 [info]: NFT verification result:
+2025-11-23 06:29:45 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:48 [info]: Token: 
+2025-11-23 06:29:48 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:48 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:48 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:48 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:48 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:48 [info]: NFT verification result:
+2025-11-23 06:29:48 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:51 [info]: Token: 
+2025-11-23 06:29:51 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:51 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:51 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:51 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:51 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:51 [info]: NFT verification result:
+2025-11-23 06:29:51 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:29:55 [info]: Token: 
+2025-11-23 06:29:55 [info]: Checking NFT access for wallet:
+2025-11-23 06:29:55 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:29:55 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:55 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:55 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:29:55 [info]: NFT verification result:
+2025-11-23 06:29:57 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:30:00 [info]: Token: 
+2025-11-23 06:30:00 [info]: Checking NFT access for wallet:
+2025-11-23 06:30:00 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:30:00 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:00 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:00 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:00 [info]: NFT verification result:
+2025-11-23 06:30:01 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:30:04 [info]: Token: 
+2025-11-23 06:30:04 [info]: Checking NFT access for wallet:
+2025-11-23 06:30:04 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:30:04 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:04 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:04 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:04 [info]: NFT verification result:
+2025-11-23 06:30:04 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:30:07 [info]: Token: 
+2025-11-23 06:30:07 [info]: Checking NFT access for wallet:
+2025-11-23 06:30:07 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:30:07 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:07 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:07 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:07 [info]: NFT verification result:
+2025-11-23 06:30:08 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:30:11 [info]: Token: 
+2025-11-23 06:30:11 [info]: Checking NFT access for wallet:
+2025-11-23 06:30:11 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:30:11 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:11 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:11 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:11 [info]: NFT verification result:
+2025-11-23 06:30:11 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:30:14 [info]: Token: 
+2025-11-23 06:30:14 [info]: Checking NFT access for wallet:
+2025-11-23 06:30:14 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:30:14 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:14 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:14 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:14 [info]: NFT verification result:
+2025-11-23 06:30:14 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:30:18 [info]: Token: 
+2025-11-23 06:30:18 [info]: Checking NFT access for wallet:
+2025-11-23 06:30:18 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:30:18 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:18 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:18 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:18 [info]: NFT verification result:
+2025-11-23 06:30:18 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:30:21 [info]: Token: 
+2025-11-23 06:30:21 [info]: Checking NFT access for wallet:
+2025-11-23 06:30:21 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:30:21 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:21 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:21 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:21 [info]: NFT verification result:
+2025-11-23 06:30:21 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:30:25 [info]: Token: 
+2025-11-23 06:30:25 [info]: Checking NFT access for wallet:
+2025-11-23 06:30:25 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:30:25 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:25 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:25 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:25 [info]: NFT verification result:
+2025-11-23 06:30:25 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:30:28 [info]: Token: 
+2025-11-23 06:30:28 [info]: Checking NFT access for wallet:
+2025-11-23 06:30:28 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:30:28 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:28 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:28 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:28 [info]: NFT verification result:
+2025-11-23 06:30:28 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:30:31 [info]: Token: 
+2025-11-23 06:30:31 [info]: Checking NFT access for wallet:
+2025-11-23 06:30:31 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:30:31 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:31 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:31 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:31 [info]: NFT verification result:
+2025-11-23 06:30:32 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 06:30:35 [info]: Token: 
+2025-11-23 06:30:35 [info]: Checking NFT access for wallet:
+2025-11-23 06:30:35 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:30:35 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:35 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:35 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:30:35 [info]: NFT verification result:
+2025-11-23 06:30:35 [info]: [Mint Status] Found signature 2sxZfG2C4NJgaEGaZYGwvjY7sSXkbVofbrt3DQacmywYLE7BPMirnWERSRFtHVefYXFbdiZoze8oL6dMD9JwAigE for reference 6RSbh3uawhyJo4snUcTyttE8JqwBWK3bUMq4b9vowUZv
+2025-11-23 07:32:50 [info]: Firebase Admin initialized successfully
+2025-11-23 06:32:51 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 06:32:51 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 06:32:51 [info]: ✅ Redis connected
+2025-11-23 06:32:53 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 06:33:42 [info]: Token: 
+2025-11-23 06:33:42 [info]: Checking NFT access for wallet:
+2025-11-23 06:33:42 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:33:42 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 06:33:43 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 06:33:43 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 06:33:43 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 06:33:43 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 06:33:43 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:33:43 [info]: NFT verification result:
+2025-11-23 06:33:43 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:33:45 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:33:45 [info]: [NFT Mint API] Payment transaction created. Price: 0.001 SOL
+2025-11-23 06:33:59 [info]: Token: 
+2025-11-23 06:33:59 [info]: Checking NFT access for wallet:
+2025-11-23 06:33:59 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:33:59 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:33:59 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:33:59 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:33:59 [info]: NFT verification result:
+2025-11-23 06:34:00 [info]: [Mint Status] Found signature WEFDJBmUecDaBAzBB4Y7Szbs2Nh8axGr2R1YdmHEo3nnoLQYUD7hEFPgYUgYMLixGCG6PJvXykRzYyEi6Vmccf4 for reference 6NjXLksBy5tkhgQis834cgc11ujSStATLYZZv2pW7k8K
+2025-11-23 06:34:28 [info]: Token: 
+2025-11-23 06:34:28 [info]: Token: 
+2025-11-23 06:34:28 [info]: Checking NFT access for wallet:
+2025-11-23 06:34:28 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:34:28 [info]: Checking NFT access for wallet:
+2025-11-23 06:34:28 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:34:28 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:34:28 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:34:28 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:34:28 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:34:28 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:34:28 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:34:28 [info]: NFT verification result:
+2025-11-23 06:34:28 [info]: NFT verification result:
+2025-11-23 06:37:31 [info]: Token: 
+2025-11-23 06:37:31 [info]: Token: 
+2025-11-23 06:37:31 [info]: Checking NFT access for wallet:
+2025-11-23 06:37:31 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:37:31 [info]: Checking NFT access for wallet:
+2025-11-23 06:37:31 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:37:31 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:31 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:31 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:31 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:31 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:31 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:31 [info]: NFT verification result:
+2025-11-23 06:37:31 [info]: NFT verification result:
+2025-11-23 06:37:39 [info]: Token: 
+2025-11-23 06:37:39 [info]: Checking NFT access for wallet:
+2025-11-23 06:37:39 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:37:39 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:39 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:39 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:39 [info]: NFT verification result:
+2025-11-23 06:37:40 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:37:53 [info]: Invalidated NFT caches for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:53 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:37:53 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 06:37:54 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 06:37:54 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 06:37:54 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 06:37:54 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 06:37:54 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:57 [info]: Token: 
+2025-11-23 06:37:57 [info]: Checking NFT access for wallet:
+2025-11-23 06:37:57 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:37:57 [info]: Token: 
+2025-11-23 06:37:57 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:57 [info]: Token: 
+2025-11-23 06:37:57 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:57 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:57 [info]: NFT verification result:
+2025-11-23 06:37:57 [info]: Checking NFT access for wallet:
+2025-11-23 06:37:57 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:37:57 [info]: Checking NFT access for wallet:
+2025-11-23 06:37:57 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:37:57 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:57 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:57 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:57 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:57 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:57 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:37:57 [info]: NFT verification result:
+2025-11-23 06:37:57 [info]: NFT verification result:
+2025-11-23 06:38:02 [info]: Token: 
+2025-11-23 06:38:02 [info]: Checking NFT access for wallet:
+2025-11-23 06:38:02 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:38:02 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:38:02 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:38:02 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:38:02 [info]: NFT verification result:
+2025-11-23 06:38:02 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:38:04 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:38:04 [info]: [NFT Mint API] Payment transaction created. Price: 0.001 SOL
+2025-11-23 06:38:16 [info]: Token: 
+2025-11-23 06:38:16 [info]: Checking NFT access for wallet:
+2025-11-23 06:38:16 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:38:16 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:38:16 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:38:16 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:38:16 [info]: NFT verification result:
+2025-11-23 06:38:17 [info]: [Mint Status] Found signature 2mKLzaEGU97zs3wSPDU5bc5xc9KHg7gADStTo2mU2YNU91E2KxfLihR1DDvJ4bcnD76DJwgFBCp88wAqqtTQ3KSW for reference 8Q3W9MWYBMfQZ6ymznREgd22MMyL5PwQt4xcjZSjDtKd
+2025-11-23 06:38:17 [info]: Token: 
+2025-11-23 06:38:17 [info]: Checking NFT access for wallet:
+2025-11-23 06:38:17 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:38:17 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:38:17 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:38:17 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:38:17 [info]: NFT verification result:
+2025-11-23 06:38:17 [info]: [NFT Mint API] Executing mint for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3 after payment 2mKLzaEGU97zs3wSPDU5bc5xc9KHg7gADStTo2mU2YNU91E2KxfLihR1DDvJ4bcnD76DJwgFBCp88wAqqtTQ3KSW
+2025-11-23 06:38:18 [info]: Uploading NFT image...
+2025-11-23 06:38:43 [info]: Uploading metadata...
+2025-11-23 06:39:00 [info]: Minting NFT to 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3...
+2025-11-23 06:39:03 [info]: ✅ NFT minted successfully: DphkqRaWbCpUv92a7EfEfveUTv8EXf74vvUDG3MDcSHA
+2025-11-23 06:39:11 [info]: Token: 
+2025-11-23 06:39:11 [info]: Checking NFT access for wallet:
+2025-11-23 06:39:11 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:39:11 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:39:11 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:39:11 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:39:11 [info]: NFT verification result:
+2025-11-23 06:39:11 [info]: Token: 
+2025-11-23 06:39:11 [info]: Checking NFT access for wallet:
+2025-11-23 06:39:11 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:39:11 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:39:11 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:39:11 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:39:12 [info]: NFT verification result:
+2025-11-23 07:40:28 [info]: Firebase Admin initialized successfully
+2025-11-23 06:40:29 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 06:40:29 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 06:40:29 [info]: ✅ Redis connected
+2025-11-23 06:40:30 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 06:40:57 [info]: Token: 
+2025-11-23 06:40:57 [info]: Checking NFT access for wallet:
+2025-11-23 06:40:57 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 06:40:57 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:40:57 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:40:57 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 06:40:57 [info]: NFT verification result:
+2025-11-23 06:40:57 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.

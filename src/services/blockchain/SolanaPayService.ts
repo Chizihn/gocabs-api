@@ -415,4 +415,37 @@ export class SolanaPayService {
       throw error;
     }
   }
+
+  async findTransactionSignature(
+    reference: PublicKey,
+    commitment: "confirmed" | "finalized" = "confirmed"
+  ): Promise<string | null> {
+    try {
+      const signatures = await this.connection.getSignaturesForAddress(
+        reference,
+        { limit: 1 },
+        commitment
+      );
+
+      if (signatures.length > 0) {
+        const signatureInfo = signatures[0]; // This is where the potential issue is.
+        if (signatureInfo) {
+          logger.info(
+            `[findTransactionSignature] Found signature ${
+              signatureInfo.signature
+            } for reference ${reference.toBase58()}`
+          );
+          return signatureInfo.signature;
+        }
+      }
+
+      return null;
+    } catch (error) {
+      logger.error(
+        `Error finding transaction signature for reference ${reference.toBase58()}:`,
+        error
+      );
+      return null;
+    }
+  }
 }

@@ -94,7 +94,8 @@ export class RewardCalculationService {
         throw new Error("Insufficient XP balance");
       }
 
-      const rewards = await tx.reward.findMany({ // Use tx for findMany within transaction
+      const rewards = await tx.reward.findMany({
+        // Use tx for findMany within transaction
         where: { userId, claimed: false },
         orderBy: { createdAt: "asc" },
       });
@@ -102,23 +103,36 @@ export class RewardCalculationService {
       let remaining = xpAmount;
       const updates: Promise<any>[] = [];
 
+      const usdcAmount = xpAmount * XP_TO_USDC_RATE;
+
       for (const reward of rewards) {
         if (remaining <= 0) break;
         const redeeming = Math.min(remaining, reward.xpEarned);
         remaining -= redeeming;
 
+        // We still mark rewards as claimed to correctly track availableXP,
+        // but the monetary value is now stored centrally on the user.
         updates.push(
-          tx.reward.update({ // Use tx for update within transaction
+          tx.reward.update({
             where: { id: reward.id },
             data: {
               claimed: true,
-              usdcValue: new Decimal(redeeming * XP_TO_USDC_RATE),
             },
           })
         );
       }
 
       await Promise.all(updates);
+
+      // Atomically increment the user's central credit balance
+      await tx.user.update({
+        where: { id: userId },
+        data: {
+          creditBalanceUsdc: {
+            increment: new Decimal(usdcAmount),
+          },
+        },
+      });
 
       logger.info(`User ${userId} redeemed ${xpAmount} XP`);
 

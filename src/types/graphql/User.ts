@@ -14,6 +14,8 @@ import { Owner } from "./Owner";
 import { Notification } from "./Notification";
 import { LocationSettings, NotificationSettings } from "./UserSettings";
 import { PaginatedResponse } from "./responses";
+import { GraphQLDecimal } from "./scalers/Decimal";
+import { Decimal } from "@prisma/client/runtime/library";
 
 registerEnumType(UserRole, {
   name: "UserRole",
@@ -74,6 +76,9 @@ export class User {
 
   @Field(() => [Notification], { nullable: true })
   notifications?: Notification[];
+
+  @Field(() => GraphQLDecimal, { nullable: true })
+  creditBalanceUsdc?: Decimal;
 }
 
 @InputType()

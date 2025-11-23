@@ -42798,3 +42798,8 @@ Timed out fetching a new connection from the connection pool. More info: http://
     at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:169:39)
     at authMiddleware (C:\Users\Chizi\Desktop\gocab\backend\src\middleware\auth.ts:50:24)
 2025-11-23 04:02:46 [error]: GraphQL Error: Access denied! You don't have permission for this action!
+2025-11-23 04:06:50 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 05:54:09 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 05:58:22 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:37:40 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:40:57 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.

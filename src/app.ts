@@ -29,6 +29,11 @@ import { NotificationResolver } from "./resolvers/NotificationResolver";
 import { AdminResolver } from "./resolvers/AdminResolver";
 import { UploadResolver } from "./resolvers/UploadResolver";
 import { LocationResolver } from "./resolvers/LocationResolver";
+import {
+  nftMintHandler,
+  nftMintExecuteHandler,
+  nftMintStatusHandler,
+} from "./api/nftMintHandler";
 
 export async function createApp(prisma: PrismaClient, redisClient: Redis) {
   const app: Express = express();
@@ -52,6 +57,11 @@ export async function createApp(prisma: PrismaClient, redisClient: Redis) {
   app.get("/health", (_req: Request, res: Response) => {
     res.status(200).json({ status: "ok" });
   });
+
+  // NFT Mint endpoints
+  app.get("/api/nft/mint", nftMintHandler);
+  app.post("/api/nft/mint/execute", nftMintExecuteHandler);
+  app.get("/api/nft/mint/status/:reference", nftMintStatusHandler);
 
   try {
     // Build GraphQL schema

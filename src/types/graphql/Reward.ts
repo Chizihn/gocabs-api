@@ -1,9 +1,9 @@
 import { ObjectType, Field, ID, Int, Float } from "type-graphql";
 import { Decimal } from "@prisma/client/runtime/library";
 import { Booking } from "./Booking";
-import { User } from "./User";
 import { GraphQLDecimal } from "./scalers/Decimal";
 import { PaginatedResponse } from "./responses";
+import { User } from "./User";
 
 @ObjectType()
 export class Reward {
