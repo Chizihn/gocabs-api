@@ -42824,3 +42824,267 @@ Timed out fetching a new connection from the connection pool. More info: http://
 2025-11-23 06:56:57 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.field"; Expected non-nullable type "String!" not to be null.
 2025-11-23 06:56:57 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.order"; Expected non-nullable type "String!" not to be null.
 2025-11-23 06:56:58 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 19:31:42 [error]: ❌ Redis error:
+2025-11-23 19:31:43 [error]: ❌ Redis error:
+2025-11-23 19:31:43 [error]: ❌ Redis error:
+2025-11-23 19:31:43 [error]: ❌ Redis error:
+2025-11-23 19:31:43 [error]: ❌ Redis error:
+2025-11-23 19:31:43 [error]: ❌ Redis error:
+2025-11-23 19:31:43 [error]: Max Redis reconnection attempts reached
+2025-11-23 19:37:09 [error]: GraphQL Error: Access denied! You need to be authenticated to perform this action!
+2025-11-23 20:19:19 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 20:24:36 [error]: IncorrectOwner: Incorrect account owner
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x39. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Incorrect account owner",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Incorrect account owner
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39
+
+    at getMplTokenMetadataErrorFromCode (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\mpl-token-metadata\src\generated\errors\mplTokenMetadata.ts:2997:24)
+    at Object.getErrorFromCode (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\mpl-token-metadata\src\generated\programs\mplTokenMetadata.ts:28:46)
+    at Object.resolveError (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi-program-repository\src\createDefaultProgramRepository.ts:135:35)
+    at Object.sendTransaction (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi-rpc-web3js\src\createWeb3JsRpc.ts:372:42)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at TransactionBuilder.sendAndConfirm (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi\src\TransactionBuilder.ts:359:23)
+    at verifyCollectionAfterMint (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:303:5)
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:227:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:24:36 [error]: Error: Failed to verify collection: Incorrect account owner
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x39. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Incorrect account owner",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Incorrect account owner
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39
+
+    at verifyCollectionAfterMint (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:314:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:227:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:24:36 [error]: Error: Failed to execute mint: Failed to verify collection: Incorrect account owner
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x39. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Incorrect account owner",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Incorrect account owner
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39
+
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:251:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:27:26 [error]: CollectionMasterEditionAccountInvalid: Edition account doesnt match collection 
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x71. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Edition account doesnt match collection ",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 16537 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x71"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Edition account doesnt match collection 
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 16537 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x71
+
+    at getMplTokenMetadataErrorFromCode (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\mpl-token-metadata\src\generated\errors\mplTokenMetadata.ts:2997:24)
+    at Object.getErrorFromCode (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\mpl-token-metadata\src\generated\programs\mplTokenMetadata.ts:28:46)
+    at Object.resolveError (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi-program-repository\src\createDefaultProgramRepository.ts:135:35)
+    at Object.sendTransaction (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi-rpc-web3js\src\createWeb3JsRpc.ts:372:42)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at TransactionBuilder.sendAndConfirm (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi\src\TransactionBuilder.ts:359:23)
+    at verifyCollectionAfterMint (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:304:5)
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:227:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:27:26 [error]: Error: Failed to verify collection: Edition account doesnt match collection 
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x71. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Edition account doesnt match collection ",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 16537 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x71"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Edition account doesnt match collection 
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 16537 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x71
+
+    at verifyCollectionAfterMint (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:316:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:227:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:27:26 [error]: Error: Failed to execute mint: Failed to verify collection: Edition account doesnt match collection 
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x71. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Edition account doesnt match collection ",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 16537 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x71"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Edition account doesnt match collection 
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 16537 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x71
+
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:251:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:33:01 [error]: IncorrectOwner: Incorrect account owner
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x39. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Incorrect account owner",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Incorrect account owner
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39
+
+    at getMplTokenMetadataErrorFromCode (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\mpl-token-metadata\src\generated\errors\mplTokenMetadata.ts:2997:24)
+    at Object.getErrorFromCode (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\mpl-token-metadata\src\generated\programs\mplTokenMetadata.ts:28:46)
+    at Object.resolveError (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi-program-repository\src\createDefaultProgramRepository.ts:135:35)
+    at Object.sendTransaction (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi-rpc-web3js\src\createWeb3JsRpc.ts:372:42)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at TransactionBuilder.sendAndConfirm (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi\src\TransactionBuilder.ts:359:23)
+    at verifyCollectionAfterMint (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:281:5)
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:227:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:33:01 [error]: Error: Failed to verify collection: Incorrect account owner
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x39. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Incorrect account owner",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Incorrect account owner
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39
+
+    at verifyCollectionAfterMint (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:290:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:227:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:33:01 [error]: Error: Failed to execute mint: Failed to verify collection: Incorrect account owner
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x39. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Incorrect account owner",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Incorrect account owner
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39
+
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:251:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)

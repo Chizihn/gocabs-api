@@ -72702,3 +72702,784 @@ Timed out fetching a new connection from the connection pool. More info: http://
 2025-11-23 06:57:37 [info]: Token: 
 2025-11-23 06:57:42 [info]: Token: 
 2025-11-23 06:57:47 [info]: Token: 
+2025-11-23 20:31:39 [info]: Firebase Admin initialized successfully
+2025-11-23 19:31:42 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 19:31:42 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 19:31:42 [error]: ❌ Redis error:
+2025-11-23 19:31:42 [warn]: Redis reconnecting (attempt 1/5)...
+2025-11-23 19:31:43 [error]: ❌ Redis error:
+2025-11-23 19:31:43 [warn]: Redis reconnecting (attempt 2/5)...
+2025-11-23 19:31:43 [error]: ❌ Redis error:
+2025-11-23 19:31:43 [warn]: Redis reconnecting (attempt 3/5)...
+2025-11-23 19:31:43 [error]: ❌ Redis error:
+2025-11-23 19:31:43 [warn]: Redis reconnecting (attempt 4/5)...
+2025-11-23 19:31:43 [error]: ❌ Redis error:
+2025-11-23 19:31:43 [warn]: Redis reconnecting (attempt 5/5)...
+2025-11-23 19:31:43 [error]: ❌ Redis error:
+2025-11-23 19:31:43 [error]: Max Redis reconnection attempts reached
+2025-11-23 19:31:44 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 20:32:15 [info]: Firebase Admin initialized successfully
+2025-11-23 19:32:17 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 19:32:17 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 19:32:17 [info]: ✅ Redis connected
+2025-11-23 19:32:20 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 19:32:44 [info]: Token: 
+2025-11-23 19:32:49 [info]: Token: 
+2025-11-23 19:32:54 [info]: Token: 
+2025-11-23 19:32:59 [info]: Token: 
+2025-11-23 19:33:04 [info]: Token: 
+2025-11-23 19:33:09 [info]: Token: 
+2025-11-23 19:33:14 [info]: Token: 
+2025-11-23 19:33:19 [info]: Token: 
+2025-11-23 19:33:24 [info]: Token: 
+2025-11-23 19:33:29 [info]: Token: 
+2025-11-23 19:33:34 [info]: Token: 
+2025-11-23 19:33:39 [info]: Token: 
+2025-11-23 19:33:44 [info]: Token: 
+2025-11-23 19:33:49 [info]: Token: 
+2025-11-23 19:33:54 [info]: Token: 
+2025-11-23 19:34:03 [info]: Token: 
+2025-11-23 19:34:06 [info]: Token: 
+2025-11-23 19:34:09 [info]: Token: 
+2025-11-23 19:34:14 [info]: Token: 
+2025-11-23 19:34:19 [info]: Token: 
+2025-11-23 19:34:26 [info]: Token: 
+2025-11-23 19:34:29 [info]: Token: 
+2025-11-23 19:34:34 [info]: Token: 
+2025-11-23 19:34:39 [info]: Token: 
+2025-11-23 19:34:44 [info]: Token: 
+2025-11-23 19:34:49 [info]: Token: 
+2025-11-23 19:34:54 [info]: Token: 
+2025-11-23 19:34:59 [info]: Token: 
+2025-11-23 19:35:04 [info]: Token: 
+2025-11-23 19:35:09 [info]: Token: 
+2025-11-23 19:35:14 [info]: Token: 
+2025-11-23 19:35:19 [info]: Token: 
+2025-11-23 19:35:24 [info]: Token: 
+2025-11-23 19:35:29 [info]: Token: 
+2025-11-23 19:35:35 [info]: Token: 
+2025-11-23 19:35:39 [info]: Token: 
+2025-11-23 19:35:44 [info]: Token: 
+2025-11-23 19:35:49 [info]: Token: 
+2025-11-23 19:35:55 [info]: Token: 
+2025-11-23 19:36:00 [info]: Token: 
+2025-11-23 19:36:04 [info]: Token: 
+2025-11-23 19:36:09 [info]: Token: 
+2025-11-23 19:36:14 [info]: Token: 
+2025-11-23 19:36:19 [info]: Token: 
+2025-11-23 19:36:24 [info]: Token: 
+2025-11-23 19:36:30 [info]: Token: 
+2025-11-23 19:36:34 [info]: Token: 
+2025-11-23 19:36:39 [info]: Token: 
+2025-11-23 19:36:44 [info]: Token: 
+2025-11-23 19:36:49 [info]: Token: 
+2025-11-23 19:36:54 [info]: Token: 
+2025-11-23 19:36:59 [info]: Token: 
+2025-11-23 19:37:04 [info]: Token: 
+2025-11-23 19:37:09 [info]: Token: 
+2025-11-23 19:37:09 [error]: GraphQL Error: Access denied! You need to be authenticated to perform this action!
+2025-11-23 19:37:09 [info]: Token: 
+2025-11-23 19:37:14 [info]: Token: 
+2025-11-23 19:37:19 [info]: Token: 
+2025-11-23 19:37:24 [info]: Token: 
+2025-11-23 19:37:29 [info]: Token: 
+2025-11-23 19:37:34 [info]: Token: 
+2025-11-23 19:37:40 [info]: Token: 
+2025-11-23 19:37:45 [info]: Token: 
+2025-11-23 19:37:50 [info]: Token: 
+2025-11-23 19:37:54 [info]: Token: 
+2025-11-23 19:38:00 [info]: Token: 
+2025-11-23 19:38:04 [info]: Token: 
+2025-11-23 19:38:10 [info]: Token: 
+2025-11-23 19:38:15 [info]: Token: 
+2025-11-23 19:38:19 [info]: Token: 
+2025-11-23 19:38:25 [info]: Token: 
+2025-11-23 19:38:29 [info]: Token: 
+2025-11-23 19:38:34 [info]: Token: 
+2025-11-23 19:38:39 [info]: Token: 
+2025-11-23 19:38:44 [info]: Token: 
+2025-11-23 19:38:49 [info]: Token: 
+2025-11-23 19:38:55 [info]: Token: 
+2025-11-23 19:38:59 [info]: Token: 
+2025-11-23 19:39:04 [info]: Token: 
+2025-11-23 19:39:09 [info]: Token: 
+2025-11-23 19:39:14 [info]: Token: 
+2025-11-23 19:39:20 [info]: Token: 
+2025-11-23 19:39:24 [info]: Token: 
+2025-11-23 19:39:29 [info]: Token: 
+2025-11-23 19:39:34 [info]: Token: 
+2025-11-23 19:39:39 [info]: Token: 
+2025-11-23 19:39:44 [info]: Token: 
+2025-11-23 19:39:49 [info]: Token: 
+2025-11-23 19:39:54 [info]: Token: 
+2025-11-23 19:41:04 [info]: Fleet login attempt: owner.tbilisi@fleet.ge
+2025-11-23 19:41:05 [info]: Fleet user logged in: owner.tbilisi@fleet.ge (OWNER)
+2025-11-23 19:41:05 [info]: Token: 
+2025-11-23 19:41:05 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:41:05 [info]: Token: 
+2025-11-23 19:41:05 [info]: Token: 
+2025-11-23 19:41:05 [info]: Token: 
+2025-11-23 19:41:05 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:41:05 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:41:05 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:42:04 [info]: Token: 
+2025-11-23 19:42:04 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:42:05 [info]: Token: 
+2025-11-23 19:42:05 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:42:05 [info]: Token: 
+2025-11-23 19:42:05 [info]: Token: 
+2025-11-23 19:42:05 [info]: Token: 
+2025-11-23 19:42:05 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:42:05 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:42:05 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:42:10 [info]: Token: 
+2025-11-23 19:42:10 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:42:52 [info]: Token: 
+2025-11-23 19:42:52 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:42:53 [info]: Token: 
+2025-11-23 19:42:53 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:42:53 [info]: Token: 
+2025-11-23 19:42:53 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:42:53 [info]: Token: 
+2025-11-23 19:42:53 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:42:53 [info]: Token: 
+2025-11-23 19:42:53 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:43:39 [info]: Token: 
+2025-11-23 19:43:39 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:43:39 [info]: Token: 
+2025-11-23 19:43:39 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:43:39 [info]: Token: 
+2025-11-23 19:43:39 [info]: Token: 
+2025-11-23 19:43:39 [info]: Token: 
+2025-11-23 19:43:39 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:43:39 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:43:39 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:43:55 [info]: Token: 
+2025-11-23 19:43:55 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:43:56 [info]: Token: 
+2025-11-23 19:43:56 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:43:56 [info]: Token: 
+2025-11-23 19:43:56 [info]: Token: 
+2025-11-23 19:43:56 [info]: Token: 
+2025-11-23 19:43:56 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:43:56 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:43:56 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:44:02 [info]: Token: 
+2025-11-23 19:44:02 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:44:02 [info]: Token: 
+2025-11-23 19:44:02 [info]: Token: 
+2025-11-23 19:44:03 [info]: Token: 
+2025-11-23 19:44:03 [info]: Token: 
+2025-11-23 19:44:03 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:44:03 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:44:03 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:44:03 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:47:00 [info]: Token: 
+2025-11-23 19:47:00 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:47:01 [info]: Token: 
+2025-11-23 19:47:01 [info]: Token: 
+2025-11-23 19:47:01 [info]: Token: 
+2025-11-23 19:47:01 [info]: Token: 
+2025-11-23 19:47:01 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:47:01 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:47:01 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:47:01 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:47:10 [info]: Token: 
+2025-11-23 19:47:10 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:47:10 [info]: Token: 
+2025-11-23 19:47:10 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:47:10 [info]: Token: 
+2025-11-23 19:47:10 [info]: Token: 
+2025-11-23 19:47:10 [info]: Token: 
+2025-11-23 19:47:10 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:47:10 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:47:10 [info]: No wallet address found for user, skipping NFT verification
+2025-11-23 19:47:35 [info]: Token: 
+2025-11-23 19:50:12 [info]: Token: 
+2025-11-23 19:50:17 [info]: Token: 
+2025-11-23 20:56:16 [info]: Firebase Admin initialized successfully
+2025-11-23 19:56:17 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 19:56:17 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 19:56:17 [info]: ✅ Redis connected
+2025-11-23 19:56:18 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 19:58:26 [info]: Token: 
+2025-11-23 19:58:31 [info]: Token: 
+2025-11-23 19:58:36 [info]: Token: 
+2025-11-23 19:59:22 [info]: Invalidated NFT caches for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 19:59:22 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 19:59:23 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 19:59:24 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 19:59:24 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 19:59:24 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 19:59:24 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 19:59:24 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 19:59:25 [info]: Token: 
+2025-11-23 19:59:25 [info]: Checking NFT access for wallet:
+2025-11-23 19:59:25 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 19:59:25 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 19:59:25 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 19:59:25 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 19:59:25 [info]: NFT verification result:
+2025-11-23 19:59:25 [info]: Token: 
+2025-11-23 19:59:25 [info]: Checking NFT access for wallet:
+2025-11-23 19:59:25 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 19:59:25 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 19:59:25 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 19:59:25 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 19:59:25 [info]: NFT verification result:
+2025-11-23 19:59:26 [info]: Token: 
+2025-11-23 19:59:26 [info]: Checking NFT access for wallet:
+2025-11-23 19:59:26 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 19:59:26 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 19:59:26 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 19:59:26 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 19:59:26 [info]: NFT verification result:
+2025-11-23 21:00:31 [info]: Firebase Admin initialized successfully
+2025-11-23 20:00:33 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 20:00:33 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 20:00:33 [info]: ✅ Redis connected
+2025-11-23 20:00:34 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 20:00:37 [info]: Checking NFT access for wallet:
+2025-11-23 20:00:37 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:00:37 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:00:37 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:00:37 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:00:37 [info]: NFT verification result:
+2025-11-23 20:00:37 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:00:37 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:00:37 [info]: [NFT Mint API] Payment transaction created. Price: 0.001 SOL
+2025-11-23 20:05:17 [info]: Checking NFT access for wallet:
+2025-11-23 20:05:17 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:05:18 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 20:05:19 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 20:05:19 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 20:05:19 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 20:05:19 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 20:05:19 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:19 [info]: NFT verification result:
+2025-11-23 20:05:20 [info]: Checking NFT access for wallet:
+2025-11-23 20:05:20 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:05:20 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:20 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:20 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:20 [info]: NFT verification result:
+2025-11-23 20:05:20 [info]: Checking NFT access for wallet:
+2025-11-23 20:05:20 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:05:20 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:20 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:20 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:20 [info]: NFT verification result:
+2025-11-23 20:05:22 [info]: Checking NFT access for wallet:
+2025-11-23 20:05:22 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:05:22 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:22 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:22 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:22 [info]: NFT verification result:
+2025-11-23 20:05:29 [info]: Checking NFT access for wallet:
+2025-11-23 20:05:29 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:05:29 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:29 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:29 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:29 [info]: NFT verification result:
+2025-11-23 20:05:29 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:31 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:05:31 [info]: [NFT Mint API] Payment transaction created. Price: 0.001 SOL
+2025-11-23 20:06:57 [info]: Checking NFT access for wallet:
+2025-11-23 20:06:57 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:06:57 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:06:57 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:06:57 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:06:57 [info]: NFT verification result:
+2025-11-23 20:06:58 [info]: Checking NFT access for wallet:
+2025-11-23 20:06:58 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:06:58 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:06:58 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:06:58 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:06:58 [info]: NFT verification result:
+2025-11-23 20:06:58 [info]: Checking NFT access for wallet:
+2025-11-23 20:06:58 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:06:58 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:06:58 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:06:58 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:06:58 [info]: NFT verification result:
+2025-11-23 20:06:59 [info]: Checking NFT access for wallet:
+2025-11-23 20:06:59 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:06:59 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:06:59 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:06:59 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:06:59 [info]: NFT verification result:
+2025-11-23 20:07:55 [info]: Checking NFT access for wallet:
+2025-11-23 20:07:55 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:07:55 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:07:55 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:07:55 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:07:55 [info]: NFT verification result:
+2025-11-23 20:07:56 [info]: Checking NFT access for wallet:
+2025-11-23 20:07:56 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:07:56 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:07:56 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:07:56 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:07:56 [info]: NFT verification result:
+2025-11-23 20:07:57 [info]: Checking NFT access for wallet:
+2025-11-23 20:07:57 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:07:57 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:07:57 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:07:57 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:07:57 [info]: NFT verification result:
+2025-11-23 20:07:57 [info]: Checking NFT access for wallet:
+2025-11-23 20:07:57 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:07:57 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:07:57 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:07:57 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:07:57 [info]: NFT verification result:
+2025-11-23 20:08:03 [info]: Checking NFT access for wallet:
+2025-11-23 20:08:03 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:08:03 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:08:03 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:08:03 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:08:03 [info]: NFT verification result:
+2025-11-23 20:08:03 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:08:06 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:08:06 [info]: [NFT Mint API] Payment transaction created. Price: 0.001 SOL
+2025-11-23 20:08:56 [info]: Checking NFT access for wallet:
+2025-11-23 20:08:56 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:08:56 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:08:56 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:08:56 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:08:56 [info]: NFT verification result:
+2025-11-23 20:08:58 [info]: [Mint Status] Found signature 5VTMT9NXXsh1zSCdCTy81xe19yfH9syLCi6MnftLDbacEUBy5LRcsNbwPh52foQAqy6f9CobaaqVcDavqJrWiWbZ for reference 85XXxmHvbCsGKFckQ9enTXR6nR53AYkq9QZNNWJAmV4b
+2025-11-23 20:08:58 [info]: Checking NFT access for wallet:
+2025-11-23 20:08:58 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:08:58 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:08:58 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:08:58 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:08:58 [info]: NFT verification result:
+2025-11-23 20:08:58 [info]: [NFT Mint API] Executing mint for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3 after payment 5VTMT9NXXsh1zSCdCTy81xe19yfH9syLCi6MnftLDbacEUBy5LRcsNbwPh52foQAqy6f9CobaaqVcDavqJrWiWbZ
+2025-11-23 20:08:58 [info]: Uploading NFT image...
+2025-11-23 20:09:24 [info]: Uploading metadata...
+2025-11-23 20:09:40 [info]: Minting NFT to 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3...
+2025-11-23 20:09:43 [info]: ✅ NFT minted successfully: AL67Dc35wn56TGDDsSwGLNaDmonqqCSTSDAUK312ibeE
+2025-11-23 20:09:43 [info]: Invalidated NFT caches for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:10:02 [info]: Checking NFT access for wallet:
+2025-11-23 20:10:02 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:10:02 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 20:10:02 [info]: Checking NFT access for wallet:
+2025-11-23 20:10:02 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:10:03 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 20:10:03 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 20:10:03 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 20:10:03 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 20:10:03 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 20:10:03 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:10:03 [info]: NFT verification result:
+2025-11-23 20:10:03 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 20:10:03 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 20:10:03 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 20:10:03 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:10:03 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:10:03 [info]: NFT verification result:
+2025-11-23 21:12:05 [info]: Firebase Admin initialized successfully
+2025-11-23 20:12:06 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 20:12:06 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 20:12:07 [info]: ✅ Redis connected
+2025-11-23 20:12:08 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 21:13:06 [info]: Firebase Admin initialized successfully
+2025-11-23 20:13:07 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 20:13:07 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 20:13:07 [info]: ✅ Redis connected
+2025-11-23 20:13:09 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 20:13:12 [info]: Checking NFT access for wallet:
+2025-11-23 20:13:12 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:13:12 [info]: Cache hit for wallet ownership: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:13:12 [info]: Cache hit for staked NFTs: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:13:12 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:13:12 [info]: NFT verification result for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false
+2025-11-23 21:16:03 [info]: Firebase Admin initialized successfully
+2025-11-23 20:16:04 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 20:16:04 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 20:16:04 [info]: ✅ Redis connected
+2025-11-23 20:16:05 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 21:16:34 [info]: Firebase Admin initialized successfully
+2025-11-23 20:16:35 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 20:16:35 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 20:16:35 [info]: ✅ Redis connected
+2025-11-23 20:16:37 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 21:18:01 [info]: Firebase Admin initialized successfully
+2025-11-23 20:18:02 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 20:18:02 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 20:18:02 [info]: ✅ Redis connected
+2025-11-23 20:18:05 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 20:19:18 [info]: Checking NFT access for wallet:
+2025-11-23 20:19:18 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:19:18 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 20:19:19 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 20:19:19 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 20:19:19 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 20:19:19 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 20:19:19 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:19:19 [info]: NFT verification result for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false
+2025-11-23 20:19:19 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 20:19:34 [info]: Invalidated NFT caches for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:19:34 [info]: Checking NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3, collection: 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:19:34 [info]: [Helius] Using RPC endpoint: (...args) => {
+                const result = value(...args);
+                return isPending(result) ? result.send() : result;
+            }
+2025-11-23 20:19:34 [info]: [Helius] Raw response for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: total=0, items=0
+2025-11-23 20:19:34 [info]: [Helius] Filtered for collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z. Found 0 matching NFTs.
+2025-11-23 20:19:34 [info]: NFT verification for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 NFTs)
+2025-11-23 20:19:34 [info]: Staked NFTs check for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3: false (0 staked)
+2025-11-23 20:19:34 [info]: No GoCabs NFT access for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 21:20:41 [info]: Firebase Admin initialized successfully
+2025-11-23 20:20:41 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 20:20:41 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 20:20:42 [info]: ✅ Redis connected
+2025-11-23 20:20:43 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 21:22:53 [info]: Firebase Admin initialized successfully
+2025-11-23 20:22:53 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 20:22:53 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 20:22:53 [info]: ✅ Redis connected
+2025-11-23 20:22:55 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 21:23:32 [info]: Firebase Admin initialized successfully
+2025-11-23 20:23:33 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 20:23:33 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 20:23:33 [info]: ✅ Redis connected
+2025-11-23 20:23:34 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 20:23:35 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:23:36 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:23:36 [info]: [NFT Mint API] Payment transaction created. Price: 0.001 SOL
+2025-11-23 20:23:55 [info]: [Mint Status] Found signature 4T9xs4PioHSAZmuq9BLUXJkGMnPKxK9bSQjmgEXU3LpJS6HTjYyvqqkhMQWQbMTeuoUoZ3JmP9F8JxDFT2fP3yx9 for reference CM43aRmH9UwLLyrny4vR2Y4r9MRmN59KzRsR453ad5hn
+2025-11-23 20:23:55 [info]: [NFT Mint API] Executing mint for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3 after payment 4T9xs4PioHSAZmuq9BLUXJkGMnPKxK9bSQjmgEXU3LpJS6HTjYyvqqkhMQWQbMTeuoUoZ3JmP9F8JxDFT2fP3yx9
+2025-11-23 20:23:55 [info]: Uploading NFT image...
+2025-11-23 20:24:17 [info]: NFT image uploaded to: https://gateway.irys.xyz/9NriKqhtfvd18jW5mDcZgpYqAQZHtdq9MNepnPJziS3w
+2025-11-23 20:24:17 [info]: Uploading metadata...
+2025-11-23 20:24:34 [info]: NFT metadata uploaded to: https://gateway.irys.xyz/6ZVf6Vkt3oT2rqpB144kDkZ4ntPaehdX8U9Vt19m28w3
+2025-11-23 20:24:34 [info]: Minting NFT (Mint Account: BtzKDE5LuUS1XKyFQBr4dSUaNjggk8pov1VZkEL2omwa) to 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3...
+2025-11-23 20:24:35 [info]: ✅ NFT minted successfully: BtzKDE5LuUS1XKyFQBr4dSUaNjggk8pov1VZkEL2omwa
+2025-11-23 20:24:35 [info]: Verifying collection for NFT: BtzKDE5LuUS1XKyFQBr4dSUaNjggk8pov1VZkEL2omwa...
+2025-11-23 20:24:35 [info]: Verifying collection for mint BtzKDE5LuUS1XKyFQBr4dSUaNjggk8pov1VZkEL2omwa against collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:24:36 [error]: IncorrectOwner: Incorrect account owner
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x39. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Incorrect account owner",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Incorrect account owner
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39
+
+    at getMplTokenMetadataErrorFromCode (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\mpl-token-metadata\src\generated\errors\mplTokenMetadata.ts:2997:24)
+    at Object.getErrorFromCode (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\mpl-token-metadata\src\generated\programs\mplTokenMetadata.ts:28:46)
+    at Object.resolveError (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi-program-repository\src\createDefaultProgramRepository.ts:135:35)
+    at Object.sendTransaction (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi-rpc-web3js\src\createWeb3JsRpc.ts:372:42)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at TransactionBuilder.sendAndConfirm (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi\src\TransactionBuilder.ts:359:23)
+    at verifyCollectionAfterMint (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:303:5)
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:227:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:24:36 [error]: Error: Failed to verify collection: Incorrect account owner
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x39. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Incorrect account owner",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Incorrect account owner
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39
+
+    at verifyCollectionAfterMint (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:314:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:227:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:24:36 [error]: Error: Failed to execute mint: Failed to verify collection: Incorrect account owner
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x39. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Incorrect account owner",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Incorrect account owner
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39
+
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:251:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 21:26:01 [info]: Firebase Admin initialized successfully
+2025-11-23 20:26:02 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 20:26:02 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 20:26:02 [info]: ✅ Redis connected
+2025-11-23 20:26:04 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 20:26:04 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:26:05 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:26:05 [info]: [NFT Mint API] Payment transaction created. Price: 0.001 SOL
+2025-11-23 20:26:26 [info]: [Mint Status] Found signature 59vqEL6WpDsd9VBNWNBtrsUUwURhEhC9G9QEVej8mgw88A4HR3codFv7eUH5oCV556wQHa32PWeFv2MnprBhAyhv for reference 26hDsJbi5tecHfc3fY3W8JeK9m4YkPA1Hfys51LtC8rE
+2025-11-23 20:26:26 [info]: [NFT Mint API] Executing mint for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3 after payment 59vqEL6WpDsd9VBNWNBtrsUUwURhEhC9G9QEVej8mgw88A4HR3codFv7eUH5oCV556wQHa32PWeFv2MnprBhAyhv
+2025-11-23 20:26:26 [info]: Uploading NFT image...
+2025-11-23 20:26:55 [info]: NFT image uploaded to: https://gateway.irys.xyz/Ez9CStp9zZhFzMqrdW4TsSzEZYWvczy612zkxVWqFr7i
+2025-11-23 20:26:55 [info]: Uploading metadata...
+2025-11-23 20:27:12 [info]: NFT metadata uploaded to: https://gateway.irys.xyz/6Fzvik8ZS5zip5acxMvARBWurFjzC8dPuyQAxgSxv8iT
+2025-11-23 20:27:12 [info]: Minting NFT (Mint Account: E4gP2y8pp6KLLshSZHqZh6eZyk8Y1zPqvzjS73Zvztmh) to 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3...
+2025-11-23 20:27:26 [info]: ✅ NFT minted successfully: E4gP2y8pp6KLLshSZHqZh6eZyk8Y1zPqvzjS73Zvztmh
+2025-11-23 20:27:26 [info]: Verifying collection for NFT: E4gP2y8pp6KLLshSZHqZh6eZyk8Y1zPqvzjS73Zvztmh...
+2025-11-23 20:27:26 [info]: Verifying collection for mint E4gP2y8pp6KLLshSZHqZh6eZyk8Y1zPqvzjS73Zvztmh against collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:27:26 [error]: CollectionMasterEditionAccountInvalid: Edition account doesnt match collection 
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x71. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Edition account doesnt match collection ",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 16537 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x71"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Edition account doesnt match collection 
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 16537 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x71
+
+    at getMplTokenMetadataErrorFromCode (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\mpl-token-metadata\src\generated\errors\mplTokenMetadata.ts:2997:24)
+    at Object.getErrorFromCode (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\mpl-token-metadata\src\generated\programs\mplTokenMetadata.ts:28:46)
+    at Object.resolveError (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi-program-repository\src\createDefaultProgramRepository.ts:135:35)
+    at Object.sendTransaction (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi-rpc-web3js\src\createWeb3JsRpc.ts:372:42)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at TransactionBuilder.sendAndConfirm (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi\src\TransactionBuilder.ts:359:23)
+    at verifyCollectionAfterMint (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:304:5)
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:227:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:27:26 [error]: Error: Failed to verify collection: Edition account doesnt match collection 
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x71. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Edition account doesnt match collection ",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 16537 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x71"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Edition account doesnt match collection 
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 16537 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x71
+
+    at verifyCollectionAfterMint (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:316:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:227:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:27:26 [error]: Error: Failed to execute mint: Failed to verify collection: Edition account doesnt match collection 
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x71. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Edition account doesnt match collection ",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 16537 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x71"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Edition account doesnt match collection 
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 16537 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x71
+
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:251:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 21:31:16 [info]: Firebase Admin initialized successfully
+2025-11-23 20:31:17 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 20:31:17 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 20:31:17 [info]: ✅ Redis connected
+2025-11-23 20:31:18 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 20:31:38 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:31:45 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:31:45 [info]: [NFT Mint API] Payment transaction created. Price: 0.001 SOL
+2025-11-23 20:32:06 [info]: [Mint Status] Found signature NhCmviENwGwcRiE6dCmoYjeP6RpGg8QrjuAvz3q6omMSmLxRrxn5E36a3TYL1tMHP6YybSGy86MU2K1hD4R9mKc for reference 4UxGTJWxdvsjqFcgdGxjTqmnjzQbPbvSBbsT1pMWXSfu
+2025-11-23 20:32:06 [info]: [NFT Mint API] Executing mint for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3 after payment NhCmviENwGwcRiE6dCmoYjeP6RpGg8QrjuAvz3q6omMSmLxRrxn5E36a3TYL1tMHP6YybSGy86MU2K1hD4R9mKc
+2025-11-23 20:32:06 [info]: Uploading NFT image...
+2025-11-23 20:32:36 [info]: NFT image uploaded to: https://gateway.irys.xyz/CGiEn7Uj9oMwgZPJxmPwAS1ASnzbrZK1tVoc9hpG9qoH
+2025-11-23 20:32:36 [info]: Uploading metadata...
+2025-11-23 20:32:57 [info]: NFT metadata uploaded to: https://gateway.irys.xyz/GKhVFf6WfEWNSyFWZbkJKw4KKLVfwg1hpuJK16KTdQoi
+2025-11-23 20:32:57 [info]: Minting NFT (Mint Account: DtuZo7YxQPcCy88FKuyG1PqyPd6gTfm1RvQLQmr88Khm) to 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3...
+2025-11-23 20:33:00 [info]: ✅ NFT minted successfully: DtuZo7YxQPcCy88FKuyG1PqyPd6gTfm1RvQLQmr88Khm
+2025-11-23 20:33:00 [info]: Verifying collection for NFT: DtuZo7YxQPcCy88FKuyG1PqyPd6gTfm1RvQLQmr88Khm...
+2025-11-23 20:33:00 [info]: Verifying collection for mint DtuZo7YxQPcCy88FKuyG1PqyPd6gTfm1RvQLQmr88Khm against collection 54pGiUsnamkorugw4NYesvxnXTrfd6cjwJCDoxT1ZU7Z
+2025-11-23 20:33:01 [error]: IncorrectOwner: Incorrect account owner
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x39. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Incorrect account owner",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Incorrect account owner
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39
+
+    at getMplTokenMetadataErrorFromCode (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\mpl-token-metadata\src\generated\errors\mplTokenMetadata.ts:2997:24)
+    at Object.getErrorFromCode (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\mpl-token-metadata\src\generated\programs\mplTokenMetadata.ts:28:46)
+    at Object.resolveError (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi-program-repository\src\createDefaultProgramRepository.ts:135:35)
+    at Object.sendTransaction (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi-rpc-web3js\src\createWeb3JsRpc.ts:372:42)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at TransactionBuilder.sendAndConfirm (C:\Users\Chizi\Desktop\gocab\backend\node_modules\@metaplex-foundation\umi\src\TransactionBuilder.ts:359:23)
+    at verifyCollectionAfterMint (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:281:5)
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:227:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:33:01 [error]: Error: Failed to verify collection: Incorrect account owner
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x39. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Incorrect account owner",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Incorrect account owner
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39
+
+    at verifyCollectionAfterMint (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:290:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:227:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:33:01 [error]: Error: Failed to execute mint: Failed to verify collection: Incorrect account owner
+
+Source: Program > mplTokenMetadata [metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s]
+
+Caused By: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x39. 
+Logs: 
+[
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]",
+  "Program log: IX: Verify",
+  "Program log: Incorrect account owner",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units",
+  "Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+
+Program Logs:
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s invoke [1]
+| Program log: IX: Verify
+| Program log: Incorrect account owner
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s consumed 5918 of 200000 compute units
+| Program metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s failed: custom program error: 0x39
+
+    at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:251:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 21:37:33 [info]: Firebase Admin initialized successfully
+2025-11-23 20:37:34 [info]: 🚀 Server ready at http://localhost:4000/graphql
+2025-11-23 20:37:34 [info]: 🔌 WebSocket server ready at ws://localhost:4000
+2025-11-23 20:37:34 [info]: ✅ Redis connected
+2025-11-23 20:37:35 [info]: ✅ Solana connected - Version: 3.0.6
+2025-11-23 20:37:51 [info]: [NFT Mint API] Creating payment transaction for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:37:51 [info]: Payment transaction created for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:37:51 [info]: [NFT Mint API] Payment transaction created. Price: 0.001 SOL
+2025-11-23 20:38:17 [info]: [Mint Status] Found signature 33SzRCgqZyZBvb8CowbQAPoMc6qxQY1kX5Ap9LzhBLkuZk7LK8bRszPVYzESL4owU6PcqLtrnwAvYma4VErNXnpo for reference 3z2YheCFdTNPPckGR97J4P8phXWkT291P1KxzF5ZAji1
+2025-11-23 20:38:17 [info]: [NFT Mint API] Executing mint for 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3 after payment 33SzRCgqZyZBvb8CowbQAPoMc6qxQY1kX5Ap9LzhBLkuZk7LK8bRszPVYzESL4owU6PcqLtrnwAvYma4VErNXnpo
+2025-11-23 20:38:17 [info]: Uploading NFT image...
+2025-11-23 20:38:39 [info]: NFT image uploaded to: https://gateway.irys.xyz/DfgTm2QzcX1fKbvyuSnQLgiTHiJBfmvKSpkBfVArHudy
+2025-11-23 20:38:39 [info]: Uploading metadata...
+2025-11-23 20:38:57 [info]: NFT metadata uploaded to: https://gateway.irys.xyz/CjZn7MDHUyRQWHMSTVhuWTbDobiMRYSh46DGkruUNbbQ
+2025-11-23 20:38:57 [info]: Minting NFT (Mint Account: 8EciZBbrKTuEKpoA5Wg9APPfquNPzn5jUAgd3PRHX4gp) to 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3...
+2025-11-23 20:39:00 [info]: ✅ NFT minted and collection verified successfully: 8EciZBbrKTuEKpoA5Wg9APPfquNPzn5jUAgd3PRHX4gp
+2025-11-23 20:39:00 [info]: Invalidated NFT caches for wallet: 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3
+2025-11-23 20:39:00 [info]: Found user 7244e989-4d1b-4bc7-b02b-72e61e85cbe1 for wallet 9eM2v3c26Md1uT9byBt5iWmdYi63oJg7sSh6oXYFVxt3 after minting.
+2025-11-23 20:39:00 [info]: Generated new auth token for user 7244e989-4d1b-4bc7-b02b-72e61e85cbe1 after mint.

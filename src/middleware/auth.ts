@@ -10,6 +10,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 interface JWTPayload {
   userId: string;
   walletAddress: string;
+  isNFTHolder?: boolean; // Add isNFTHolder to the JWT payload
 }
 
 export const authMiddleware = async (
@@ -26,8 +27,20 @@ export const authMiddleware = async (
     }
 
     const token = authHeader.replace("Bearer ", "");
-    logger.info("Token: ", token);
+    // logger.info("Token: ", token);
     const decoded = jwt.verify(token, JWT_SECRET) as JWTPayload;
+
+    // If isNFTHolder status is in the token, we can trust it for this request.
+    // The token will be re-issued on login, wallet change, or minting/staking events.
+    if (decoded.isNFTHolder !== undefined) {
+      (req as any).user = {
+        id: decoded.userId,
+        walletAddress: decoded.walletAddress,
+        isNFTHolder: decoded.isNFTHolder,
+      };
+      (req as any).userId = decoded.userId; // Also set userId directly for GraphQL context
+      return next();
+    }
 
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
@@ -47,22 +60,30 @@ export const authMiddleware = async (
     if (user.walletAddress) {
       try {
         logger.info("Checking NFT access for wallet:", user.walletAddress);
+        // This performs a check if the token is old and doesn't have the isNFTHolder flag.
+        // The result of this check will be used for the duration of this single request.
         const access = await NFTVerificationService.hasNFTAccess(
           user.walletAddress
         );
         isNFTHolder = access.hasAccess;
-        logger.info("NFT verification result:", isNFTHolder);
+
+        logger.info(
+          `NFT verification result for ${user.walletAddress}: ${isNFTHolder}`
+        );
       } catch (verificationError) {
         logger.warn("NFT verification failed:", verificationError);
       }
     } else {
-      logger.info("No wallet address found for user, skipping NFT verification");
+      logger.info(
+        "No wallet address found for user, skipping NFT verification"
+      );
     }
 
     (req as any).user = {
       ...user,
       isNFTHolder,
     };
+    (req as any).userId = user.id; // Also set userId directly for GraphQL context
     next();
   } catch (error) {
     logger.error("Auth middleware error:", error);
@@ -74,9 +95,10 @@ export const authMiddleware = async (
 export const generateToken = (
   userId: string,
   role: UserRole,
-  identifier?: string,
+  walletAddress: string,
+  isNFTHolder: boolean = false // Add isNFTHolder to token generation
 ): string => {
-  return jwt.sign({ userId, role, identifier }, JWT_SECRET, {
+  return jwt.sign({ userId, role, walletAddress, isNFTHolder }, JWT_SECRET, {
     expiresIn: "7d",
   });
 };

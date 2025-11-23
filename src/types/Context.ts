@@ -7,7 +7,6 @@ export interface User {
   id: string;
   walletAddress?: string | null;
   role: string;
-  isNFTHolder?: boolean;
   nftTokens?: string[];
 }
 
@@ -15,9 +14,10 @@ export interface Context {
   req: Request;
   res: Response;
   user: User | null;
-  userId: string | null; 
+  userId: string | null;
   userRole: string | null; // Added userRole
   ownerId: string | null; // Added ownerId
+  isNFTHolder?: boolean;
   prisma: PrismaClient;
   redisClient: Redis;
   pubSub: PubSubEngine;

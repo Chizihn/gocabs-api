@@ -30,6 +30,7 @@ import {
 } from "@solana/web3.js";
 import { solanaConnection } from "../../config/solana";
 import { NFTVerificationService } from "./NFTVerificationService";
+import { prisma } from "../../config/database";
 
 let umiInstance: Umi | null = null;
 let mintKeypair: any = null;
@@ -142,7 +143,11 @@ export async function createMintPaymentTransaction(
 export async function executeMintAfterPayment(
   recipientAddress: string,
   paymentSignature: string
-): Promise<{ success: boolean; mintAddress: string }> {
+): Promise<{
+  success: boolean;
+  mintAddress: string;
+  user: { id: string; role: any } | null;
+}> {
   try {
     const umi = getUmi();
     const collectionAddress = PROGRAM_IDS.GOCABS_NFT_COLLECTION;
@@ -171,6 +176,7 @@ export async function executeMintAfterPayment(
     });
 
     const [imageUri] = await umi.uploader.upload([imageFile]);
+    logger.info(`NFT image uploaded to: ${imageUri}`);
 
     // Create metadata
     const metadata = {
@@ -186,13 +192,16 @@ export async function executeMintAfterPayment(
 
     logger.info("Uploading metadata...");
     const metadataUri = await umi.uploader.uploadJson(metadata);
+    logger.info(`NFT metadata uploaded to: ${metadataUri}`);
 
     // Mint the NFT - we need to create a new signer for the mint
     // Since we pre-generated the mint address, we'll need to use it
     // Actually, we should generate a new mint signer here
     const mint = generateSigner(umi);
 
-    logger.info(`Minting NFT to ${recipientAddress}...`);
+    logger.info(
+      `Minting NFT (Mint Account: ${mint.publicKey}) to ${recipientAddress}...`
+    );
     await createNft(umi, {
       mint,
       name: metadata.name,
@@ -205,73 +214,45 @@ export async function executeMintAfterPayment(
         key: publicKey(collectionAddress),
         verified: false,
       }),
-    }).sendAndConfirm(umi);
+    })
+      .add(
+        verifyCollectionV1(umi, {
+          metadata: findMetadataPda(umi, { mint: mint.publicKey }),
+          collectionMint: publicKey(collectionAddress),
+          authority: umi.identity,
+        })
+      )
+      .sendAndConfirm(umi);
 
     const actualMintAddress = mint.publicKey;
 
-    logger.info(`✅ NFT minted successfully: ${actualMintAddress}`);
+    logger.info(
+      `✅ NFT minted and collection verified successfully: ${actualMintAddress}`
+    );
 
     // Invalidate the cache so the next check reflects the new ownership
     await NFTVerificationService.invalidateCache(recipientAddress);
 
+    // Find the user associated with this wallet to return their info for token generation
+    const user = await prisma.user.findFirst({
+      where: { walletAddress: recipientAddress },
+      select: { id: true, role: true },
+    });
+
+    if (user) {
+      logger.info(
+        `Found user ${user.id} for wallet ${recipientAddress} after minting.`
+      );
+    }
+
     return {
       success: true,
       mintAddress: actualMintAddress,
+      user,
     };
   } catch (error: any) {
     logger.error("Error executing mint:", error);
     throw new Error(`Failed to execute mint: ${error.message}`);
-  }
-}
-
-/**
- * Verify the collection after minting
- * This should be called after the transaction is confirmed
- */
-export async function verifyCollectionAfterMint(
-  mintAddress: string
-): Promise<void> {
-  try {
-    const umi = getUmi();
-    const collectionAddress = PROGRAM_IDS.GOCABS_NFT_COLLECTION;
-
-    if (!collectionAddress) {
-      throw new Error("NFT_COLLECTION_ADDRESS not configured");
-    }
-
-    const nftMetadataPda = findMetadataPda(umi, {
-      mint: publicKey(mintAddress),
-    });
-    const collectionUmiPubkey = publicKey(collectionAddress);
-    const collectionMetadataPda = findMetadataPda(umi, {
-      mint: collectionUmiPubkey,
-    });
-    const collectionMasterEditionPda = findMasterEditionPda(umi, {
-      mint: collectionUmiPubkey,
-    });
-
-    // Get collection metadata to verify authority
-    const collectionMetadata = await fetchMetadata(umi, collectionMetadataPda);
-
-    if (collectionMetadata.updateAuthority !== umi.identity.publicKey) {
-      throw new Error(
-        `Not authorized to verify collection. Expected ${collectionMetadata.updateAuthority}, got ${umi.identity.publicKey}`
-      );
-    }
-
-    // Verify the collection
-    await verifyCollectionV1(umi, {
-      metadata: nftMetadataPda,
-      collectionMint: collectionUmiPubkey,
-      collectionMetadata: collectionMetadataPda,
-      collectionMasterEdition: collectionMasterEditionPda,
-      authority: umi.identity,
-    }).sendAndConfirm(umi);
-
-    logger.info(`Collection verified for NFT: ${mintAddress}`);
-  } catch (error: any) {
-    logger.error("Error verifying collection:", error);
-    throw new Error(`Failed to verify collection: ${error.message}`);
   }
 }
 

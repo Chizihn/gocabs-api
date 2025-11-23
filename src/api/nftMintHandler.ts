@@ -6,6 +6,7 @@ import {
 } from "../services/blockchain/NFTMintService";
 import { logger } from "../utils/logger";
 import { PublicKey } from "@solana/web3.js";
+import { generateToken } from "../middleware/auth";
 
 /**
  * REST API endpoint for preparing NFT mint payment transactions
@@ -122,12 +123,24 @@ export const nftMintExecuteHandler = async (req: Request, res: Response) => {
     );
 
     // Execute the mint
-    const result = await executeMintAfterPayment(
+    const { success, mintAddress, user } = await executeMintAfterPayment(
       walletAddress,
       paymentSignature
     );
 
-    return res.status(200).json(result);
+    let newAuthToken: string | null = null;
+    if (success && user) {
+      // CRITICAL FIX: Generate a new token that confirms NFT ownership.
+      // The client must use this new token for all subsequent requests.
+      newAuthToken = generateToken(user.id, user.role, walletAddress, true);
+      logger.info(`Generated new auth token for user ${user.id} after mint.`);
+    }
+
+    return res.status(200).json({
+      success,
+      mintAddress,
+      newAuthToken, // Send the new token to the client
+    });
   } catch (error: any) {
     logger.error("[NFT Mint API] Error executing mint:", error);
     return res.status(500).json({
