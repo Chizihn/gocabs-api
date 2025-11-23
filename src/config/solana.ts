@@ -29,6 +29,15 @@ export const SOLANA_CONFIG = {
   commitment: "confirmed" as const,
 };
 
+// --- START: Environment Variable Validation ---
+if (!process.env.NFT_COLLECTION_ADDRESS) {
+  const errorMessage =
+    "FATAL ERROR: NFT_COLLECTION_ADDRESS environment variable is not set.";
+  logger.error(errorMessage);
+  throw new Error(errorMessage);
+}
+// --- END: Environment Variable Validation ---
+
 export const PROGRAM_IDS = {
   TOKEN_PROGRAM: new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"),
   ASSOCIATED_TOKEN_PROGRAM: new PublicKey(
