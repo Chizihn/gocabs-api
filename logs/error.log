@@ -42803,3 +42803,24 @@ Timed out fetching a new connection from the connection pool. More info: http://
 2025-11-23 05:58:22 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
 2025-11-23 06:37:40 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
 2025-11-23 06:40:57 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:45:19 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:47:34 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:47:56 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:51:11 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:54:35 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:54:55 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:54:56 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.field"; Expected non-nullable type "String!" not to be null.
+2025-11-23 06:54:56 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.order"; Expected non-nullable type "String!" not to be null.
+2025-11-23 06:54:57 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:55:52 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:55:53 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.field"; Expected non-nullable type "String!" not to be null.
+2025-11-23 06:55:53 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.order"; Expected non-nullable type "String!" not to be null.
+2025-11-23 06:55:54 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:56:44 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:56:45 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.field"; Expected non-nullable type "String!" not to be null.
+2025-11-23 06:56:45 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.order"; Expected non-nullable type "String!" not to be null.
+2025-11-23 06:56:46 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:56:56 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 06:56:57 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.field"; Expected non-nullable type "String!" not to be null.
+2025-11-23 06:56:57 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.order"; Expected non-nullable type "String!" not to be null.
+2025-11-23 06:56:58 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
