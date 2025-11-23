@@ -24,6 +24,12 @@ export class Event {
   location!: Record<string, unknown>;
 
   @Field()
+  city!: string;
+
+  @Field()
+  country!: string;
+
+  @Field()
   eventDate!: Date;
 
   @Field()
@@ -53,8 +59,14 @@ export class CreateEventInput {
   @Field(() => String, { nullable: true })
   description?: string;
 
-  @Field(() => GraphQLJSONObject)
-  location!: Record<string, unknown>;
+  @Field(() => GraphQLJSONObject, { nullable: true })
+  location?: Record<string, unknown>;
+
+  @Field(() => String)
+  city!: string;
+
+  @Field(() => String)
+  country!: string;
 
   @Field()
   eventDate!: Date;

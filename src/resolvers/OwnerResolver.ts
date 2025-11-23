@@ -28,6 +28,7 @@ import { Driver } from "../types/graphql/Driver";
 import { Owner } from "../types/graphql/Owner";
 import { GraphQLError } from "graphql";
 import { FleetOverview } from "../types/graphql/Fleet";
+import { logger } from "../utils/logger";
 
 @ObjectType()
 class RevenueDataPoint {
@@ -314,15 +315,37 @@ export class OwnerResolver {
     const owner = await prisma.owner.findUnique({
       where: { userId: userId! },
     });
+    logger.info("input data", data);
+    console.log("input data console", data);
+    logger.info("owner", owner);
+    console.log("data", data.eventId);
 
     if (!owner) throw new Error("Owner not found");
+
+    console.log("owner id", owner.id);
 
     // Verify vehicle belongs to this owner
     const vehicle = await prisma.vehicle.findFirst({
       where: { id: data.vehicleId, ownerId: owner.id },
     });
 
+    logger.info("vehicle", vehicle);
+
     if (!vehicle) throw new Error("Vehicle not found or not owned by you");
+
+    // Verify event exists
+    const event = await prisma.event.findUnique({
+      where: { id: data.eventId },
+    });
+    if (!event) throw new Error(`Event with ID ${data.eventId} not found`);
+
+    // Verify driver exists if provided
+    if (data.driverId) {
+      const driver = await prisma.driver.findUnique({
+        where: { id: data.driverId },
+      });
+      if (!driver) throw new Error(`Driver with ID ${data.driverId} not found`);
+    }
 
     const shuttle = await prisma.shuttle.create({
       data: {
@@ -339,7 +362,9 @@ export class OwnerResolver {
       include: {
         event: true,
         vehicle: true,
-        driver: true,
+        driver: {
+          include: { user: true },
+        },
       },
     });
 
@@ -436,7 +461,7 @@ export class OwnerResolver {
     const drivers = await prisma.driver.findMany({
       where: {
         isOnline: true,
-        currentShuttle: null,
+        // currentShuttle: null,
       },
       include: { user: true },
       orderBy: { rating: "desc" },

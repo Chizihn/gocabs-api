@@ -170,3 +170,24 @@ export class UpdateShuttleInput {
 
 @ObjectType()
 export class PaginatedShuttlesResponse extends PaginatedResponse(Shuttle) {}
+
+export enum ShuttleSortField {
+  DEPARTURE_TIME = "departureTime",
+  BASE_PRICE = "basePriceUsdc",
+  CREATED_AT = "createdAt",
+}
+registerEnumType(ShuttleSortField, {
+  name: "ShuttleSortField",
+  description: "Fields to sort shuttles by",
+});
+
+@InputType()
+export class ShuttleSortInput {
+  @Field(() => ShuttleSortField, {
+    defaultValue: ShuttleSortField.DEPARTURE_TIME,
+  })
+  field: ShuttleSortField;
+
+  @Field(() => String, { defaultValue: "asc" })
+  direction: "asc" | "desc";
+}

@@ -2,7 +2,7 @@ import { Server as SocketIOServer } from "socket.io";
 import { prisma } from "../../config/database";
 import { redisClient } from "../../config/redis";
 import { logger } from "../../utils/logger";
-import { Shuttle } from "../../types/graphql/Shuttle";
+import { pubSub } from "../../config/pubsub"; // 1. Import pubSub
 
 interface LocationUpdate {
   shuttleId: string;
@@ -10,6 +10,8 @@ interface LocationUpdate {
   longitude: number;
   timestamp: number;
 }
+
+const LOCATION_UPDATE_TOPIC = "LOCATION_UPDATE"; // 2. Define the topic
 
 export class LocationTrackingService {
   private io: SocketIOServer;
@@ -84,6 +86,13 @@ export class LocationTrackingService {
         timestamp,
       });
 
+      // 3. Publish to GraphQL Subscription
+      await pubSub.publish(LOCATION_UPDATE_TOPIC, {
+        shuttleId,
+        coordinates: { latitude, longitude },
+        timestamp,
+      });
+
       logger.debug(`Location updated for shuttle ${shuttleId}`);
     } catch (error) {
       logger.error("Failed to handle location update:", error);
@@ -135,9 +144,7 @@ export class LocationTrackingService {
     }
   }
 
-  async getShuttleLocation(
-    shuttleId: string
-  ): Promise<{
+  async getShuttleLocation(shuttleId: string): Promise<{
     coordinates: { latitude: number; longitude: number };
     timestamp: number;
   } | null> {

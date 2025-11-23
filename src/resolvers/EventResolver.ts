@@ -48,7 +48,10 @@ class GetEventsArgs {
   endDate?: Date;
 
   @Field({ nullable: true })
-  location?: string;
+  city?: string;
+
+  @Field({ nullable: true })
+  country?: string;
 
   @Field(() => PaginationInput)
   pagination: PaginationInput;
@@ -68,7 +71,8 @@ export class EventResolver {
       eventType,
       startDate,
       endDate,
-      location,
+      city,
+      country,
       pagination,
       sort,
     }: GetEventsArgs
@@ -91,12 +95,12 @@ export class EventResolver {
       where.eventType = { equals: eventType, mode: "insensitive" };
     }
 
-    if (location) {
-      where.location = {
-        path: ["name"], // Assuming location has a 'name' field
-        string_contains: location,
-        mode: "insensitive",
-      };
+    if (city) {
+      where.city = { equals: city, mode: "insensitive" };
+    }
+
+    if (country) {
+      where.country = { equals: country, mode: "insensitive" };
     }
 
     const { page, limit } = pagination;
@@ -191,6 +195,8 @@ export class EventResolver {
         data: {
           name: input.name,
           description: input.description ?? null,
+          city: input.city,
+          country: input.country,
           location: input.location as Prisma.JsonObject,
           eventDate: input.eventDate,
           eventType: input.eventType,

@@ -1,0 +1,502 @@
+// components/HomeHeader.tsx
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { Header } from "./Header";
+import { useTheme } from "@/hooks/useTheme";
+
+interface HomeHeaderProps {
+  location: string;
+  onLocationPress: () => void;
+  onMenuPress: () => void;
+  onProfilePress: () => void;
+}
+
+/**
+ * Preconfigured header variant matching the old design.
+ */
+export const HomeHeader: React.FC<HomeHeaderProps> = ({
+  location,
+  onLocationPress,
+  onMenuPress,
+  onProfilePress,
+}) => {
+  const { colors } = useTheme();
+
+  const Left = (
+    <TouchableOpacity
+      onPress={onMenuPress}
+      className="bg-primary rounded-full h-10 w-10 flex-row items-center justify-center"
+    >
+      <Feather name="menu" size={18} color="black" />
+    </TouchableOpacity>
+  );
+
+  const Center = (
+    <TouchableOpacity
+      onPress={onLocationPress}
+      className="flex-row items-center"
+    >
+      <Text className="text-white font-heading-bold text-xl">{location}</Text>
+      <Feather
+        name="chevron-down"
+        size={16}
+        color="white"
+        style={{ marginLeft: 4 }}
+      />
+    </TouchableOpacity>
+  );
+
+  const Right = (
+    <TouchableOpacity
+      onPress={onProfilePress}
+      className="relative h-10 w-10 rounded-full bg-gray-400 flex justify-center items-center"
+    >
+      <Feather name="user" size={18} color="white" />
+      <View className="absolute -bottom-1 -right-1 h-6 w-6 rounded-full flex justify-center items-center bg-primary">
+        <Feather name="lock" size={12} color="black" />
+      </View>
+    </TouchableOpacity>
+  );
+
+  return <Header left={Left} center={Center} right={Right} />;
+};
+
+
+
+// app/(tabs)/index.tsx
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  ScrollView,
+  ActivityIndicator,
+  Text,
+  RefreshControl,
+} from "react-native";
+import MapView, { Marker } from "react-native-maps";
+import { useTheme } from "@/hooks/useTheme";
+import { TabSwitcher } from "@/components/ui/TabSwitcher";
+import { EventCard } from "@/components/cards/EventCard";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { HomeHeader } from "@/components/HomeHeader";
+import { useQuery } from "@apollo/client";
+import { GET_EVENTS } from "@/services/queries";
+import { useAuthStore } from "@/store/auth";
+import { useRouter } from "expo-router";
+import { Button } from "@/components/ui/Button";
+import { useLocationStore } from "@/store/location";
+import { CustomBottomSheet } from "@/components/ui/BottomSheet";
+import { LocationPicker } from "@/components/LocationPicker";
+import { Ionicons } from "@expo/vector-icons";
+import { Event } from "@/types";
+import { formatDate } from "@/utils/date";
+import { Banner } from "@/components/Banner";
+
+interface SelectedLocation {
+  name: string;
+  coords?: { latitude: number; longitude: number };
+}
+
+export default function EventsScreen() {
+  const { colors } = useTheme();
+  const router = useRouter();
+  const [viewMode, setViewMode] = useState<"map" | "list">("map");
+  const [refreshing, setRefreshing] = useState(false);
+  const hasNFTAccess = useAuthStore((state) => state.hasNFTAccess);
+  const [showLocationPicker, setShowLocationPicker] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState<SelectedLocation>({
+    name: "Current Location",
+  });
+
+  const { location: userCurrentLocation, getCurrentLocation } =
+    useLocationStore();
+
+  useEffect(() => {
+    getCurrentLocation();
+  }, [getCurrentLocation]);
+
+  useEffect(() => {
+    if (userCurrentLocation && !selectedLocation.coords) {
+      setSelectedLocation({
+        name: "Current Location",
+        coords: {
+          latitude: userCurrentLocation.coords.latitude,
+          longitude: userCurrentLocation.coords.longitude,
+        },
+      });
+    }
+  }, [userCurrentLocation, selectedLocation.coords]);
+
+  const { data, loading, error, refetch } = useQuery(GET_EVENTS, {
+    variables: {
+      pagination: { limit: 10, page: 1 },
+      upcoming: true,
+      isActive: true,
+      location:
+        selectedLocation.name !== "Current Location"
+          ? selectedLocation.name
+          : undefined,
+    },
+    fetchPolicy: "cache-and-network",
+  });
+
+  const events: Event[] = data?.events?.items || [];
+  const pagination = data?.events?.pagination;
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    await getCurrentLocation();
+    setRefreshing(false);
+  };
+
+  const handleLocationPress = () => setShowLocationPicker(true);
+
+  const handleSelectLocation = (
+    locationName: string,
+    coords?: { latitude: number; longitude: number }
+  ) => {
+    setSelectedLocation({ name: locationName, coords });
+    setShowLocationPicker(false);
+    refetch({
+      location: locationName !== "Current Location" ? locationName : undefined,
+    });
+  };
+
+  const handleEventPress = (eventId: string) => {
+    router.push(`/events/${eventId}`);
+  };
+
+  const handleShowAllEvents = () => {
+    router.push("/events");
+  };
+
+  const displayLocationName = selectedLocation.name;
+
+  const initialMapRegion = selectedLocation.coords
+    ? {
+        latitude: selectedLocation.coords.latitude,
+        longitude: selectedLocation.coords.longitude,
+        latitudeDelta: 0.15,
+        longitudeDelta: 0.15,
+      }
+    : {
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.3,
+        longitudeDelta: 0.3,
+      };
+
+  if (loading && !data) {
+    return (
+      <SafeAreaView className="flex-1 bg-background items-center justify-center">
+        <ActivityIndicator size="large" color={colors.primary} />
+      </SafeAreaView>
+    );
+  }
+
+  if (error) {
+    return (
+      <SafeAreaView className="flex-1 bg-background items-center justify-center px-6">
+        <Text className="text-white text-center mb-4">
+          Failed to load events. Please try again.
+        </Text>
+        <Button title="Retry" onPress={() => refetch()} />
+      </SafeAreaView>
+    );
+  }
+
+  return (
+    <SafeAreaView className="flex-1 bg-background">
+      <HomeHeader
+        location={displayLocationName}
+        onLocationPress={handleLocationPress}
+        onMenuPress={() => router.push("/settings")}
+        onProfilePress={() => router.push("/profile")}
+      />
+
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 100 }}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <Banner onPress={() => router.push("/welcome")} />
+        <TabSwitcher
+          activeTab={viewMode}
+          onTabChange={setViewMode}
+          tabs={[
+            { id: "map", label: "Map" },
+            { id: "list", label: "List" },
+          ]}
+          containerClassName="mx-4 mt-4 mb-3"
+        />
+
+        {/* Map View */}
+        {viewMode === "map" && events.length > 0 && (
+          <View className="mx-4 mb-6 rounded-3xl overflow-hidden h-80">
+            <MapView style={{ flex: 1 }} region={initialMapRegion}>
+              {events.map((event) => (
+                <Marker
+                  key={event.id}
+                  coordinate={{
+                    latitude: event.location.lat,
+                    longitude: event.location.lng,
+                  }}
+                  title={event.name}
+                  onPress={() => handleEventPress(event.id)}
+                />
+              ))}
+            </MapView>
+          </View>
+        )}
+
+        {/* Events List */}
+        <View className="px-4">
+          {events.length === 0 ? (
+            <View className="py-12 items-center">
+              <Ionicons
+                name="calendar-outline"
+                size={48}
+                color={colors.textSecondary}
+              />
+              <Text className="text-textSecondary text-center mt-4 text-lg">
+                No upcoming events found
+              </Text>
+              <Text className="text-textSecondary/70 text-center mt-2">
+                {selectedLocation.name === "Current Location"
+                  ? "Try changing location or check back later"
+                  : `No events in ${selectedLocation.name}`}
+              </Text>
+              <Button
+                title="View all events"
+                onPress={handleShowAllEvents}
+                className="mt-6"
+              />
+            </View>
+          ) : (
+            <>
+              {events.slice(0, 5).map((event) => (
+                <EventCard
+                  key={event.id}
+                  id={event.id}
+                  title={event.name}
+                  date={formatDate(event.eventDate)}
+                  location={
+                    event.location.address || event.location.name || "Unknown"
+                  }
+                  price="10"
+                  image={
+                    event.imageUrl
+                      ? { uri: event.imageUrl }
+                      : require("@assets/images/event.png")
+                  }
+                  isVerified={hasNFTAccess}
+                  viewMode={viewMode}
+                  // onPress={() => handleEventPress(event.id)}
+                />
+              ))}
+
+              <Button
+                title="View all events"
+                onPress={handleShowAllEvents}
+                className="mt-6"
+              />
+            </>
+          )}
+        </View>
+      </ScrollView>
+
+      <CustomBottomSheet
+        visible={showLocationPicker}
+        onClose={() => setShowLocationPicker(false)}
+      >
+        <LocationPicker
+          onSelectLocation={handleSelectLocation}
+          onClose={() => setShowLocationPicker(false)}
+        />
+      </CustomBottomSheet>
+    </SafeAreaView>
+  );
+}
+
+
+import { create } from "zustand";
+import * as Location from "expo-location";
+
+interface LocationState {
+  location: Location.LocationObject | null;
+  isLoading: boolean;
+  error: string | null;
+  hasPermission: boolean | null;
+  requestPermission: () => Promise<boolean>;
+  getCurrentLocation: () => Promise<Location.LocationObject | null>;
+  watchPosition: () => Promise<() => void>;
+  stopWatching: () => void;
+}
+
+let watchSubscription: Location.LocationSubscription | null = null;
+
+export const useLocationStore = create<LocationState>((set, get) => ({
+  location: null,
+  isLoading: false,
+  error: null,
+  hasPermission: null,
+
+  requestPermission: async () => {
+    try {
+      set({ isLoading: true, error: null });
+      
+      // Check current permission status
+      const { status: existingStatus } = await Location.getForegroundPermissionsAsync();
+      
+      if (existingStatus === "granted") {
+        set({ hasPermission: true, isLoading: false });
+        return true;
+      }
+
+      // Request permission
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      
+      if (status !== "granted") {
+        set({
+          hasPermission: false,
+          isLoading: false,
+          error: "Location permission denied",
+        });
+        return false;
+      }
+
+      set({ hasPermission: true, isLoading: false });
+      return true;
+    } catch (error: any) {
+      set({
+        hasPermission: false,
+        isLoading: false,
+        error: error.message || "Failed to request location permission",
+      });
+      return false;
+    }
+  },
+
+  getCurrentLocation: async () => {
+    try {
+      const { hasPermission } = get();
+      
+      if (hasPermission === null || !hasPermission) {
+        const granted = await get().requestPermission();
+        if (!granted) return null;
+      }
+
+      set({ isLoading: true, error: null });
+
+      const location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.High,
+      });
+
+      set({ location, isLoading: false });
+      return location;
+    } catch (error: any) {
+      set({
+        isLoading: false,
+        error: error.message || "Failed to get location",
+      });
+      return null;
+    }
+  },
+
+  watchPosition: async () => {
+    try {
+      const { hasPermission } = get();
+      
+      if (hasPermission === null || !hasPermission) {
+        const granted = await get().requestPermission();
+        if (!granted) throw new Error("Location permission denied");
+      }
+
+      // Stop any existing watch
+      if (watchSubscription) {
+        watchSubscription.remove();
+      }
+
+      watchSubscription = await Location.watchPositionAsync(
+        {
+          accuracy: Location.Accuracy.High,
+          timeInterval: 5000, // Update every 5 seconds
+          distanceInterval: 10, // Update every 10 meters
+        },
+        (location) => {
+          set({ location, error: null });
+        }
+      );
+
+      return () => {
+        if (watchSubscription) {
+          watchSubscription.remove();
+          watchSubscription = null;
+        }
+      };
+    } catch (error: any) {
+      set({
+        error: error.message || "Failed to watch location",
+      });
+      throw error;
+    }
+  },
+
+  stopWatching: () => {
+    if (watchSubscription) {
+      watchSubscription.remove();
+      watchSubscription = null;
+    }
+  },
+}));
+
+
+
+export const GET_EVENTS = gql`
+  query Events(
+    $pagination: PaginationInput!
+    $sort: SortInput
+    $location: String
+    $endDate: DateTimeISO
+    $startDate: DateTimeISO
+    $eventType: String
+    $upcoming: Boolean
+    $isActive: Boolean
+  ) {
+    events(
+      pagination: $pagination
+      sort: $sort
+      location: $location
+      endDate: $endDate
+      startDate: $startDate
+      eventType: $eventType
+      upcoming: $upcoming
+      isActive: $isActive
+    ) {
+      items {
+        id
+        name
+        description
+        location
+        eventDate
+        eventType
+        imageUrl
+        isActive
+        createdAt
+        updatedAt
+      }
+      pagination {
+        totalItems
+        page
+        limit
+        totalPages
+        hasNextPage
+        hasPreviousPage
+      }
+    }
+  }
+`;
+

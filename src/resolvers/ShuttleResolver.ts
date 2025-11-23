@@ -14,6 +14,8 @@ import {
   CreateShuttleInput,
   UpdateShuttleInput,
   PaginatedShuttlesResponse,
+  ShuttleSortInput,
+  ShuttleSortField,
 } from "../types/graphql/Shuttle";
 import { Location } from "../types/graphql/Location";
 import { prisma } from "../config/database";
@@ -33,8 +35,15 @@ export class ShuttleResolver {
   @Query(() => PaginatedShuttlesResponse)
   async shuttles(
     @Arg("pagination") pagination: PaginationInput,
-    @Arg("sort", { nullable: true }) sort?: SortInput,
-    @Arg("eventId", { nullable: true }) eventId?: string,
+    @Arg("sort", () => ShuttleSortInput, {
+      defaultValue: {
+        field: ShuttleSortField.DEPARTURE_TIME,
+        direction: "asc",
+      },
+    })
+    sort: ShuttleSortInput,
+    @Arg("eventId", { nullable: true })
+    eventId?: string,
     @Arg("status", () => ShuttleStatus, { nullable: true })
     status?: ShuttleStatus,
     @Arg("isFractionalized", { nullable: true }) isFractionalized?: boolean,
@@ -48,9 +57,7 @@ export class ShuttleResolver {
     };
 
     const { page, limit } = pagination;
-    const orderBy = sort
-      ? { [sort.field]: sort.order }
-      : { departureTime: "asc" as const };
+    const orderBy = { [sort.field]: sort.direction };
 
     const [items, totalItems] = await prisma.$transaction([
       prisma.shuttle.findMany({
@@ -380,11 +387,21 @@ export class ShuttleResolver {
 
   @FieldResolver(() => Location)
   pickupLocation(@Root() shuttle: Shuttle): Location {
-    return shuttle.pickupLocation as Location;
+    const loc = shuttle.pickupLocation as any;
+    return {
+      lat: loc?.lat ?? 0,
+      lng: loc?.lng ?? 0,
+      name: loc?.name ?? "Unknown Pickup",
+    };
   }
 
   @FieldResolver(() => Location)
   dropoffLocation(@Root() shuttle: Shuttle): Location {
-    return shuttle.dropoffLocation as Location;
+    const loc = shuttle.dropoffLocation as any;
+    return {
+      lat: loc?.lat ?? 0,
+      lng: loc?.lng ?? 0,
+      name: loc?.name ?? "Unknown Dropoff",
+    };
   }
 }

@@ -2,25 +2,19 @@ import {
   Connection,
   PublicKey,
   Transaction,
-  TransactionSignature,
   ParsedTransactionWithMeta,
   Keypair,
-  VersionedTransaction
 } from "@solana/web3.js";
 import {
   createTransferCheckedInstruction,
   getAssociatedTokenAddress,
   getAccount as getTokenAccount,
-  getOrCreateAssociatedTokenAccount,
-  createTransferInstruction,
-  getAssociatedTokenAddressSync,
-  TOKEN_PROGRAM_ID,
-  ASSOCIATED_TOKEN_PROGRAM_ID
-} from "@solana/spl-token";
-import { encodeURL, createQR, parseURL, validateTransfer } from "@solana/pay";
+} from "@solana/spl-token"; // createQR is removed as it's for client-side
+import { encodeURL, parseURL, validateTransfer } from "@solana/pay";
 import { solanaConnection, PROGRAM_IDS } from "../../config/solana";
 import { logger } from "../../utils/logger";
 import BigNumber from "bignumber.js";
+import qrcode from "qrcode"; // Use a server-side friendly QR code library
 
 export interface PaymentRequest {
   url: string;
@@ -29,7 +23,7 @@ export interface PaymentRequest {
 }
 
 export class SolanaPayService {
-  private connection: Connection;
+  public connection: Connection;
   private merchantWallet: PublicKey;
   private merchantKeypair: Keypair;
   private usdcMint: PublicKey;
@@ -42,35 +36,85 @@ export class SolanaPayService {
       new Uint8Array(JSON.parse(process.env.MERCHANT_WALLET_PRIVATE_KEY!))
     );
     this.usdcMint = PROGRAM_IDS.USDC_MINT;
+    logger.info(
+      `[SolanaPayService] Initialized with merchant wallet: ${this.merchantWallet.toBase58()}`
+    );
   }
 
   async createPaymentRequest(
     amount: number,
     reference: PublicKey,
     label: string,
-    message: string
+    message: string,
+    bookingId?: string
   ): Promise<PaymentRequest> {
     try {
-      // USDC has 6 decimals
-      const amountBigNumber = new BigNumber(amount);
+      logger.info(
+        `[createPaymentRequest] Received request: amount=${amount}, reference=${reference.toBase58()}`
+      );
+      const isMainnet = process.env.SOLANA_NETWORK === "mainnet-beta";
+      let paymentAmount: BigNumber;
+      let splToken: PublicKey | undefined;
+      let finalMessage = message;
 
-      const url = encodeURL({
+      if (isMainnet) {
+        // Mainnet: Use USDC directly.
+        paymentAmount = new BigNumber(amount);
+        splToken = new PublicKey(
+          "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+        ); // Mainnet USDC
+        logger.info(`[SolanaPay] Creating mainnet payment for ${amount} USDC.`);
+      } else {
+        // Devnet: Convert USDC to an equivalent amount in SOL for testing.
+        // This rate is for testing convenience and should be periodically updated.
+        const usdcToSolRate = 0.0085; // Approx. rate: 1 USDC ≈ 0.0085 SOL
+        const solAmount = new BigNumber(amount).times(usdcToSolRate);
+        paymentAmount = solAmount;
+        splToken = undefined; // Omit splToken to request native SOL.
+        finalMessage = `${message} (~${solAmount.toPrecision(4)} SOL)`;
+        logger.info(
+          `[SolanaPay] Creating devnet payment for ${amount} USDC as ${solAmount.toPrecision(
+            4
+          )} SOL.`
+        );
+      }
+
+      // REVERTING to the simple Transfer Request flow.
+      const urlParams: any = {
         recipient: this.merchantWallet,
-        amount: amountBigNumber,
-        splToken: this.usdcMint,
+        amount: paymentAmount,
         reference,
         label,
-        message,
-      });
+        memo: finalMessage,
+      };
 
-      const qrCode = await this.generateQRCode(url);
+      // Add splToken only if it's a mainnet USDC transaction
+      if (splToken) {
+        urlParams.splToken = splToken;
+      }
+
+      // 1. Create the base Solana Pay URL.
+      const baseUrl = encodeURL(urlParams);
+
+      // 2. Create return URL with booking context (Solana Pay will append signature)
+      // The return URL should include the reference and bookingId so we can identify the booking
+      // Solana Pay will append &signature=xxx to this URL
+      let returnUrlPath = `gocabs://processing-transaction?reference=${reference.toBase58()}`;
+      if (bookingId) {
+        returnUrlPath += `&bookingId=${bookingId}`;
+      }
+      const returnUrl = encodeURIComponent(returnUrlPath);
+      const finalUrl = `${baseUrl.toString()}&return=${returnUrl}`;
+
+      // 3. Generate the QR code from the *exact same* final URL.
+      const qrCode = await this.generateQRCode(finalUrl);
 
       logger.info(
-        `Payment request created: ${amount} USDC, reference: ${reference.toString()}`
+        `[createPaymentRequest] Generated Solana Pay URL: ${finalUrl}`
       );
 
       return {
-        url: url.toString(),
+        url: finalUrl,
         qrCode,
         reference: reference.toString(),
       };
@@ -86,7 +130,9 @@ export class SolanaPayService {
     expectedAmount: number
   ): Promise<boolean> {
     try {
-      logger.info(`Verifying transaction: ${signature}`);
+      logger.info(
+        `[verifyTransaction] Verifying signature: ${signature} for reference: ${reference.toBase58()}, expectedAmount: ${expectedAmount}`
+      );
 
       // Wait for confirmation
       await this.connection.confirmTransaction(signature, "confirmed");
@@ -98,7 +144,9 @@ export class SolanaPayService {
       );
 
       if (!transaction) {
-        logger.warn(`Transaction not found: ${signature}`);
+        logger.warn(
+          `[verifyTransaction] Transaction not found after confirmation: ${signature}`
+        );
         return false;
       }
 
@@ -108,21 +156,43 @@ export class SolanaPayService {
       );
 
       if (!hasReference) {
-        logger.warn(`Reference not found in transaction: ${signature}`);
+        logger.warn(
+          `[verifyTransaction] Reference ${reference.toBase58()} not found in transaction: ${signature}`
+        );
         return false;
       }
 
-      // Verify token transfer amount
-      const isValid = await this.verifyTokenTransfer(
-        transaction,
-        this.merchantWallet,
-        expectedAmount
-      );
+      const isMainnet = process.env.SOLANA_NETWORK === "mainnet-beta";
+      let isValid = false;
 
-      logger.info(`Transaction verification result: ${isValid}`);
+      if (isMainnet) {
+        // On mainnet, verify the USDC token transfer
+        logger.info(`[Verify] Running mainnet (USDC) verification.`);
+        isValid = await this.verifyTokenTransfer(
+          transaction,
+          this.merchantWallet,
+          expectedAmount
+        );
+      } else {
+        // On devnet, verify the native SOL transfer
+        logger.info(`[Verify] Running devnet (SOL) verification.`);
+        const usdcToSolRate = 0.0085; // Must match the rate in createPaymentRequest
+        const expectedSolAmount = new BigNumber(expectedAmount).times(
+          usdcToSolRate
+        );
+        isValid = this.verifySolTransfer(
+          transaction,
+          this.merchantWallet,
+          expectedSolAmount
+        );
+      }
+
+      logger.info(
+        `[verifyTransaction] Final verification result for ${signature}: ${isValid}`
+      );
       return isValid;
     } catch (error) {
-      logger.error("Transaction verification failed:", error);
+      logger.error(`[verifyTransaction] Error verifying ${signature}:`, error);
       return false;
     }
   }
@@ -162,6 +232,52 @@ export class SolanaPayService {
       return false;
     } catch (error) {
       logger.error("Token transfer verification failed:", error);
+      return false;
+    }
+  }
+
+  private verifySolTransfer(
+    transaction: ParsedTransactionWithMeta,
+    recipient: PublicKey,
+    expectedAmount: BigNumber
+  ): boolean {
+    try {
+      const recipientIndex =
+        transaction.transaction.message.accountKeys.findIndex((key) =>
+          key.pubkey.equals(recipient)
+        );
+
+      if (recipientIndex === -1) {
+        logger.warn(
+          `[Verify SOL] Recipient ${recipient.toBase58()} not found in transaction.`
+        );
+        return false;
+      }
+
+      const preBalance = transaction.meta?.preBalances[recipientIndex] || 0;
+      const postBalance = transaction.meta?.postBalances[recipientIndex] || 0;
+
+      const amountReceivedLamports = postBalance - preBalance;
+      const amountReceivedSol = new BigNumber(amountReceivedLamports).div(
+        1_000_000_000
+      );
+
+      // Allow a small tolerance for floating point inaccuracies
+      const isValid = amountReceivedSol.isGreaterThanOrEqualTo(
+        expectedAmount.times(0.999)
+      );
+
+      logger.info(
+        `[Verify SOL] Amount verification: expected ~${expectedAmount.toPrecision(
+          8
+        )} SOL, received ${amountReceivedSol.toPrecision(
+          8
+        )} SOL. Valid: ${isValid}`
+      );
+
+      return isValid;
+    } catch (error) {
+      logger.error("[Verify SOL] SOL transfer verification failed:", error);
       return false;
     }
   }
@@ -210,11 +326,13 @@ export class SolanaPayService {
     }
   }
 
-  private async generateQRCode(url: URL): Promise<string> {
+  private async generateQRCode(url: string): Promise<string> {
     try {
-      const qr = createQR(url, 512, "transparent");
-      const qrBuffer = await qr.getRawData("png");
-      return `data:image/png;base64,${qrBuffer?.toString("base64")}`;
+      // Switched from @solana/pay's createQR to the 'qrcode' library
+      // to generate the QR code on the server without a DOM.
+      return await qrcode.toDataURL(url, {
+        errorCorrectionLevel: "high",
+      });
     } catch (error) {
       logger.error("Failed to generate QR code:", error);
       return "";
@@ -242,50 +360,58 @@ export class SolanaPayService {
     try {
       // Sign the transaction
       transaction.sign(this.merchantKeypair);
-      
+
       // Send the transaction
       const serialized = transaction.serialize();
-      const signature = await this.connection.sendRawTransaction(
-        serialized,
-        { skipPreflight: false, preflightCommitment: 'confirmed' }
-      );
-      
+      const signature = await this.connection.sendRawTransaction(serialized, {
+        skipPreflight: false,
+        preflightCommitment: "confirmed",
+      });
+
       logger.info(`Transaction sent: ${signature}`);
       return signature;
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      logger.error('Error sending transaction:', errorMessage);
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error";
+      logger.error("Error sending transaction:", errorMessage);
       throw new Error(`Failed to send transaction: ${errorMessage}`);
     }
   }
 
   async confirmTransaction(
     signature: string,
-    commitment: 'processed' | 'confirmed' | 'finalized' = 'confirmed'
+    commitment: "processed" | "confirmed" | "finalized" = "confirmed"
   ): Promise<boolean> {
     try {
-      const status = await this.connection.confirmTransaction(signature, commitment);
+      const status = await this.connection.confirmTransaction(
+        signature,
+        commitment
+      );
       if (status.value.err) {
-        throw new Error(`Transaction failed: ${JSON.stringify(status.value.err)}`);
+        throw new Error(
+          `Transaction failed: ${JSON.stringify(status.value.err)}`
+        );
       }
       logger.info(`Transaction ${signature} confirmed`);
       return true;
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      logger.error('Error confirming transaction:', errorMessage);
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error";
+      logger.error("Error confirming transaction:", errorMessage);
       return false;
     }
   }
 
   async getTransactionDetails(signature: string): Promise<any> {
     try {
-      return await this.connection.getParsedTransaction(
-        signature,
-        { commitment: 'confirmed', maxSupportedTransactionVersion: 0 }
-      );
+      return await this.connection.getParsedTransaction(signature, {
+        commitment: "confirmed",
+        maxSupportedTransactionVersion: 0,
+      });
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      logger.error('Error fetching transaction details:', errorMessage);
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error";
+      logger.error("Error fetching transaction details:", errorMessage);
       throw error;
     }
   }

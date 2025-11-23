@@ -9,6 +9,8 @@ import {
   Root,
   Int,
   UseMiddleware,
+  ObjectType,
+  Field,
 } from "type-graphql";
 import {
   Booking,
@@ -21,17 +23,24 @@ import type { Context } from "../types/Context";
 import { prisma } from "../config/database";
 import { BookingService } from "../services/booking/BookingService";
 import { BookingStatus, Prisma } from "@prisma/client";
-import { NFTGate } from "../middleware/nftGate";
+// import { NFTGate } from "../middleware/nftGate";
 import {
   BaseResponse,
   PaginationInput,
   SortInput,
 } from "../types/graphql/responses";
+import { logger } from "../utils/logger";
+
+@ObjectType()
+class FindAndConfirmPaymentResponse extends BaseResponse {
+  @Field(() => Booking, { nullable: true })
+  booking?: Booking;
+}
 
 @Resolver(() => Booking)
 export class BookingResolver {
-  @Authorized("NFT_HOLDER")
-  @UseMiddleware(NFTGate)
+  // @Authorized("NFT_HOLDER")
+  // @UseMiddleware(NFTGate)
   @Mutation(() => BookingResponse)
   async createBooking(
     @Arg("input") input: CreateBookingInput,
@@ -57,10 +66,20 @@ export class BookingResolver {
     @Arg("signature") signature: string,
     @Arg("reference") reference: string
   ): Promise<BaseResponse> {
+    logger.info(
+      `[ConfirmPayment] Mutation called for bookingId: ${bookingId}, reference: ${reference}`
+    );
     try {
       await BookingService.confirmPayment(bookingId, signature, reference);
+      logger.info(
+        `[ConfirmPayment] Successfully confirmed payment for bookingId: ${bookingId}`
+      );
       return { success: true, message: "Payment confirmed successfully." };
     } catch (error: any) {
+      logger.error(
+        `[ConfirmPayment] Error for bookingId: ${bookingId}:`,
+        error
+      );
       return {
         success: false,
         message: error.message || "Payment confirmation failed.",
@@ -68,15 +87,61 @@ export class BookingResolver {
     }
   }
 
+  // No @Authorized() - this is called from polling and doesn't need auth
+  @Mutation(() => FindAndConfirmPaymentResponse)
+  async findAndConfirmPayment(
+    @Arg("reference") reference: string
+  ): Promise<FindAndConfirmPaymentResponse> {
+    logger.info(
+      `[FindAndConfirmPayment] Mutation called for reference: ${reference}`
+    );
+    try {
+      const booking = await BookingService.findAndConfirmPaymentByReference(
+        reference
+      );
+      if (booking) {
+        logger.info(
+          `[FindAndConfirmPayment] Successfully found and confirmed payment for reference: ${reference}`
+        );
+        return {
+          success: true,
+          message: "Payment found and confirmed successfully.",
+          booking: booking as Booking,
+        };
+      } else {
+        // Transaction not found yet on blockchain
+        return {
+          success: false,
+          message: "Transaction not found yet. Please wait and try again.",
+        };
+      }
+    } catch (error: any) {
+      logger.error(
+        `[FindAndConfirmPayment] Error for reference: ${reference}:`,
+        error
+      );
+      return {
+        success: false,
+        message: error.message || "Failed to find and confirm payment.",
+      };
+    }
+  }
+
   @Authorized()
-  @UseMiddleware(NFTGate)
+  // @UseMiddleware(NFTGate)
   @Query(() => PaginatedBookingsResponse)
   async myBookings(
     @Ctx() ctx: Context,
     @Arg("pagination") pagination: PaginationInput,
     @Arg("sort", { nullable: true }) sort?: SortInput
   ): Promise<PaginatedBookingsResponse> {
-    const where = { userId: ctx.userId! };
+    const where: Prisma.BookingWhereInput = {
+      userId: ctx.userId!,
+      // Exclude bookings that are cancelled or have a failed payment
+      status: { not: BookingStatus.CANCELLED },
+      paymentStatus: { not: "FAILED" },
+    };
+
     const { page, limit } = pagination;
     const orderBy = sort
       ? { [sort.field]: sort.order }

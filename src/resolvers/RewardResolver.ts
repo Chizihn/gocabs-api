@@ -54,7 +54,7 @@ export class RewardResolver {
     };
   }
 
-  @Authorized("NFT_HOLDER")
+  // @Authorized("NFT_HOLDER")
   @Mutation(() => RedemptionResponse)
   async redeemRewards(
     @Arg("xpAmount") xpAmount: number,

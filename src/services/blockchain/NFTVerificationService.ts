@@ -25,25 +25,50 @@ export class NFTVerificationService {
 
       // Fetch from Helius (updated to direct method call)
       const heliusClient = await getHeliusClient();
+      // NEW: Log the RPC endpoint being used
+      logger.info(`[Helius] Using RPC endpoint: ${heliusClient.endpoint}`);
+
       const response = await heliusClient.getAssetsByOwner({
         ownerAddress: walletAddress,
         page: 1,
         limit: 1000,
         displayOptions: {
           showNativeBalance: false,
-          showCollectionMetadata: true, // Ensures grouping is populated for collections
+          showCollectionMetadata: true,
         },
       });
+
+      // NEW: Detailed debug logging of the raw Helius response
+      logger.info(
+        `[Helius] Raw response for ${walletAddress}: total=${response.total}, items=${response.items.length}`
+      );
+      if (response.items.length > 0) {
+        logger.debug(
+          `[Helius] Sample item groupings for ${walletAddress}:`,
+          response.items
+            .slice(0, 3)
+            .map((item: any) => ({ id: item.id, grouping: item.grouping }))
+        );
+      }
 
       // Filter for collection NFTs
       const collectionAddress = PROGRAM_IDS.GOCABS_NFT_COLLECTION.toString();
       const goCabsNFTs = response.items.filter((nft: any) => {
-        const grouping = nft.grouping || [];
-        return grouping.some(
-          (g: any) =>
-            g.group_key === "collection" && g.group_value === collectionAddress
+        const grouping = nft.grouping;
+        return (
+          Array.isArray(grouping) &&
+          grouping.some(
+            (g: any) =>
+              g.group_key === "collection" &&
+              g.group_value === collectionAddress
+          )
         );
       });
+
+      // NEW: Log filter results
+      logger.info(
+        `[Helius] Filtered for collection ${collectionAddress}. Found ${goCabsNFTs.length} matching NFTs.`
+      );
 
       const result = {
         isHolder: goCabsNFTs.length > 0,

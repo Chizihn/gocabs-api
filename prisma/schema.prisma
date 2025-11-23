@@ -47,6 +47,7 @@ enum BookingStatus {
   COMPLETED
   CANCELLED
   NO_SHOW
+  PENDING
 }
 
 enum NotificationType {
@@ -101,7 +102,7 @@ model Driver {
   currentLng     Float?
   earnings       Decimal  @default(0) @db.Decimal(12, 2)
 
-  currentShuttle Shuttle? @relation("DriverCurrentShuttle")
+  shuttles       Shuttle[] @relation("DriverShuttles")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -137,6 +138,7 @@ model Vehicle {
   vehicleType     String   @default("minibus")
   capacity        Int
   mileage         Int      @default(0)
+  imageUrl        String?
   lastMaintenance DateTime?
   nextMaintenance DateTime?
 
@@ -152,6 +154,8 @@ model Event {
   id          String   @id @default(uuid())
   name        String
   description String?
+  city        String?
+  country     String?
   location    Json
   eventDate   DateTime
   eventType   String
@@ -163,6 +167,7 @@ model Event {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@index([city, country])
   @@map("events")
 }
 
@@ -175,8 +180,8 @@ model Shuttle {
   vehicleId        String
   vehicle          Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Restrict)
 
-  driverId         String?  @unique
-  driver           Driver?  @relation("DriverCurrentShuttle", fields: [driverId], references: [id])
+  driverId         String?  
+  driver           Driver?  @relation("DriverShuttles", fields: [driverId], references: [id])
 
   departureTime    DateTime
   arrivalTime      DateTime
@@ -210,6 +215,7 @@ model Booking {
   seats            Int           @default(1)
   totalPriceUsdc   Decimal       @db.Decimal(12, 6)
   paymentStatus    PaymentStatus @default(PENDING)
+    paymentReference  String?   @unique 
   transactionHash  String?       @unique
 
   status           BookingStatus @default(CONFIRMED)

@@ -9,13 +9,15 @@ let heliusClient: any = null;
 export async function getHeliusClient() {
   if (!heliusClient) {
     try {
-      const { createHelius } = await import('helius-sdk');
+      const { createHelius } = await import("helius-sdk");
       heliusClient = createHelius({
         apiKey: process.env.HELIUS_API_KEY || "",
       });
     } catch (error) {
-      logger.error('Failed to initialize Helius client:', error);
-      throw new Error('Failed to initialize Helius client. Please check your configuration.');
+      logger.error("Failed to initialize Helius client:", error);
+      throw new Error(
+        "Failed to initialize Helius client. Please check your configuration."
+      );
     }
   }
   return heliusClient;

@@ -1,42 +1,45 @@
-import 'reflect-metadata';
-import express, { Express, Request, Response, NextFunction } from 'express';
-import { ApolloServer } from '@apollo/server';
+import "reflect-metadata";
+import express, { Express, Request, Response, NextFunction } from "express";
+import { PubSub } from "graphql-subscriptions";
+import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@as-integrations/express5";
-import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
-import { json } from 'body-parser';
-import cors from 'cors';
-import http, { Server as HttpServer } from 'http';
-import { Server as SocketIOServer } from 'socket.io';
-import { PrismaClient } from '@prisma/client';
-import { Redis } from 'ioredis';
-import { buildSchema } from 'type-graphql';
-import { errorHandler } from './middleware/errorHandler';
-import { setupLocationSocket } from './socket/LocationSocket';
-import { logger } from './utils/logger';
-import { authMiddleware } from './middleware/auth';
-import { generalRateLimiter } from './middleware/graphqlRateLimits';
-import { UserResolver } from './resolvers/UserResolver';
-import { EventResolver } from './resolvers/EventResolver';
-import { ShuttleResolver } from './resolvers/ShuttleResolver';
-import { BookingResolver } from './resolvers/BookingResolver';
-import { StakingResolver } from './resolvers/StakingResolver';
-import { RewardResolver } from './resolvers/RewardResolver';
-import { FleetAuthResolver } from './resolvers/FleetAuthResolver';
-import { DriverResolver } from './resolvers/DriverResolver';
-import { OwnerResolver } from './resolvers/OwnerResolver';
-import { NotificationResolver } from './resolvers/NotificationResolver';
-import { AdminResolver } from './resolvers/AdminResolver';
-import { pubSub } from './config/pubsub';
+import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
+import { json } from "body-parser";
+import cors from "cors";
+import http, { Server as HttpServer } from "http";
+import { Server as SocketIOServer } from "socket.io";
+import { PrismaClient } from "@prisma/client";
+import { Redis } from "ioredis";
+import { buildSchema } from "type-graphql";
+import { errorHandler } from "./middleware/errorHandler";
+import { setupLocationSocket } from "./socket/LocationSocket";
+import { logger } from "./utils/logger";
+import { authMiddleware } from "./middleware/auth";
+// import { generalRateLimiter } from "./middleware/graphqlRateLimits";
+import { UserResolver } from "./resolvers/UserResolver";
+import { EventResolver } from "./resolvers/EventResolver";
+import { ShuttleResolver } from "./resolvers/ShuttleResolver";
+import { BookingResolver } from "./resolvers/BookingResolver";
+import { StakingResolver } from "./resolvers/StakingResolver";
+import { RewardResolver } from "./resolvers/RewardResolver";
+import { FleetAuthResolver } from "./resolvers/FleetAuthResolver";
+import { DriverResolver } from "./resolvers/DriverResolver";
+import { OwnerResolver } from "./resolvers/OwnerResolver";
+import { NotificationResolver } from "./resolvers/NotificationResolver";
+import { AdminResolver } from "./resolvers/AdminResolver";
+import { UploadResolver } from "./resolvers/UploadResolver";
+import { LocationResolver } from "./resolvers/LocationResolver";
 
 export async function createApp(prisma: PrismaClient, redisClient: Redis) {
   const app: Express = express();
   const httpServer: HttpServer = http.createServer(app);
-  
+  const pubSub = new PubSub() as any;
+
   // Configure CORS for Socket.IO
   const io = new SocketIOServer(httpServer, {
     cors: {
-      origin: '*',
-      methods: ['GET', 'POST'],
+      origin: "*",
+      methods: ["GET", "POST"],
     },
   });
 
@@ -46,8 +49,8 @@ export async function createApp(prisma: PrismaClient, redisClient: Redis) {
   app.use(authMiddleware);
 
   // Health check endpoint
-  app.get('/health', (_req: Request, res: Response) => {
-    res.status(200).json({ status: 'ok' });
+  app.get("/health", (_req: Request, res: Response) => {
+    res.status(200).json({ status: "ok" });
   });
 
   try {
@@ -65,13 +68,16 @@ export async function createApp(prisma: PrismaClient, redisClient: Redis) {
         OwnerResolver,
         NotificationResolver,
         AdminResolver,
+        UploadResolver,
+        LocationResolver,
       ],
-      globalMiddlewares: [generalRateLimiter],
+      pubSub,
+      // globalMiddlewares: [generalRateLimiter],
       authChecker: ({ context }, roles) => {
         const { user } = context;
         if (!user) return false;
 
-        if (roles.includes('NFT_HOLDER')) {
+        if (roles.includes("NFT_HOLDER")) {
           return user.isNFTHolder;
         }
 
@@ -86,7 +92,7 @@ export async function createApp(prisma: PrismaClient, redisClient: Redis) {
       schema,
       plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
       formatError: (error) => {
-        logger.error('GraphQL Error:', error);
+        logger.error("GraphQL Error:", error);
         return error;
       },
     });
@@ -96,36 +102,37 @@ export async function createApp(prisma: PrismaClient, redisClient: Redis) {
 
     // Apply GraphQL middleware
     app.use(
-      '/graphql',
+      "/graphql",
       json(),
-              expressMiddleware(server, {
-                context: async ({ req, res }) => {
-                  const user = (req as any).user;
-                  const userId = user?.id || null;
-                  const userRole = user?.role || null;
-                  let ownerId: string | null = null;
-      
-                  if (userRole === "OWNER" && userId) {
-                    const owner = await prisma.owner.findUnique({
-                      where: { userId: userId },
-                      select: { id: true },
-                    });
-                    ownerId = owner?.id || null;
-                  }
-      
-                  return {
-                    req,
-                    res,
-                    user,
-                    userId,
-                    userRole,
-                    ownerId,
-                    prisma,
-                    redisClient,
-                    pubSub,
-                  };
-                },
-              })    );
+      expressMiddleware(server, {
+        context: async ({ req, res }) => {
+          const user = (req as any).user;
+          const userId = user?.id || null;
+          const userRole = user?.role || null;
+          let ownerId: string | null = null;
+
+          if (userRole === "OWNER" && userId) {
+            const owner = await prisma.owner.findUnique({
+              where: { userId: userId },
+              select: { id: true },
+            });
+            ownerId = owner?.id || null;
+          }
+
+          return {
+            req,
+            res,
+            user,
+            userId,
+            userRole,
+            ownerId,
+            prisma,
+            redisClient,
+            pubSub,
+          };
+        },
+      })
+    );
 
     // Setup Socket.IO for real-time tracking
     setupLocationSocket(io);
@@ -135,7 +142,7 @@ export async function createApp(prisma: PrismaClient, redisClient: Redis) {
 
     return { app, httpServer, io };
   } catch (error) {
-    logger.error('Failed to initialize application:', error);
+    logger.error("Failed to initialize application:", error);
     throw error;
   }
 }

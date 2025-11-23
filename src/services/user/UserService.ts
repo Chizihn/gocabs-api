@@ -29,9 +29,13 @@ export class UserService {
     }
 
     const normalized = walletAddress?.trim();
-    const nftAccess = normalized ? await NFTVerificationService.hasNFTAccess(normalized) : { hasAccess: false };
+    const nftAccess = normalized
+      ? await NFTVerificationService.hasNFTAccess(normalized)
+      : { hasAccess: false };
 
-    const hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
+    const hashedPassword = password
+      ? await bcrypt.hash(password, 10)
+      : undefined;
 
     const user = await prisma.$transaction(async (tx) => {
       const newUser = await tx.user.create({
@@ -73,6 +77,9 @@ export class UserService {
     if (!normalized) {
       throw new Error("Wallet address is required");
     }
+
+    // Invalidate cache to ensure a fresh check on every connection
+    await NFTVerificationService.invalidateCache(normalized);
 
     const nftAccess = await NFTVerificationService.hasNFTAccess(normalized);
 
@@ -133,10 +140,7 @@ export class UserService {
     return user;
   }
 
-  static async updateProfile(
-    userId: string,
-    data: Prisma.UserUpdateInput
-  ) {
+  static async updateProfile(userId: string, data: Prisma.UserUpdateInput) {
     return prisma.user.update({
       where: { id: userId },
       data,
@@ -215,12 +219,11 @@ export class UserService {
       throw new Error("User not found");
     }
 
-    const previous =
-      (user.locationSettings as LocationSettings | null) ?? {
-        shareLocation: true,
-        accuracy: "high",
-        backgroundUpdates: false,
-      };
+    const previous = (user.locationSettings as LocationSettings | null) ?? {
+      shareLocation: true,
+      accuracy: "high",
+      backgroundUpdates: false,
+    };
 
     const next = {
       ...previous,
@@ -257,4 +260,3 @@ export class UserService {
     );
   }
 }
-
