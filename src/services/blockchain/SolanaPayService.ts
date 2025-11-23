@@ -31,11 +31,33 @@ export class SolanaPayService {
 
   constructor() {
     this.connection = solanaConnection;
+
+    // 1. Public key (must be base58 string, e.g. 7x123...abc)
     this.merchantWallet = new PublicKey(process.env.MERCHANT_WALLET_ADDRESS!);
-    this.merchantKeypair = Keypair.fromSecretKey(
-      new Uint8Array(JSON.parse(process.env.MERCHANT_WALLET_PRIVATE_KEY!))
-    );
+
+    // 2. Private key (must be the [1,2,3,...] array string)
+    const secretKeyString = process.env.MERCHANT_WALLET_PRIVATE_KEY;
+    if (!secretKeyString) {
+      throw new Error(
+        "Missing MERCHANT_WALLET_PRIVATE_KEY environment variable"
+      );
+    }
+
+    let secretKey: Uint8Array;
+    try {
+      const parsed = JSON.parse(secretKeyString);
+      if (!Array.isArray(parsed) || parsed.length !== 64) {
+        throw new Error("Private key must be a 64-number array");
+      }
+      secretKey = Uint8Array.from(parsed);
+    } catch (e) {
+      throw new Error(`Invalid MERCHANT_WALLET_PRIVATE_KEY format: `);
+    }
+
+    this.merchantKeypair = Keypair.fromSecretKey(secretKey);
+
     this.usdcMint = PROGRAM_IDS.USDC_MINT;
+
     logger.info(
       `[SolanaPayService] Initialized with merchant wallet: ${this.merchantWallet.toBase58()}`
     );

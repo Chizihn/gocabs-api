@@ -29,14 +29,23 @@ export const SOLANA_CONFIG = {
   commitment: "confirmed" as const,
 };
 
-// --- START: Environment Variable Validation ---
-if (!process.env.NFT_COLLECTION_ADDRESS) {
-  const errorMessage =
-    "FATAL ERROR: NFT_COLLECTION_ADDRESS environment variable is not set.";
-  logger.error(errorMessage);
-  throw new Error(errorMessage);
+// --- START: Public Key Environment Variable Validation ---
+function validatePublicKeyEnv(variableName: string): string {
+  const value = process.env[variableName];
+  if (!value) {
+    const errorMessage = `FATAL ERROR: Environment variable ${variableName} is not set.`;
+    logger.error(errorMessage);
+    throw new Error(errorMessage);
+  }
+  try {
+    new PublicKey(value); // Try to create a PublicKey to validate the string
+  } catch (error) {
+    const errorMessage = `FATAL ERROR: Environment variable ${variableName} with value "${value}" is not a valid base-58 public key.`;
+    logger.error(errorMessage);
+    throw new Error(errorMessage);
+  }
+  return value;
 }
-// --- END: Environment Variable Validation ---
 
 export const PROGRAM_IDS = {
   TOKEN_PROGRAM: new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"),
@@ -47,7 +56,9 @@ export const PROGRAM_IDS = {
     process.env.USDC_MINT_ADDRESS ||
       "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
   ),
-  GOCABS_NFT_COLLECTION: new PublicKey(process.env.NFT_COLLECTION_ADDRESS!),
+  GOCABS_NFT_COLLECTION: new PublicKey(
+    validatePublicKeyEnv("NFT_COLLECTION_ADDRESS")
+  ),
 };
 
 export const solanaConnection = new Connection(
