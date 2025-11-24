@@ -7,6 +7,7 @@ import {
 import { logger } from "../utils/logger";
 import { PublicKey } from "@solana/web3.js";
 import { generateToken } from "../middleware/auth";
+import { prisma } from "../config/database";
 
 /**
  * REST API endpoint for preparing NFT mint payment transactions
@@ -94,6 +95,43 @@ export const nftMintStatusHandler = async (req: Request, res: Response) => {
 };
 
 /**
+ * REST API endpoint for checking the status of a queued mint job. Changed to POST to prevent caching.
+ * POST /api/nft/mint/job-status
+ * Body: { paymentSignature: string }
+ */
+export const nftMintJobStatusHandler = async (req: Request, res: Response) => {
+  try {
+    const { paymentSignature } = req.body;
+
+    if (!paymentSignature) {
+      return res
+        .status(400)
+        .json({ error: "Missing paymentSignature parameter" });
+    }
+
+    const mintAttempt = await prisma.mintAttempt.findUnique({
+      where: { paymentSignature },
+    });
+
+    if (!mintAttempt) {
+      return res.status(404).json({ status: "NOT_FOUND" });
+    }
+
+    return res.status(200).json({
+      status: mintAttempt.status,
+      mintAddress: mintAttempt.mintAddress,
+      errorMessage: mintAttempt.errorMessage,
+    });
+  } catch (error: any) {
+    logger.error("[NFT Mint Job Status] Error polling for job:", error);
+    return res.status(500).json({
+      error: "Failed to check job status",
+      message: error.message,
+    });
+  }
+};
+
+/**
  * REST API endpoint for executing mint after payment
  * POST /api/nft/mint/execute
  * Body: { walletAddress, paymentSignature }
@@ -122,24 +160,33 @@ export const nftMintExecuteHandler = async (req: Request, res: Response) => {
       `[NFT Mint API] Executing mint for ${walletAddress} after payment ${paymentSignature}`
     );
 
-    // Execute the mint
-    const { success, mintAddress, user } = await executeMintAfterPayment(
-      walletAddress,
-      paymentSignature
-    );
+    // Instead of executing immediately, create a mint job in the database.
+    // A background worker will process this job.
+    const existingAttempt = await prisma.mintAttempt.findUnique({
+      where: { paymentSignature },
+    });
 
-    let newAuthToken: string | null = null;
-    if (success && user) {
-      // CRITICAL FIX: Generate a new token that confirms NFT ownership.
-      // The client must use this new token for all subsequent requests.
-      newAuthToken = generateToken(user.id, user.role, walletAddress, true);
-      logger.info(`Generated new auth token for user ${user.id} after mint.`);
+    if (existingAttempt) {
+      logger.warn(
+        `Mint execution for signature ${paymentSignature} already queued.`
+      );
+      return res.status(202).json({
+        status: "MINT_ALREADY_QUEUED",
+        paymentSignature,
+      });
     }
 
-    return res.status(200).json({
-      success,
-      mintAddress,
-      newAuthToken, // Send the new token to the client
+    await prisma.mintAttempt.create({
+      data: {
+        paymentSignature,
+        walletAddress,
+      },
+    });
+
+    return res.status(202).json({
+      status: "MINT_QUEUED",
+      message:
+        "Your payment is confirmed, and your NFT mint has been queued. It will appear in your wallet shortly.",
     });
   } catch (error: any) {
     logger.error("[NFT Mint API] Error executing mint:", error);

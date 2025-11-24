@@ -43088,3 +43088,687 @@ Program Logs:
     at executeMintAfterPayment (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTMintService.ts:251:11)
     at processTicksAndRejections (node:internal/process/task_queues:105:5)
     at nftMintExecuteHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\nftMintHandler.ts:126:44)
+2025-11-23 20:54:37 [error]: TypeError: Cannot read properties of undefined (reading 'findFirst')
+    at processMintQueue (C:\Users\Chizi\Desktop\gocab\backend\src\api\mintProcessor.ts:12:40)
+    at Timeout._onTimeout (C:\Users\Chizi\Desktop\gocab\backend\src\api\mintProcessor.ts:86:5)
+    at listOnTimeout (node:internal/timers:588:17)
+    at processTimers (node:internal/timers:523:7)
+2025-11-23 20:55:07 [error]: TypeError: Cannot read properties of undefined (reading 'findFirst')
+    at processMintQueue (C:\Users\Chizi\Desktop\gocab\backend\src\api\mintProcessor.ts:12:40)
+    at Timeout._onTimeout (C:\Users\Chizi\Desktop\gocab\backend\src\api\mintProcessor.ts:86:5)
+    at listOnTimeout (node:internal/timers:588:17)
+    at processTimers (node:internal/timers:523:7)
+2025-11-23 21:29:21 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 21:31:50 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 21:31:51 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.field"; Expected non-nullable type "String!" not to be null.
+2025-11-23 21:31:51 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.order"; Expected non-nullable type "String!" not to be null.
+2025-11-23 21:31:52 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 21:36:24 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.field"; Expected non-nullable type "String!" not to be null.
+2025-11-23 21:36:24 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.order"; Expected non-nullable type "String!" not to be null.
+2025-11-23 21:36:26 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 21:37:33 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 21:37:34 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.field"; Expected non-nullable type "String!" not to be null.
+2025-11-23 21:37:34 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.order"; Expected non-nullable type "String!" not to be null.
+2025-11-23 21:37:35 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 21:38:54 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.field"; Expected non-nullable type "String!" not to be null.
+2025-11-23 21:38:54 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.order"; Expected non-nullable type "String!" not to be null.
+2025-11-23 21:38:55 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 21:45:49 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 21:45:50 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.field"; Expected non-nullable type "String!" not to be null.
+2025-11-23 21:45:50 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.order"; Expected non-nullable type "String!" not to be null.
+2025-11-23 21:46:47 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 21:46:47 [error]: GraphQL Error: Access denied! You don't have permission for this action!
+2025-11-23 22:01:58 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 22:02:26 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 22:04:51 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 22:04:52 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.field"; Expected non-nullable type "String!" not to be null.
+2025-11-23 22:04:52 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.order"; Expected non-nullable type "String!" not to be null.
+2025-11-23 22:04:58 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.field"; Expected non-nullable type "String!" not to be null.
+2025-11-23 22:04:58 [error]: GraphQL Error: Variable "$sort" got invalid value null at "sort.order"; Expected non-nullable type "String!" not to be null.
+2025-11-23 22:05:44 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 22:06:56 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 22:07:11 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-23 23:23:41 [error]: ❌ Redis error:
+2025-11-23 23:23:41 [error]: ❌ Redis error:
+2025-11-23 23:23:42 [error]: ❌ Redis error:
+2025-11-23 23:23:42 [error]: ❌ Redis error:
+2025-11-23 23:23:42 [error]: ❌ Redis error:
+2025-11-23 23:23:42 [error]: ❌ Redis error:
+2025-11-23 23:23:43 [error]: Max Redis reconnection attempts reached
+2025-11-24 08:20:25 [error]: Error: RPC error (getAssetsByOwner): unknown field `network`, expected one of `ownerAddress`, `sortBy`, `limit`, `page`, `before`, `after`, `displayOptions`, `options`, `cursor` at line 1 column 169
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:34:24)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:175:39)
+    at Function.connectWallet (C:\Users\Chizi\Desktop\gocab\backend\src\services\user\UserService.ts:84:23)
+    at UserResolver.connectWallet (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:67:40)
+2025-11-24 08:20:25 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:90:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:175:39)
+    at Function.connectWallet (C:\Users\Chizi\Desktop\gocab\backend\src\services\user\UserService.ts:84:23)
+    at UserResolver.connectWallet (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:67:40)
+2025-11-24 08:21:52 [error]: Error: RPC error (getAssetsByOwner): unknown field `network`, expected one of `ownerAddress`, `sortBy`, `limit`, `page`, `before`, `after`, `displayOptions`, `options`, `cursor` at line 1 column 169
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:34:24)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:175:39)
+    at refreshTokenHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\authHandler.ts:26:27)
+2025-11-24 08:21:52 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:90:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:175:39)
+    at refreshTokenHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\authHandler.ts:26:27)
+2025-11-24 08:21:52 [error]: Error: RPC error (getAssetsByOwner): unknown field `network`, expected one of `ownerAddress`, `sortBy`, `limit`, `page`, `before`, `after`, `displayOptions`, `options`, `cursor` at line 1 column 169
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:34:24)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:21:52 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:90:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:21:52 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:21:56 [error]: Error: RPC error (getAssetsByOwner): unknown field `network`, expected one of `ownerAddress`, `sortBy`, `limit`, `page`, `before`, `after`, `displayOptions`, `options`, `cursor` at line 1 column 169
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:34:24)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:21:56 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:90:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:21:56 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:21:59 [error]: Error: RPC error (getAssetsByOwner): unknown field `network`, expected one of `ownerAddress`, `sortBy`, `limit`, `page`, `before`, `after`, `displayOptions`, `options`, `cursor` at line 1 column 169
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:34:24)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:21:59 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:90:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:21:59 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:22:03 [error]: Error: RPC error (getAssetsByOwner): unknown field `network`, expected one of `ownerAddress`, `sortBy`, `limit`, `page`, `before`, `after`, `displayOptions`, `options`, `cursor` at line 1 column 169
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:34:24)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:22:03 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:90:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:22:03 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:22:07 [error]: Error: RPC error (getAssetsByOwner): unknown field `network`, expected one of `ownerAddress`, `sortBy`, `limit`, `page`, `before`, `after`, `displayOptions`, `options`, `cursor` at line 1 column 169
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:34:24)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:22:07 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:90:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:22:07 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:22:10 [error]: Error: RPC error (getAssetsByOwner): unknown field `network`, expected one of `ownerAddress`, `sortBy`, `limit`, `page`, `before`, `after`, `displayOptions`, `options`, `cursor` at line 1 column 169
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:34:24)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:22:10 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:90:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:22:10 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:26:17 [error]: TypeError: Cannot read properties of undefined (reading 'findFirst')
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:85:49)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:26:17 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:123:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:26:17 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:26:21 [error]: TypeError: Cannot read properties of undefined (reading 'findFirst')
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:85:49)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:26:21 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:123:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:26:21 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:26:24 [error]: TypeError: Cannot read properties of undefined (reading 'findFirst')
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:85:49)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:26:24 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:123:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:26:24 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:26:27 [error]: TypeError: Cannot read properties of undefined (reading 'findFirst')
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:85:49)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:26:27 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:123:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:26:27 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:26:31 [error]: TypeError: Cannot read properties of undefined (reading 'findFirst')
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:85:49)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:26:31 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:123:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:26:31 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:26:34 [error]: TypeError: Cannot read properties of undefined (reading 'findFirst')
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:85:49)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:26:34 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:123:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:26:34 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:27:43 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:27:43 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:27:43 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:27:47 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:27:47 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:27:47 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:27:51 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:27:51 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:27:51 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:27:54 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:27:54 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:27:54 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:27:57 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:27:57 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:27:57 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:28:01 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:28:01 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:28:01 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:29:56 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database.js' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:29:56 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:29:56 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:29:59 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database.js' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:29:59 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:29:59 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:30:03 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database.js' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:30:03 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:30:03 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:30:06 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database.js' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:30:06 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:30:06 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:30:10 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database.js' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:30:10 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:30:10 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:30:13 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database.js' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:30:13 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:30:13 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:32:02 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database.js' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:32:03 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:32:03 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:32:06 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database.js' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:32:06 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:32:06 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:32:09 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database.js' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:32:09 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:32:09 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:32:13 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database.js' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:32:13 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:32:13 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:32:16 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database.js' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:32:17 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:32:17 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:32:21 [error]: Error: Cannot find module 'C:\Users\Chizi\Desktop\gocab\backend\src\config\database.js' imported from C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)
+    at ModuleLoader.#cachedDefaultResolve (node:internal/modules/esm/loader:704:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:643:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:344:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:642:21)
+2025-11-24 08:32:21 [error]: Error: Failed to verify NFT ownership
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:125:13)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:32:21 [error]: GraphQL Error: Failed to refresh NFT status
+2025-11-24 08:35:52 [error]: Error: RPC error (getAsset): Database Error: RecordNotFound Error: Asset Not Found
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifySpecificNFT (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:135:21)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:102:30)
+    at Function.hasNFTAccess (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:209:39)
+    at refreshTokenHandler (C:\Users\Chizi\Desktop\gocab\backend\src\api\authHandler.ts:26:27)
+2025-11-24 08:35:52 [error]: Error: RPC error (getAsset): Database Error: RecordNotFound Error: Asset Not Found
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifySpecificNFT (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:135:21)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:102:30)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:36:08 [error]: Error: RPC error (getAsset): Database Error: RecordNotFound Error: Asset Not Found
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifySpecificNFT (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:135:21)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:102:30)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:36:25 [error]: Error: RPC error (getAsset): Database Error: RecordNotFound Error: Asset Not Found
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifySpecificNFT (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:135:21)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:102:30)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:36:41 [error]: Error: RPC error (getAsset): Database Error: RecordNotFound Error: Asset Not Found
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifySpecificNFT (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:135:21)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:102:30)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:36:57 [error]: Error: RPC error (getAsset): Database Error: RecordNotFound Error: Asset Not Found
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifySpecificNFT (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:135:21)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:102:30)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:37:14 [error]: Error: RPC error (getAsset): Database Error: RecordNotFound Error: Asset Not Found
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.verifySpecificNFT (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:135:21)
+    at Function.verifyNFTOwnership (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:102:30)
+    at UserResolver.refreshNFTStatus (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\UserResolver.ts:444:24)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:40:02 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-24 08:43:29 [error]: GraphQL Error: Field "updateFCMToken" of type "BaseResponse!" must have a selection of subfields. Did you mean "updateFCMToken { ... }"?
+2025-11-24 08:43:33 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-24 08:47:47 [error]: GraphQL Error: Field "updateFCMToken" of type "BaseResponse!" must have a selection of subfields. Did you mean "updateFCMToken { ... }"?
+2025-11-24 08:49:36 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-24 08:49:40 [error]: GraphQL Error: Cannot query field "tokens" on type "MyOwnedNftsResponse".
+2025-11-24 08:50:30 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-24 08:50:32 [error]: GraphQL Error: Cannot query field "mintAddress" on type "MyOwnedNftsResponse".
+2025-11-24 08:50:32 [error]: GraphQL Error: Cannot query field "metadata" on type "MyOwnedNftsResponse".
+2025-11-24 08:50:34 [error]: GraphQL Error: Cannot query field "mintAddress" on type "MyOwnedNftsResponse".
+2025-11-24 08:50:34 [error]: GraphQL Error: Cannot query field "metadata" on type "MyOwnedNftsResponse".
+2025-11-24 08:54:36 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-24 08:56:35 [error]: GraphQL Error: Variable "$pagination" of required type "PaginationInput!" was not provided.
+2025-11-24 08:56:38 [error]: Error: RPC error (getAsset): Database Error: RecordNotFound Error: Asset Not Found
+    at file:///C:/Users/Chizi/Desktop/gocab/backend/node_modules/helius-sdk/src/rpc/caller.ts:18:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Function.getNFTMetadata (C:\Users\Chizi\Desktop\gocab\backend\src\services\blockchain\NFTVerificationService.ts:317:21)
+    at C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\BookingResolver.ts:201:28
+    at async Promise.all (index 0)
+    at BookingResolver.myOwnedNfts (C:\Users\Chizi\Desktop\gocab\backend\src\resolvers\BookingResolver.ts:199:32)
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+    at C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:80:26
+    at dispatchHandler (C:\Users\Chizi\Desktop\gocab\backend\node_modules\type-graphql\build\cjs\resolvers\helpers.js:79:24)
+2025-11-24 08:56:57 [error]: GraphQL Error: Variable "$input" got invalid value "pool" at "input.stakeType"; Value "pool" does not exist in "StakeType" enum. Did you mean the enum value "POOL"?

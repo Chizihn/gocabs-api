@@ -1,0 +1,546 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+  AppState,
+  Alert,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Feather } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import { useTheme } from "@/hooks/useTheme";
+import { Button } from "@/components/ui/Button";
+import { BlurView } from "expo-blur";
+import { useAuthStore } from "@/store/auth";
+import { useMutation } from "@apollo/client";
+import { REFRESH_NFT_STATUS } from "@/services/queries";
+import { useSolanaWallet } from "@/hooks/useSolanaWallet";
+import { Transaction } from "@solana/web3.js";
+import { Buffer } from "buffer";
+import * as SecureStore from "expo-secure-store";
+import { API_URL } from "@/services/apollo";
+import useToast from "@/hooks/useToast";
+
+export default function NFTPurchaseScreen() {
+  const { colors } = useTheme();
+  const router = useRouter();
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [verificationError, setVerificationError] = useState<string | null>(
+    null
+  );
+  const { showToast } = useToast();
+
+  const user = useAuthStore((state) => state.user);
+  const hasNFTAccess = useAuthStore((state) => state.hasNFTAccess);
+  const setNFTStatus = useAuthStore((state) => state.setNFTStatus);
+  const { account, sendTransaction } = useSolanaWallet();
+  const [isMinting, setIsMinting] = useState(false);
+
+  // GraphQL Mutation for refreshing NFT status
+  const [refreshNFTStatus] = useMutation(REFRESH_NFT_STATUS, {
+    onCompleted: async (data) => {
+      const status = data.refreshNFTStatus;
+      if (status?.hasAccess) {
+        const tokens =
+          status.tokens?.map(
+            (token: { tokenMint: string }) => token.tokenMint
+          ) ?? [];
+        await setNFTStatus(true, tokens);
+      } else {
+        setVerificationError("No NFT found in your wallet");
+      }
+    },
+    onError: (error) => {
+      console.error("Error refreshing NFT status:", error);
+      setVerificationError("Failed to verify NFT ownership");
+    },
+  });
+
+  const verifyNFT = async (retryCount = 0) => {
+    if (!user) return;
+
+    const MAX_RETRIES = 2;
+    const RETRY_DELAY = 2000; // 2 seconds
+
+    try {
+      setIsVerifying(true);
+      setVerificationError(null);
+
+      const { data } = await refreshNFTStatus();
+
+      if (!data?.refreshNFTStatus?.hasAccess) {
+        throw new Error("NFT verification failed");
+      }
+
+      const tokens =
+        data.refreshNFTStatus.tokens?.map(
+          (token: { tokenMint: string }) => token.tokenMint
+        ) ?? [];
+
+      await setNFTStatus(true, tokens);
+      return true;
+    } catch (error: any) {
+      console.error("NFT verification failed:", error);
+
+      // Implement retry logic
+      if (retryCount < MAX_RETRIES) {
+        setVerificationError("Retrying verification...");
+        await new Promise<void>((resolve) => setTimeout(resolve, RETRY_DELAY));
+        return verifyNFT(retryCount + 1);
+      }
+
+      setVerificationError(
+        error.message.includes("network")
+          ? "Network error. Please check your connection."
+          : "Failed to verify NFT ownership. Please try again."
+      );
+      return false;
+    } finally {
+      setIsVerifying(false);
+    }
+  };
+
+  const handlePurchaseNFT = async () => {
+    if (!account || !user?.walletAddress) {
+      setVerificationError("Please connect your wallet first");
+      return;
+    }
+
+    try {
+      setIsMinting(true);
+      setVerificationError(null);
+
+      // Get API base URL (remove /graphql from GraphQL URL)
+      const apiBaseUrl = API_URL.replace("/graphql", "");
+      const token = await SecureStore.getItemAsync("authToken");
+
+      // Step 1: Get the payment transaction from backend
+      console.log("Requesting mint transaction...");
+      const mintResponse = await fetch(
+        `${apiBaseUrl}/api/nft/mint?walletAddress=${user.walletAddress}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+        }
+      );
+
+      if (!mintResponse.ok) {
+        const errorData = await mintResponse.json();
+        throw new Error(errorData.error || "Failed to create mint transaction");
+      }
+
+      const {
+        transaction: transactionBase64,
+        price,
+        reference,
+      } = await mintResponse.json();
+      console.log(`Mint transaction received. Price: ${price} SOL`);
+
+      if (!reference) {
+        throw new Error(
+          "Mint transaction reference not found. Please update your backend."
+        );
+      }
+
+      // Step 2: Deserialize the transaction
+      const transactionBuffer = Buffer.from(transactionBase64, "base64");
+      const transaction = Transaction.from(transactionBuffer);
+
+      // Step 3: Sign and send transaction. This may throw a "CancellationException"
+      // even on success. We need to capture the signature regardless.
+      console.log("Signing and sending transaction...");
+      let paymentSignature: string | undefined;
+      try {
+        paymentSignature = await sendTransaction(transaction);
+      } catch (error: any) {
+        if (
+          error.message &&
+          error.message.includes("java.util.concurrent.CancellationException")
+        ) {
+          console.log(
+            "Transaction sent, but received expected CancellationException. Attempting to find signature from error..."
+          );
+          // Some wallet adapters embed the signature in the error object.
+          paymentSignature = error.signature;
+        } else {
+          // Re-throw other errors
+          throw error;
+        }
+      }
+
+      if (!paymentSignature) {
+        throw new Error(
+          "Could not confirm payment transaction. Please check your wallet and try again."
+        );
+      }
+
+      // Step 4: Execute the mint server-side
+      console.log("Queuing mint job with signature:", paymentSignature);
+      setStatusMessage("Your mint has been queued. Finalizing...");
+      const executeResponse = await fetch(
+        `${apiBaseUrl}/api/nft/mint/execute`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify({
+            walletAddress: user.walletAddress,
+            paymentSignature: paymentSignature,
+          }),
+        }
+      );
+
+      if (executeResponse.status !== 202) {
+        const errorData = await executeResponse.json();
+        throw new Error(errorData.error || "Failed to queue mint job.");
+      }
+
+      const queueResult = await executeResponse.json();
+      if (queueResult.status !== "MINT_QUEUED") {
+        throw new Error("Failed to queue mint job. Unexpected status.");
+      }
+
+      console.log("Mint job queued successfully. Now polling for completion.");
+      setStatusMessage("Minting in progress... This may take a moment.");
+
+      // Step 5: Poll the job status endpoint
+      const pollMintJobStatus = async (signatureToPoll: string): Promise<boolean> => {
+        for (let i = 0; i < 60; i++) {
+          // Add a log to confirm we are polling with the correct signature
+          console.log(`Polling job status for signature: ${signatureToPoll} (Attempt ${i + 1})`);
+          // Poll for up to 5 minutes (60 * 5s)
+          try {
+            const jobStatusResponse = await fetch(
+              `${apiBaseUrl}/api/nft/mint/job-status`,
+              {
+                method: "POST", // Use POST to bypass any server-side caching
+                headers: {
+                  "Content-Type": "application/json",
+                  ...(token ? { Authorization: `Bearer ${token}` } : {}),
+                },
+                body: JSON.stringify({
+                  paymentSignature: signatureToPoll,
+                }),
+              }
+            );
+
+            if (jobStatusResponse.ok) {
+              const { status } = await jobStatusResponse.json();
+              if (status === "COMPLETED") {
+                console.log("Mint job completed!");
+                return true;
+              } else if (status === "FAILED") {
+                throw new Error("Minting failed on the server.");
+              }
+              // Otherwise, continue polling for PENDING/PROCESSING
+            }
+          } catch (e) {
+            console.warn("Job polling error, will retry...", e);
+          }
+          await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait 5 seconds
+        }
+        return false; // Timeout
+      };
+
+      const isMintCompleted = await pollMintJobStatus(paymentSignature);
+
+      if (!isMintCompleted) {
+        throw new Error("Minting process timed out. Please check your wallet.");
+      }
+
+      // Step 6: Refresh auth token
+      console.log("Mint complete. Refreshing authentication token...");
+      setStatusMessage("Updating your session...");
+      const tokenResponse = await fetch(
+        `${apiBaseUrl}/api/auth/refresh-token`,
+        {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const { newAuthToken } = await tokenResponse.json();
+      await SecureStore.setItemAsync("authToken", newAuthToken);
+      // The AppInitializer will handle updating the user state via GET_ME
+
+      showToast("Your GoCabs NFT has been minted!", "success");
+
+      // Step 7: Verify NFT ownership
+      console.log("Verifying NFT ownership...");
+      const success = await verifyNFT();
+
+      if (success) {
+        // Show success state briefly before navigating
+        await new Promise<void>((resolve) => setTimeout(resolve, 1000));
+        router.replace("/welcome");
+      } else {
+        showToast(
+          "NFT minted but verification failed. Please refresh.",
+          "error"
+        );
+        setVerificationError(
+          "NFT minted but verification failed. Please refresh."
+        );
+      }
+    } catch (error: any) {
+      console.error("Error in mint flow:", error);
+      // Check for user cancellation from the wallet app
+      if (
+        error.message &&
+        error.message.includes("java.util.concurrent.CancellationException")
+      ) {
+        setVerificationError("Transaction cancelled in wallet.");
+      } else {
+        setVerificationError(
+          error.message || "Failed to complete purchase. Please try again."
+        );
+      }
+    } finally {
+      setIsMinting(false);
+      setStatusMessage(null);
+    }
+  };
+
+  const handleBack = () => {
+    router.back();
+  };
+
+  return (
+    <SafeAreaView className="flex-1 bg-background" edges={["top", "bottom"]}>
+      {/* Header */}
+      <View className="flex-row items-center px-4 py-4">
+        <TouchableOpacity
+          onPress={handleBack}
+          className="w-10 h-10 rounded-full bg-background/30 items-center justify-center"
+        >
+          <BlurView
+            intensity={20}
+            className="w-full h-full rounded-full items-center justify-center"
+          >
+            <Feather name="arrow-left" size={20} color="#fff" />
+          </BlurView>
+        </TouchableOpacity>
+        <Text className="text-white text-xl font-heading-bold ml-4">
+          Get GoCabs NFT
+        </Text>
+      </View>
+
+      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+        <View className="px-4 py-6">
+          {/* Hero Section */}
+          <View className="items-center mb-8">
+            <View className="w-32 h-32 rounded-3xl bg-primary/20 items-center justify-center mb-6 border border-primary/40">
+              <Feather name="image" size={64} color={colors.primary} />
+            </View>
+            <Text className="text-white text-3xl font-heading-bold text-center mb-3">
+              Unlock Full Access
+            </Text>
+            <Text className="text-white/70 text-center font-body text-base px-6">
+              Own a GoCabs NFT to access all premium features
+            </Text>
+          </View>
+
+          {/* Benefits */}
+          <View className="mb-8">
+            <Text className="text-white text-xl font-heading-bold mb-4">
+              NFT Holder Benefits
+            </Text>
+
+            {[
+              {
+                icon: "calendar",
+                title: "Book Rides",
+                description: "Reserve shuttle services for events",
+              },
+              {
+                icon: "map-pin",
+                title: "Live Tracking",
+                description: "Track your shuttle in real-time",
+              },
+              {
+                icon: "award",
+                title: "Earn Rewards",
+                description: "Collect XP and redeem for USDC",
+              },
+              {
+                icon: "trending-up",
+                title: "Revenue Share",
+                description: "Stake NFTs to earn platform revenue",
+              },
+              {
+                icon: "percent",
+                title: "Fractional Ownership",
+                description: "Link NFTs to shuttles for revenue",
+              },
+            ].map((benefit, index) => (
+              <View
+                key={index}
+                className="bg-card/80 rounded-2xl p-4 mb-3 border border-border/20"
+              >
+                <View className="flex-row items-start">
+                  <View className="w-10 h-10 bg-primary/20 rounded-full items-center justify-center mr-3">
+                    <Feather
+                      name={benefit.icon as any}
+                      size={20}
+                      color={colors.primary}
+                    />
+                  </View>
+                  <View className="flex-1">
+                    <Text className="text-white font-body-bold text-base mb-1">
+                      {benefit.title}
+                    </Text>
+                    <Text className="text-white/60 font-body text-sm">
+                      {benefit.description}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            ))}
+          </View>
+
+          {/* Pricing Info */}
+          <View className="bg-primary/10 rounded-2xl p-6 mb-6 border border-primary/30">
+            <View className="flex-row items-center justify-between mb-4">
+              <Text className="text-white font-body-bold text-lg">
+                Current Price
+              </Text>
+              <Text className="text-primary font-heading-bold text-2xl">
+                TBD SOL
+              </Text>
+            </View>
+            <Text className="text-white/60 font-body text-sm">
+              {process.env.EXPO_PUBLIC_NETWORK === "devnet"
+                ? "Devnet pricing: 0.01 SOL. Your NFT will be minted directly to your wallet after payment."
+                : "Mainnet pricing: 0.1 SOL. Your NFT will be minted directly to your wallet after payment."}
+            </Text>
+          </View>
+
+          {/* How to Purchase */}
+          <View className="mb-8">
+            <Text className="text-white text-xl font-heading-bold mb-4">
+              How to Purchase
+            </Text>
+
+            {[
+              {
+                step: "1",
+                title: "Connect Wallet",
+                description: "Use Phantom, Solflare, or another Solana wallet",
+              },
+              {
+                step: "2",
+                title: "Tap Mint Access Pass",
+                description: "Review the price and confirm the transaction",
+              },
+              {
+                step: "3",
+                title: "Sign Transaction",
+                description: "Approve the payment transaction in your wallet",
+              },
+              {
+                step: "4",
+                title: "Receive NFT",
+                description: "Your NFT will be minted directly to your wallet",
+              },
+            ].map((item, index) => (
+              <View key={index} className="flex-row mb-4">
+                <View className="w-8 h-8 rounded-full bg-primary items-center justify-center mr-4">
+                  <Text className="text-black font-body-bold text-sm">
+                    {item.step}
+                  </Text>
+                </View>
+                <View className="flex-1">
+                  <Text className="text-white font-body-bold text-base mb-1">
+                    {item.title}
+                  </Text>
+                  <Text className="text-white/60 font-body text-sm">
+                    {item.description}
+                  </Text>
+                </View>
+              </View>
+            ))}
+          </View>
+
+          <View className="h-24" />
+        </View>
+      </ScrollView>
+
+      {/* Bottom CTA */}
+      <View className="px-4 pb-6 pt-4 bg-black/50">
+        {/* This wrapper View with overflow: 'hidden' is the fix for the Android IndexOutOfBoundsException crash */}
+        <View className="absolute inset-0 overflow-hidden">
+          <BlurView intensity={80} className="w-full h-full" tint="dark" />
+        </View>
+
+        {isVerifying || isMinting ? (
+          <View className="bg-primary/20 p-4 rounded-xl items-center">
+            <ActivityIndicator
+              size="small"
+              color={colors.primary}
+              className="mb-2"
+            />
+            <Text className="text-white font-body text-center">
+              {statusMessage ||
+                (isMinting
+                  ? "Minting your NFT..."
+                  : "Verifying NFT ownership...")}
+            </Text>
+          </View>
+        ) : hasNFTAccess ? (
+          <View className="bg-green-500/20 p-4 rounded-xl items-center">
+            <Feather
+              name="check-circle"
+              size={24}
+              color="#10B981"
+              className="mb-2"
+            />
+            <Text className="text-green-400 font-body-bold text-center text-base">
+              NFT Verified! You have full access.
+            </Text>
+            <Text className="text-green-300/80 font-body text-center text-sm mt-1">
+              Enjoy all premium features.
+            </Text>
+          </View>
+        ) : (
+          <View>
+            <Button
+              title={
+                process.env.EXPO_PUBLIC_NETWORK === "devnet"
+                  ? "Mint Access Pass (0.01 SOL)"
+                  : "Mint Access Pass"
+              }
+              onPress={handlePurchaseNFT}
+              variant="primary"
+              size="medium"
+              icon="zap"
+              iconPosition="right"
+              disabled={isVerifying || isMinting || !account}
+            />
+
+            {verificationError && (
+              <Text className="text-red-400 text-center text-sm mt-2">
+                {verificationError}
+              </Text>
+            )}
+
+            <Button
+              title="I already own an NFT - Verify Ownership"
+              onPress={() => verifyNFT()}
+              variant="text"
+              size="medium"
+              disabled={isVerifying}
+            />
+          </View>
+        )}
+      </View>
+    </SafeAreaView>
+  );
+}

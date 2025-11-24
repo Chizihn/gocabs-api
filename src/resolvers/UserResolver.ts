@@ -432,9 +432,31 @@ export class UserResolver {
       // Invalidate cache to force a fresh check
       await NFTVerificationService.invalidateCache(user.walletAddress);
 
-      // Verify ownership and get the list of tokens
-      const { isHolder, nftTokens } =
-        await NFTVerificationService.verifyNFTOwnership(user.walletAddress);
+      let isHolder = false;
+      let nftTokens: string[] = [];
+      const MAX_RETRIES = 5; // Increased retries for post-mint verification
+      const RETRY_DELAY = 3000; // 3 seconds
+
+      for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+        logger.info(
+          `[refreshNFTStatus] Verifying NFT ownership for ${user.walletAddress} (Attempt ${attempt})`
+        );
+        const result = await NFTVerificationService.verifyNFTOwnership(
+          user.walletAddress
+        );
+        isHolder = result.isHolder;
+        nftTokens = result.nftTokens;
+
+        if (isHolder) {
+          logger.info(
+            `[refreshNFTStatus] Verification successful for ${user.walletAddress}`
+          );
+          break; // Exit loop on success
+        }
+
+        if (attempt < MAX_RETRIES)
+          await new Promise((res) => setTimeout(res, RETRY_DELAY));
+      }
 
       return {
         hasAccess: isHolder,

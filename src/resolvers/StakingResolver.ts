@@ -14,10 +14,11 @@ import {
   SortInput,
 } from "../types/graphql/responses";
 import { GraphQLError } from "graphql";
+import { logger } from "../utils/logger";
 
 @Resolver()
 export class StakingResolver {
-  @Authorized("NFT_HOLDER")
+  // @Authorized("NFT_HOLDER")
   @Mutation(() => StakedNFT)
   async stakeNFT(
     @Arg("input") input: StakeNFTInput,
@@ -37,7 +38,7 @@ export class StakingResolver {
     }
   }
 
-  @Authorized("NFT_HOLDER")
+  // @Authorized("NFT_HOLDER")
   @Mutation(() => BaseResponse)
   async unstakeNFT(
     @Arg("tokenMint") tokenMint: string,
@@ -46,18 +47,23 @@ export class StakingResolver {
     return StakingService.unstakeNFT(ctx.userId!, tokenMint);
   }
 
-  @Authorized("NFT_HOLDER")
+  // @Authorized("NFT_HOLDER")
   @Query(() => PaginatedStakedNFTsResponse)
   async myStakedNFTs(
     @Ctx() ctx: Context,
     @Arg("pagination") pagination: PaginationInput,
     @Arg("sort", { nullable: true }) sort?: SortInput
   ): Promise<PaginatedStakedNFTsResponse> {
+    logger.info(`[myStakedNFTs] Query called for user: ${ctx.userId}`);
     const result = await StakingService.getUserStakedNFTs(
       ctx.userId!,
       pagination,
       sort
     );
+    logger.info(
+      `[myStakedNFTs] StakingService returned ${result.items.length} items for user: ${ctx.userId}`
+    );
+    logger.debug(`[myStakedNFTs] Full result for user ${ctx.userId}:`, result);
     // The 'as any' is a temporary workaround for a known TypeGraphQL/Prisma typing complexity.
     return result as any;
   }

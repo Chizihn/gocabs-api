@@ -1,4 +1,5 @@
 import "reflect-metadata";
+
 import express, { Express, Request, Response, NextFunction } from "express";
 import { PubSub } from "graphql-subscriptions";
 import { ApolloServer } from "@apollo/server";
@@ -33,7 +34,9 @@ import {
   nftMintHandler,
   nftMintExecuteHandler,
   nftMintStatusHandler,
+  nftMintJobStatusHandler,
 } from "./api/nftMintHandler";
+import { refreshTokenHandler } from "./api/authHandler";
 
 export async function createApp(prisma: PrismaClient, redisClient: Redis) {
   const app: Express = express();
@@ -62,6 +65,10 @@ export async function createApp(prisma: PrismaClient, redisClient: Redis) {
   app.get("/api/nft/mint", nftMintHandler);
   app.post("/api/nft/mint/execute", nftMintExecuteHandler);
   app.get("/api/nft/mint/status/:reference", nftMintStatusHandler);
+  // Add the POST route for checking mint job status to prevent caching issues
+  app.post("/api/nft/mint/job-status", nftMintJobStatusHandler);
+  // Correct the refresh token route to be a POST request as intended
+  app.post("/api/auth/refresh-token", refreshTokenHandler);
 
   try {
     // Build GraphQL schema

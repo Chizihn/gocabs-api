@@ -29,12 +29,37 @@ import {
   PaginationInput,
   SortInput,
 } from "../types/graphql/responses";
+import { NFTVerificationService } from "../services/blockchain/NFTVerificationService";
 import { logger } from "../utils/logger";
 
 @ObjectType()
 class FindAndConfirmPaymentResponse extends BaseResponse {
   @Field(() => Booking, { nullable: true })
   booking?: Booking;
+}
+
+@ObjectType()
+class NFTMetadata {
+  @Field(() => String, { nullable: true })
+  name?: string;
+
+  @Field(() => String, { nullable: true })
+  image?: string;
+}
+
+@ObjectType()
+class OwnedNFT {
+  @Field()
+  mintAddress: string;
+
+  @Field(() => NFTMetadata, { nullable: true })
+  metadata?: NFTMetadata;
+}
+
+@ObjectType()
+class MyOwnedNftsResponse {
+  @Field(() => [OwnedNFT])
+  nfts: OwnedNFT[];
 }
 
 @Resolver(() => Booking)
@@ -70,11 +95,35 @@ export class BookingResolver {
       `[ConfirmPayment] Mutation called for bookingId: ${bookingId}, reference: ${reference}`
     );
     try {
-      await BookingService.confirmPayment(bookingId, signature, reference);
+      // OLD, RISKY WAY: This tries to confirm the payment immediately and can fail.
+      // await BookingService.confirmPayment(bookingId, signature, reference);
+
+      // NEW, ROBUST WAY: Just save the signature and let the background worker handle confirmation.
+      // This is much more reliable for the user.
+      const booking = await prisma.booking.findUnique({
+        where: { id: bookingId },
+      });
+
+      if (!booking) {
+        throw new Error("Booking not found.");
+      }
+
+      await prisma.booking.update({
+        where: { id: bookingId },
+        data: {
+          transactionHash: signature,
+          paymentStatus: "PROCESSING", // Mark as processing
+        },
+      });
+
       logger.info(
-        `[ConfirmPayment] Successfully confirmed payment for bookingId: ${bookingId}`
+        `[ConfirmPayment] Payment signature for booking ${bookingId} has been queued for confirmation.`
       );
-      return { success: true, message: "Payment confirmed successfully." };
+      return {
+        success: true,
+        message:
+          "Your payment is being confirmed. Your booking will be updated shortly.",
+      };
     } catch (error: any) {
       logger.error(
         `[ConfirmPayment] Error for bookingId: ${bookingId}:`,
@@ -82,7 +131,7 @@ export class BookingResolver {
       );
       return {
         success: false,
-        message: error.message || "Payment confirmation failed.",
+        message: error.message || "Failed to queue payment for confirmation.",
       };
     }
   }
@@ -124,6 +173,45 @@ export class BookingResolver {
         success: false,
         message: error.message || "Failed to find and confirm payment.",
       };
+    }
+  }
+
+  @Authorized()
+  @Query(() => MyOwnedNftsResponse)
+  async myOwnedNfts(@Ctx() ctx: Context): Promise<MyOwnedNftsResponse> {
+    const user = await prisma.user.findUnique({
+      where: { id: ctx.userId! },
+      select: { walletAddress: true },
+    });
+
+    if (!user || !user.walletAddress) {
+      logger.warn(`myOwnedNfts: User ${ctx.userId!} has no wallet address.`);
+      return { nfts: [] };
+    }
+
+    try {
+      // This performs a live check of the user's wallet
+      const { nftTokens } = await NFTVerificationService.verifyNFTOwnership(
+        user.walletAddress
+      );
+
+      // Fetch metadata for each NFT in parallel
+      const nftsWithMetadata = await Promise.all(
+        nftTokens.map(async (mintAddress) => {
+          const metadata = await NFTVerificationService.getNFTMetadata(
+            mintAddress
+          );
+          return { mintAddress, metadata };
+        })
+      );
+
+      return { nfts: nftsWithMetadata };
+    } catch (error) {
+      logger.error(
+        `myOwnedNfts: Error fetching NFTs for wallet ${user.walletAddress}`,
+        error
+      );
+      return { nfts: [] };
     }
   }
 

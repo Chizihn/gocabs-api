@@ -141,15 +141,22 @@ export class StakingService {
     pagination: PaginationInput,
     sort?: SortInput
   ) {
+    logger.info(`[StakingService] Getting staked NFTs for userId: ${userId}`);
     const user = await prisma.user.findUnique({
       where: { id: userId },
       select: { walletAddress: true },
     });
 
     if (!user?.walletAddress) {
+      logger.warn(
+        `[StakingService] User ${userId} does not have a wallet address.`
+      );
       throw new Error("Wallet not connected.");
     }
 
+    logger.info(
+      `[StakingService] Querying staked NFTs for wallet: ${user.walletAddress}`
+    );
     const where = { walletAddress: user.walletAddress, isActive: true };
     const { page, limit } = pagination;
     const orderBy = sort
@@ -169,6 +176,11 @@ export class StakingService {
       }),
       prisma.stakedNFT.count({ where }),
     ]);
+
+    logger.info(
+      `[StakingService] Prisma query found ${totalItems} total staked NFTs for wallet: ${user.walletAddress}`
+    );
+    logger.debug(`[StakingService] Found items:`, items);
 
     return {
       items,

@@ -59,17 +59,30 @@ export const authMiddleware = async (
     let isNFTHolder = false;
     if (user.walletAddress) {
       try {
-        logger.info("Checking NFT access for wallet:", user.walletAddress);
-        // This performs a check if the token is old and doesn't have the isNFTHolder flag.
-        // The result of this check will be used for the duration of this single request.
-        const access = await NFTVerificationService.hasNFTAccess(
-          user.walletAddress
-        );
-        isNFTHolder = access.hasAccess;
+        const MAX_RETRIES = 3;
+        const RETRY_DELAY = 3000; // 3 seconds
 
-        logger.info(
-          `NFT verification result for ${user.walletAddress}: ${isNFTHolder}`
-        );
+        for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+          logger.info(
+            `Checking NFT access for wallet: ${user.walletAddress} (Attempt ${attempt}/${MAX_RETRIES})`
+          );
+          // This performs a check if the token is old and doesn't have the isNFTHolder flag.
+          const access = await NFTVerificationService.hasNFTAccess(
+            user.walletAddress
+          );
+          isNFTHolder = access.hasAccess;
+
+          logger.info(
+            `NFT verification result for ${user.walletAddress}: ${isNFTHolder}`
+          );
+
+          if (isNFTHolder) {
+            break; // Exit loop on success
+          }
+
+          if (attempt < MAX_RETRIES)
+            await new Promise((res) => setTimeout(res, RETRY_DELAY));
+        }
       } catch (verificationError) {
         logger.warn("NFT verification failed:", verificationError);
       }
