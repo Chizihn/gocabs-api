@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,102 +7,339 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ====================== ENUMS ======================
+enum UserRole {
+  SEEKER
+  DRIVER
+  OWNER
+  ADMIN
+}
+
+enum StakeType {
+  POOL
+  FRACTIONAL
+}
+
+enum StakingTier {
+  TIER_1
+  TIER_2
+}
+
+enum ShuttleStatus {
+  SCHEDULED
+  BOARDING
+  IN_TRANSIT
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum BookingStatus {
+  CONFIRMED
+  PICKED_UP
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+  PENDING_PAYMENT
+  PENDING
+}
+
+enum NotificationType {
+  RIDE_UPDATE
+  BOOKING_CONFIRMED
+  BOOKING_CANCELLED
+  PAYMENT_RECEIVED
+  REWARD_EARNED
+  PROMOTION
+  SYSTEM
+}
+
+enum MintStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum ConfirmationStatus {
+  PENDING
+  CONFIRMED
+  FAILED
+}
+
+// ====================== MODELS ======================
 model User {
   id            String    @id @default(uuid())
-  walletAddress String    @unique
-  role          Role      @default(USER)
-  profile       Profile?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  stakedNFTs    StakedNFT[]
-  bookings      Booking[]
-  mintJobs      MintJob[]
+
+  walletAddress String?   @unique @db.VarChar(44)
+  email         String?   @unique
+  username      String?   @db.VarChar(50)
+  password      String?
+  phoneNumber   String?
+  avatar        String?
+  fcmToken      String?
+
+  role                  UserRole @default(SEEKER)
+  notificationSettings  Json     @default("{\"rideUpdates\":true,\"promotions\":true,\"rewards\":true}")
+  locationSettings      Json     @default("{\"shareLocation\":true,\"accuracy\":\"high\"}")
+
+  bookings       Booking[]
+  rewards        Reward[]
+  stakedNFTs     StakedNFT[]
+
+  creditBalanceUsdc Decimal @default(0) @db.Decimal(12, 6)
+
+  driver         Driver?
+  owner          Owner?
+  notifications  Notification[]
+
+  @@map("users")
 }
 
-model Profile {
-  id        String   @id @default(uuid())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String   @unique
-  username  String?
-  avatarUrl String?
+model MintAttempt {
+  id                String     @id @default(cuid())
+  paymentSignature  String     @unique
+  walletAddress     String
+  status            MintStatus @default(PENDING)
+  mintAddress       String?
+  retryCount        Int        @default(0)
+  lastAttemptAt     DateTime?
+  errorMessage      String?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+}
+
+model Driver {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  licenseNumber  String?  @unique
+  rating         Decimal  @default(5.0) @db.Decimal(3, 2)
+  totalRides     Int      @default(0)
+  isOnline       Boolean  @default(false)
+  isVerified     Boolean  @default(false)
+  currentLat     Float?
+  currentLng     Float?
+  earnings       Decimal  @default(0) @db.Decimal(12, 2)
+
+  shuttles       Shuttle[] @relation("DriverShuttles")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("drivers")
 }
 
-model Shuttle {
-  id               String      @id @default(uuid())
-  name             String
-  capacity         Int
-  isFractionalized Boolean     @default(false)
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
-  bookings         Booking[]
-  stakedNFTs       StakedNFT[]
-  event            Event?      @relation(fields: [eventId], references: [id])
-  eventId          String?
+model Owner {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  companyName   String?
+  licenseNumber String?  @unique
+  isVerified    Boolean  @default(false)
+  totalRevenue  Decimal  @default(0) @db.Decimal(12, 2)
+
+  vehicles      Vehicle[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("owners")
+}
+
+model Vehicle {
+  id              String   @id @default(uuid())
+  ownerId         String
+  owner           Owner    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  vehicleNumber   String   @unique
+  licensePlate    String
+  vehicleType     String   @default("minibus")
+  capacity        Int
+  mileage         Int      @default(0)
+  imageUrl        String?
+  lastMaintenance DateTime?
+  nextMaintenance DateTime?
+
+  shuttles        Shuttle[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("vehicles")
 }
 
 model Event {
-  id        String    @id @default(uuid())
-  name      String
-  date      DateTime
-  location  String
-  shuttles  Shuttle[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  city        String?
+  country     String?
+  location    Json
+  eventDate   DateTime
+  eventType   String
+  imageUrl    String?
+  isActive    Boolean  @default(true)
+
+  shuttles    Shuttle[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([city, country])
+  @@map("events")
+}
+
+model Shuttle {
+  id               String   @id @default(uuid())
+
+  eventId          String
+  event            Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  vehicleId        String
+  vehicle          Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Restrict)
+
+  driverId         String?  
+  driver           Driver?  @relation("DriverShuttles", fields: [driverId], references: [id])
+
+  departureTime    DateTime
+  arrivalTime      DateTime
+  pickupLocation   Json
+  dropoffLocation  Json
+
+  basePriceUsdc    Decimal  @db.Decimal(12, 6)
+  status           ShuttleStatus  @default(SCHEDULED)
+  isFractionalized Boolean  @default(false)
+
+  currentLat       Float?
+  currentLng       Float?
+  lastLocationUpdate DateTime?
+
+  bookings         Booking[]
+  stakedNFTs       StakedNFT[]
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("shuttles")
 }
 
 model Booking {
-  id             String         @id @default(uuid())
-  user           User           @relation(fields: [userId], references: [id])
-  userId         String
-  shuttle        Shuttle        @relation(fields: [shuttleId], references: [id])
-  shuttleId      String
-  totalPriceUsdc Decimal
-  paymentStatus  PaymentStatus  @default(PENDING)
-  reference      String?        @unique // For Solana Pay
-  signature      String?        @unique // For Solana Pay
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
+  id               String        @id @default(uuid())
+  userId           String
+  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shuttleId        String
+  shuttle          Shuttle       @relation(fields: [shuttleId], references: [id], onDelete: Cascade)
+
+  seats            Int           @default(1)
+  totalPriceUsdc   Decimal       @db.Decimal(12, 6)
+  creditAppliedUsdc Decimal?      @db.Decimal(12, 6)
+  paymentStatus    PaymentStatus @default(PENDING)
+    paymentReference  String?   @unique 
+      confirmationStatus ConfirmationStatus @default(PENDING)
+  confirmationRetries Int @default(0)
+  confirmationError   String?
+  transactionHash  String?       @unique
+
+  status           BookingStatus @default(CONFIRMED)
+  rating           Int?
+  review           String?
+
+  reward           Reward?
+
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@map("bookings")
+}
+
+model Reward {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  bookingId  String   @unique
+  booking    Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  xpEarned   Int      @default(100)
+  co2SavedKg Int      @default(8)
+  usdcValue  Decimal? @db.Decimal(12, 6)
+  claimed    Boolean  @default(false)
+
+  createdAt  DateTime @default(now())
+
+  @@map("rewards")
 }
 
 model StakedNFT {
-  id            String      @id @default(uuid())
-  user          User        @relation(fields: [userId], references: [id])
+  id            String    @id @default(uuid())
+
   userId        String
-  walletAddress String
-  tokenMint     String      @unique
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  walletAddress String    @db.VarChar(44)
+  tokenMint     String    @unique
+
   stakeType     StakeType
-  tier          StakingTier
-  shuttle       Shuttle?    @relation(fields: [shuttleId], references: [id])
   shuttleId     String?
-  isActive      Boolean     @default(true)
-  stakedAt      DateTime    @default(now())
+  shuttle       Shuttle?  @relation(fields: [shuttleId], references: [id])
+
+  tier          StakingTier
+  isActive      Boolean   @default(true)
+
+  stakedAt      DateTime  @default(now())
   unstakedAt    DateTime?
+
+  totalEarnings Decimal   @default(0) @db.Decimal(12, 6)
+  lastPayoutAt  DateTime?
+
   payouts       Payout[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("staked_nfts")
 }
 
 model Payout {
-  id        String    @id @default(uuid())
-  stakedNFT StakedNFT @relation(fields: [stakedNFTId], references: [id])
+  id          String   @id @default(uuid())
   stakedNFTId String
-  amount    Decimal
-  payoutDate DateTime @default(now())
+  stakedNFT   StakedNFT @relation(fields: [stakedNFTId], references: [id], onDelete: Cascade)
+
+  amountUsdc  Decimal  @db.Decimal(12, 6)
+  type        String   // "REVENUE_SHARE" or "FRACTIONAL_OWNERSHIP"
+  txSignature String?  @unique
+  status      String   @default("PENDING")
+  payoutDate  DateTime @default(now())
+
+  @@index([stakedNFTId])
+  @@map("payouts")
 }
 
-model MintJob {
-  id               String      @id @default(cuid())
-  status           JobStatus   @default(PENDING)
-  walletAddress    String
-  user             User?       @relation(fields: [walletAddress], references: [walletAddress], onUpdate: NoAction, onDelete: NoAction)
-  paymentSignature String      @unique
-  mintAddress      String?
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
-}
+model Notification {
+  id      String   @id @default(uuid())
+  userId  String
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-enum Role { USER ADMIN }
-enum PaymentStatus { PENDING COMPLETED FAILED }
-enum StakeType { POOL FRACTIONAL }
-enum StakingTier { TIER_1 TIER_2 }
-enum JobStatus { PENDING PROCESSING COMPLETED FAILED }
+  title   String
+  body    String
+  type    NotificationType
+  data    Json?
+  isRead  Boolean  @default(false)
+  readAt  DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@map("notifications")
+}
